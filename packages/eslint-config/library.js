@@ -4,8 +4,8 @@ const project = resolve(process.cwd(), "tsconfig.json");
 
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
-  extends: ["eslint:recommended", "prettier", "turbo"],
-  plugins: ["only-warn"],
+  extends: ["eslint:recommended", "eslint-config-prettier", "turbo"],
+  plugins: ["@typescript-eslint/eslint-plugin", "import", "prettier", "react", "react-hooks"],
   globals: {
     React: true,
     JSX: true,
@@ -31,4 +31,23 @@ module.exports = {
       files: ["*.js?(x)", "*.ts?(x)"],
     },
   ],
+  rules: {
+    "prettier/prettier": "error",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        argsIgnorePattern: "^_",
+        varsIgnorePattern: "^_",
+        caughtErrorsIgnorePattern: "^_",
+      },
+    ],
+    "import/order": [
+      "error",
+      {
+        groups: [["builtin", "external", "internal"], "parent", "sibling", "index"],
+        alphabetize: { order: "asc" },
+      },
+    ],
+  },
 };
