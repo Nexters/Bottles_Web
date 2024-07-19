@@ -1,0 +1,29 @@
+{
+  "name": "@bottlesteam/bottle",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbo",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@bottlesteam/ui": "workspace:*",
+    "@vanilla-extract/css": "^1.15.3",
+    "next": "14.2.4",
+    "react": "^18.3.1",
+    "react-dom": "^18"
+  },
+  "devDependencies": {
+    "@bottlesteam/eslint-config": "workspace:*",
+    "@bottlesteam/typescript-config": "workspace:*",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@vanilla-extract/next-plugin": "^2.4.3",
+    "eslint": "^8",
+    "eslint-config-next": "15.0.0-rc.0",
+    "typescript": "^5"
+  }
+}
