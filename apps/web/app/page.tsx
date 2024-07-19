@@ -1,19 +1,12 @@
-import { Button } from "@bottlesteam/ui";
-import Image from "next/image";
-import styles from "./page.module.css";
+import { Button } from '@bottlesteam/ui';
+import Image from 'next/image';
+import styles from './page.module.css';
 
 export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
+        <Image className={styles.logo} src="/next.svg" alt="Next.js logo" width={180} height={38} priority />
         <ol>
           <li>
             Get started by editing <code>app/page.tsx</code>
@@ -28,13 +21,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
+            <Image className={styles.logo} src="/vercel.svg" alt="Vercel logomark" width={20} height={20} />
             Deploy now
           </a>
           <a
@@ -46,9 +33,7 @@ export default function Home() {
             Read our docs
           </a>
         </div>
-        <Button appName="web" className={styles.secondary}>
-          Open alert
-        </Button>
+        <Button variant={{ color: 'brand' }}>Open addlert</Button>
       </main>
       <footer className={styles.footer}>
         <a
