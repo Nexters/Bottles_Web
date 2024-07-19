@@ -1,5 +1,5 @@
 {
-  "name": "@repo/ui",
+  "name": "@bottlesteam/ui",
   "version": "0.0.0",
   "private": true,
   "exports": {
@@ -12,8 +12,8 @@
     "generate:component": "turbo gen react-component"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
+    "@bottlesteam/eslint-config": "workspace:*",
+    "@bottlesteam/typescript-config": "workspace:*",
     "@turbo/gen": "^1.12.4",
     "@types/node": "^20.11.24",
     "@types/eslint": "^8.56.5",
@@ -23,6 +23,6 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "react": "^18.2.0"
+    "react": "^18.3.1"
   }
 }
