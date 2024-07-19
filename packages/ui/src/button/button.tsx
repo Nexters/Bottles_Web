@@ -2,7 +2,7 @@
 
 import { RecipeVariants } from '@vanilla-extract/recipes';
 import { ReactNode } from 'react';
-import { buttonStyle } from './button.css';
+import { buttonStyle } from './button.css.ts';
 
 interface ButtonProps {
   children: ReactNode;
