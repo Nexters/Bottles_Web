@@ -1,5 +1,5 @@
 {
   "buildCommand": "turbo run build",
   "installCommand": "npx pnpm i -r",
-  "outputDirectory": ".next"
+  "outputDirectory": "apps/web/.next"
 }
