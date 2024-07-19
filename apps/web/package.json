@@ -1,5 +1,5 @@
 {
-  "name": "web",
+  "name": "@bottlesteam/web",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,19 +9,21 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@repo/ui": "workspace:*",
-    "react": "19.0.0-rc-f994737d14-20240522",
-    "react-dom": "19.0.0-rc-f994737d14-20240522",
-    "next": "15.0.0-rc.0"
+    "@bottlesteam/ui": "workspace:*",
+    "@vanilla-extract/css": "^1.15.3",
+    "next": "14.2.4",
+    "react": "^18.3.1",
+    "react-dom": "^18"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
-    "typescript": "^5",
+    "@bottlesteam/eslint-config": "workspace:*",
+    "@bottlesteam/typescript-config": "workspace:*",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@vanilla-extract/next-plugin": "^2.4.3",
     "eslint": "^8",
-    "eslint-config-next": "15.0.0-rc.0"
+    "eslint-config-next": "15.0.0-rc.0",
+    "typescript": "^5"
   }
 }
