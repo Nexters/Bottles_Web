@@ -1,4 +1,4 @@
-import { Button } from "@bottlesteam/ui/button";
+import { Button } from "@bottlesteam/ui";
 import Image from "next/image";
 import styles from "./page.module.css";
 
