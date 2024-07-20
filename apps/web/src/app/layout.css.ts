@@ -2,13 +2,19 @@ import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 export const mainStyle = style({
-  padding: '40px 20px',
+  padding: '40px 30px',
   minHeight: 'calc(100vh - 180px)',
   background: 'linear-gradient(white, #f7f5f9)',
 });
 
 export const layoutStyle = style({
-  width: '375px',
+  width: '100%',
+  minWidth: '375px',
+  '@media': {
+    'screen and (min-width: 500px)': {
+      width: '375px',
+    },
+  },
   height: 'auto',
   minHeight: '100vh',
   backgroundColor: 'whitesmoke',
