@@ -42,6 +42,9 @@ export const boxStyle = recipe({
       },
     },
   },
+  defaultVariants: {
+    margin: 'normal',
+  },
 });
 
 export const textStyle = recipe({
@@ -49,6 +52,14 @@ export const textStyle = recipe({
     color: 'white',
   },
   variants: {
+    color: {
+      black: {
+        color: 'black',
+      },
+      white: {
+        color: 'white',
+      },
+    },
     typography: {
       t1: {
         fontSize: '12px',
@@ -59,5 +70,9 @@ export const textStyle = recipe({
         fontWeight: 500,
       },
     },
+  },
+  defaultVariants: {
+    color: 'white',
+    typography: 't1',
   },
 });
