@@ -38,11 +38,11 @@ jobs:
         env:
           DATA: |
             {
-              "content": "<@태환✌️>",
+              "content": "<@태환>",
               "embeds": [
                 {
                   "title": "🎉 미리보기가 준비되었어요 🎉",
-                  "description": "👉 ${{ steps.vercel_preview_url.outputs.vercel_preview_url }}",
+                  "description": "👉 ${{ steps.vercel_preview_url.outputs.preview_url }}",
                   "color": 65280,
                 }
               ]
