@@ -25,3 +25,31 @@ jobs:
         run: vercel build --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+  capture_vercel_preview_url:
+    name: Capture Vercel preview URL
+    runs-on: 'ubuntu-latest'
+    steps:
+      - uses: aaimio/vercel-preview-url-action@v2.2.0
+        id: vercel_preview_url
+        with:
+          GITHUB_TOKEN: ${{ secrets.MY_TOKEN }}
+      - uses: actions/github-script@v3
+        with:
+          github-token: ${{secrets.MY_TOKEN}}
+      - name: Send Discord Notification
+        env:
+          DATA: |
+            {
+              "content": "<@태환✌️>",
+              "embeds": [
+                {
+                  "title": "🎉 미리보기가 준비되었어요 🎉",
+                  "description": "👉 ${{ steps.vercel_preview_url.outputs.vercel_preview_url }}",
+                  "color": 65280,
+                }
+              ]
+            }
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          -d "$DATA" \
+          ${{ secrets.DISCORD_WEBHOOK_URL }}
