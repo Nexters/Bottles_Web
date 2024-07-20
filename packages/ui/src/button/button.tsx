@@ -12,7 +12,7 @@ interface ButtonProps {
 
 export const Button = ({ children, variant }: ButtonProps) => {
   return (
-    <button className={buttonStyle(variant)} onClick={() => alert(`Button made with Vanilla Extract`)}>
+    <button className={buttonStyle({ color: 'accent' })} onClick={() => alert(`Button made with Vanilla Extract`)}>
       ddd {children}
     </button>
   );
