@@ -1,8 +1,10 @@
 {
   "extends": "@bottlesteam/typescript-config/react-library.json",
   "compilerOptions": {
-    "outDir": "dist"
+    "outDir": "dist",
+    "allowImportingTsExtensions": true,
+    "emitDeclarationOnly": true
   },
-  "include": ["src"],
+  "include": ["src", "build.mjs"],
   "exclude": ["node_modules", "dist"]
 }
