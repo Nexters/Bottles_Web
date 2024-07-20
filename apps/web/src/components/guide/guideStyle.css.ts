@@ -2,6 +2,7 @@ import { style } from '@vanilla-extract/css';
 
 export const sectionStyle = style({
   marginTop: '100px',
+  marginBottom: '100px',
 });
 
 export const guideTextStyle = style({
@@ -20,8 +21,9 @@ export const buttonStyle = style({
   width: '140px',
   height: '50px',
   borderRadius: '14px',
-  backgroundColor: '#D1D3FF',
+  backgroundColor: '#4E65F1',
   border: 'none',
+  color: '#ffffff',
   fontSize: '16px',
   fontWeight: 600,
   cursor: 'pointer',

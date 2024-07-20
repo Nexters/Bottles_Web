@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
-import { Text } from './Text';
+import { boxStyle } from '../../app/layout.css';
+import { Text } from '../text/Text';
 import { container } from './infoStyle.css';
-import { boxStyle } from './layout.css';
 
 export function Info() {
   return (

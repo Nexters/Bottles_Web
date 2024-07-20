@@ -1,5 +1,5 @@
 // import { RecipeVariants } from '@vanilla-extract/recipes';
-import { textStyle } from './layout.css';
+import { textStyle } from './textStyle.css';
 
 // type TextVariants = RecipeVariants<typeof textStyle>['typography'];
 

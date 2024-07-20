@@ -30,7 +30,6 @@ export function Guide() {
         그렇다면 바로 <strong className={strongTextStyle}>Bottle</strong> 로 접속해 <br /> 사랑의 보틀을 받아보세요!
       </h2>
       <br />
-      <br />
       <button onClick={() => alert('앗! 아직 앱이 준비중이에요. 잠시만 기다려주세요.')} className={buttonStyle}>
         이용하러 가기
       </button>
