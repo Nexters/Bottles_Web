@@ -25,3 +25,29 @@ jobs:
         run: vercel build --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+      - name: vercel-preview-url
+        uses: zentered/vercel-preview-url@v1.1.9
+        id: vercel_preview_url
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_ACCESS_TOKEN }}
+        with:
+          vercel_project_id: ${{ secrets.VERCEL_PROJECT_ID }}
+      - name: Get URL
+        run: echo "https://${{ steps.vercel_preview_url.outputs.preview_url }}"
+      - name: Send Discord Notification
+        env:
+          DATA: |
+            {
+              "content": "<@stakbucks>",
+              "embeds": [
+                {
+                  "title": "👀 미리보기가 준비되었어요",
+                  "description": "👉 https://${{ steps.vercel_preview_url.outputs.preview_url }}",
+                  "color": 65280
+                }
+              ]
+            }
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          -d "$DATA" \
+          ${{ secrets.DISCORD_WEBHOOK_URL }}
