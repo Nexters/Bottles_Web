@@ -5,3 +5,4 @@
 export * from './button';
 export * from './paragraph';
 export type * from './types';
+export * from './colors';
