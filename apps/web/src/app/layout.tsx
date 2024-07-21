@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
+import { wantedSansStd } from './fonts';
 import './globals.css';
 import '@bottlesteam/ui/styles';
-import { watedSansStd } from './fonts';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <link rel="icon" href="/favicon.ico" sizes="any" />
-      <body className={watedSansStd.className}>{children}</body>
+      <body className={wantedSansStd.className}>{children}</body>
     </html>
   );
 }
