@@ -27,3 +27,5 @@ export const colorsMap = Object.entries(colors).reduce(
   }),
   {}
 ) as Record<keyof typeof colors, Record<'color', string>>;
+
+export type Color = keyof typeof colors;
