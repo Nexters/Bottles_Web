@@ -1,6 +1,6 @@
 import localFont from 'next/font/local';
 
-export const watedSansStd = localFont({
+export const wantedSansStd = localFont({
   src: './WantedSansStdVariable.woff2',
   variable: '--font-wantedSans-std',
 });
