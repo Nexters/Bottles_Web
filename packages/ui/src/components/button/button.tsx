@@ -1,19 +1,27 @@
 'use client';
 
-import { RecipeVariants } from '@vanilla-extract/recipes';
-import { ReactNode } from 'react';
+import { Slot } from '@radix-ui/react-slot';
+import { ElementRef, ReactNode, forwardRef } from 'react';
 import { buttonStyle } from './button.css.ts';
 
-interface ButtonProps {
+type DefaultProps = {
   children: ReactNode;
-  className?: string;
-  variant: RecipeVariants<typeof buttonStyle>;
-}
-
-export const Button = ({ children, variant }: ButtonProps) => {
-  return (
-    <button className={buttonStyle(variant)} onClick={() => alert(`Button made with Vanilla Extract`)}>
-      ddd {children}
-    </button>
-  );
+  asChild?: boolean;
 };
+
+export type ButtonProps = DefaultProps & {
+  variant: 'outlined' | 'solid';
+  size: 'sm' | 'md' | 'lg';
+};
+
+export const Button = forwardRef<ElementRef<'button'>, ButtonProps>((props: ButtonProps, ref) => {
+  const { children, variant, size, asChild = false, ...rest } = props;
+
+  const Component = asChild ? Slot : 'button';
+
+  return (
+    <Component ref={ref} className={buttonStyle({ variant, size })} {...rest}>
+      {children}
+    </Component>
+  );
+});

@@ -1,14 +1,210 @@
 import { recipe } from '@vanilla-extract/recipes';
+import { colors, radius, spacings } from '../../systems';
+import { typography } from '../../systems';
 
 export const buttonStyle = recipe({
   base: {
-    backgroundColor: 'purple',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colors.white100,
   },
   variants: {
-    color: {
-      neutral: { background: 'whitesmoke' },
-      brand: { background: 'red' },
-      accent: { background: 'blue' },
+    variant: {
+      outlined: {},
+      solid: {},
+    },
+    size: {
+      sm: {},
+      md: {},
+      lg: {},
+      'full-width': {},
+    },
+  },
+  compoundVariants: [
+    {
+      variants: {
+        variant: 'outlined',
+        size: 'sm',
+      },
+      style: {
+        color: colors.neutral900,
+        width: 'auto',
+        height: '36px',
+        ...typography.bo,
+        border: `1px solid ${colors.neutral300}`,
+        padding: `0 ${spacings.sm}`,
+        borderRadius: radius.sm,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        ':active': {
+          backgroundColor: colors.purple100,
+          color: colors.purple500,
+        },
+        ':disabled': {
+          backgroundColor: colors.white100,
+          color: colors.neutral400,
+          border: `1px solid ${colors.neutral300}`,
+        },
+      },
+    },
+    {
+      variants: {
+        variant: 'outlined',
+        size: 'md',
+      },
+      style: {
+        color: colors.neutral900,
+        width: '158px',
+        height: '56px',
+        ...typography.bo,
+        border: `1px solid ${colors.neutral300}`,
+        borderRadius: radius.sm,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        ':active': {
+          backgroundColor: colors.purple100,
+          color: colors.purple500,
+        },
+        ':disabled': {
+          backgroundColor: colors.white100,
+          color: colors.neutral400,
+          border: `1px solid ${colors.neutral300}`,
+        },
+      },
+    },
+    {
+      variants: {
+        variant: 'outlined',
+        size: 'lg',
+      },
+      style: {
+        wordWrap: 'break-word',
+        width: '328px',
+        height: '56px',
+        ...typography.bo,
+        border: `1px solid ${colors.neutral300}`,
+        borderRadius: radius.sm,
+        display: 'flex',
+        justifyContent: 'center',
+
+        ':active': {
+          backgroundColor: colors.purple100,
+          color: colors.purple500,
+        },
+        ':disabled': {
+          backgroundColor: colors.white100,
+          color: colors.neutral400,
+          border: `1px solid ${colors.neutral300}`,
+        },
+      },
+    },
+    {
+      variants: {
+        variant: 'solid',
+        size: 'sm',
+      },
+      style: {
+        color: colors.white100,
+        width: '158px',
+        height: '56px',
+        ...typography.st1,
+        backgroundColor: colors.purple400,
+        borderRadius: radius.sm,
+        border: 'none',
+        wordWrap: 'break-word',
+
+        ':active': {
+          backgroundColor: colors.purple500,
+        },
+        ':disabled': {
+          backgroundColor: colors.neutral400,
+        },
+      },
+    },
+    {
+      variants: {
+        variant: 'solid',
+        size: 'md',
+      },
+      style: {
+        color: colors.white100,
+        width: '264px',
+        height: '56px',
+        ...typography.st1,
+        backgroundColor: colors.purple400,
+        wordWrap: 'break-word',
+        borderRadius: radius.sm,
+        border: 'none',
+
+        ':active': {
+          backgroundColor: colors.purple500,
+        },
+        ':disabled': {
+          backgroundColor: colors.neutral400,
+        },
+      },
+    },
+    {
+      variants: {
+        variant: 'solid',
+        size: 'lg',
+      },
+      style: {
+        color: colors.white100,
+        width: '328px',
+        height: '56px',
+        ...typography.st1,
+        backgroundColor: colors.purple400,
+        borderRadius: radius.sm,
+        border: 'none',
+        wordWrap: 'break-word',
+
+        ':active': {
+          backgroundColor: colors.purple500,
+        },
+        ':disabled': {
+          backgroundColor: colors.neutral400,
+        },
+      },
+    },
+  ],
+});
+
+export const imageContainerStyle = recipe({
+  base: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: spacings.sm,
+  },
+  variants: {
+    size: {
+      sm: {
+        gap: spacings.xs,
+      },
+      md: {
+        gap: spacings.sm,
+      },
+    },
+  },
+});
+
+export const imageStyle = recipe({
+  base: {},
+  variants: {
+    size: {
+      sm: {
+        width: '16px',
+        height: '16px',
+      },
+      md: {
+        width: '100px',
+        height: '100px',
+      },
     },
   },
 });
