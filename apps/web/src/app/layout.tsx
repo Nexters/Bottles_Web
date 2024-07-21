@@ -1,16 +1,7 @@
 import type { Metadata } from 'next';
-import localFont from 'next/font/local';
 import './globals.css';
 import '@bottlesteam/ui/styles';
-
-const geistSans = localFont({
-  src: './fonts/GeistVF.woff',
-  variable: '--font-geist-sans',
-});
-const geistMono = localFont({
-  src: './fonts/GeistMonoVF.woff',
-  variable: '--font-geist-mono',
-});
+import { laundryGothicOtf } from './fonts';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -25,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <link rel="icon" href="/favicon.ico" sizes="any" />
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>{children}</body>
+      <body className={laundryGothicOtf.className}>{children}</body>
     </html>
   );
 }
