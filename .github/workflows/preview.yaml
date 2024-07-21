@@ -38,10 +38,10 @@ jobs:
         env:
           DATA: |
             {
-              "content": "<@&태환 ✌️>",
+              "content": "<@stakbucks>",
               "embeds": [
                 {
-                  "title": "🎉 미리보기가 준비되었어요 🎉",
+                  "title": "👀 미리보기가 준비되었어요",
                   "description": "👉 https://${{ steps.vercel_preview_url.outputs.preview_url }}",
                   "color": 65280
                 }

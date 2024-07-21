@@ -25,3 +25,20 @@ jobs:
         run: vercel build --prod --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+      - name: Send Discord Notification
+        env:
+          DATA: |
+            {
+              "content": "<@stakbucks>",
+              "embeds": [
+                {
+                  "title": "🎉 배포 완료! 🎉",
+                  "description": "👉 https://bottles.asia",
+                  "color": 65280
+                }
+              ]
+            }
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          -d "$DATA" \
+          ${{ secrets.DISCORD_WEBHOOK_URL }}
