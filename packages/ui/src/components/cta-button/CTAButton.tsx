@@ -35,9 +35,7 @@ const CTAButtonImpl = forwardRef<ElementRef<'button'>, CTAButtonProps>((props: C
   );
 });
 
-const CTAButton = Object.assign(CTAButtonImpl, {
+export const CTAButton = Object.assign(CTAButtonImpl, {
   Left: LeftButton,
   Right: RightButton,
 });
-
-export { CTAButton };
