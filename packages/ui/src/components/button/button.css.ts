@@ -8,17 +8,34 @@ export const buttonStyle = recipe({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.white100,
+    cursor: 'pointer',
   },
   variants: {
     variant: {
-      outlined: {},
-      solid: {},
+      outlined: {
+        ':active': {
+          backgroundColor: colors.purple100,
+          color: colors.purple500,
+        },
+        ':disabled': {
+          backgroundColor: colors.white100,
+          color: colors.neutral400,
+          border: `1px solid ${colors.neutral300}`,
+        },
+      },
+      solid: {
+        ':active': {
+          backgroundColor: colors.purple500,
+        },
+        ':disabled': {
+          backgroundColor: colors.neutral400,
+        },
+      },
     },
     size: {
       sm: {},
       md: {},
       lg: {},
-      'full-width': {},
     },
   },
   compoundVariants: [
@@ -38,15 +55,6 @@ export const buttonStyle = recipe({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        ':active': {
-          backgroundColor: colors.purple100,
-          color: colors.purple500,
-        },
-        ':disabled': {
-          backgroundColor: colors.white100,
-          color: colors.neutral400,
-          border: `1px solid ${colors.neutral300}`,
-        },
       },
     },
     {
@@ -64,15 +72,6 @@ export const buttonStyle = recipe({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        ':active': {
-          backgroundColor: colors.purple100,
-          color: colors.purple500,
-        },
-        ':disabled': {
-          backgroundColor: colors.white100,
-          color: colors.neutral400,
-          border: `1px solid ${colors.neutral300}`,
-        },
       },
     },
     {
@@ -89,16 +88,6 @@ export const buttonStyle = recipe({
         borderRadius: radius.sm,
         display: 'flex',
         justifyContent: 'center',
-
-        ':active': {
-          backgroundColor: colors.purple100,
-          color: colors.purple500,
-        },
-        ':disabled': {
-          backgroundColor: colors.white100,
-          color: colors.neutral400,
-          border: `1px solid ${colors.neutral300}`,
-        },
       },
     },
     {
@@ -115,13 +104,6 @@ export const buttonStyle = recipe({
         borderRadius: radius.sm,
         border: 'none',
         wordWrap: 'break-word',
-
-        ':active': {
-          backgroundColor: colors.purple500,
-        },
-        ':disabled': {
-          backgroundColor: colors.neutral400,
-        },
       },
     },
     {
@@ -138,13 +120,6 @@ export const buttonStyle = recipe({
         wordWrap: 'break-word',
         borderRadius: radius.sm,
         border: 'none',
-
-        ':active': {
-          backgroundColor: colors.purple500,
-        },
-        ':disabled': {
-          backgroundColor: colors.neutral400,
-        },
       },
     },
     {
@@ -161,13 +136,6 @@ export const buttonStyle = recipe({
         borderRadius: radius.sm,
         border: 'none',
         wordWrap: 'break-word',
-
-        ':active': {
-          backgroundColor: colors.purple500,
-        },
-        ':disabled': {
-          backgroundColor: colors.neutral400,
-        },
       },
     },
   ],
