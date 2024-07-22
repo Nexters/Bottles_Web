@@ -14,18 +14,4 @@ export const guideTextStyle = style({
 export const strongTextStyle = style({
   fontSize: '40px',
   fontWeight: 700,
-  color: '#4E65F1',
-});
-
-export const buttonStyle = style({
-  width: '140px',
-  height: '50px',
-  borderRadius: '14px',
-  backgroundColor: '#4E65F1',
-  border: 'none',
-  color: '#ffffff',
-  fontSize: '16px',
-  fontWeight: 600,
-  cursor: 'pointer',
-  boxShadow: ' 0 2px 3px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.08)',
 });

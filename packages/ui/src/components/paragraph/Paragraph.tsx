@@ -1,21 +1,22 @@
-import { ElementType, ReactNode } from 'react';
+import { Slot } from '@radix-ui/react-slot';
+import { ComponentPropsWithoutRef, ReactNode } from 'react';
 import { Color } from '../../systems/colors';
-import { PolymorphicAsProp } from '../../types';
 import { paragraphStyle } from './paragraph.css';
 
 type Typography = 't1' | 't2' | 'st1' | 'st2' | 'bo' | 'ca' | 'kl';
 
-export interface ParagraphProps<E extends ElementType> extends PolymorphicAsProp<E> {
+export interface ParagraphProps extends ComponentPropsWithoutRef<'p'> {
   typography?: Typography;
   color?: Color;
   children: ReactNode;
+  asChild?: boolean;
 }
 
-export function Paragraph<E extends ElementType>({ typography, color, children, as, ...rest }: ParagraphProps<E>) {
-  const Component = as ?? 'p';
+export function Paragraph({ typography, color, children, className, asChild, ...rest }: ParagraphProps) {
+  const Component = asChild ? Slot : 'p';
 
   return (
-    <Component className={paragraphStyle({ typography, color })} {...rest}>
+    <Component className={`${paragraphStyle({ typography, color })} ${className}`} {...rest}>
       {children}
     </Component>
   );
