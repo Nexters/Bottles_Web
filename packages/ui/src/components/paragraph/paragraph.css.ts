@@ -3,7 +3,9 @@ import { colorsMap } from '../../systems/colors';
 import { typography } from '../../systems/typography';
 
 export const paragraphStyle = recipe({
-  base: '',
+  base: {
+    whiteSpace: 'pre-wrap',
+  },
   variants: {
     color: colorsMap,
     typography: typography,

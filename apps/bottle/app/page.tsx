@@ -1,4 +1,3 @@
-import { Button } from '@bottlesteam/ui';
 import Image from 'next/image';
 import styles from './page.module.css';
 
@@ -33,7 +32,6 @@ export default function Home() {
             Read our docs
           </a>
         </div>
-        <Button variant={{ color: 'brand' }}>Open addlert</Button>
       </main>
       <footer className={styles.footer}>
         <a
