@@ -12,12 +12,12 @@ export interface ButtonProps extends ComponentPropsWithoutRef<'button'> {
 }
 
 export const Button = forwardRef<ElementRef<'button'>, ButtonProps>((props: ButtonProps, ref) => {
-  const { children, variant, size, asChild = false, ...rest } = props;
+  const { children, variant, size, asChild = false, className, ...rest } = props;
 
   const Component = asChild ? Slot : 'button';
 
   return (
-    <Component ref={ref} className={buttonStyle({ variant, size })} {...rest}>
+    <Component ref={ref} className={`${buttonStyle({ variant, size })} ${className}`} {...rest}>
       {children}
     </Component>
   );
