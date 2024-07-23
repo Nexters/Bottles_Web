@@ -6,3 +6,5 @@ export { CTAButton } from './cta-button';
 export type { CTAButtonProps } from './cta-button';
 export { Paragraph } from './paragraph';
 export type { ParagraphProps } from './paragraph';
+export { Asset } from './asset';
+export type { AssetProps } from './asset';

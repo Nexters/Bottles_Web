@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import '@bottlesteam/ui/styles';
-import { wantedSansStd } from './fonts';
+import { wantedSansStd } from '../fonts';
 
 export const metadata: Metadata = {
   title: '보틀',

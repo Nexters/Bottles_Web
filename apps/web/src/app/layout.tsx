@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { wantedSansStd } from './fonts';
+import { wantedSansStd } from '../fonts';
 import './globals.css';
 import '@bottlesteam/ui/styles';
 

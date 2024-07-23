@@ -3,8 +3,8 @@
   "compilerOptions": {
     "outDir": "dist",
     "allowImportingTsExtensions": true,
-    "emitDeclarationOnly": true
+    "noEmit": true
   },
-  "include": ["src", "build.mjs"],
+  "include": ["src", "build.mjs", "src/icon.d.ts"],
   "exclude": ["node_modules", "dist"]
 }
