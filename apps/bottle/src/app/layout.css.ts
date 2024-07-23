@@ -3,10 +3,11 @@ import { style } from '@vanilla-extract/css';
 
 export const layoutStyle = style({
   width: '100%',
-  minWidth: '375px',
+  minWidth: '360px',
+  padding: '0 16px',
   '@media': {
     'screen and (min-width: 500px)': {
-      width: '375px',
+      width: '360px',
     },
   },
   height: 'auto',
