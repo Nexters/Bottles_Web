@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import '@bottlesteam/ui/styles';
 import { wantedSansStd } from '../fonts';
+import { layoutStyle } from './layout.css';
 
 export const metadata: Metadata = {
   title: '보틀',
@@ -15,7 +16,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={wantedSansStd.className}>{children}</body>
+      <body className={wantedSansStd.className}>
+        <main className={layoutStyle}>{children}</main>
+      </body>
     </html>
   );
 }

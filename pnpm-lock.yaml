@@ -23,6 +23,12 @@ importers:
       '@bottlesteam/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      '@radix-ui/react-slot':
+        specifier: ^1.1.0
+        version: 1.1.0(@types/react@18.2.61)(react@18.3.1)
+      es-toolkit:
+        specifier: ^1.13.1
+        version: 1.13.1
       next:
         specifier: 14.2.4
         version: 14.2.4(@babel/core@7.24.9)(react-dom@18.3.1)(react@18.3.1)
@@ -2541,7 +2547,7 @@ packages:
     dependencies:
       '@babel/core': 7.24.9
       '@svgr/babel-preset': 8.1.0(@babel/core@7.24.9)
-      '@svgr/core': 8.1.0(typescript@5.3.3)
+      '@svgr/core': 8.1.0(typescript@5.5.3)
       '@svgr/hast-util-to-babel-ast': 8.0.0
       svg-parser: 2.0.4
     transitivePeerDependencies:
@@ -4139,6 +4145,10 @@ packages:
       is-date-object: 1.0.5
       is-symbol: 1.0.4
     dev: true
+
+  /es-toolkit@1.13.1:
+    resolution: {integrity: sha512-tGsgoI8DfU0yrZI7w97aYVMZJU5sjpXC+HK8aYf3pmLQRNHMleiJN5ud21dA/IHKkTDFY5jcDMQcLs0A21LtAg==}
+    dev: false
 
   /esbuild-plugin-preserve-directives@0.0.8(esbuild@0.23.0):
     resolution: {integrity: sha512-YDfhIYN+/heVnzx1SvyjkBQ7vIZ4un6wXHlJVOztkTMQfIPd6BuqOC7kEs9M4FlOX818ISSdZ+3ebkrzdO59Qw==}

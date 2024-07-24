@@ -14,4 +14,5 @@ export const layoutStyle = style({
   minHeight: '100vh',
   backgroundColor: colors.white100,
   margin: '0 auto',
+  position: 'relative',
 });

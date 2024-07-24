@@ -16,6 +16,7 @@ export const buttonStyle = recipe({
         ':active': {
           backgroundColor: colors.purple100,
           color: colors.purple500,
+          border: `1px solid ${colors.purple500}`,
         },
         ':disabled': {
           backgroundColor: colors.white100,
@@ -30,6 +31,13 @@ export const buttonStyle = recipe({
         ':disabled': {
           backgroundColor: colors.neutral400,
         },
+      },
+    },
+    selected: {
+      true: {
+        backgroundColor: colors.purple100,
+        color: colors.purple500,
+        border: `1px solid ${colors.purple500}`,
       },
     },
     size: {
@@ -138,7 +146,19 @@ export const buttonStyle = recipe({
         wordWrap: 'break-word',
       },
     },
+    {
+      variants: {
+        variant: 'outlined',
+        selected: true,
+      },
+      style: {
+        border: `1px solid ${colors.purple500}`,
+      },
+    },
   ],
+  defaultVariants: {
+    selected: false,
+  },
 });
 
 export const imageContainerStyle = recipe({

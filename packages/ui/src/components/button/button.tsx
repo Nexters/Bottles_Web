@@ -9,15 +9,16 @@ export interface ButtonProps extends ComponentPropsWithoutRef<'button'> {
   asChild?: boolean;
   variant: 'outlined' | 'solid';
   size: 'sm' | 'md' | 'lg';
+  selected?: boolean;
 }
 
 export const Button = forwardRef<ElementRef<'button'>, ButtonProps>((props: ButtonProps, ref) => {
-  const { children, variant, size, asChild = false, className, ...rest } = props;
+  const { children, variant, size, selected, asChild = false, className, ...rest } = props;
 
   const Component = asChild ? Slot : 'button';
 
   return (
-    <Component ref={ref} className={`${buttonStyle({ variant, size })} ${className}`} {...rest}>
+    <Component ref={ref} className={`${buttonStyle({ variant, size, selected })} ${className}`} {...rest}>
       {children}
     </Component>
   );
