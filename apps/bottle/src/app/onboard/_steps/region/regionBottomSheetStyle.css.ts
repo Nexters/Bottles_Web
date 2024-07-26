@@ -12,8 +12,7 @@ export const tabBarStyle = style({
 export const listStyle = style({
   width: '100%',
   height: '208px',
-  overflow: 'scroll',
-  overflowX: 'hidden',
+  overflowY: 'auto',
   display: 'flex',
   flexDirection: 'column',
   gap: spacings.sm,
@@ -23,5 +22,4 @@ export const itemStyle = style({
   width: '100%',
   display: 'flex',
   alignItems: 'center',
-  overflowX: 'hidden',
 });
