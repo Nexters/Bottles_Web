@@ -1,13 +1,15 @@
 'use client';
 
-import { ReactNode } from 'react';
+import { ReactNode, Suspense } from 'react';
 import { OnboardingProvider } from './OnboardingProvider';
 import { StepProvider } from './StepProvider';
 
 export default function OnboardingLayout({ children }: { children: ReactNode }) {
   return (
     <OnboardingProvider>
-      <StepProvider>{children}</StepProvider>
+      <Suspense>
+        <StepProvider>{children}</StepProvider>
+      </Suspense>
     </OnboardingProvider>
   );
 }
