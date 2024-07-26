@@ -8,9 +8,9 @@ export interface VariantOneProps extends Omit<ButtonProps, 'variant' | 'size' | 
 }
 
 export const VariantOne = forwardRef<ElementRef<'button'>, VariantOneProps>(
-  ({ children, asChild, ...rest }: VariantOneProps, ref) => {
+  ({ children, asChild, style, ...rest }: VariantOneProps, ref) => {
     return (
-      <div className={containerStyle}>
+      <div className={containerStyle} style={style}>
         <Button {...rest} ref={ref} variant="solid" size="lg" className={variantOneStyle} asChild={asChild}>
           {children}
         </Button>

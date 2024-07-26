@@ -1,4 +1,4 @@
-import { Button, Paragraph, colors } from '@bottlesteam/ui';
+import { Asset, Button, Paragraph, colors } from '@bottlesteam/ui';
 import { useState } from 'react';
 import { BottomSheet, BottomSheetProps } from './bottom-sheet/BottomSheet';
 import { itemStyle, listStyle, tabBarStyle } from './regionBottomSheetStyle.css';
@@ -41,6 +41,7 @@ export function RegionBottomSheet({ onSelect, selected, items, type, ...bottomSh
       }
       button={
         <BottomSheet.Button
+          disabled={localSelected === undefined}
           onClick={() => {
             onSelect(localSelected);
             bottomSheetProps.onClose();
@@ -59,6 +60,7 @@ function TabBar({ type }: { type: 'city' | 'state' }) {
       <Button variant="outlined" size="sm" selected={type === 'city'}>
         전체 지역
       </Button>
+      <Asset type="icon-right" />
       <Button variant="outlined" size="sm" selected={type === 'state'}>
         상세 지역
       </Button>

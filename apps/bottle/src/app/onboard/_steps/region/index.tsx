@@ -18,9 +18,6 @@ export function Region() {
   const [city, setCity] = useState<string>();
   const [state, setState] = useState<string>();
 
-  console.log(regionsData);
-  console.log(city);
-
   const openRegionBottomSheet = (type: 'city' | 'state') => {
     overlay.open(({ isOpen, close }) => {
       return (

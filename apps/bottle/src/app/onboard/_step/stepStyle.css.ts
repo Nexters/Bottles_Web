@@ -12,6 +12,8 @@ export const buttonContainer = style({
   width: '100%',
   height: `${CTA_HEIGHT}px`,
   paddingTop: spacings.xl,
+  display: 'flex',
+  justifyContent: 'center',
 });
 
 export const containerStyle = style({
@@ -21,5 +23,14 @@ export const containerStyle = style({
   scrollbarWidth: 'none',
   '::-webkit-scrollbar': {
     display: 'none',
+  },
+});
+
+export const buttonStyle = style({
+  width: '100%',
+  '@media': {
+    'screen and (min-width: 500px)': {
+      width: '360px',
+    },
   },
 });

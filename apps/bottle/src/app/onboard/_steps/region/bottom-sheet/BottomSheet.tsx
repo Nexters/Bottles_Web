@@ -1,7 +1,7 @@
 import { VariantOneProps } from '@bottlesteam/ui';
 import { ReactNode } from 'react';
 import { FixedButton } from '../../../_step/StepContainer';
-import { bodyStyle, overlayStyle, wrapperStyle } from './bottomSheetStyle.css';
+import { bodyStyle, layoutStyle, overlayStyle, wrapperStyle } from './bottomSheetStyle.css';
 
 export interface BottomSheetProps {
   body: ReactNode;
@@ -17,8 +17,10 @@ function BottomSheetRoot({ button, body, onClose, isOpen }: BottomSheetProps) {
         <>
           <div className={overlayStyle} onClick={onClose} />
           <div className={wrapperStyle}>
-            <div className={bodyStyle}>{body}</div>
-            {button}
+            <div className={layoutStyle}>
+              <div className={bodyStyle}>{body}</div>
+              {button}
+            </div>
           </div>
         </>
       )}

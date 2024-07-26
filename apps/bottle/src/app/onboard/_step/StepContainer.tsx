@@ -1,6 +1,6 @@
 import { CTAButton, Paragraph, ParagraphProps, VariantOneProps } from '@bottlesteam/ui';
 import { ReactNode } from 'react';
-import { buttonContainer, containerStyle } from './stepStyle.css';
+import { buttonContainer, buttonStyle, containerStyle } from './stepStyle.css';
 
 interface Props {
   children: ReactNode;
@@ -36,9 +36,11 @@ function Subtitle({ children, ...rest }: Omit<ParagraphProps, 'typography' | 'co
 export function FixedButton(props: VariantOneProps) {
   return (
     <div className={buttonContainer}>
-      <CTAButton variant="one" {...props}>
-        {props.children}
-      </CTAButton>
+      <div className={buttonStyle}>
+        <CTAButton variant="one" {...props} style={{ width: '100%', maxWidth: '500px' }}>
+          {props.children}
+        </CTAButton>
+      </div>
     </div>
   );
 }
