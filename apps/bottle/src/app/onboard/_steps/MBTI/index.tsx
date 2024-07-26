@@ -1,6 +1,7 @@
 import { Button, ButtonProps } from '@bottlesteam/ui';
 import { useState } from 'react';
 import { Control, toggle } from '../../../../components/control';
+import { Stepper } from '../../../../components/stepper';
 import { useOnboardingValues } from '../../OnboardingProvider';
 import { useStep } from '../../StepProvider';
 import { Step } from '../../_step/StepContainer';
@@ -22,6 +23,7 @@ export function MBTI() {
 
   return (
     <Step>
+      <Stepper current={1} max={9} />
       <Step.Title>OO님의 성격에 대해 알고 싶어요</Step.Title>
       <section className={bodyStyle}>
         <Step.Subtitle>외향형 · 내향형</Step.Subtitle>

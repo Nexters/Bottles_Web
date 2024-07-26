@@ -12,7 +12,7 @@ export const layoutStyle = style({
   },
   height: 'auto',
   minHeight: '100vh',
-  backgroundColor: colors.white100,
+  backgroundColor: colors.neutral50,
   margin: '0 auto',
   position: 'relative',
 });

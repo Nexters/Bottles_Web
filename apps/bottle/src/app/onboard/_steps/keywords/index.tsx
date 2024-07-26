@@ -1,6 +1,7 @@
 import { Button } from '@bottlesteam/ui';
 import { useState } from 'react';
 import { Control } from '../../../../components/control';
+import { Stepper } from '../../../../components/stepper';
 import { useOnboardingValues } from '../../OnboardingProvider';
 import { useStep } from '../../StepProvider';
 import { Step } from '../../_step/StepContainer';
@@ -39,6 +40,7 @@ export function Keywords() {
 
   return (
     <Step>
+      <Stepper current={2} max={9} />
       <Step.Title>나를 표현하는 키워드는?</Step.Title>
       <Step.Description style={{ marginTop: '12px' }}>최대 5개까지 선택할 수 있어요</Step.Description>
       <Control value={keywords}>

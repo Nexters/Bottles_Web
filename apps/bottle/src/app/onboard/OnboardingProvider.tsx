@@ -9,6 +9,7 @@ interface OnboardingValues {
     entertainment: string[];
     etc: string[];
   };
+  height: number;
   job: string;
   smoking: string;
   alcohol: string;
@@ -38,6 +39,8 @@ export function OnboardingProvider({ children }: Props) {
       ...prev,
       [key]: value,
     };
+
+    console.log('values', onboardingValues.current);
   }, []);
 
   return <Onboarding.Provider value={{ setValue }}>{children}</Onboarding.Provider>;

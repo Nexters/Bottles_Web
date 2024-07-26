@@ -1,13 +1,13 @@
 import { CTAButton, Paragraph, ParagraphProps, VariantOneProps } from '@bottlesteam/ui';
 import { ReactNode } from 'react';
-import { buttonContainer } from './stepStyle.css';
+import { buttonContainer, containerStyle } from './stepStyle.css';
 
 interface Props {
   children: ReactNode;
 }
 
 function StepContainer({ children }: Props) {
-  return <div>{children}</div>;
+  return <div className={containerStyle}>{children}</div>;
 }
 
 function Title({ children, ...rest }: Omit<ParagraphProps, 'typography' | 'color'>) {
