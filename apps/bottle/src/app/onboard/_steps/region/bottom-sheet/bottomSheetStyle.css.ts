@@ -25,7 +25,6 @@ export const layoutStyle = style({
   padding: spacings.md,
   paddingTop: spacings.xl,
   margin: 0,
-
   backgroundColor: colors.white100,
   display: 'flex',
   justifyContent: 'center',
@@ -36,6 +35,7 @@ export const layoutStyle = style({
       width: '360px',
     },
   },
+  overflowX: 'hidden',
 });
 
 export const overlayStyle = style({
