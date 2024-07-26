@@ -31,7 +31,7 @@ export function Height() {
           onChange={({ id }) => setHeight(Number(id))}
           selectedID={DEFAULT_ID}
           fontSize={14}
-          height={220}
+          height={250}
           width={'100%'}
           itemHeight={56}
           shadowColor="none"

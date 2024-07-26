@@ -71,6 +71,9 @@ export function MBTI() {
       <Step.FixedButton
         disabled={EI == null || SN == null || TF == null || JP == null}
         onClick={() => {
+          if (EI == null || SN == null || TF == null || JP == null) {
+            return;
+          }
           setValue('mbti', `${EI}${SN}${TF}${JP}`);
           onNextStep();
         }}

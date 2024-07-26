@@ -5,24 +5,25 @@ import { Stepper } from '../../../../components/stepper';
 import { useOnboardingValues } from '../../OnboardingProvider';
 import { useStep } from '../../StepProvider';
 import { Step } from '../../_step/StepContainer';
-import { jobStyle } from './jobStyle.css';
+import { religionStyle } from './religionStyle.css';
 
-const jobList = ['대학생 · 대학원생', '직장인', '프리랜서', '자영업', '취준생 · 무직'] as const;
-type JobItem = (typeof jobList)[number];
+const religionList = ['무교', '기독교', '천주교', '불교', '기타'] as const;
+type ReligionItem = (typeof religionList)[number];
 
-export function Job() {
+export function Religion() {
   const { setValue } = useOnboardingValues();
   const { onNextStep } = useStep();
 
-  const [job, setJob] = useState<JobItem>();
+  const [religion, setReligion] = useState<ReligionItem>();
+
   return (
     <Step>
-      <Stepper current={4} max={9} />
-      <Step.Title>지금 어떤 일을 하고 있나요?</Step.Title>
-      <section className={jobStyle}>
-        <Control value={job}>
-          {jobList.map((item, index) => (
-            <Control.Item key={index} value={item} onClick={() => setJob(prev => toggle(prev, item))}>
+      <Stepper current={8} max={9} />
+      <Step.Title>어떤 종교를 가지고 있나요?</Step.Title>
+      <section className={religionStyle}>
+        <Control value={religion}>
+          {religionList.map((item, index) => (
+            <Control.Item key={index} value={item} onClick={() => setReligion(prev => toggle(prev, item))}>
               <Button variant="outlined" size="md" style={{ width: 'auto' }}>
                 {item}
               </Button>
@@ -31,12 +32,12 @@ export function Job() {
         </Control>
       </section>
       <Step.FixedButton
-        disabled={job === undefined}
+        disabled={religion === undefined}
         onClick={() => {
-          if (job === undefined) {
+          if (religion === undefined) {
             return;
           }
-          setValue('job', job);
+          setValue('religion', religion);
           onNextStep();
         }}
       >

@@ -32,6 +32,9 @@ importers:
       next:
         specifier: 14.2.4
         version: 14.2.4(@babel/core@7.24.9)(react-dom@18.3.1)(react@18.3.1)
+      overlay-kit:
+        specifier: ^1.3.0
+        version: 1.3.0(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -6068,6 +6071,16 @@ packages:
     resolution: {integrity: sha512-D2FR03Vir7FIu45XBY20mTb+/ZSWB00sjU9jdQXt83gDrI4Ztz5Fs7/yy74g2N5SVQY4xY1qDr4rNddwYRVX0g==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /overlay-kit@1.3.0(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-vJZhxWUChL8/IUnOLl2eMKy4v8bFS7K9/9benyeOe3N7bgoXCMNbu1Po51VZVym4bSTaco4P18Au0eCvc1nMjg==}
+    peerDependencies:
+      react: ^18
+      react-dom: ^18
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+    dev: false
 
   /p-limit@3.1.0:
     resolution: {integrity: sha512-TYOanM3wGwNGsZN2cVTYPArw454xnXj5qmWF1bEoAc4+cU/ol7GVh7odevjp1FNHduHc3KZMcFduxU5Xc6uJRQ==}

@@ -72,6 +72,9 @@ export function Keywords() {
       <Step.FixedButton
         disabled={keywords.length === 0}
         onClick={() => {
+          if (keywords.length === 0) {
+            return;
+          }
           setValue('keyword', keywords);
           onNextStep();
         }}

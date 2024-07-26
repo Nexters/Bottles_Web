@@ -2,8 +2,8 @@ import { spacings } from '@bottlesteam/ui';
 import { style } from '@vanilla-extract/css';
 
 export const HEADER_HEIGHT = 48;
-const CTA_HEIGHT = 109;
-const CONTAINER_OFFSET_HEIGHT = HEADER_HEIGHT + CTA_HEIGHT;
+export const CTA_HEIGHT = 109;
+export const CONTAINER_OFFSET_HEIGHT = HEADER_HEIGHT + CTA_HEIGHT;
 
 export const buttonContainer = style({
   position: 'fixed',
@@ -17,4 +17,9 @@ export const buttonContainer = style({
 export const containerStyle = style({
   height: `calc(100vh - ${CONTAINER_OFFSET_HEIGHT}px)`,
   overflow: 'scroll',
+  msOverflowStyle: 'none',
+  scrollbarWidth: 'none',
+  '::-webkit-scrollbar': {
+    display: 'none',
+  },
 });
