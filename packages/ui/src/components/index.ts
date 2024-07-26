@@ -8,3 +8,5 @@ export { Paragraph } from './paragraph';
 export type { ParagraphProps } from './paragraph';
 export { Asset } from './asset';
 export type { AssetProps } from './asset';
+export { WheelPicker, WheelPickerItem } from './wheel-picker';
+export type { WheelPickerProps, WheelPickerItemProps } from './wheel-picker';

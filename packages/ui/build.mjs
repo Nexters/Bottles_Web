@@ -21,5 +21,6 @@ esbuild
     format: 'esm',
     loader: { '.css': 'file' },
     outdir,
+    external: ['react', 'react-dom'],
   })
   .catch(() => process.exit(1));
