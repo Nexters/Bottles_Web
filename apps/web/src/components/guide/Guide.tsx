@@ -38,7 +38,7 @@ export function Guide() {
       <br />
       <Button
         onClick={() => {
-          alert('앗! 아직 서비스가 준비중이에요. 잠시만 기다려주세요.');
+          alert('앗! 아직 서비스가 준비중이에요. 잠시만 기다려주세요.z');
         }}
         variant="solid"
         size="sm"
