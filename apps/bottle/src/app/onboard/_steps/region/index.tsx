@@ -5,6 +5,7 @@ import { Stepper } from '../../../../components/stepper';
 import { useOnboardingValues } from '../../OnboardingProvider';
 import { useStep } from '../../StepProvider';
 import { Step } from '../../_step/StepContainer';
+import { spacingStyle } from '../MBTI/MBTIStyle.css';
 import { RegionBottomSheet } from './RegionBottomSheet';
 import { RegionData, fetchRegionData } from './fetchRegion';
 import { regionStyle } from './regionStyle.css';
@@ -59,15 +60,14 @@ export function Region() {
         <Stepper current={9} max={9} />
         <Step.Title>주로 생활하는 지역은 어딘가요?</Step.Title>
         <Step.Subtitle style={{ marginTop: spacings.xxl }}>전체 지역</Step.Subtitle>
-        <div aria-hidden={true} style={{ marginBottom: spacings.sm }} />
+        <div aria-hidden={true} className={spacingStyle} />
         <SelectInput
           onClick={() => openRegionBottomSheet('city')}
           placeholder={'전체 지역을 선택해 주세요'}
           value={city}
-          style={{ marginTop: spacings.sm }}
         />
         <Step.Subtitle style={{ marginTop: spacings.xl }}>시 · 군 · 구</Step.Subtitle>
-        <div aria-hidden={true} style={{ marginBottom: spacings.sm }} />
+        <div aria-hidden={true} className={spacingStyle} />
         <SelectInput
           onClick={() => {
             if (city === undefined) {
@@ -78,7 +78,6 @@ export function Region() {
           }}
           placeholder={'상세 지역을 선택해 주세요'}
           value={state}
-          style={{ marginTop: spacings.sm }}
         />
         <section className={regionStyle}></section>
       </OverlayProvider>

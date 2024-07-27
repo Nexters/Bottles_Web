@@ -19,3 +19,7 @@ export const buttonsContainerStyle = style({
   width: '100%',
   gap: spacings.sm,
 });
+
+export const spacingStyle = style({
+  height: spacings.sm,
+});
