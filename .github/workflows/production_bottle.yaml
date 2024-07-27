@@ -1,7 +1,7 @@
-name: Production Deployment - Web
+name: Production Deployment - Bottle
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_BOTTLE }}
   TURBO_TOKEN: ${{ secrets.VERCEL_ACCESS_TOKEN }}
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 on:
@@ -46,7 +46,7 @@ jobs:
               "content": "<@stakbucks>",
               "embeds": [
                 {
-                  "title": "🎉 배포 완료! 🎉",
+                  "title": "🎉 Bottle 배포 완료! 🎉",
                   "description": "👉 https://bottles.asia",
                   "color": 65280
                 }

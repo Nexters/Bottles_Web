@@ -1,4 +1,4 @@
-name: Vercel Preview Deployment - Bottle
+name: Preview Deployment - Bottle
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_BOTTLE }}
@@ -55,7 +55,7 @@ jobs:
               "content": "<@stakbucks>",
               "embeds": [
                 {
-                  "title": "👀 미리보기가 준비되었어요",
+                  "title": "👀 Bottle 미리보기가 준비되었어요",
                   "description": "👉 https://${{ steps.vercel_preview_url.outputs.preview_url }}",
                   "color": 65280
                 }
