@@ -19,7 +19,7 @@ export const Button = forwardRef<ElementRef<'button'>, ButtonProps>((props: Butt
 
   return (
     <Component ref={ref} className={`${buttonStyle({ variant, size, selected })} ${className}`} {...rest}>
-      {children} fitering...2
+      {children} fitering...3
     </Component>
   );
 });
