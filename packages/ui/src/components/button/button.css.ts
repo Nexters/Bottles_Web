@@ -13,11 +13,6 @@ export const buttonStyle = recipe({
   variants: {
     variant: {
       outlined: {
-        ':active': {
-          backgroundColor: colors.purple100,
-          color: colors.purple500,
-          border: `1px solid ${colors.purple500}`,
-        },
         ':disabled': {
           backgroundColor: colors.white100,
           color: colors.neutral400,
@@ -25,9 +20,6 @@ export const buttonStyle = recipe({
         },
       },
       solid: {
-        ':active': {
-          backgroundColor: colors.purple500,
-        },
         ':disabled': {
           backgroundColor: colors.neutral400,
         },
