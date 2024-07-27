@@ -1,5 +1,5 @@
 import { recipe } from '@vanilla-extract/recipes';
-import { colors, radius, spacings, typography } from '../../systems';
+import { colors, radius, spacings, typography } from '../../foundations';
 
 export const imageButtonStyle = recipe({
   base: {

@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { spacings } from '../../../systems';
+import { spacings } from '../../../foundations';
 
 export const containerStyle = style({
   width: '100vw',

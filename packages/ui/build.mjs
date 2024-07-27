@@ -1,6 +1,7 @@
-import esbuild from 'esbuild';
 import { vanillaExtractPlugin } from '@vanilla-extract/esbuild-plugin';
+import esbuild from 'esbuild';
 import { preserveDirectivesPlugin } from 'esbuild-plugin-preserve-directives';
+import svgr from 'esbuild-plugin-svgr';
 import path from 'path';
 
 const outdir = path.join(process.cwd(), 'dist');
@@ -9,6 +10,7 @@ esbuild
     entryPoints: ['./src/index.ts'],
     bundle: true,
     plugins: [
+      svgr(),
       vanillaExtractPlugin(),
       preserveDirectivesPlugin({
         directives: ['use client', 'use strict'],
@@ -19,5 +21,6 @@ esbuild
     format: 'esm',
     loader: { '.css': 'file' },
     outdir,
+    external: ['react', 'react-dom'],
   })
   .catch(() => process.exit(1));

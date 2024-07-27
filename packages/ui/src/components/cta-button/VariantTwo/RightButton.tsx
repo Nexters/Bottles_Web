@@ -8,9 +8,9 @@ export interface RightButtonProps extends Omit<ButtonProps, 'children' | 'varian
 }
 
 export const RightButton = forwardRef<ElementRef<'button'>, RightButtonProps>(
-  ({ children, asChild }: RightButtonProps, ref) => {
+  ({ children, asChild, ...rest }: RightButtonProps, ref) => {
     return (
-      <Button ref={ref} variant="solid" size="sm" asChild={asChild} className={rightStyle}>
+      <Button ref={ref} variant="solid" size="sm" asChild={asChild} className={rightStyle} {...rest}>
         {children}
       </Button>
     );

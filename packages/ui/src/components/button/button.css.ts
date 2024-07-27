@@ -1,6 +1,6 @@
 import { recipe } from '@vanilla-extract/recipes';
-import { colors, radius, spacings } from '../../systems';
-import { typography } from '../../systems';
+import { colors, radius, spacings } from '../../foundations';
+import { typography } from '../../foundations';
 
 export const buttonStyle = recipe({
   base: {
@@ -13,10 +13,6 @@ export const buttonStyle = recipe({
   variants: {
     variant: {
       outlined: {
-        ':active': {
-          backgroundColor: colors.purple100,
-          color: colors.purple500,
-        },
         ':disabled': {
           backgroundColor: colors.white100,
           color: colors.neutral400,
@@ -24,12 +20,16 @@ export const buttonStyle = recipe({
         },
       },
       solid: {
-        ':active': {
-          backgroundColor: colors.purple500,
-        },
         ':disabled': {
           backgroundColor: colors.neutral400,
         },
+      },
+    },
+    selected: {
+      true: {
+        backgroundColor: colors.purple100,
+        color: colors.purple500,
+        border: `1px solid ${colors.purple500}`,
       },
     },
     size: {
@@ -138,7 +138,21 @@ export const buttonStyle = recipe({
         wordWrap: 'break-word',
       },
     },
+    {
+      variants: {
+        variant: 'outlined',
+        selected: true,
+      },
+      style: {
+        color: colors.purple500,
+        backgroundColor: colors.purple100,
+        border: `1px solid ${colors.purple500}`,
+      },
+    },
   ],
+  defaultVariants: {
+    selected: false,
+  },
 });
 
 export const imageContainerStyle = recipe({

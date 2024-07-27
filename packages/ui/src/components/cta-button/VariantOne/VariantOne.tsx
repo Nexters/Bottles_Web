@@ -1,18 +1,17 @@
-import { ElementRef, ReactNode, forwardRef } from 'react';
+import { ElementRef, forwardRef } from 'react';
 import { Button } from '../../button';
 import { ButtonProps } from '../../button/button';
 import { variantOneStyle, containerStyle } from './variantOneStyle.css';
 
-export interface VariantOneProps extends Omit<ButtonProps, 'variant' | 'size' | 'className' | 'children'> {
-  children: ReactNode;
+export interface VariantOneProps extends Omit<ButtonProps, 'variant' | 'size' | 'className'> {
   asChild?: boolean;
 }
 
 export const VariantOne = forwardRef<ElementRef<'button'>, VariantOneProps>(
-  ({ children, asChild }: VariantOneProps, ref) => {
+  ({ children, asChild, style, ...rest }: VariantOneProps, ref) => {
     return (
-      <div className={containerStyle}>
-        <Button ref={ref} variant="solid" size="lg" className={variantOneStyle} asChild={asChild}>
+      <div className={containerStyle} style={style}>
+        <Button {...rest} ref={ref} variant="solid" size="lg" className={variantOneStyle} asChild={asChild}>
           {children}
         </Button>
       </div>

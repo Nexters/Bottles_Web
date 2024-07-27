@@ -8,9 +8,9 @@ export interface LeftButtonProps extends Omit<ButtonProps, 'children' | 'variant
 }
 
 export const LeftButton = forwardRef<ElementRef<'button'>, LeftButtonProps>(
-  ({ children, asChild }: LeftButtonProps, ref) => {
+  ({ children, asChild, ...rest }: LeftButtonProps, ref) => {
     return (
-      <Button ref={ref} variant="outlined" size="sm" asChild={asChild} className={leftStyle}>
+      <Button ref={ref} variant="outlined" size="sm" asChild={asChild} className={leftStyle} {...rest}>
         {children}
       </Button>
     );

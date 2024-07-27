@@ -24,6 +24,7 @@
     "@vanilla-extract/esbuild-plugin": "^2.3.8",
     "esbuild": "0.23.0",
     "esbuild-plugin-preserve-directives": "^0.0.8",
+    "esbuild-plugin-svgr": "^2.1.0",
     "eslint": "^8.57.0",
     "typescript": "^5.3.3"
   },

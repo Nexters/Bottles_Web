@@ -3,6 +3,6 @@
   "compilerOptions": {
     "outDir": "dist"
   },
-  "include": ["src", "turbo"],
+  "include": ["src", "build.mjs", "src/components/icon/icon.d.ts", "turbo"],
   "exclude": ["node_modules", "dist"]
 }
