@@ -10,3 +10,5 @@ export { Asset } from './asset';
 export type { AssetProps } from './asset';
 export { WheelPicker, WheelPickerItem } from './wheel-picker';
 export type { WheelPickerProps, WheelPickerItemProps } from './wheel-picker';
+export { BottomSheet } from './bottom-sheet';
+export type { BottomSheetProps } from './bottom-sheet';

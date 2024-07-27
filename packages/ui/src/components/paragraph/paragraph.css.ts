@@ -1,6 +1,6 @@
 import { recipe } from '@vanilla-extract/recipes';
-import { colorsMap } from '../../systems/colors';
-import { typography } from '../../systems/typography';
+import { colorsMap } from '../../foundations/colors';
+import { typography } from '../../foundations/typography';
 
 export const paragraphStyle = recipe({
   base: {

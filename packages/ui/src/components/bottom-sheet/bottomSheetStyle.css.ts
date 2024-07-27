@@ -1,6 +1,7 @@
-import { colors, spacings } from '@bottlesteam/ui';
 import { style } from '@vanilla-extract/css';
-import { CTA_HEIGHT } from '../../../_step/stepStyle.css';
+import { spacings, colors } from '../../foundations';
+
+export const CTA_HEIGHT = 109;
 
 export const wrapperStyle = style({
   width: '100%',
@@ -46,4 +47,24 @@ export const overlayStyle = style({
   position: 'fixed',
   top: 0,
   left: 0,
+});
+
+export const buttonContainer = style({
+  position: 'fixed',
+  bottom: 0,
+  left: 0,
+  width: '100%',
+  height: `${CTA_HEIGHT}px`,
+  paddingTop: spacings.xl,
+  display: 'flex',
+  justifyContent: 'center',
+});
+
+export const buttonStyle = style({
+  width: '100%',
+  '@media': {
+    'screen and (min-width: 500px)': {
+      width: '360px',
+    },
+  },
 });

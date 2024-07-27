@@ -1,6 +1,5 @@
-import { Asset, Button, Paragraph, colors } from '@bottlesteam/ui';
+import { Asset, Button, Paragraph, colors, BottomSheet, BottomSheetProps } from '@bottlesteam/ui';
 import { useState } from 'react';
-import { BottomSheet, BottomSheetProps } from './bottom-sheet/BottomSheet';
 import { itemStyle, listStyle, tabBarStyle } from './regionBottomSheetStyle.css';
 
 interface Props extends Omit<BottomSheetProps, 'button' | 'body'> {

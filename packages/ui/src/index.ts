@@ -1,6 +1,15 @@
 'use client';
 
-export { Button, ImageButton, CTAButton, Paragraph, Asset, WheelPicker, WheelPickerItem } from './components';
+export {
+  Button,
+  ImageButton,
+  CTAButton,
+  Paragraph,
+  Asset,
+  WheelPicker,
+  WheelPickerItem,
+  BottomSheet,
+} from './components';
 export type {
   ButtonProps,
   ImageButtonProps,
@@ -11,9 +20,10 @@ export type {
   VariantTwoProps,
   WheelPickerProps,
   WheelPickerItemProps,
+  BottomSheetProps,
 } from './components';
 
-export { colors, colorsMap, typography, spacings, radius, radiusMap } from './systems';
-export type { Color, Typography, Spacing, Radius } from './systems';
+export { colors, colorsMap, typography, spacings, radius, radiusMap } from './foundations';
+export type { Color, Typography, Spacing, Radius } from './foundations';
 
 export type * from './types';

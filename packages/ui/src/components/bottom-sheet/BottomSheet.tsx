@@ -1,16 +1,22 @@
-import { VariantOneProps } from '@bottlesteam/ui';
 import { ReactNode } from 'react';
-import { FixedButton } from '../../../_step/StepContainer';
-import { bodyStyle, layoutStyle, overlayStyle, wrapperStyle } from './bottomSheetStyle.css';
+import { VariantOneProps, CTAButton } from '../cta-button';
+import {
+  bodyStyle,
+  buttonContainer,
+  buttonStyle,
+  layoutStyle,
+  overlayStyle,
+  wrapperStyle,
+} from './bottomSheetStyle.css';
 
 export interface BottomSheetProps {
   body: ReactNode;
-  button: ReturnType<typeof FixedButton>;
+  button: ReturnType<typeof BottomSheetButton>;
   isOpen: boolean;
   onClose(): void;
 }
 
-function BottomSheetRoot({ button, body, onClose, isOpen }: BottomSheetProps) {
+function BottomSheetImpl({ button, body, onClose, isOpen }: BottomSheetProps) {
   return (
     <>
       {isOpen && (
@@ -33,10 +39,18 @@ function BottomSheetOverlay() {
 }
 
 function BottomSheetButton(props: VariantOneProps) {
-  return <FixedButton {...props}>{props.children}</FixedButton>;
+  return (
+    <div className={buttonContainer}>
+      <div className={buttonStyle}>
+        <CTAButton variant="one" style={{ width: '100%', maxWidth: '500px' }} {...props}>
+          {props.children}
+        </CTAButton>
+      </div>
+    </div>
+  );
 }
 
-export const BottomSheet = Object.assign(BottomSheetRoot, {
+export const BottomSheet = Object.assign(BottomSheetImpl, {
   Overlay: BottomSheetOverlay,
   Button: BottomSheetButton,
 });

@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { colors, radius } from '../../systems';
+import { colors, radius } from '../../foundations';
 
 export const listStyle = style({
   position: 'relative',

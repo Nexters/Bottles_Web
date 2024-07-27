@@ -1,6 +1,6 @@
 import { Slot } from '@radix-ui/react-slot';
 import { ComponentPropsWithoutRef, ReactNode } from 'react';
-import { Color } from '../../systems/colors';
+import { Color } from '../../foundations/colors';
 import { paragraphStyle } from './paragraph.css';
 
 type Typography = 't1' | 't2' | 'st1' | 'st2' | 'bo' | 'ca' | 'kl';
