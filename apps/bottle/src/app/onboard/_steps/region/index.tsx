@@ -58,14 +58,16 @@ export function Region() {
       <OverlayProvider>
         <Stepper current={9} max={9} />
         <Step.Title>주로 생활하는 지역은 어딘가요?</Step.Title>
-        <Step.Subtitle style={{ marginTop: spacings.xxl, marginBottom: spacings.sm }}>전체 지역</Step.Subtitle>
+        <Step.Subtitle style={{ marginTop: spacings.xxl }}>전체 지역</Step.Subtitle>
+        <div aria-hidden={true} style={{ marginBottom: spacings.sm }} />
         <SelectInput
           onClick={() => openRegionBottomSheet('city')}
           placeholder={'전체 지역을 선택해 주세요'}
           value={city}
           style={{ marginTop: spacings.sm }}
         />
-        <Step.Subtitle style={{ marginTop: spacings.xl, marginBottom: spacings.sm }}>시 · 군 · 구</Step.Subtitle>
+        <Step.Subtitle style={{ marginTop: spacings.xl }}>시 · 군 · 구</Step.Subtitle>
+        <div aria-hidden={true} style={{ marginBottom: spacings.sm }} />
         <SelectInput
           onClick={() => {
             if (city === undefined) {
