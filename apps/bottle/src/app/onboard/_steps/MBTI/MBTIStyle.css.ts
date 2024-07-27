@@ -8,6 +8,12 @@ export const bodyStyle = style({
   gap: spacings.xl,
 });
 
+export const controlStyle = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: spacings.sm,
+});
+
 export const buttonsContainerStyle = style({
   display: 'flex',
   width: '100%',
