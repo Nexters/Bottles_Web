@@ -35,7 +35,8 @@ export function Height() {
           width={'100%'}
           itemHeight={56}
           shadowColor="none"
-          color={colors.black100}
+          activeColor={colors.neutral900}
+          color={colors.neutral600}
         />
       </div>
       <Step.FixedButton

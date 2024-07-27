@@ -35,6 +35,7 @@ export const textStyle = style({
   margin: 0,
   textAlign: 'center',
   wordWrap: 'break-word',
+  fontWeight: 500,
   zIndex: 1000,
 });
 
