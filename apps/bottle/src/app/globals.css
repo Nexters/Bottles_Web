@@ -165,3 +165,11 @@ button {
   outline: 'none';
   border: 'none';
 }
+input,
+select,
+textarea,
+button,
+a,
+label {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}

@@ -152,6 +152,8 @@ export const buttonStyle = recipe({
         selected: true,
       },
       style: {
+        color: colors.purple500,
+        backgroundColor: colors.purple100,
         border: `1px solid ${colors.purple500}`,
       },
     },
