@@ -55,35 +55,32 @@ jobs:
       - name: Check for WEB changes
         id: web_changed
         run: |
-          if [ "$(pnpm dlx turbo run build --filter=./apps/web --dry-run=json | jq '.tasks[-1].cache.status')" == "\"MISS\"" ]; then
-            echo "changed=true" >> $GITHUB_ENV
-          else
-            echo "changed=false" >> $GITHUB_ENV
-          fi
-          echo "::set-output name=changed::$(echo $changed)"
+          status=$(pnpm dlx turbo run build --filter=./apps/web --dry-run=json | jq -r '.tasks[-1].cache.status')
+           if [ "$status" == "MISS" ]; then
+             echo "web_changed=true" >> $GITHUB_ENV
+             echo "web_changed=true" > web_changed.txt
+           else
+             echo "web_changed=false" >> $GITHUB_ENV
+             echo "web_changed=false" > web_changed.txt
+           fi
 
       - name: Check for BOTTLE changes
         id: bottle_changed
         run: |
-          if [ "$(pnpm dlx turbo run build --filter=./apps/bottle --dry-run=json | jq '.tasks[-1].cache.status')" == "\"MISS\"" ]; then
-            echo "changed=true" >> $GITHUB_ENV
+          status=$(npx turbo run build --filter=./apps/bottle --dry-run=json | jq -r '.tasks[-1].cache.status')
+          if [ "$status" == "MISS" ]; then
+            echo "bottle_changed=true" >> $GITHUB_ENV
+            echo "bottle_changed=true" > bottle_changed.txt
           else
-            echo "changed=false" >> $GITHUB_ENV
+            echo "bottle_changed=false" >> $GITHUB_ENV
+            echo "bottle_changed=false" > bottle_changed.txt
           fi
-          echo "::set-output name=changed::$(echo $changed)"
-
-      - name: Save build statuses
-        run: |
-          echo "packages_changed=${{ steps.set-packages-status.outputs.changed }}" > build_status.txt
-          echo "web_changed=${{ steps.set-web-status.outputs.changed }}" >> build_status.txt
-          echo "bottle_changed=${{ steps.set-bottle-status.outputs.changed }}" >> build_status.txt
-        env:
-          packages_changed: ${{ steps.set-packages-status.outputs.changed }}
-          web_changed: ${{ steps.set-web-status.outputs.changed }}
-          bottle_changed: ${{ steps.set-bottle-status.outputs.changed }}
 
       - name: Upload build statuses
         uses: actions/upload-artifact@v2
         with:
           name: build-statuses
-          path: build_status.txt
+          path: |
+            packages_changed.txt
+            web_changed.txt
+            bottle_changed.txt
