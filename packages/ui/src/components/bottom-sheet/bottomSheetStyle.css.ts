@@ -11,6 +11,9 @@ export const wrapperStyle = style({
   display: 'flex',
   justifyContent: 'center',
   zIndex: 100,
+  '::-webkit-scrollbar': {
+    display: 'none',
+  },
 });
 
 export const bodyStyle = style({
@@ -18,6 +21,9 @@ export const bodyStyle = style({
   height: '308px',
   overflow: 'scroll',
   margin: '0 auto',
+  '::-webkit-scrollbar': {
+    display: 'none',
+  },
 });
 
 export const layoutStyle = style({
@@ -36,7 +42,9 @@ export const layoutStyle = style({
       width: '360px',
     },
   },
-  overflowX: 'hidden',
+  '::-webkit-scrollbar': {
+    display: 'none',
+  },
 });
 
 export const overlayStyle = style({

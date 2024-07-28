@@ -12,3 +12,5 @@ export { WheelPicker, WheelPickerItem } from './wheel-picker';
 export type { WheelPickerProps, WheelPickerItemProps } from './wheel-picker';
 export { BottomSheet } from './bottom-sheet';
 export type { BottomSheetProps } from './bottom-sheet';
+export { Chip } from './chip';
+export type { ChipProps } from './chip';
