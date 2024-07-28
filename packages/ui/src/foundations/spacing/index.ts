@@ -3,7 +3,7 @@ export const spacings = {
   xl: '24px',
   lg: '20px',
   md: '16px',
-  sm: '12px;',
+  sm: '12px',
   xs: '8px',
   xxs: '4px',
 } as const;
