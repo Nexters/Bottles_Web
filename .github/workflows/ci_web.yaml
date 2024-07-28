@@ -6,9 +6,11 @@ env:
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 on:
   workflow_run:
-    workflows: [Check]
+    workflows: ["Check"]
     types:
       - completed
+    branches:
+      - 'chore/**'
 jobs:
   Deploy-Preview:
     runs-on: ubuntu-latest
