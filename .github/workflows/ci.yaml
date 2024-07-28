@@ -41,7 +41,7 @@ jobs:
       - name: Check for package changes
         id: packages_changed
         run: |
-          if [ "$(npx turbo run build --filter=./packages/ui --dry-run=json | jq '.tasks[-1].cache.status')" == "\"MISS\"" ]; then
+          if [ "$(pnpm dlx turbo run build --filter=./packages/ui --dry-run=json | jq '.tasks[-1].cache.status')" == "\"MISS\"" ]; then
             echo "changed=true" >> $GITHUB_ENV
           else
             echo "changed=false" >> $GITHUB_ENV
@@ -51,7 +51,7 @@ jobs:
       - name: Check for WEB changes
         id: web_changed
         run: |
-          if [ "$(npx turbo run build --filter=apps/NEXT1 --dry-run=json | jq '.tasks[-1].cache.status')" == "\"MISS\"" ]; then
+          if [ "$(pnpm dlx turbo run build --filter=apps/NEXT1 --dry-run=json | jq '.tasks[-1].cache.status')" == "\"MISS\"" ]; then
             echo "changed=true" >> $GITHUB_ENV
           else
             echo "changed=false" >> $GITHUB_ENV
@@ -61,7 +61,7 @@ jobs:
       - name: Check for BOTTLE changes
         id: bottle_changed
         run: |
-          if [ "$(npx turbo run build --filter=./apps/web --dry-run=json | jq '.tasks[-1].cache.status')" == "\"MISS\"" ]; then
+          if [ "$(pnpm dlx turbo run build --filter=./apps/web --dry-run=json | jq '.tasks[-1].cache.status')" == "\"MISS\"" ]; then
             echo "changed=true" >> $GITHUB_ENV
           else
             echo "changed=false" >> $GITHUB_ENV
