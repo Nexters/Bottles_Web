@@ -5,13 +5,27 @@ env:
   TURBO_TOKEN: ${{ secrets.VERCEL_ACCESS_TOKEN }}
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 on:
-  push:
-    branches-ignore:
-      - main
+  workflow_run:
+    workflows: ['Check and Build']
+    types:
+      - completed
 jobs:
   Deploy-Preview:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
+      - name: Download build statuses
+        uses: actions/download-artifact@v2
+        with:
+          name: build-statuses
+
+      - name: Read build statuses
+        id: read-statuses
+        run: |
+          source build_status.txt
+          echo "::set-output name=packages_changed::$packages_changed"
+          echo "::set-output name=bottle_changed::$bottle_changed"
+
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v3
         name: Install pnpm
@@ -55,7 +69,7 @@ jobs:
               "content": "<@stakbucks>",
               "embeds": [
                 {
-                  "title": "👀 Bottle 미리보기가 준비되었어요",
+                  "title": "👀 미리보기가 준비되었어요",
                   "description": "👉 https://${{ steps.vercel_preview_url.outputs.preview_url }}",
                   "color": 65280
                 }
