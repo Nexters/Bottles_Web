@@ -6,7 +6,7 @@ env:
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 on:
   workflow_run:
-    workflows: ['Check and Build']
+    workflows: [Check and Build]
     types:
       - completed
 jobs:
