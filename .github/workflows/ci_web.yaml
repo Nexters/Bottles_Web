@@ -6,9 +6,8 @@ env:
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 on:
   workflow_run:
-    workflows: [Check and Build]
-    types:
-      - completed
+    workflows: ["Check and Build"]
+    types: [completed]
 jobs:
   Deploy-Preview:
     runs-on: ubuntu-latest
