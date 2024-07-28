@@ -9,6 +9,7 @@ export {
   WheelPicker,
   WheelPickerItem,
   BottomSheet,
+  Chip,
 } from './components';
 export type {
   ButtonProps,
@@ -21,6 +22,7 @@ export type {
   WheelPickerProps,
   WheelPickerItemProps,
   BottomSheetProps,
+  ChipProps,
 } from './components';
 
 export { colors, colorsMap, typography, spacings, radius, radiusMap } from './foundations';
