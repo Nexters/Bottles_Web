@@ -43,12 +43,14 @@ jobs:
       - name: Check for package changes
         id: packages_changed
         run: |
-          if [ "$(pnpm dlx turbo run build --filter=./packages/ui --dry-run=json | jq '.tasks[-1].cache.status')" == "\"MISS\"" ]; then
-            echo "changed=true" >> $GITHUB_ENV
+          status=$(pnpm dlx turbo run build --filter=./packages/ui --dry-run=json | jq -r '.tasks[-1].cache.status')
+          if [ "$status" == "MISS" ]; then
+            echo "packages_changed=true" >> $GITHUB_ENV
+            echo "packages_changed=true" > packages_changed.txt
           else
-            echo "changed=false" >> $GITHUB_ENV
+            echo "packages_changed=false" >> $GITHUB_ENV
+            echo "packages_changed=false" > packages_changed.txt
           fi
-          echo "::set-output name=changed::$(echo $changed)"
 
       - name: Check for WEB changes
         id: web_changed
