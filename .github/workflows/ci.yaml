@@ -30,6 +30,8 @@ jobs:
         with:
           node-version: 20
           cache: 'pnpm'
+      - name: Install turbo
+        run: pnpm install turbo
       - name: Cache turbo build setup
         uses: actions/cache@v4
         with:
@@ -51,7 +53,7 @@ jobs:
       - name: Check for WEB changes
         id: web_changed
         run: |
-          if [ "$(turbo run build --filter=./apps/web --dry-run=json | jq '.tasks[-1].cache.status')" == "\"MISS\"" ]; then
+          if [ "$(pnpm dlx turbo run build --filter=./apps/web --dry-run=json | jq '.tasks[-1].cache.status')" == "\"MISS\"" ]; then
             echo "changed=true" >> $GITHUB_ENV
           else
             echo "changed=false" >> $GITHUB_ENV
