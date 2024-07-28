@@ -22,9 +22,10 @@ jobs:
       - name: Read build statuses
         id: read-statuses
         run: |
-          source build_status.txt
-          echo "::set-output name=packages_changed::$packages_changed"
-          echo "::set-output name=web_changed::$web_changed"
+          packages_changed=$(cat packages_changed.txt)
+          web_changed=$(cat web_changed.txt)
+          echo "packages_changed=$packages_changed" >> $GITHUB_ENV
+          echo "web_changed=$web_changed" >> $GITHUB_ENV
 
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v3
