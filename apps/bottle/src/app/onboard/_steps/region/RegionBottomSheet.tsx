@@ -1,5 +1,5 @@
-import { Asset, Button, Paragraph, colors, BottomSheet, BottomSheetProps } from '@bottlesteam/ui';
-import { useState } from 'react';
+import { Asset, Paragraph, colors, BottomSheet, BottomSheetProps, Chip } from '@bottlesteam/ui';
+import { useEffect, useState } from 'react';
 import { itemStyle, listStyle, tabBarStyle } from './regionBottomSheetStyle.css';
 
 interface Props extends Omit<BottomSheetProps, 'button' | 'body'> {
@@ -11,6 +11,14 @@ interface Props extends Omit<BottomSheetProps, 'button' | 'body'> {
 
 export function RegionBottomSheet({ onSelect, selected, items, type, ...bottomSheetProps }: Props) {
   const [localSelected, setLocalSelected] = useState(selected);
+
+  useEffect(() => {
+    if (bottomSheetProps.isOpen) {
+      window.document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.removeProperty('overflow');
+    }
+  }, [bottomSheetProps.isOpen]);
 
   return (
     <BottomSheet
@@ -56,13 +64,9 @@ export function RegionBottomSheet({ onSelect, selected, items, type, ...bottomSh
 function TabBar({ type }: { type: 'city' | 'state' }) {
   return (
     <div className={tabBarStyle}>
-      <Button variant="outlined" size="sm" selected={type === 'city'}>
-        전체 지역
-      </Button>
+      <Chip active={type === 'city'}>전체 지역</Chip>
       <Asset type="icon-right" />
-      <Button variant="outlined" size="sm" selected={type === 'state'}>
-        상세 지역
-      </Button>
+      <Chip active={type === 'state'}>상세 지역</Chip>
     </div>
   );
 }

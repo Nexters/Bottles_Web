@@ -1,7 +1,7 @@
-import { ReactNode } from 'react';
+import { ComponentProps, ReactNode } from 'react';
 import { chipStyle } from './chipStyle.css';
 
-export interface ChipProps {
+export interface ChipProps extends ComponentProps<'div'> {
   active?: boolean;
   children: ReactNode;
 }

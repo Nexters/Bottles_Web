@@ -16,6 +16,9 @@ export const listStyle = style({
   display: 'flex',
   flexDirection: 'column',
   gap: spacings.sm,
+  '::-webkit-scrollbar': {
+    display: 'none',
+  },
 });
 
 export const itemStyle = style({
