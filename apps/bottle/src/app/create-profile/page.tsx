@@ -1,5 +1,6 @@
 'use client';
 
+import { useStep } from '@/features/steps/StepProvider';
 import { Asset } from '@bottlesteam/ui';
 import { MBTI } from './_steps/MBTI';
 import { Alcohol } from './_steps/alcohol';
@@ -11,7 +12,6 @@ import { Region } from './_steps/region';
 import { Religion } from './_steps/religion';
 import { Smoking } from './_steps/smoking';
 import { headerStyle } from './headerStyle.css';
-import { useStep } from '@/features/steps/StepProvider';
 
 const steps = [
   <MBTI key={1} />,

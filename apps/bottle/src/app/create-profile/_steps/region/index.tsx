@@ -1,3 +1,6 @@
+import { Stepper } from '@/components/stepper';
+import { Step } from '@/features/steps/StepContainer';
+import { useStep } from '@/features/steps/StepProvider';
 import { spacings } from '@bottlesteam/ui';
 import { OverlayProvider, overlay } from 'overlay-kit';
 import { useEffect, useState } from 'react';
@@ -7,9 +10,6 @@ import { RegionBottomSheet } from './RegionBottomSheet';
 import { RegionData, fetchRegionData } from './fetchRegion';
 import { regionStyle } from './regionStyle.css';
 import { SelectInput } from './select-input/SelectInput';
-import { Stepper } from '@/components/stepper';
-import { Step } from '@/features/steps/StepContainer';
-import { useStep } from '@/features/steps/StepProvider';
 
 export function Region() {
   const { setValue } = useCreateProfileValues();

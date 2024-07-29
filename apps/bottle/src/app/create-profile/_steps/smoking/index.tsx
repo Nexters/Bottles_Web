@@ -1,11 +1,11 @@
-import { Button } from '@bottlesteam/ui';
-import { useState } from 'react';
-import { useCreateProfileValues } from '../../CreateProfileProvider';
-import { smokingStyle } from './smokingStyle.css';
 import { Control, toggle } from '@/components/control';
 import { Stepper } from '@/components/stepper';
 import { Step } from '@/features/steps/StepContainer';
 import { useStep } from '@/features/steps/StepProvider';
+import { Button } from '@bottlesteam/ui';
+import { useState } from 'react';
+import { useCreateProfileValues } from '../../CreateProfileProvider';
+import { smokingStyle } from './smokingStyle.css';
 
 const smokingList = ['전혀 피우지 않아요', '가끔 피워요', '자주 피워요'] as const;
 type SmokingItem = (typeof smokingList)[number];

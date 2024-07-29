@@ -1,12 +1,12 @@
 'use client';
 
+import { Stepper } from '@/components/stepper';
+import { Step } from '@/features/steps/StepContainer';
+import { useStep } from '@/features/steps/StepProvider';
 import { WheelPicker, colors } from '@bottlesteam/ui';
 import { useState } from 'react';
 import { useCreateProfileValues } from '../../CreateProfileProvider';
 import { wheelPickerContainerStyle } from './heightStyle.css';
-import { Stepper } from '@/components/stepper';
-import { Step } from '@/features/steps/StepContainer';
-import { useStep } from '@/features/steps/StepProvider';
 
 const OFFSET = 140;
 const DEFAULT_ID = '168';
