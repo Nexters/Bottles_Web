@@ -2,9 +2,9 @@ import { Button } from '@bottlesteam/ui';
 import { useState } from 'react';
 import { Control, toggle } from '../../../../components/control';
 import { Stepper } from '../../../../components/stepper';
+import { Step } from '../../../../features/steps/StepContainer';
+import { useStep } from '../../../../features/steps/StepProvider';
 import { useCreateProfileValues } from '../../CreateProfileProvider';
-import { useStep } from '../../StepProvider';
-import { Step } from '../../_step/StepContainer';
 import { alcoholStyle } from './alcoholStyle.css';
 
 const alcoholList = ['한 방울도 마시지 않아요', '때에 따라 적당히 즐겨요', '자주 찾는 편이에요'] as const;

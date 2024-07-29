@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { HEADER_HEIGHT } from './_step/stepStyle.css';
+import { HEADER_HEIGHT } from '../../features/steps/stepStyle.css';
 
 export const headerStyle = style({
   width: '100%',

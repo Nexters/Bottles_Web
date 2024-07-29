@@ -2,9 +2,9 @@ import { Button, ButtonProps, spacings } from '@bottlesteam/ui';
 import { useState } from 'react';
 import { Control } from '../../../../components/control';
 import { Stepper } from '../../../../components/stepper';
+import { Step } from '../../../../features/steps/StepContainer';
+import { useStep } from '../../../../features/steps/StepProvider';
 import { useCreateProfileValues } from '../../CreateProfileProvider';
-import { useStep } from '../../StepProvider';
-import { Step } from '../../_step/StepContainer';
 import { culture, entertainment, etc, sports } from './constants';
 import { interestsStyle } from './interestsStyle.css';
 
@@ -23,7 +23,7 @@ export function Interests() {
 
   const handleClick = (item: InterestItem) => {
     if (interests.length >= MAX_SELECTED && !interests.includes(item)) {
-      alert('최대 5개까지 선택할 수 있어요');
+      alert('최대 10개까지 선택할 수 있어요');
       return;
     }
     setInterests(prev => {
@@ -87,7 +87,7 @@ export function Interests() {
           onNextStep();
         }}
       >
-        다음
+        {`다음 ${interests.length} / ${MAX_SELECTED}`}
       </Step.FixedButton>
     </>
   );

@@ -3,9 +3,9 @@
 import { WheelPicker, colors } from '@bottlesteam/ui';
 import { useState } from 'react';
 import { Stepper } from '../../../../components/stepper';
+import { useStep } from '../../../../features/steps/StepProvider';
 import { useCreateProfileValues } from '../../CreateProfileProvider';
-import { useStep } from '../../StepProvider';
-import { Step } from '../../_step/StepContainer';
+import { Step } from '../../../../features/steps/StepContainer';
 import { wheelPickerContainerStyle } from './heightStyle.css';
 
 const OFFSET = 140;

@@ -2,9 +2,9 @@ import { Button } from '@bottlesteam/ui';
 import { useState } from 'react';
 import { Control, toggle } from '../../../../components/control';
 import { Stepper } from '../../../../components/stepper';
+import { Step } from '../../../../features/steps/StepContainer';
+import { useStep } from '../../../../features/steps/StepProvider';
 import { useCreateProfileValues } from '../../CreateProfileProvider';
-import { useStep } from '../../StepProvider';
-import { Step } from '../../_step/StepContainer';
 import { jobStyle } from './jobStyle.css';
 
 const jobList = ['대학생 · 대학원생', '직장인', '프리랜서', '자영업', '취준생 · 무직'] as const;

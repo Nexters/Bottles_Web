@@ -2,9 +2,9 @@ import { Button } from '@bottlesteam/ui';
 import { useState } from 'react';
 import { Control, toggle } from '../../../../components/control';
 import { Stepper } from '../../../../components/stepper';
+import { useStep } from '../../../../features/steps/StepProvider';
 import { useCreateProfileValues } from '../../CreateProfileProvider';
-import { useStep } from '../../StepProvider';
-import { Step } from '../../_step/StepContainer';
+import { Step } from '../../../../features/steps/StepContainer';
 import { religionStyle } from './religionStyle.css';
 
 const religionList = ['무교', '기독교', '천주교', '불교', '기타'] as const;

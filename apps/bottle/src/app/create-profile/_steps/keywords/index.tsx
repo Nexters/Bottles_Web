@@ -2,9 +2,9 @@ import { Button } from '@bottlesteam/ui';
 import { useState } from 'react';
 import { Control } from '../../../../components/control';
 import { Stepper } from '../../../../components/stepper';
+import { Step } from '../../../../features/steps/StepContainer';
+import { useStep } from '../../../../features/steps/StepProvider';
 import { useCreateProfileValues } from '../../CreateProfileProvider';
-import { useStep } from '../../StepProvider';
-import { Step } from '../../_step/StepContainer';
 import { keywordsStyle } from './keywordsStyle.css';
 
 const keywordList = [
@@ -80,7 +80,7 @@ export function Keywords() {
           onNextStep();
         }}
       >
-        {`다음 ${keywords.length}/${MAX_SELECTED}`}
+        {`다음 ${keywords.length} / ${MAX_SELECTED}`}
       </Step.FixedButton>
     </Step>
   );

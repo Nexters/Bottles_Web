@@ -1,7 +1,7 @@
 'use client';
 
 import { Asset } from '@bottlesteam/ui';
-import { useStep } from './StepProvider';
+import { useStep } from '../../features/steps/StepProvider';
 import { MBTI } from './_steps/MBTI';
 import { Alcohol } from './_steps/alcohol';
 import { Height } from './_steps/height';
