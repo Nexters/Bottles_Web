@@ -1,0 +1,21 @@
+{
+  "name": "@bottlesteam/vitest-config",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.4.8",
+    "@testing-library/react": "^16.0.0",
+    "@testing-library/user-event": "^14.5.2",
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite-plugin-magical-svg": "^1.2.1",
+    "vite-tsconfig-paths": "^4.3.1",
+    "vitest": "^2.0.4",
+    "typescript": "^5.5.2",
+    "@bottlesteam/typescript-config": "workspace:*"
+  }
+}
