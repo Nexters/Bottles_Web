@@ -2,7 +2,7 @@ import { Button } from '@bottlesteam/ui';
 import { useState } from 'react';
 import { Control, toggle } from '../../../../components/control';
 import { Stepper } from '../../../../components/stepper';
-import { useOnboardingValues } from '../../OnboardingProvider';
+import { useCreateProfileValues } from '../../CreateProfileProvider';
 import { useStep } from '../../StepProvider';
 import { Step } from '../../_step/StepContainer';
 import { smokingStyle } from './smokingStyle.css';
@@ -11,7 +11,7 @@ const smokingList = ['전혀 피우지 않아요', '가끔 피워요', '자주 �
 type SmokingItem = (typeof smokingList)[number];
 
 export function Smoking() {
-  const { setValue } = useOnboardingValues();
+  const { setValue } = useCreateProfileValues();
   const { onNextStep } = useStep();
 
   const [smoking, setSmoking] = useState<SmokingItem>();

@@ -3,7 +3,7 @@
 import { WheelPicker, colors } from '@bottlesteam/ui';
 import { useState } from 'react';
 import { Stepper } from '../../../../components/stepper';
-import { useOnboardingValues } from '../../OnboardingProvider';
+import { useCreateProfileValues } from '../../CreateProfileProvider';
 import { useStep } from '../../StepProvider';
 import { Step } from '../../_step/StepContainer';
 import { wheelPickerContainerStyle } from './heightStyle.css';
@@ -17,7 +17,7 @@ const heightData = Array.from({ length: 61 }, (_, index) => ({
 }));
 
 export function Height() {
-  const { setValue } = useOnboardingValues();
+  const { setValue } = useCreateProfileValues();
   const { onNextStep } = useStep();
   const [height, setHeight] = useState(Number(DEFAULT_ID));
 

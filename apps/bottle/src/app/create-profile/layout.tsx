@@ -1,15 +1,15 @@
 'use client';
 
 import { ReactNode, Suspense } from 'react';
-import { OnboardingProvider } from './OnboardingProvider';
+import { CreateProfileProvider } from './CreateProfileProvider';
 import { StepProvider } from './StepProvider';
 
-export default function OnboardingLayout({ children }: { children: ReactNode }) {
+export default function CreateProfileLayout({ children }: { children: ReactNode }) {
   return (
-    <OnboardingProvider>
+    <CreateProfileProvider>
       <Suspense>
         <StepProvider>{children}</StepProvider>
       </Suspense>
-    </OnboardingProvider>
+    </CreateProfileProvider>
   );
 }

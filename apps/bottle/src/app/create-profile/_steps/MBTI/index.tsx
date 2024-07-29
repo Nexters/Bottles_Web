@@ -2,7 +2,7 @@ import { Button, ButtonProps } from '@bottlesteam/ui';
 import { useMemo, useState } from 'react';
 import { Control, toggle } from '../../../../components/control';
 import { Stepper } from '../../../../components/stepper';
-import { useOnboardingValues } from '../../OnboardingProvider';
+import { useCreateProfileValues } from '../../CreateProfileProvider';
 import { useStep } from '../../StepProvider';
 import { Step } from '../../_step/StepContainer';
 import { bodyStyle, buttonsContainerStyle, controlStyle } from './MBTIStyle.css';
@@ -14,7 +14,7 @@ type JPType = 'J' | 'P';
 
 export function MBTI() {
   const { onNextStep } = useStep();
-  const { setValue } = useOnboardingValues();
+  const { setValue } = useCreateProfileValues();
 
   const [EI, setEI] = useState<EIType>();
   const [SN, setSN] = useState<SNType>();

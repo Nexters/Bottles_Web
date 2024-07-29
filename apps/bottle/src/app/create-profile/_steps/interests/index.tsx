@@ -2,18 +2,11 @@ import { Button, ButtonProps, spacings } from '@bottlesteam/ui';
 import { useState } from 'react';
 import { Control } from '../../../../components/control';
 import { Stepper } from '../../../../components/stepper';
-import { useOnboardingValues } from '../../OnboardingProvider';
+import { useCreateProfileValues } from '../../CreateProfileProvider';
 import { useStep } from '../../StepProvider';
 import { Step } from '../../_step/StepContainer';
 import { culture, entertainment, etc, sports } from './constants';
 import { interestsStyle } from './interestsStyle.css';
-
-// type Interest = {
-//   culture: string[];
-//   sports: string[];
-//   entertainment: string[];
-//   etc: string[];
-// };
 
 type InterestItem = (typeof culture | typeof sports | typeof entertainment | typeof etc)[number];
 
@@ -21,7 +14,7 @@ const MAX_SELECTED = 5;
 
 export function Interests() {
   const { onNextStep } = useStep();
-  const { setValue } = useOnboardingValues();
+  const { setValue } = useCreateProfileValues();
 
   const [interests, setInterests] = useState<InterestItem[]>([]);
 

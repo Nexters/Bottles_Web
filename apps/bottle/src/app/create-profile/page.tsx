@@ -25,7 +25,7 @@ const steps = [
   <Region key={9} />,
 ] as const;
 
-export default function OnboardPage() {
+export default function CreateProfilePage() {
   const { onPreviousStep, currentStep } = useStep();
 
   return (

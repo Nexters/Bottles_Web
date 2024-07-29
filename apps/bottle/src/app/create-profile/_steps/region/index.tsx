@@ -2,7 +2,7 @@ import { spacings } from '@bottlesteam/ui';
 import { OverlayProvider, overlay } from 'overlay-kit';
 import { useEffect, useState } from 'react';
 import { Stepper } from '../../../../components/stepper';
-import { useOnboardingValues } from '../../OnboardingProvider';
+import { useCreateProfileValues } from '../../CreateProfileProvider';
 import { useStep } from '../../StepProvider';
 import { Step } from '../../_step/StepContainer';
 import { spacingStyle } from '../MBTI/MBTIStyle.css';
@@ -12,7 +12,7 @@ import { regionStyle } from './regionStyle.css';
 import { SelectInput } from './select-input/SelectInput';
 
 export function Region() {
-  const { setValue } = useOnboardingValues();
+  const { setValue } = useCreateProfileValues();
   const { onNextStep } = useStep();
 
   const [regionsData, setRegionsData] = useState<RegionData[]>();

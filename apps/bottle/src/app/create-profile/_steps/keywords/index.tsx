@@ -2,7 +2,7 @@ import { Button } from '@bottlesteam/ui';
 import { useState } from 'react';
 import { Control } from '../../../../components/control';
 import { Stepper } from '../../../../components/stepper';
-import { useOnboardingValues } from '../../OnboardingProvider';
+import { useCreateProfileValues } from '../../CreateProfileProvider';
 import { useStep } from '../../StepProvider';
 import { Step } from '../../_step/StepContainer';
 import { keywordsStyle } from './keywordsStyle.css';
@@ -34,7 +34,7 @@ const MAX_SELECTED = 5;
 
 export function Keywords() {
   const { onNextStep } = useStep();
-  const { setValue } = useOnboardingValues();
+  const { setValue } = useCreateProfileValues();
 
   const [keywords, setKeywords] = useState<(typeof keywordList)[number][]>([]);
 
