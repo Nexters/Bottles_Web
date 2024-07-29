@@ -22,6 +22,7 @@ interface CreateProfileValues {
 
 interface CreateProfileContext {
   setValue<K extends keyof CreateProfileValues>(key: K, value: CreateProfileValues[K]): void;
+  getValues(): Partial<CreateProfileValues>;
 }
 
 const CreateProfile = createContext<CreateProfileContext | null>(null);
@@ -41,7 +42,9 @@ export function CreateProfileProvider({ children }: Props) {
     };
   }, []);
 
-  return <CreateProfile.Provider value={{ setValue }}>{children}</CreateProfile.Provider>;
+  const getValues = useCallback(() => onboardingValues.current, []);
+
+  return <CreateProfile.Provider value={{ setValue, getValues }}>{children}</CreateProfile.Provider>;
 }
 
 export function useCreateProfileValues() {
@@ -51,5 +54,5 @@ export function useCreateProfileValues() {
     throw new Error('Wrap Create Profile Provider');
   }
 
-  return { setValue: createProfileContext.setValue };
+  return createProfileContext;
 }

@@ -90,6 +90,9 @@ importers:
       eslint-config-next:
         specifier: 15.0.0-rc.0
         version: 15.0.0-rc.0(eslint@8.57.0)(typescript@5.5.3)
+      eslint-plugin-vitest:
+        specifier: ^0.5.4
+        version: 0.5.4(eslint@8.57.0)(typescript@5.5.3)(vitest@2.0.4)
       jsdom:
         specifier: ^24.1.1
         version: 24.1.1
@@ -4943,6 +4946,27 @@ packages:
     dependencies:
       dotenv: 16.0.3
       eslint: 8.57.0
+    dev: true
+
+  /eslint-plugin-vitest@0.5.4(eslint@8.57.0)(typescript@5.5.3)(vitest@2.0.4):
+    resolution: {integrity: sha512-um+odCkccAHU53WdKAw39MY61+1x990uXjSPguUCq3VcEHdqJrOb8OTMrbYlY6f9jAKx7x98kLVlIe3RJeJqoQ==}
+    engines: {node: ^18.0.0 || >= 20.0.0}
+    peerDependencies:
+      '@typescript-eslint/eslint-plugin': '*'
+      eslint: ^8.57.0 || ^9.0.0
+      vitest: '*'
+    peerDependenciesMeta:
+      '@typescript-eslint/eslint-plugin':
+        optional: true
+      vitest:
+        optional: true
+    dependencies:
+      '@typescript-eslint/utils': 7.16.1(eslint@8.57.0)(typescript@5.5.3)
+      eslint: 8.57.0
+      vitest: 2.0.4(@types/node@20.11.24)(jsdom@24.1.1)
+    transitivePeerDependencies:
+      - supports-color
+      - typescript
     dev: true
 
   /eslint-scope@5.1.1:
