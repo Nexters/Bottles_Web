@@ -1,8 +1,8 @@
 'use client';
 
 import { ReactNode, Suspense } from 'react';
-import { StepProvider } from '../../features/steps/StepProvider';
 import { CreateProfileProvider } from './CreateProfileProvider';
+import { StepProvider } from '@/features/steps/StepProvider';
 
 export default function CreateProfileLayout({ children }: { children: ReactNode }) {
   return (

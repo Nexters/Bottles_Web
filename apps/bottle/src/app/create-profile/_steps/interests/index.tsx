@@ -1,12 +1,12 @@
 import { Button, ButtonProps, spacings } from '@bottlesteam/ui';
 import { useState } from 'react';
-import { Control } from '../../../../components/control';
-import { Stepper } from '../../../../components/stepper';
-import { Step } from '../../../../features/steps/StepContainer';
-import { useStep } from '../../../../features/steps/StepProvider';
 import { useCreateProfileValues } from '../../CreateProfileProvider';
 import { culture, entertainment, etc, sports } from './constants';
 import { interestsStyle } from './interestsStyle.css';
+import { Control } from '@/components/control';
+import { Stepper } from '@/components/stepper';
+import { Step } from '@/features/steps/StepContainer';
+import { useStep } from '@/features/steps/StepProvider';
 
 type InterestItem = (typeof culture | typeof sports | typeof entertainment | typeof etc)[number];
 

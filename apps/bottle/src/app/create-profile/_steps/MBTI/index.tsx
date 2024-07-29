@@ -1,11 +1,11 @@
 import { Button, ButtonProps } from '@bottlesteam/ui';
 import { useMemo, useState } from 'react';
-import { Control, toggle } from '../../../../components/control';
-import { Stepper } from '../../../../components/stepper';
-import { Step } from '../../../../features/steps/StepContainer';
-import { useStep } from '../../../../features/steps/StepProvider';
 import { useCreateProfileValues } from '../../CreateProfileProvider';
 import { bodyStyle, buttonsContainerStyle, controlStyle } from './MBTIStyle.css';
+import { Control, toggle } from '@/components/control';
+import { Stepper } from '@/components/stepper';
+import { Step } from '@/features/steps/StepContainer';
+import { useStep } from '@/features/steps/StepProvider';
 
 type EIType = 'E' | 'I';
 type SNType = 'S' | 'N';
