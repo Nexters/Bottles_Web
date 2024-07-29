@@ -8,7 +8,11 @@
     ],
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "types": ["vitest/globals"]
+  },
+  "ts-node": {
+    "esm": true
   },
   "include": [
     "next-env.d.ts",
@@ -17,7 +21,8 @@
     "**/css.ts",
     "**/css.js",
     "**/*.tsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "vitest.config.mjs"
   ],
   "exclude": ["node_modules"]
 }

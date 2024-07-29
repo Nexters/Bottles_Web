@@ -3,6 +3,10 @@
   "compilerOptions": {
     "types": ["vitest/globals"]
   },
-  "include": ["src", "setup.ts", "vitest.config.ts"],
+  "ts-node": {
+    // Tell ts-node CLI to install the --loader automatically
+    "esm": true
+  },
+  "include": ["src", "setup.ts", "vitest.config.mjs"],
   "exclude": ["node_modules"]
 }
