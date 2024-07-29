@@ -1,17 +1,17 @@
+import { Control, toggle } from '@/components/control';
+import { Stepper } from '@/components/stepper';
+import { Step } from '@/features/steps/StepContainer';
+import { useStep } from '@/features/steps/StepProvider';
 import { Button } from '@bottlesteam/ui';
 import { useState } from 'react';
-import { Control, toggle } from '../../../../components/control';
-import { Stepper } from '../../../../components/stepper';
-import { useOnboardingValues } from '../../OnboardingProvider';
-import { useStep } from '../../StepProvider';
-import { Step } from '../../_step/StepContainer';
+import { useCreateProfileValues } from '../../CreateProfileProvider';
 import { religionStyle } from './religionStyle.css';
 
 const religionList = ['무교', '기독교', '천주교', '불교', '기타'] as const;
 type ReligionItem = (typeof religionList)[number];
 
 export function Religion() {
-  const { setValue } = useOnboardingValues();
+  const { setValue } = useCreateProfileValues();
   const { onNextStep } = useStep();
 
   const [religion, setReligion] = useState<ReligionItem>();

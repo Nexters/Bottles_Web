@@ -1,11 +1,11 @@
 'use client';
 
+import { Stepper } from '@/components/stepper';
+import { Step } from '@/features/steps/StepContainer';
+import { useStep } from '@/features/steps/StepProvider';
 import { WheelPicker, colors } from '@bottlesteam/ui';
 import { useState } from 'react';
-import { Stepper } from '../../../../components/stepper';
-import { useOnboardingValues } from '../../OnboardingProvider';
-import { useStep } from '../../StepProvider';
-import { Step } from '../../_step/StepContainer';
+import { useCreateProfileValues } from '../../CreateProfileProvider';
 import { wheelPickerContainerStyle } from './heightStyle.css';
 
 const OFFSET = 140;
@@ -17,7 +17,7 @@ const heightData = Array.from({ length: 61 }, (_, index) => ({
 }));
 
 export function Height() {
-  const { setValue } = useOnboardingValues();
+  const { setValue } = useCreateProfileValues();
   const { onNextStep } = useStep();
   const [height, setHeight] = useState(Number(DEFAULT_ID));
 

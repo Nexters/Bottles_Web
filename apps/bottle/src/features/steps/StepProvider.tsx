@@ -11,25 +11,26 @@ interface StepContext {
 
 const Step = createContext<StepContext | null>(null);
 
-interface Props {
+interface StepProviderProps {
+  maxStep: number;
+  uri: string;
   children: ReactNode;
 }
 
 const STEP_PARAM_KEY = 'step';
-const MAX_STEP = 9;
 
-export function StepProvider({ children }: Props) {
+export function StepProvider({ children, maxStep, uri }: StepProviderProps) {
   const searchParams = useSearchParams();
   const step = useMemo(() => Number(searchParams.get(STEP_PARAM_KEY) ?? '1'), [searchParams]);
   const router = useRouter();
 
   const onNextStep = useCallback(() => {
-    if (step < MAX_STEP) router.push(`/onboard?step=${step + 1}`);
-  }, [step, router]);
+    if (step < maxStep) router.push(`${uri}?${STEP_PARAM_KEY}=${step + 1}`);
+  }, [step, router, maxStep, uri]);
 
   const onPreviousStep = useCallback(() => {
-    if (step > 1) router.push(`/onboard?step=${step - 1}`);
-  }, [step, router]);
+    if (step > 1) router.push(`${uri}?${STEP_PARAM_KEY}=${step - 1}`);
+  }, [step, router, uri]);
 
   return <Step.Provider value={{ onNextStep, currentStep: step, onPreviousStep }}>{children}</Step.Provider>;
 }

@@ -1,7 +1,7 @@
 'use client';
 
+import { useStep } from '@/features/steps/StepProvider';
 import { Asset } from '@bottlesteam/ui';
-import { useStep } from './StepProvider';
 import { MBTI } from './_steps/MBTI';
 import { Alcohol } from './_steps/alcohol';
 import { Height } from './_steps/height';
@@ -25,7 +25,7 @@ const steps = [
   <Region key={9} />,
 ] as const;
 
-export default function OnboardPage() {
+export default function CreateProfilePage() {
   const { onPreviousStep, currentStep } = useStep();
 
   return (

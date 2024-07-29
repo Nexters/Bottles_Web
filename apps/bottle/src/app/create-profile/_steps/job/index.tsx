@@ -1,17 +1,17 @@
+import { Control, toggle } from '@/components/control';
+import { Stepper } from '@/components/stepper';
+import { Step } from '@/features/steps/StepContainer';
+import { useStep } from '@/features/steps/StepProvider';
 import { Button } from '@bottlesteam/ui';
 import { useState } from 'react';
-import { Control, toggle } from '../../../../components/control';
-import { Stepper } from '../../../../components/stepper';
-import { useOnboardingValues } from '../../OnboardingProvider';
-import { useStep } from '../../StepProvider';
-import { Step } from '../../_step/StepContainer';
+import { useCreateProfileValues } from '../../CreateProfileProvider';
 import { jobStyle } from './jobStyle.css';
 
 const jobList = ['대학생 · 대학원생', '직장인', '프리랜서', '자영업', '취준생 · 무직'] as const;
 type JobItem = (typeof jobList)[number];
 
 export function Job() {
-  const { setValue } = useOnboardingValues();
+  const { setValue } = useCreateProfileValues();
   const { onNextStep } = useStep();
 
   const [job, setJob] = useState<JobItem>();

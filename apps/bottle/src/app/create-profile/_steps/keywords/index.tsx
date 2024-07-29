@@ -1,10 +1,10 @@
+import { Control } from '@/components/control';
+import { Stepper } from '@/components/stepper';
+import { Step } from '@/features/steps/StepContainer';
+import { useStep } from '@/features/steps/StepProvider';
 import { Button } from '@bottlesteam/ui';
 import { useState } from 'react';
-import { Control } from '../../../../components/control';
-import { Stepper } from '../../../../components/stepper';
-import { useOnboardingValues } from '../../OnboardingProvider';
-import { useStep } from '../../StepProvider';
-import { Step } from '../../_step/StepContainer';
+import { useCreateProfileValues } from '../../CreateProfileProvider';
 import { keywordsStyle } from './keywordsStyle.css';
 
 const keywordList = [
@@ -30,11 +30,12 @@ const keywordList = [
   '매너좋은',
 ] as const;
 
+const MIN_SELECTED = 3;
 const MAX_SELECTED = 5;
 
 export function Keywords() {
   const { onNextStep } = useStep();
-  const { setValue } = useOnboardingValues();
+  const { setValue } = useCreateProfileValues();
 
   const [keywords, setKeywords] = useState<(typeof keywordList)[number][]>([]);
 
@@ -42,7 +43,7 @@ export function Keywords() {
     <Step>
       <Stepper current={2} max={9} />
       <Step.Title>나를 표현하는 키워드는?</Step.Title>
-      <Step.Description style={{ marginTop: '12px' }}>최대 5개까지 선택할 수 있어요</Step.Description>
+      <Step.Description style={{ marginTop: '12px' }}>최소 3개, 최대 5개까지 선택할 수 있어요</Step.Description>
       <Control value={keywords}>
         <section className={keywordsStyle}>
           {keywordList.map((item, index) => (
@@ -70,7 +71,7 @@ export function Keywords() {
         </section>
       </Control>
       <Step.FixedButton
-        disabled={keywords.length === 0}
+        disabled={keywords.length < MIN_SELECTED}
         onClick={() => {
           if (keywords.length === 0) {
             return;
@@ -79,7 +80,7 @@ export function Keywords() {
           onNextStep();
         }}
       >
-        다음
+        {`다음 ${keywords.length} / ${MAX_SELECTED}`}
       </Step.FixedButton>
     </Step>
   );

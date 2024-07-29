@@ -1,27 +1,21 @@
+import { Control } from '@/components/control';
+import { Stepper } from '@/components/stepper';
+import { Step } from '@/features/steps/StepContainer';
+import { useStep } from '@/features/steps/StepProvider';
 import { Button, ButtonProps, spacings } from '@bottlesteam/ui';
 import { useState } from 'react';
-import { Control } from '../../../../components/control';
-import { Stepper } from '../../../../components/stepper';
-import { useOnboardingValues } from '../../OnboardingProvider';
-import { useStep } from '../../StepProvider';
-import { Step } from '../../_step/StepContainer';
+import { useCreateProfileValues } from '../../CreateProfileProvider';
 import { culture, entertainment, etc, sports } from './constants';
 import { interestsStyle } from './interestsStyle.css';
 
-// type Interest = {
-//   culture: string[];
-//   sports: string[];
-//   entertainment: string[];
-//   etc: string[];
-// };
-
 type InterestItem = (typeof culture | typeof sports | typeof entertainment | typeof etc)[number];
 
-const MAX_SELECTED = 5;
+const MIN_SELECTD = 3;
+const MAX_SELECTED = 10;
 
 export function Interests() {
   const { onNextStep } = useStep();
-  const { setValue } = useOnboardingValues();
+  const { setValue } = useCreateProfileValues();
 
   const [interests, setInterests] = useState<InterestItem[]>([]);
 
@@ -29,7 +23,7 @@ export function Interests() {
 
   const handleClick = (item: InterestItem) => {
     if (interests.length >= MAX_SELECTED && !interests.includes(item)) {
-      alert('최대 5개까지 선택할 수 있어요');
+      alert('최대 10개까지 선택할 수 있어요');
       return;
     }
     setInterests(prev => {
@@ -45,7 +39,7 @@ export function Interests() {
       <Step>
         <Stepper current={3} max={9} />
         <Step.Title>푹 빠진 취미는 무엇인가요?</Step.Title>
-        <Step.Description style={{ marginTop: '12px' }}>최대 5개까지 선택할 수 있어요</Step.Description>
+        <Step.Description style={{ marginTop: '12px' }}>최소 3개, 최대 10개까지 선택할 수 있어요</Step.Description>
         <Step.Subtitle style={{ marginTop: spacings.xxl }}>문화 예술</Step.Subtitle>
         <Control value={interests}>
           <section className={interestsStyle}>
@@ -82,7 +76,7 @@ export function Interests() {
         </Control>
       </Step>
       <Step.FixedButton
-        disabled={interests.length === 0}
+        disabled={interests.length < MIN_SELECTD}
         onClick={() => {
           setValue('interest', {
             culture: culture.filter(filterPredicate),
@@ -93,7 +87,7 @@ export function Interests() {
           onNextStep();
         }}
       >
-        다음
+        {`다음 ${interests.length} / ${MAX_SELECTED}`}
       </Step.FixedButton>
     </>
   );
