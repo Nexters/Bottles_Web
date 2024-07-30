@@ -3,12 +3,12 @@ import { RegionData, Regions } from './fetchRegion';
 
 export function useFetchRegions() {
   const [regionsData, setRegionsData] = useState<RegionData[]>();
-  const [error, setError] = useState<unknown>();
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     async function fetchRegions() {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/profile/choice1`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/profile/choice`);
         if (!response.ok) {
           throw new Error();
         }
@@ -16,7 +16,7 @@ export function useFetchRegions() {
 
         setRegionsData(data.regions);
       } catch (error) {
-        setError(error);
+        setError(true);
       }
     }
     fetchRegions();
