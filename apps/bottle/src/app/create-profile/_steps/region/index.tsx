@@ -10,12 +10,14 @@ import { RegionBottomSheet } from './RegionBottomSheet';
 import { RegionData, fetchRegionData } from './fetchRegion';
 import { regionStyle } from './regionStyle.css';
 import { SelectInput } from './select-input/SelectInput';
+import { useFetchRegions } from './useFetchRegion';
 
 export function Region() {
   const { setValue } = useCreateProfileValues();
   const { onNextStep } = useStep();
 
-  const [regionsData, setRegionsData] = useState<RegionData[]>();
+  const regionsData = useFetchRegions();
+
   const [city, setCity] = useState<string>();
   const [state, setState] = useState<string>();
 
@@ -44,15 +46,6 @@ export function Region() {
       );
     });
   };
-
-  useEffect(() => {
-    async function fetch() {
-      const response = await fetchRegionData();
-      setRegionsData(response);
-    }
-
-    fetch();
-  }, []);
 
   return (
     <Step>

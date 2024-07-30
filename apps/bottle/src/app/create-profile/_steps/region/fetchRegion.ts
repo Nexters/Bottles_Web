@@ -1,5 +1,3 @@
-import { responseData } from './mock';
-
 export interface RegionData {
   city: string;
   state: string[];
@@ -10,11 +8,12 @@ export interface Regions {
 }
 
 export async function fetchRegionData() {
-  // TODO:서버에서 데이터 패칭
-  //   const res = await fetch('https://api.bottles.asia/api/v1/profile/choice');
-  const response: Promise<Regions> = new Promise(resolve => {
-    resolve(responseData);
-  });
-
-  return (await response).regions;
+  const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/profile/choice1`);
+  console.log('res', response);
+  if (response.status !== 200) {
+    return 'Error';
+  }
+  const data: Regions = await response.json();
+  console.log('data', data);
+  return data.regions;
 }
