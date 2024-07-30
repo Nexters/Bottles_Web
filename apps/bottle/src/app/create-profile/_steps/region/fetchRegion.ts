@@ -8,10 +8,12 @@ export interface Regions {
 }
 
 export async function fetchRegionData() {
-  try {
-    const data: Regions = await fetch('https://api.bottles.asia/api/v1/profile/choice').then(res => res.json());
-    return data.regions;
-  } catch (error) {
-    console.log('ERROR!!!', error);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/profile/choice1`);
+  console.log('res', response);
+  if (response.status !== 200) {
+    return 'Error';
   }
+  const data: Regions = await response.json();
+  console.log('data', data);
+  return data.regions;
 }
