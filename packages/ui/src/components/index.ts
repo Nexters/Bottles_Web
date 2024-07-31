@@ -14,3 +14,5 @@ export { BottomSheet } from './bottom-sheet';
 export type { BottomSheetProps } from './bottom-sheet';
 export { Chip } from './chip';
 export type { ChipProps } from './chip';
+export { TextField } from './text-field';
+export type { TextFieldProps } from './text-field';
