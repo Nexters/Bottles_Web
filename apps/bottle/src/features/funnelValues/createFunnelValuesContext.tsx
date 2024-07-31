@@ -2,6 +2,7 @@ import { ProviderProps, createContext, useCallback, useContext, useRef } from 'r
 
 export interface FunnelValuesContext<I extends object> {
   setValue<K extends keyof I>(key: K, value: I[K]): void;
+  setValues<K extends keyof I>(newValues: { key: K; value: I[K] }[]): void;
   getValues(): Partial<I>;
 }
 
@@ -18,8 +19,18 @@ export function createFunnelValuesContext<I extends object>() {
       };
     }, []);
 
+    const setValues = useCallback(<K extends keyof I>(newValues: { key: K; value: I[K] }[]) => {
+      const prev = { ...values.current };
+
+      newValues.forEach(({ key, value }) => {
+        prev[key] = value;
+      });
+
+      values.current = prev;
+    }, []);
+
     const getValues = useCallback(() => values.current, []);
-    return <Context.Provider value={{ setValue, getValues }} {...props} />;
+    return <Context.Provider value={{ setValue, setValues, getValues }} {...props} />;
   }
 
   function useFunnelValues() {
