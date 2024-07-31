@@ -27,8 +27,11 @@ export function useTimer(time: number) {
   }, [timeLeft]);
 
   const start = useCallback(() => {
+    if (timeLeft === 0) {
+      setTimeLeft(time);
+    }
     setCount(true);
-  }, []);
+  }, [time, timeLeft]);
 
   return { start, timeLeft };
 }
