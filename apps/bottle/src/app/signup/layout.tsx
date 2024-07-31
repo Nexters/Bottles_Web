@@ -1,3 +1,5 @@
+'use client';
+
 import { StepProvider } from '@/features/steps/StepProvider';
 import { ReactNode, Suspense } from 'react';
 import { SignupProvider } from './SignupProvider';

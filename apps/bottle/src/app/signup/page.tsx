@@ -3,8 +3,9 @@
 import { Header } from '@/components/header';
 import { useStep } from '@/features/steps/StepProvider';
 import { Asset } from '@bottlesteam/ui';
+import { Information } from './_steps/information';
 
-const steps = [] as const;
+const steps = [<Information key={1} />] as const;
 
 export default function SignupPage() {
   const { onPreviousStep, currentStep } = useStep();

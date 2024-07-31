@@ -26,10 +26,10 @@ function useControlValue() {
   return controlContext;
 }
 
-interface ItemProps extends Partial<ButtonProps> {
+type ItemProps = Partial<ButtonProps> & {
   children: ReactNode;
   value: any;
-}
+};
 function Item(props: ItemProps) {
   const { value: controlValue } = useControlValue();
 
