@@ -37,9 +37,10 @@ export function Guide() {
       </Paragraph>
       <br />
       <Button
-        onClick={() => {
+        onClick={e => {
           // eslint-disable-next-line no-undef
           Native.onClickCancelButton();
+          e.preventDefault();
           // alert('앗! 아직 서비스가 준비중이에요. 잠시만 기다려주세요.');
         }}
         variant="solid"
