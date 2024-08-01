@@ -38,7 +38,9 @@ export function Guide() {
       <br />
       <Button
         onClick={() => {
-          alert('앗! 아직 서비스가 준비중이에요. 잠시만 기다려주세요.');
+          // eslint-disable-next-line no-undef
+          Native.onClickCancelButton();
+          // alert('앗! 아직 서비스가 준비중이에요. 잠시만 기다려주세요.');
         }}
         variant="solid"
         size="sm"
