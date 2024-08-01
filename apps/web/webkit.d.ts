@@ -1,3 +1,3 @@
 declare const webkit: {
-  onClickCancelButton: () => void;
+  messageHandlers: any;
 };

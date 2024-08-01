@@ -39,7 +39,7 @@ export function Guide() {
       <Button
         onClick={e => {
           // eslint-disable-next-line no-undef
-          (window as any).webkit.messageHandlers.Native.onClickCancelButton();
+          webkit.messageHandlers.Native.onClickCancelButton();
           // Native.onClickCancelButton();
           e.preventDefault();
           // alert('앗! 아직 서비스가 준비중이에요. 잠시만 기다려주세요.');
