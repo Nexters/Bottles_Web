@@ -17,7 +17,8 @@
     "**/css.js",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "native.d.ts"
+    "native.d.ts",
+    "webkit.d.ts"
   ],
   "exclude": ["node_modules"]
 }
