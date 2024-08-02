@@ -16,6 +16,7 @@
   },
   "include": [
     "next-env.d.ts",
+    "global.d.ts",
     "next.config.mjs",
     "**/*.ts",
     "**/css.ts",
