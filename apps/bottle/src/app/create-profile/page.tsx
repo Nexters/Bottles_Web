@@ -1,5 +1,6 @@
 'use client';
 
+import { Header } from '@/components/header';
 import { useStep } from '@/features/steps/StepProvider';
 import { Asset } from '@bottlesteam/ui';
 import { MBTI } from './_steps/MBTI';
@@ -11,7 +12,6 @@ import { Keywords } from './_steps/keywords';
 import { Region } from './_steps/region';
 import { Religion } from './_steps/religion';
 import { Smoking } from './_steps/smoking';
-import { headerStyle } from './headerStyle.css';
 
 const steps = [
   <MBTI key={1} />,
@@ -30,9 +30,7 @@ export default function CreateProfilePage() {
 
   return (
     <>
-      <header className={headerStyle}>
-        {currentStep !== 1 && <Asset onClick={onPreviousStep} type="icon-arrow-left" />}
-      </header>
+      <Header>{currentStep !== 1 && <Asset onClick={onPreviousStep} type="icon-arrow-left" />}</Header>
       {steps[currentStep - 1]}
     </>
   );

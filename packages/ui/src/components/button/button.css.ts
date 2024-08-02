@@ -33,6 +33,7 @@ export const buttonStyle = recipe({
       },
     },
     size: {
+      xs: {},
       sm: {},
       md: {},
       lg: {},
@@ -88,6 +89,25 @@ export const buttonStyle = recipe({
         borderRadius: radius.sm,
         display: 'flex',
         justifyContent: 'center',
+      },
+    },
+    {
+      variants: {
+        variant: 'solid',
+        size: 'xs',
+      },
+      style: {
+        color: colors.white100,
+        width: 'auto',
+        height: '36px',
+        padding: `0 ${spacings.sm}`,
+        display: 'flex',
+        alignItems: 'center',
+        ...typography.bo,
+        backgroundColor: colors.purple400,
+        borderRadius: radius.xs,
+        border: 'none',
+        wordWrap: 'break-word',
       },
     },
     {
