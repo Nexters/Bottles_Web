@@ -1,8 +1,10 @@
 import { Control, toggle } from '@/components/control';
 import { Stepper } from '@/components/stepper';
 import { Step } from '@/features/steps/StepContainer';
+import { useStep } from '@/features/steps/StepProvider';
 import { Button, ButtonProps } from '@bottlesteam/ui';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+import { useCreateProfileValues } from '../../CreateProfileProvider';
 import { bodyStyle, buttonsContainerStyle, controlStyle } from './MBTIStyle.css';
 
 type EIType = 'E' | 'I';
@@ -11,10 +13,15 @@ type TFType = 'T' | 'F';
 type JPType = 'J' | 'P';
 
 export function MBTI() {
+  const { onNextStep } = useStep();
+  const { setValue } = useCreateProfileValues();
+
   const [EI, setEI] = useState<EIType>();
   const [SN, setSN] = useState<SNType>();
   const [TF, setTF] = useState<TFType>();
   const [JP, setJP] = useState<JPType>();
+
+  const isDisabled = useMemo(() => EI == null || SN == null || TF == null || JP == null, [EI, JP, TF, SN]);
 
   return (
     <Step>
@@ -74,7 +81,7 @@ export function MBTI() {
           </div>
         </div>
       </section>
-      {/* <Step.FixedButton
+      <Step.FixedButton
         disabled={isDisabled}
         onClick={() => {
           if (isDisabled) {
@@ -85,7 +92,7 @@ export function MBTI() {
         }}
       >
         다음
-      </Step.FixedButton> */}
+      </Step.FixedButton>
     </Step>
   );
 }
