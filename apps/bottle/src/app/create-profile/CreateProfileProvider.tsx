@@ -1,6 +1,6 @@
 import { createFunnelValuesContext } from '@/features/funnel-values/createFunnelValuesContext';
 
-interface CreateProfileValues {
+export interface CreateProfileValues {
   mbti: string;
   keyword: string[];
   interest: {

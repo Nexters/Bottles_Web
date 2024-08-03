@@ -10,8 +10,11 @@ export interface FunnelValuesContext<I extends object> {
 export function createFunnelValuesContext<I extends object>() {
   const Context = createContext<FunnelValuesContext<I> | null>(null);
 
-  function Provider(props: Omit<ProviderProps<FunnelValuesContext<I> | null>, 'value'>) {
-    const values = useRef<Partial<I>>({});
+  function Provider({
+    initial,
+    ...props
+  }: Omit<ProviderProps<FunnelValuesContext<I> | null> & { initial?: Partial<I> }, 'value'>) {
+    const values = useRef<Partial<I>>(initial != null ? initial : {});
     const setValue = useCallback(<K extends keyof I>(key: K, value: I[K]) => {
       const prev = { ...values.current };
       values.current = {
