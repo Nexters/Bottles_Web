@@ -4,25 +4,36 @@ import { Step } from '@/features/steps/StepContainer';
 import { useStep } from '@/features/steps/StepProvider';
 import { Button, ButtonProps, spacings } from '@bottlesteam/ui';
 import { useState } from 'react';
-import { useCreateProfileValues } from '../../CreateProfileProvider';
+import { CreateProfileValues, useCreateProfileValues } from '../../CreateProfileProvider';
 import { culture, entertainment, etc, sports } from './constants';
 import { interestsStyle } from './interestsStyle.css';
 
-type InterestItem = (typeof culture | typeof sports | typeof entertainment | typeof etc)[number];
+export type InterestItem = (typeof culture | typeof sports | typeof entertainment | typeof etc)[number];
 
 const MIN_SELECTD = 3;
 const MAX_SELECTED = 10;
 
+function processSelected(selected: CreateProfileValues['interest']) {
+  /**
+   * NOTE: Prototype Object.values() causes incorrect type inference
+   * used spread operator instead
+   */
+  return [...selected.culture, ...selected.sports, ...selected.entertainment, ...selected.etc] as InterestItem[];
+}
+
 export function Interests() {
   const { onNextStep } = useStep();
-  const { setValue } = useCreateProfileValues();
+  const { setValue, getValue } = useCreateProfileValues();
 
-  const [interests, setInterests] = useState<InterestItem[]>([]);
+  const selected = getValue('interest');
+
+  const [interests, setInterests] = useState<InterestItem[]>(selected != null ? processSelected(selected) : []);
 
   const filterPredicate = (item: InterestItem) => interests.includes(item);
 
   const handleClick = (item: InterestItem) => {
     if (interests.length >= MAX_SELECTED && !interests.includes(item)) {
+      // TODO: replace alert to Native.onOpenToast()
       alert('최대 10개까지 선택할 수 있어요');
       return;
     }

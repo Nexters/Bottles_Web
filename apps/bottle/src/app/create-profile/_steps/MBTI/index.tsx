@@ -7,10 +7,10 @@ import { useMemo, useState } from 'react';
 import { useCreateProfileValues } from '../../CreateProfileProvider';
 import { bodyStyle, buttonsContainerStyle, controlStyle } from './MBTIStyle.css';
 
-type EIType = 'E' | 'I';
-type SNType = 'S' | 'N';
-type TFType = 'T' | 'F';
-type JPType = 'J' | 'P';
+export type EIType = 'E' | 'I';
+export type SNType = 'S' | 'N';
+export type TFType = 'T' | 'F';
+export type JPType = 'J' | 'P';
 
 export function MBTI() {
   const { onNextStep } = useStep();
@@ -28,7 +28,6 @@ export function MBTI() {
   return (
     <Step>
       <Stepper current={1} max={9} />
-      <div>{selected}zzzzzz</div>
       <Step.Title>OO님의 성격에 대해 알고 싶어요</Step.Title>
       <section className={bodyStyle}>
         <div className={controlStyle}>
@@ -87,7 +86,7 @@ export function MBTI() {
       <Step.FixedButton
         disabled={isDisabled}
         onClick={() => {
-          if (isDisabled) {
+          if (EI == null || SN == null || TF == null || JP == null) {
             return;
           }
           setValue('mbti', `${EI}${SN}${TF}${JP}`);

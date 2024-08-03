@@ -8,13 +8,13 @@ import { useCreateProfileValues } from '../../CreateProfileProvider';
 import { jobStyle } from './jobStyle.css';
 
 const jobList = ['대학생 · 대학원생', '직장인', '프리랜서', '자영업', '취준생 · 무직'] as const;
-type JobItem = (typeof jobList)[number];
+export type JobItem = (typeof jobList)[number];
 
 export function Job() {
-  const { setValue } = useCreateProfileValues();
+  const { setValue, getValue } = useCreateProfileValues();
   const { onNextStep } = useStep();
 
-  const [job, setJob] = useState<JobItem>();
+  const [job, setJob] = useState<JobItem | undefined>(getValue('job'));
   return (
     <Step>
       <Stepper current={4} max={9} />

@@ -13,13 +13,14 @@ import { SelectInput } from './select-input/SelectInput';
 import { useFetchRegions } from './useFetchRegion';
 
 export function Region() {
-  const { setValue } = useCreateProfileValues();
+  const { setValue, getValue } = useCreateProfileValues();
   const { onNextStep } = useStep();
 
   const regionsData = useFetchRegions();
 
-  const [city, setCity] = useState<string>();
-  const [state, setState] = useState<string>();
+  const selected = getValue('region');
+  const [city, setCity] = useState<string | undefined>(selected != null ? selected.city : undefined);
+  const [state, setState] = useState<string | undefined>(selected != null ? selected.state : undefined);
 
   const openRegionBottomSheet = (type: 'city' | 'state') => {
     overlay.open(({ isOpen, unmount }) => {

@@ -17,9 +17,10 @@ const heightData = Array.from({ length: 61 }, (_, index) => ({
 }));
 
 export function Height() {
-  const { setValue } = useCreateProfileValues();
+  const { setValue, getValue } = useCreateProfileValues();
   const { onNextStep } = useStep();
-  const [height, setHeight] = useState(Number(DEFAULT_ID));
+
+  const [height, setHeight] = useState(getValue('height') ?? Number(DEFAULT_ID));
 
   return (
     <Step>
@@ -29,7 +30,7 @@ export function Height() {
         <WheelPicker
           data={heightData}
           onChange={({ id }) => setHeight(Number(id))}
-          selectedID={DEFAULT_ID}
+          selectedID={String(height)}
           fontSize={14}
           height={250}
           width={'100%'}
