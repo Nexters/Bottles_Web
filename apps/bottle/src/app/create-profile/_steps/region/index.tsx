@@ -1,6 +1,7 @@
 import { Stepper } from '@/components/stepper';
 import { Step } from '@/features/steps/StepContainer';
-import { useStep } from '@/features/steps/StepProvider';
+import { useUserAgent } from '@/features/web-view/UserAgentProvider';
+import { webViewAPI } from '@/features/web-view/api';
 import { spacings } from '@bottlesteam/ui';
 import { OverlayProvider, overlay } from 'overlay-kit';
 import { useState } from 'react';
@@ -13,6 +14,7 @@ import { SelectInput } from './select-input/SelectInput';
 import { useFetchRegions } from './useFetchRegion';
 
 export function Region() {
+  const userAgent = useUserAgent();
   const { setValue, getValue, getValues } = useCreateProfileValues();
 
   const regionsData = useFetchRegions();
@@ -82,7 +84,8 @@ export function Region() {
           }
           setValue('region', { city, state });
           console.log('create profile values:', getValues());
-          // onNextStep();
+          //TODO: add server mutation code
+          webViewAPI('onCreateProfileComplete', { iOS: { type: 'onCreateProfileComplete' } }, userAgent);
         }}
       >
         다음
