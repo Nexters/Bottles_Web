@@ -6,15 +6,14 @@ import { OverlayProvider, overlay } from 'overlay-kit';
 import { useState } from 'react';
 import { useCreateProfileValues } from '../../CreateProfileProvider';
 import { spacingStyle } from '../MBTI/MBTIStyle.css';
-import { RegionBottomSheet } from './RegionBottomSheet';
+import { RegionBottomSheet } from './bottom-sheet/RegionBottomSheet';
 import { RegionData } from './fetchRegion';
 import { regionStyle } from './regionStyle.css';
 import { SelectInput } from './select-input/SelectInput';
 import { useFetchRegions } from './useFetchRegion';
 
 export function Region() {
-  const { setValue, getValue } = useCreateProfileValues();
-  const { onNextStep } = useStep();
+  const { setValue, getValue, getValues } = useCreateProfileValues();
 
   const regionsData = useFetchRegions();
 
@@ -82,7 +81,8 @@ export function Region() {
             return;
           }
           setValue('region', { city, state });
-          onNextStep();
+          console.log('create profile values:', getValues());
+          // onNextStep();
         }}
       >
         다음

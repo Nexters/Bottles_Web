@@ -2,7 +2,7 @@
 
 import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
 
-interface UserAgent {
+export interface UserAgent {
   rawUA: string;
   isIOS: boolean;
   isAndroid: boolean;
