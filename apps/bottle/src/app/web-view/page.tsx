@@ -37,7 +37,7 @@ export default function WebViewPage() {
     console.log('토스트 열었음');
   }
 
-  function sendToken() {
+  function login() {
     const accessToken = 'accessTokenExample';
     const refreshToken = 'refreshTokenExample';
     userAgent.isIOS
@@ -79,8 +79,8 @@ export default function WebViewPage() {
       </Flex>
       <Flex>
         <Paragraph typography="st2">onTokenSend(json)</Paragraph>
-        <Button variant="solid" size="sm" onClick={sendToken}>
-          토큰 받기
+        <Button variant="solid" size="sm" onClick={login}>
+          로그인/회원가입 토큰 전달
         </Button>
       </Flex>
       <Paragraph typography="st1" color="purple500" style={{ marginBottom: spacings.md }}>
