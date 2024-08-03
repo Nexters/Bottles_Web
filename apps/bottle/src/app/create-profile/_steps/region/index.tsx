@@ -22,7 +22,7 @@ export function Region() {
   const [state, setState] = useState<string>();
 
   const openRegionBottomSheet = (type: 'city' | 'state') => {
-    overlay.open(({ isOpen, close }) => {
+    overlay.open(({ isOpen, unmount }) => {
       return (
         <>
           {regionsData && (
@@ -34,7 +34,7 @@ export function Region() {
                 type === 'city' && city !== item && setState(undefined);
               }}
               isOpen={isOpen}
-              onClose={close}
+              onClose={unmount}
               items={
                 type === 'city'
                   ? regionsData.map(({ city }) => city)
