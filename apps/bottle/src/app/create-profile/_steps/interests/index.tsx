@@ -66,7 +66,7 @@ export function Interests() {
             ))}
           </section>
           <Step.Subtitle style={{ marginTop: spacings.xl }}>기타</Step.Subtitle>
-          <section className={interestsStyle}>
+          <section className={interestsStyle} style={{ marginBottom: spacings.xl }}>
             {etc.map((item, index) => (
               <Control.Item value={item} key={index} onClick={() => handleClick(item)}>
                 <ItemButton>{item}</ItemButton>

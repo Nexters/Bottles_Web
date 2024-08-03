@@ -3,6 +3,12 @@ import { style } from '@vanilla-extract/css';
 
 export const HEADER_HEIGHT = 48;
 export const CTA_HEIGHT = 109;
+
+/**
+ * NOTE: This is a trick to make sure that
+ * the Bottom CTA's gradient overlaps with the body of the Step Container.
+ */
+export const OVERLAP_HEIGHT = 20;
 export const CONTAINER_OFFSET_HEIGHT = HEADER_HEIGHT + CTA_HEIGHT;
 
 export const buttonContainer = style({
@@ -14,10 +20,11 @@ export const buttonContainer = style({
   paddingTop: spacings.xl,
   display: 'flex',
   justifyContent: 'center',
+  background: 'linear-gradient(180deg, rgba(251, 251, 251, 0) 0%, #FBFBFB 25%)',
 });
 
 export const containerStyle = style({
-  height: `calc(100vh - ${CONTAINER_OFFSET_HEIGHT}px)`,
+  height: `calc(100vh - ${CONTAINER_OFFSET_HEIGHT - OVERLAP_HEIGHT}px)`,
   overflow: 'scroll',
   msOverflowStyle: 'none',
   scrollbarWidth: 'none',
