@@ -8,13 +8,13 @@ import { useCreateProfileValues } from '../../CreateProfileProvider';
 import { religionStyle } from './religionStyle.css';
 
 const religionList = ['무교', '기독교', '천주교', '불교', '기타'] as const;
-type ReligionItem = (typeof religionList)[number];
+export type ReligionItem = (typeof religionList)[number];
 
 export function Religion() {
-  const { setValue } = useCreateProfileValues();
+  const { setValue, getValue } = useCreateProfileValues();
   const { onNextStep } = useStep();
 
-  const [religion, setReligion] = useState<ReligionItem>();
+  const [religion, setReligion] = useState<ReligionItem | undefined>(getValue('religion'));
 
   return (
     <Step>

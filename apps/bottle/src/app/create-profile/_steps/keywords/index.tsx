@@ -30,14 +30,16 @@ const keywordList = [
   '매너좋은',
 ] as const;
 
+export type Keyword = (typeof keywordList)[number];
+
 const MIN_SELECTED = 3;
 const MAX_SELECTED = 5;
 
 export function Keywords() {
   const { onNextStep } = useStep();
-  const { setValue } = useCreateProfileValues();
+  const { setValue, getValue } = useCreateProfileValues();
 
-  const [keywords, setKeywords] = useState<(typeof keywordList)[number][]>([]);
+  const [keywords, setKeywords] = useState<Keyword[]>(getValue('keyword') ?? []);
 
   return (
     <Step>

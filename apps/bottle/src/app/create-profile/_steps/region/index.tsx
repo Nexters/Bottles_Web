@@ -1,28 +1,30 @@
 import { Stepper } from '@/components/stepper';
 import { Step } from '@/features/steps/StepContainer';
-import { useStep } from '@/features/steps/StepProvider';
+import { useUserAgent } from '@/features/web-view/UserAgentProvider';
+import { webViewAPI } from '@/features/web-view/api';
 import { spacings } from '@bottlesteam/ui';
 import { OverlayProvider, overlay } from 'overlay-kit';
 import { useState } from 'react';
 import { useCreateProfileValues } from '../../CreateProfileProvider';
 import { spacingStyle } from '../MBTI/MBTIStyle.css';
-import { RegionBottomSheet } from './RegionBottomSheet';
+import { RegionBottomSheet } from './bottom-sheet/RegionBottomSheet';
 import { RegionData } from './fetchRegion';
 import { regionStyle } from './regionStyle.css';
 import { SelectInput } from './select-input/SelectInput';
 import { useFetchRegions } from './useFetchRegion';
 
 export function Region() {
-  const { setValue } = useCreateProfileValues();
-  const { onNextStep } = useStep();
+  const userAgent = useUserAgent();
+  const { setValue, getValue, getValues } = useCreateProfileValues();
 
   const regionsData = useFetchRegions();
 
-  const [city, setCity] = useState<string>();
-  const [state, setState] = useState<string>();
+  const selected = getValue('region');
+  const [city, setCity] = useState<string | undefined>(selected != null ? selected.city : undefined);
+  const [state, setState] = useState<string | undefined>(selected != null ? selected.state : undefined);
 
   const openRegionBottomSheet = (type: 'city' | 'state') => {
-    overlay.open(({ isOpen, close }) => {
+    overlay.open(({ isOpen, unmount }) => {
       return (
         <>
           {regionsData && (
@@ -34,7 +36,7 @@ export function Region() {
                 type === 'city' && city !== item && setState(undefined);
               }}
               isOpen={isOpen}
-              onClose={close}
+              onClose={unmount}
               items={
                 type === 'city'
                   ? regionsData.map(({ city }) => city)
@@ -81,7 +83,9 @@ export function Region() {
             return;
           }
           setValue('region', { city, state });
-          onNextStep();
+          console.log('create profile values:', getValues());
+          //TODO: add server mutation code
+          webViewAPI('onCreateProfileComplete', { iOS: { type: 'onCreateProfileComplete' } }, userAgent);
         }}
       >
         다음

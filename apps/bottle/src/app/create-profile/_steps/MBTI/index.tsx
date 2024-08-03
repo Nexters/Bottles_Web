@@ -7,19 +7,21 @@ import { useMemo, useState } from 'react';
 import { useCreateProfileValues } from '../../CreateProfileProvider';
 import { bodyStyle, buttonsContainerStyle, controlStyle } from './MBTIStyle.css';
 
-type EIType = 'E' | 'I';
-type SNType = 'S' | 'N';
-type TFType = 'T' | 'F';
-type JPType = 'J' | 'P';
+export type EIType = 'E' | 'I';
+export type SNType = 'S' | 'N';
+export type TFType = 'T' | 'F';
+export type JPType = 'J' | 'P';
 
 export function MBTI() {
   const { onNextStep } = useStep();
-  const { setValue } = useCreateProfileValues();
+  const { setValue, getValue } = useCreateProfileValues();
 
-  const [EI, setEI] = useState<EIType>();
-  const [SN, setSN] = useState<SNType>();
-  const [TF, setTF] = useState<TFType>();
-  const [JP, setJP] = useState<JPType>();
+  const selected = getValue('mbti');
+
+  const [EI, setEI] = useState<EIType | undefined>(() => (selected != null ? (selected[0] as EIType) : undefined));
+  const [SN, setSN] = useState<SNType | undefined>(selected != null ? (selected[1] as SNType) : undefined);
+  const [TF, setTF] = useState<TFType | undefined>(selected != null ? (selected[2] as TFType) : undefined);
+  const [JP, setJP] = useState<JPType | undefined>(selected != null ? (selected[3] as JPType) : undefined);
 
   const isDisabled = useMemo(() => EI == null || SN == null || TF == null || JP == null, [EI, JP, TF, SN]);
 
@@ -33,10 +35,10 @@ export function MBTI() {
           <div className={buttonsContainerStyle}>
             <Control value={EI}>
               <Control.Item value={'E'} onClick={() => setEI(prev => toggle(prev, 'E'))}>
-                <ItemButton>E</ItemButton>
+                <ItemButton aria-selected={EI === 'E'}>E</ItemButton>
               </Control.Item>
               <Control.Item value={'I'} onClick={() => setEI(prev => toggle(prev, 'I'))}>
-                <ItemButton>I</ItemButton>
+                <ItemButton aria-selected={EI === 'I'}>I</ItemButton>
               </Control.Item>
             </Control>
           </div>
@@ -46,10 +48,10 @@ export function MBTI() {
           <div className={buttonsContainerStyle}>
             <Control value={SN}>
               <Control.Item value={'S'} onClick={() => setSN(prev => toggle(prev, 'S'))}>
-                <ItemButton>S</ItemButton>
+                <ItemButton aria-selected={SN === 'S'}>S</ItemButton>
               </Control.Item>
               <Control.Item value={'N'} onClick={() => setSN(prev => toggle(prev, 'N'))}>
-                <ItemButton>N</ItemButton>
+                <ItemButton aria-selected={SN === 'N'}>N</ItemButton>
               </Control.Item>
             </Control>
           </div>
@@ -59,10 +61,10 @@ export function MBTI() {
           <div className={buttonsContainerStyle}>
             <Control value={TF}>
               <Control.Item value={'T'} onClick={() => setTF(prev => toggle(prev, 'T'))}>
-                <ItemButton>T</ItemButton>
+                <ItemButton aria-selected={TF === 'T'}>T</ItemButton>
               </Control.Item>
               <Control.Item value={'F'} onClick={() => setTF(prev => toggle(prev, 'F'))}>
-                <ItemButton>F</ItemButton>
+                <ItemButton aria-selected={TF === 'F'}>F</ItemButton>
               </Control.Item>
             </Control>
           </div>
@@ -72,10 +74,10 @@ export function MBTI() {
           <div className={buttonsContainerStyle}>
             <Control value={JP}>
               <Control.Item value={'J'} onClick={() => setJP(prev => toggle(prev, 'J'))}>
-                <ItemButton>J</ItemButton>
+                <ItemButton aria-selected={JP === 'J'}>J</ItemButton>
               </Control.Item>
               <Control.Item value={'P'} onClick={() => setJP(prev => toggle(prev, 'P'))}>
-                <ItemButton>P</ItemButton>
+                <ItemButton aria-selected={JP === 'P'}>P</ItemButton>
               </Control.Item>
             </Control>
           </div>
@@ -84,7 +86,7 @@ export function MBTI() {
       <Step.FixedButton
         disabled={isDisabled}
         onClick={() => {
-          if (isDisabled) {
+          if (EI == null || SN == null || TF == null || JP == null) {
             return;
           }
           setValue('mbti', `${EI}${SN}${TF}${JP}`);
