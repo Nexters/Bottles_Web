@@ -1,4 +1,4 @@
-import { createFunnelValuesContext } from '@/features/funnelValues/createFunnelValuesContext';
+import { createFunnelValuesContext } from '@/features/funnel-values/createFunnelValuesContext';
 
 interface CreateProfileValues {
   mbti: string;

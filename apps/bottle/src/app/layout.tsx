@@ -1,3 +1,4 @@
+import { UserAgentProvider } from '@/features/web-view/UserAgentProvider';
 import type { Metadata } from 'next';
 import './globals.css';
 import '@bottlesteam/ui/styles';
@@ -17,7 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={wantedSansStd.className}>
-        <main className={layoutStyle}>{children}</main>
+        <main className={layoutStyle}>
+          <UserAgentProvider>{children}</UserAgentProvider>
+        </main>
       </body>
     </html>
   );
