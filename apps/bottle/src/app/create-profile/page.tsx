@@ -1,8 +1,6 @@
 'use client';
 
-import { Header } from '@/components/header';
 import { useStep } from '@/features/steps/StepProvider';
-import { Asset } from '@bottlesteam/ui';
 import { MBTI } from './_steps/MBTI';
 import { Alcohol } from './_steps/alcohol';
 import { Height } from './_steps/height';
@@ -26,11 +24,11 @@ const steps = [
 ] as const;
 
 export default function CreateProfilePage() {
-  const { onPreviousStep, currentStep } = useStep();
+  const { currentStep } = useStep();
 
   return (
     <>
-      <Header>{currentStep !== 1 && <Asset onClick={onPreviousStep} type="icon-arrow-left" />}</Header>
+      {/* <Header>{currentStep !== 1 && <Asset onClick={onPreviousStep} type="icon-arrow-left" />}</Header> */}
       {steps[currentStep - 1]}
     </>
   );
