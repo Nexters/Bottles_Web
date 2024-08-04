@@ -1,4 +1,5 @@
 import { Stepper } from '@/components/stepper';
+import { POST, createInit } from '@/features/server/utils';
 import { Step } from '@/features/steps/StepContainer';
 import { useUserAgent } from '@/features/web-view/UserAgentProvider';
 import { webViewAPI } from '@/features/web-view/api';
@@ -8,10 +9,9 @@ import { useState } from 'react';
 import { useCreateProfileValues } from '../../CreateProfileProvider';
 import { spacingStyle } from '../MBTI/MBTIStyle.css';
 import { RegionBottomSheet } from './bottom-sheet/RegionBottomSheet';
-import { RegionData } from './fetchRegion';
 import { regionStyle } from './regionStyle.css';
 import { SelectInput } from './select-input/SelectInput';
-import { useFetchRegions } from './useFetchRegion';
+import { RegionData, useFetchRegions } from './useFetchRegion';
 
 export function Region() {
   const userAgent = useUserAgent();
@@ -78,13 +78,17 @@ export function Region() {
       </OverlayProvider>
       <Step.FixedButton
         disabled={city === undefined || state === undefined}
-        onClick={() => {
+        onClick={async () => {
           if (city === undefined || state === undefined) {
             return;
           }
           setValue('region', { city, state });
           console.log('create profile values:', getValues());
-          //TODO: add server mutation code
+          await POST(
+            `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/profile/choice`,
+            // TODO: make a step for kakaoId
+            createInit(localStorage.getItem('accessToken') ?? '', { ...getValues(), kakaoId: 'dhassidu11' })
+          );
           webViewAPI('onCreateProfileComplete', { iOS: { type: 'onCreateProfileComplete' } }, userAgent);
         }}
       >
