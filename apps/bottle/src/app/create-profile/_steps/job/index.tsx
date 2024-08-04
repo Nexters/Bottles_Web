@@ -17,7 +17,7 @@ export function Job() {
   const [job, setJob] = useState<JobItem | undefined>(getValue('job'));
   return (
     <Step>
-      <Stepper current={4} max={9} />
+      <Stepper current={4} max={10} />
       <Step.Title>지금 어떤 일을 하고 있나요?</Step.Title>
       <section className={jobStyle}>
         <Control value={job}>

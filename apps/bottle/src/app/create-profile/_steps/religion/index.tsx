@@ -18,7 +18,7 @@ export function Religion() {
 
   return (
     <Step>
-      <Stepper current={8} max={9} />
+      <Stepper current={8} max={10} />
       <Step.Title>어떤 종교를 가지고 있나요?</Step.Title>
       <section className={religionStyle}>
         <Control value={religion}>

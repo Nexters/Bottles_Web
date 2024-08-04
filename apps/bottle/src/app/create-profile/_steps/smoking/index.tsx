@@ -18,7 +18,7 @@ export function Smoking() {
 
   return (
     <Step>
-      <Stepper current={6} max={9} />
+      <Stepper current={6} max={10} />
       <Step.Title>흡연 스타일이 궁금해요</Step.Title>
       <Control value={smoking}>
         <section className={smokingStyle}>

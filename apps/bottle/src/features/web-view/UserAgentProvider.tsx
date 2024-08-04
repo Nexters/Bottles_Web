@@ -6,26 +6,32 @@ export interface UserAgent {
   rawUA: string;
   isIOS: boolean;
   isAndroid: boolean;
+  isMobile: boolean;
 }
 
 const UserAgentContext = createContext<UserAgent | null>(null);
 
 export function UserAgentProvider({ children }: { children: ReactNode }) {
-  const [userAgent, setUserAgent] = useState<UserAgent>({ isAndroid: false, isIOS: true, rawUA: '' });
+  const [userAgent, setUserAgent] = useState<UserAgent>({ isAndroid: false, isIOS: true, rawUA: '', isMobile: true });
 
   useEffect(() => {
     const _userAgent = navigator.userAgent.toLowerCase();
+
+    const isMobile = _userAgent.indexOf('iphone') > -1 || _userAgent.indexOf('android') > -1;
+
     if (_userAgent.indexOf('android') > -1) {
       setUserAgent({
         isIOS: false,
         isAndroid: true,
         rawUA: _userAgent,
+        isMobile,
       });
     } else {
       setUserAgent({
         isIOS: true,
         isAndroid: false,
         rawUA: _userAgent,
+        isMobile,
       });
     }
   }, []);

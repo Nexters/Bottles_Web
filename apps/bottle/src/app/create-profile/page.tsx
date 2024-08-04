@@ -8,6 +8,7 @@ import { Alcohol } from './_steps/alcohol';
 import { Height } from './_steps/height';
 import { Interests } from './_steps/interests';
 import { Job } from './_steps/job';
+import { KaKaoId } from './_steps/kakao-id';
 import { Keywords } from './_steps/keywords';
 import { Region } from './_steps/region';
 import { Religion } from './_steps/religion';
@@ -23,6 +24,7 @@ const steps = [
   <Alcohol key={7} />,
   <Religion key={8} />,
   <Region key={9} />,
+  <KaKaoId key={10} />,
 ] as const;
 
 export default function CreateProfilePage() {

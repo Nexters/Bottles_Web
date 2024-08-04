@@ -9,14 +9,14 @@ export interface TextFieldProps extends ComponentPropsWithoutRef<'input'> {
 }
 
 const TextFieldImpl = forwardRef<ElementRef<'input'>, TextFieldProps>(
-  ({ rightButton, caption, error = false, ...inputProps }, ref) => {
+  ({ rightButton, caption, error = false, style, ...inputProps }, ref) => {
     const id = useId();
 
     const hasRightButton = rightButton !== undefined;
     const { disabled } = inputProps;
 
     return (
-      <div className={containerStyle}>
+      <div className={containerStyle} style={style}>
         <label htmlFor={id} className={labelStyle({ disabled, error })}>
           <input ref={ref} id={id} className={inputStyle({ hasRightButton })} {...inputProps} />
           {rightButton}

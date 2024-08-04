@@ -1,7 +1,11 @@
 import { refreshAuth } from './auth';
 import { STATUS } from './types';
 
-export function createInit(token?: string, body?: object, cache: RequestCache = 'no-store'): RequestInit {
+export function createInit<Body extends object>(
+  token?: string,
+  body?: Body,
+  cache: RequestCache = 'no-store'
+): RequestInit {
   return {
     headers: {
       'Content-Type': 'application/json',
@@ -12,7 +16,7 @@ export function createInit(token?: string, body?: object, cache: RequestCache = 
   };
 }
 
-async function fetchWrapperWithTokenHandler(input: string, init?: RequestInit) {
+async function fetchWrapperWithTokenHandler<Data>(input: string, init?: RequestInit): Promise<Data> {
   const response = await fetch(input, init);
 
   /**
@@ -21,7 +25,7 @@ async function fetchWrapperWithTokenHandler(input: string, init?: RequestInit) {
   if (response.status === STATUS.UNAUTHORIZED) {
     await refreshAuth();
 
-    const response = await fetch(input, {
+    return await fetchWrapperWithTokenHandler<Data>(input, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem('accessToken') ?? ''}`,
@@ -29,16 +33,20 @@ async function fetchWrapperWithTokenHandler(input: string, init?: RequestInit) {
       body: init?.body,
       cache: init?.cache,
     });
-    return response;
   }
 
-  return response;
+  try {
+    const data = await response.json();
+    return data as Data;
+  } catch (error) {
+    return undefined as any;
+  }
 }
 
-export function POST(input: string, init?: RequestInit) {
-  return fetchWrapperWithTokenHandler(input, { method: 'POST', ...init });
+export function POST<Data>(input: string, init?: RequestInit): Promise<Data | void> {
+  return fetchWrapperWithTokenHandler<Data>(input, { method: 'POST', ...init });
 }
 
-export function GET(input: string, init?: RequestInit) {
-  return fetchWrapperWithTokenHandler(input, init);
+export function GET<Data>(input: string, init?: RequestInit) {
+  return fetchWrapperWithTokenHandler<Data>(input, init);
 }

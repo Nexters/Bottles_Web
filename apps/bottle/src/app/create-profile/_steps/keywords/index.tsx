@@ -43,7 +43,7 @@ export function Keywords() {
 
   return (
     <Step>
-      <Stepper current={2} max={9} />
+      <Stepper current={2} max={10} />
       <Step.Title>나를 표현하는 키워드는?</Step.Title>
       <Step.Description style={{ marginTop: '12px' }}>최소 3개, 최대 5개까지 선택할 수 있어요</Step.Description>
       <Control value={keywords}>
