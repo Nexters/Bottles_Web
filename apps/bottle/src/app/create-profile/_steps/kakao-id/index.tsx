@@ -34,8 +34,11 @@ export function KaKaoId() {
             `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/profile/choice`,
             createInit(localStorage.getItem('accessToken') ?? '', { ...getValues() })
           );
-
-          webViewAPI('onCreateProfileComplete', { iOS: { type: 'onCreateProfileComplete' } }, userAgent);
+          webViewAPI({
+            type: 'onCreateProfileComplete',
+            payload: { iOS: { type: 'onCreateProfileComplete' } },
+            userAgent,
+          });
         }}
       >
         다음

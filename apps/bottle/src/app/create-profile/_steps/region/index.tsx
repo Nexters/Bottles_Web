@@ -67,21 +67,17 @@ export function Region() {
         <SelectInput
           onClick={() => {
             if (city === undefined) {
-              if (userAgent.isMobile) {
-                webViewAPI(
-                  'onToastOpen',
-                  {
-                    android: '전체 지역을 먼저 선택해주세요.',
-                    iOS: {
-                      type: 'onToastOpen',
-                      message: '전체 지역을 먼저 선택해주세요.',
-                    },
+              webViewAPI({
+                type: 'onToastOpen',
+                payload: {
+                  android: '전체 지역을 먼저 선택해주세요.',
+                  iOS: {
+                    type: 'onToastOpen',
+                    message: '전체 지역을 먼저 선택해주세요.',
                   },
-                  userAgent
-                );
-              } else {
-                alert('전체 지역을 먼저 선택해주세요');
-              }
+                },
+                userAgent,
+              });
               return;
             }
             openRegionBottomSheet('state');

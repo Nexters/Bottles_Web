@@ -29,9 +29,9 @@ export function webViewAPI({
   payload: { iOS: IOSPayload; android?: AndroidPayload };
   userAgent: UserAgent;
 }) {
-  if (!userAgent.isMobile) {
-    return;
+  try {
+    return userAgent.isIOS ? iOSCall(payload.iOS) : androidCall(type, payload.android);
+  } catch (error) {
+    alert(type + '웹뷰 API를 호출하였습니다.');
   }
-
-  return userAgent.isIOS ? iOSCall(payload.iOS) : androidCall(type, payload.android);
 }
