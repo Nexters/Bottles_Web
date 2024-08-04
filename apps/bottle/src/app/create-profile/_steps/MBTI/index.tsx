@@ -27,7 +27,7 @@ export function MBTI() {
 
   return (
     <Step>
-      <Stepper current={1} max={9} />
+      <Stepper current={1} max={10} />
       <Step.Title>OO님의 성격에 대해 알고 싶어요</Step.Title>
       <section className={bodyStyle}>
         <div className={controlStyle}>

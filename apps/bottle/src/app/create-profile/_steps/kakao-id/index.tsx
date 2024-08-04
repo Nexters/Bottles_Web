@@ -1,5 +1,5 @@
 import { Stepper } from '@/components/stepper';
-import { POST, createInit } from '@/features/server/utils';
+import { POST, createInit } from '@/features/server';
 import { Step } from '@/features/steps/StepContainer';
 import { useUserAgent } from '@/features/web-view/UserAgentProvider';
 import { webViewAPI } from '@/features/web-view/api';
@@ -28,16 +28,13 @@ export function KaKaoId() {
       <Step.FixedButton
         disabled={disabled}
         onClick={async () => {
-          if (disabled) {
-            return;
-          }
           setValue('kakaoId', kakaoId);
 
-          console.log('create profile values:', getValues());
           await POST(
             `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/profile/choice`,
             createInit(localStorage.getItem('accessToken') ?? '', { ...getValues() })
           );
+
           webViewAPI('onCreateProfileComplete', { iOS: { type: 'onCreateProfileComplete' } }, userAgent);
         }}
       >

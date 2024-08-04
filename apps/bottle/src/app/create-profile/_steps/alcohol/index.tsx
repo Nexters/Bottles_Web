@@ -18,7 +18,7 @@ export function Alcohol() {
 
   return (
     <Step>
-      <Stepper current={7} max={9} />
+      <Stepper current={7} max={10} />
       <Step.Title>술은 얼마나 즐기나요?</Step.Title>
       <Control value={alcohol}>
         <section className={alcoholStyle}>
