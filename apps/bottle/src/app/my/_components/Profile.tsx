@@ -1,6 +1,5 @@
 import { Card } from '@/components/card';
 import { Paragraph, Asset, Chip } from '@bottlesteam/ui';
-import type { IntroductionField, Profile } from '../fetchProfile';
 import {
   introductionStyle,
   gapStyle,
@@ -10,6 +9,7 @@ import {
   selectedProfileBlockStyle,
   chipWrapper,
 } from '../pageStyle.css';
+import type { IntroductionField, Profile } from '../useFetchProfile';
 
 interface Props {
   profile: Profile;

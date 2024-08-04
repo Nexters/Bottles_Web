@@ -1,14 +1,16 @@
+'use client';
+
 import { ActionButtons } from './_components/ActionButtons';
 import { ProfileInformation } from './_components/Profile';
-import { fetchProfile } from './fetchProfile';
 import { layoutStyle } from './pageStyle.css';
+import { useFetchProfile } from './useFetchProfile';
 
-export default async function MyPage() {
-  const profile = await fetchProfile();
+export default function MyPage() {
+  const profile = useFetchProfile();
 
   return (
     <div className={layoutStyle}>
-      <ProfileInformation profile={profile} />
+      {profile !== undefined && <ProfileInformation profile={profile} />}
       <ActionButtons />
     </div>
   );
