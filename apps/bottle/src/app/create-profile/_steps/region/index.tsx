@@ -1,6 +1,8 @@
 import { Stepper } from '@/components/stepper';
 import { Step } from '@/features/steps/StepContainer';
 import { useStep } from '@/features/steps/StepProvider';
+import { useUserAgent } from '@/features/web-view/UserAgentProvider';
+import { webViewAPI } from '@/features/web-view/api';
 import { spacings } from '@bottlesteam/ui';
 import { OverlayProvider, overlay } from 'overlay-kit';
 import { useState } from 'react';
@@ -12,6 +14,7 @@ import { SelectInput } from './select-input/SelectInput';
 import { RegionData, useFetchRegions } from './useFetchRegion';
 
 export function Region() {
+  const userAgent = useUserAgent();
   const { onNextStep } = useStep();
   const { setValue, getValue } = useCreateProfileValues();
 
@@ -64,7 +67,21 @@ export function Region() {
         <SelectInput
           onClick={() => {
             if (city === undefined) {
-              alert('전체 지역을 먼저 선택해주세요.');
+              if (userAgent.isMobile) {
+                webViewAPI(
+                  'onToastOpen',
+                  {
+                    android: '전체 지역을 먼저 선택해주세요.',
+                    iOS: {
+                      type: 'onToastOpen',
+                      message: '전체 지역을 먼저 선택해주세요.',
+                    },
+                  },
+                  userAgent
+                );
+              } else {
+                alert('전체 지역을 먼저 선택해주세요');
+              }
               return;
             }
             openRegionBottomSheet('state');

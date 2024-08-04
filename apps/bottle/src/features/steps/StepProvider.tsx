@@ -7,7 +7,6 @@ interface StepContext {
   currentStep: number;
   onNextStep(): void;
   onPreviousStep(): void;
-  onExit(): void;
 }
 
 const Step = createContext<StepContext | null>(null);
@@ -16,7 +15,7 @@ interface StepProviderProps {
   maxStep: number;
   uri: string;
   children: ReactNode;
-  onExit: () => void;
+  onExit?: () => void;
 }
 
 const STEP_PARAM_KEY = 'step';
@@ -34,11 +33,11 @@ export function StepProvider({ children, maxStep, uri, onExit }: StepProviderPro
     if (step > 1) {
       router.push(`${uri}?${STEP_PARAM_KEY}=${step - 1}`);
     } else {
-      onExit();
+      onExit?.();
     }
   }, [step, router, uri, onExit]);
 
-  return <Step.Provider value={{ onNextStep, currentStep: step, onPreviousStep, onExit }}>{children}</Step.Provider>;
+  return <Step.Provider value={{ onNextStep, currentStep: step, onPreviousStep }}>{children}</Step.Provider>;
 }
 
 export function useStep() {

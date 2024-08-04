@@ -20,14 +20,18 @@ export function androidCall(type: CallType, payload?: AndroidPayload) {
     : (Native[type] as any)();
 }
 
-export function webViewAPI(
-  type: CallType,
-  payload: { iOS: IOSPayload; android?: AndroidPayload },
-  { isIOS, isMobile }: UserAgent
-) {
-  if (!isMobile) {
+export function webViewAPI({
+  type,
+  payload,
+  userAgent,
+}: {
+  type: CallType;
+  payload: { iOS: IOSPayload; android?: AndroidPayload };
+  userAgent: UserAgent;
+}) {
+  if (!userAgent.isMobile) {
     return;
   }
 
-  return isIOS ? iOSCall(payload.iOS) : androidCall(type, payload.android);
+  return userAgent.isIOS ? iOSCall(payload.iOS) : androidCall(type, payload.android);
 }
