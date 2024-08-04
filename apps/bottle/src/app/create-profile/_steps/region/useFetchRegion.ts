@@ -1,5 +1,15 @@
+import { STATUS } from '@/features/server/types';
+import { GET } from '@/features/server/utils';
 import { useEffect, useState } from 'react';
-import { RegionData, Regions } from './fetchRegion';
+
+export interface RegionData {
+  city: string;
+  state: string[];
+}
+
+export interface Regions {
+  regions: RegionData[];
+}
 
 export function useFetchRegions() {
   const [regionsData, setRegionsData] = useState<RegionData[]>();
@@ -8,8 +18,8 @@ export function useFetchRegions() {
   useEffect(() => {
     async function fetchRegions() {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/profile/choice`);
-        if (!response.ok) {
+        const response = await GET(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/profile/choice`);
+        if (response.status !== STATUS.SUCCESS) {
           throw new Error();
         }
         const data: Regions = await response.json();
