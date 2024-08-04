@@ -23,7 +23,11 @@ export function androidCall(type: CallType, payload?: AndroidPayload) {
 export function webViewAPI(
   type: CallType,
   payload: { iOS: IOSPayload; android?: AndroidPayload },
-  { isIOS }: UserAgent
+  { isIOS, isMobile }: UserAgent
 ) {
+  if (!isMobile) {
+    return;
+  }
+
   return isIOS ? iOSCall(payload.iOS) : androidCall(type, payload.android);
 }
