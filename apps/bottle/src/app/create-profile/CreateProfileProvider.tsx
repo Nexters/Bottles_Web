@@ -25,6 +25,7 @@ export interface CreateProfileValues {
     city: string;
     state: string;
   };
+  kakaoId: string;
 }
 
 export const [CreateProfileProvider, useCreateProfileValues] = createFunnelValuesContext<CreateProfileValues>();

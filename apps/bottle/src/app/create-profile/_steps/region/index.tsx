@@ -1,8 +1,6 @@
 import { Stepper } from '@/components/stepper';
-import { POST, createInit } from '@/features/server/utils';
 import { Step } from '@/features/steps/StepContainer';
-import { useUserAgent } from '@/features/web-view/UserAgentProvider';
-import { webViewAPI } from '@/features/web-view/api';
+import { useStep } from '@/features/steps/StepProvider';
 import { spacings } from '@bottlesteam/ui';
 import { OverlayProvider, overlay } from 'overlay-kit';
 import { useState } from 'react';
@@ -14,8 +12,8 @@ import { SelectInput } from './select-input/SelectInput';
 import { RegionData, useFetchRegions } from './useFetchRegion';
 
 export function Region() {
-  const userAgent = useUserAgent();
-  const { setValue, getValue, getValues } = useCreateProfileValues();
+  const { onNextStep } = useStep();
+  const { setValue, getValue } = useCreateProfileValues();
 
   const regionsData = useFetchRegions();
 
@@ -83,13 +81,7 @@ export function Region() {
             return;
           }
           setValue('region', { city, state });
-          console.log('create profile values:', getValues());
-          await POST(
-            `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/profile/choice`,
-            // TODO: make a step for kakaoId
-            createInit(localStorage.getItem('accessToken') ?? '', { ...getValues(), kakaoId: 'dhassidu11' })
-          );
-          webViewAPI('onCreateProfileComplete', { iOS: { type: 'onCreateProfileComplete' } }, userAgent);
+          onNextStep();
         }}
       >
         다음

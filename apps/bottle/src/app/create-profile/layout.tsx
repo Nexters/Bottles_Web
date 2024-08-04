@@ -8,7 +8,7 @@ export default function CreateProfileLayout({ children }: { children: ReactNode 
   return (
     <CreateProfileProvider>
       <Suspense>
-        <StepProvider maxStep={9} uri="/create-profile">
+        <StepProvider maxStep={10} uri="/create-profile">
           {children}
         </StepProvider>
       </Suspense>
