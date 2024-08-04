@@ -32,7 +32,11 @@ export default function CreateProfilePage() {
 
   return (
     <>
-      <Header>{currentStep !== 1 && <Asset onClick={onPreviousStep} type="icon-arrow-left" />}</Header>
+      <Header>
+        <button style={{ background: 'none', border: 'none' }}>
+          <Asset onClick={onPreviousStep} type="icon-arrow-left" />
+        </button>
+      </Header>
       {steps[currentStep - 1]}
     </>
   );

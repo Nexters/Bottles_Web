@@ -174,3 +174,10 @@ a,
 label {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+button {
+  border: 'none';
+  background: 'none';
+}
+input {
+  background-color: transparent;
+}

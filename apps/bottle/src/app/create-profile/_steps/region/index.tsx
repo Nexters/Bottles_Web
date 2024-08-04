@@ -1,6 +1,10 @@
 import { Stepper } from '@/components/stepper';
+import { GET } from '@/features/server';
+import { useFetch } from '@/features/server/useFetch';
 import { Step } from '@/features/steps/StepContainer';
 import { useStep } from '@/features/steps/StepProvider';
+import { useUserAgent } from '@/features/web-view/UserAgentProvider';
+import { webViewAPI } from '@/features/web-view/api';
 import { spacings } from '@bottlesteam/ui';
 import { OverlayProvider, overlay } from 'overlay-kit';
 import { useState } from 'react';
@@ -9,13 +13,24 @@ import { spacingStyle } from '../MBTI/MBTIStyle.css';
 import { RegionBottomSheet } from './bottom-sheet/RegionBottomSheet';
 import { regionStyle } from './regionStyle.css';
 import { SelectInput } from './select-input/SelectInput';
-import { RegionData, useFetchRegions } from './useFetchRegion';
+
+export interface RegionData {
+  city: string;
+  state: string[];
+}
+
+export interface Regions {
+  regions: RegionData[];
+}
 
 export function Region() {
+  const userAgent = useUserAgent();
   const { onNextStep } = useStep();
   const { setValue, getValue } = useCreateProfileValues();
 
-  const regionsData = useFetchRegions();
+  const regionsData = useFetch<Regions>(() =>
+    GET<Regions>(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/profile/choice`)
+  );
 
   const selected = getValue('region');
   const [city, setCity] = useState<string | undefined>(selected != null ? selected.city : undefined);
@@ -37,8 +52,8 @@ export function Region() {
               onClose={unmount}
               items={
                 type === 'city'
-                  ? regionsData.map(({ city }) => city)
-                  : (regionsData.find(region => region.city === city) as RegionData).state
+                  ? regionsData.regions.map(({ city }) => city)
+                  : (regionsData.regions.find(region => region.city === city) as RegionData).state
               }
             />
           )}
@@ -64,7 +79,17 @@ export function Region() {
         <SelectInput
           onClick={() => {
             if (city === undefined) {
-              alert('전체 지역을 먼저 선택해주세요.');
+              webViewAPI({
+                type: 'onToastOpen',
+                payload: {
+                  android: '전체 지역을 먼저 선택해주세요.',
+                  iOS: {
+                    type: 'onToastOpen',
+                    message: '전체 지역을 먼저 선택해주세요.',
+                  },
+                },
+                userAgent,
+              });
               return;
             }
             openRegionBottomSheet('state');

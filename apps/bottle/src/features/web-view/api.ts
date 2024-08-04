@@ -20,14 +20,18 @@ export function androidCall(type: CallType, payload?: AndroidPayload) {
     : (Native[type] as any)();
 }
 
-export function webViewAPI(
-  type: CallType,
-  payload: { iOS: IOSPayload; android?: AndroidPayload },
-  { isIOS, isMobile }: UserAgent
-) {
-  if (!isMobile) {
-    return;
+export function webViewAPI({
+  type,
+  payload,
+  userAgent,
+}: {
+  type: CallType;
+  payload: { iOS: IOSPayload; android?: AndroidPayload };
+  userAgent: UserAgent;
+}) {
+  try {
+    return userAgent.isIOS ? iOSCall(payload.iOS) : androidCall(type, payload.android);
+  } catch (error) {
+    alert(type + '웹뷰 API를 호출하였습니다.');
   }
-
-  return isIOS ? iOSCall(payload.iOS) : androidCall(type, payload.android);
 }

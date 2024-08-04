@@ -15,11 +15,12 @@ interface StepProviderProps {
   maxStep: number;
   uri: string;
   children: ReactNode;
+  onExit?: () => void;
 }
 
 const STEP_PARAM_KEY = 'step';
 
-export function StepProvider({ children, maxStep, uri }: StepProviderProps) {
+export function StepProvider({ children, maxStep, uri, onExit }: StepProviderProps) {
   const searchParams = useSearchParams();
   const step = useMemo(() => Number(searchParams.get(STEP_PARAM_KEY) ?? '1'), [searchParams]);
   const router = useRouter();
@@ -29,8 +30,12 @@ export function StepProvider({ children, maxStep, uri }: StepProviderProps) {
   }, [step, router, maxStep, uri]);
 
   const onPreviousStep = useCallback(() => {
-    if (step > 1) router.push(`${uri}?${STEP_PARAM_KEY}=${step - 1}`);
-  }, [step, router, uri]);
+    if (step > 1) {
+      router.push(`${uri}?${STEP_PARAM_KEY}=${step - 1}`);
+    } else {
+      onExit?.();
+    }
+  }, [step, router, uri, onExit]);
 
   return <Step.Provider value={{ onNextStep, currentStep: step, onPreviousStep }}>{children}</Step.Provider>;
 }

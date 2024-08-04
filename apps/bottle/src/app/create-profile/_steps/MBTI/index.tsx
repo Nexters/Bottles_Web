@@ -15,6 +15,7 @@ export type JPType = 'J' | 'P';
 export function MBTI() {
   const { onNextStep } = useStep();
   const { setValue, getValue } = useCreateProfileValues();
+  //TODO: fetch name from the server
 
   const selected = getValue('mbti');
 
