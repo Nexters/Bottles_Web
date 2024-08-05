@@ -13,7 +13,7 @@ export default function SignupPage() {
 
   return (
     <>
-      <Header>{currentStep !== 1 && <Asset onClick={onPreviousStep} type="icon-arrow-left" />}</Header>
+      <Header>{<Asset onClick={onPreviousStep} type="icon-arrow-left" />}</Header>
       {steps[currentStep - 1]}
     </>
   );
