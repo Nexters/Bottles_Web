@@ -4,6 +4,7 @@ import { Step } from '@/features/steps/StepContainer';
 import { useUserAgent } from '@/features/web-view/UserAgentProvider';
 import { webViewAPI } from '@/features/web-view/api';
 import { TextField, spacings } from '@bottlesteam/ui';
+import { getCookie } from 'cookies-next';
 import { useState } from 'react';
 import { useCreateProfileValues } from '../../CreateProfileProvider';
 
@@ -32,7 +33,7 @@ export function KaKaoId() {
 
           await POST(
             `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/profile/choice`,
-            createInit(localStorage.getItem('accessToken') ?? '', { ...getValues() })
+            createInit(getCookie('accessToken') ?? '', { ...getValues() })
           );
           webViewAPI({
             type: 'onCreateProfileComplete',

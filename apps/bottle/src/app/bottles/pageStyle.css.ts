@@ -26,18 +26,3 @@ export const contentsContainer = style({
     display: 'none',
   },
 });
-
-export const listStyle = style({
-  width: '100%',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: spacings.md,
-  paddingBottom: '38px',
-});
-
-export const titleStyle = style({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: spacings.sm,
-  marginBottom: spacings.xxl,
-});

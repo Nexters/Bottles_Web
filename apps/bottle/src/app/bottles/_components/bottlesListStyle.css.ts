@@ -1,6 +1,14 @@
 import { colors, radius, spacings } from '@bottlesteam/ui';
 import { style } from '@vanilla-extract/css';
 
+export const listStyle = style({
+  width: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: spacings.md,
+  paddingBottom: '38px',
+});
+
 export const itemStyle = style({
   width: '100%',
   height: '125px',

@@ -2,6 +2,7 @@
 
 import { GET, createInit } from '@/features/server';
 import { useFetch } from '@/features/server/useFetch';
+import { getCookie } from 'cookies-next';
 import { ActionButtons } from './_components/ActionButtons';
 import { ProfileInformation } from './_components/Profile';
 import { layoutStyle } from './pageStyle.css';
@@ -39,7 +40,7 @@ export default function MyPage() {
   const profile = useFetch(() =>
     GET<Profile>(
       `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/profile`,
-      createInit(localStorage.getItem('accessToken') ?? '')
+      createInit(getCookie('accessToken') ?? '')
     )
   );
 

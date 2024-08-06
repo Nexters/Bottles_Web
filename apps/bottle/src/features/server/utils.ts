@@ -1,3 +1,4 @@
+import { getCookie } from 'cookies-next';
 import { refreshAuth } from './auth';
 import { STATUS } from './types';
 
@@ -28,7 +29,7 @@ async function fetchWrapperWithTokenHandler<Data>(input: string, init?: RequestI
     return await fetchWrapperWithTokenHandler<Data>(input, {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('accessToken') ?? ''}`,
+        Authorization: `Bearer ${getCookie('accessToken') ?? ''}`,
       },
       body: init?.body,
       cache: init?.cache,
