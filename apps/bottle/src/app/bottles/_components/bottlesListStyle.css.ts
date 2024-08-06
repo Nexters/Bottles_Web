@@ -42,7 +42,6 @@ export const userInfoContainerStyle = style({
 export const userInfoStyle = style({
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'start',
   gap: spacings.xs,
 });
 export const imageContainerStyle = style({

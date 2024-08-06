@@ -1,12 +1,8 @@
 import { Bottle } from '@/features/query/useBottlesQuery';
+import { getTimeDifference } from '@/features/time/getTimeDifference';
 import { Paragraph, spacings, Asset } from '@bottlesteam/ui';
-import {
-  itemStyle,
-  timeLabelStyle,
-  userInfoContainerStyle,
-  userInfoStyle,
-  imageContainerStyle,
-} from './bottlesListStyle.css';
+import Image from 'next/image';
+import { itemStyle, timeLabelStyle, userInfoContainerStyle, userInfoStyle } from './bottlesListStyle.css';
 
 interface Props {
   bottle: Bottle;
@@ -18,7 +14,7 @@ export function BottlesListItem({ bottle, onClick }: Props) {
     <li key={bottle.id} className={itemStyle} onClick={onClick}>
       <div className={timeLabelStyle}>
         <Paragraph typography="bo" color="purple500">
-          1시간 후 사라져요
+          {displayRemainingTime(bottle.expiredAt)}
         </Paragraph>
       </div>
       <div className={userInfoContainerStyle}>
@@ -38,10 +34,14 @@ export function BottlesListItem({ bottle, onClick }: Props) {
             <span>{stringifyKeywords(bottle.keyword)}</span>
           </Paragraph>
         </div>
-        {/**
-         * TODO: 실제 이미지 넣기
-         */}
-        <div className={imageContainerStyle} />
+        <Image
+          src={bottle.userImageUrl}
+          alt="user-profile"
+          priority
+          width={48}
+          height={48}
+          style={{ borderRadius: '50%' }}
+        />
       </div>
     </li>
   );
@@ -49,4 +49,13 @@ export function BottlesListItem({ bottle, onClick }: Props) {
 
 export function stringifyKeywords(keyword: Bottle['keyword']) {
   return keyword.slice(0, 3).reduce((acc, cur) => `${acc}${acc !== '' ? ', ' : ''}${cur}`, '');
+}
+
+function displayRemainingTime(futureDate: string) {
+  const remainingTime = getTimeDifference(futureDate);
+
+  if (remainingTime.hours > 0) {
+    return `${remainingTime.hours}시간 후 사라져요`;
+  }
+  return `${remainingTime.minutes}분 후 사라져요`;
 }

@@ -10,5 +10,6 @@ export function Top({ children }: Props) {
   const {
     data: { name },
   } = useUserInfoQuery();
+
   return <div className={titleStyle}>{children(name)}</div>;
 }
