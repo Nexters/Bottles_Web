@@ -2,13 +2,13 @@ import { Control } from '@/components/control';
 import { Stepper } from '@/components/stepper';
 import { Step } from '@/features/steps/StepContainer';
 import { useStep } from '@/features/steps/StepProvider';
+import { Culture, ETC, Entertainment, Sports, culture, entertainment, etc, sports } from '@/models/profile/interests';
 import { Button, ButtonProps, spacings } from '@bottlesteam/ui';
 import { useState } from 'react';
 import { CreateProfileValues, useCreateProfileValues } from '../../CreateProfileProvider';
-import { culture, entertainment, etc, sports } from './constants';
 import { interestsStyle } from './interestsStyle.css';
 
-export type InterestItem = (typeof culture | typeof sports | typeof entertainment | typeof etc)[number];
+export type Interest = Culture | Sports | Entertainment | ETC;
 
 const MIN_SELECTD = 3;
 const MAX_SELECTED = 10;
@@ -18,7 +18,7 @@ function processSelected(selected: CreateProfileValues['interest']) {
    * NOTE: Prototype Object.values() causes incorrect type inference
    * used spread operator instead
    */
-  return [...selected.culture, ...selected.sports, ...selected.entertainment, ...selected.etc] as InterestItem[];
+  return [...selected.culture, ...selected.sports, ...selected.entertainment, ...selected.etc] as Interest[];
 }
 
 export function Interests() {
@@ -27,11 +27,11 @@ export function Interests() {
 
   const selected = getValue('interest');
 
-  const [interests, setInterests] = useState<InterestItem[]>(selected != null ? processSelected(selected) : []);
+  const [interests, setInterests] = useState<Interest[]>(selected != null ? processSelected(selected) : []);
 
-  const filterPredicate = (item: InterestItem) => interests.includes(item);
+  const filterPredicate = (item: Interest) => interests.includes(item);
 
-  const handleClick = (item: InterestItem) => {
+  const handleClick = (item: Interest) => {
     if (interests.length >= MAX_SELECTED && !interests.includes(item)) {
       // TODO: replace alert to Native.onOpenToast()
       alert('최대 10개까지 선택할 수 있어요');

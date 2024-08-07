@@ -6,12 +6,11 @@ import { itemStyle, timeLabelStyle, userInfoContainerStyle, userInfoStyle } from
 
 interface Props {
   bottle: Bottle;
-  onClick: () => void;
 }
 
-export function BottlesListItem({ bottle, onClick }: Props) {
+export function BottlesListItem({ bottle }: Props) {
   return (
-    <li key={bottle.id} className={itemStyle} onClick={onClick}>
+    <li key={bottle.id} className={itemStyle}>
       <div className={timeLabelStyle}>
         <Paragraph typography="bo" color="purple500">
           {displayRemainingTime(bottle.expiredAt)}

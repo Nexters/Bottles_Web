@@ -46,3 +46,8 @@ export const entertainment = [
 ] as const;
 
 export const etc = ['여행', '카페 방문', '맛집 방문', '드라이브', '캠핑', '봉사'] as const;
+
+export type Culture = (typeof culture)[number];
+export type Sports = (typeof sports)[number];
+export type Entertainment = (typeof entertainment)[number];
+export type ETC = (typeof etc)[number];

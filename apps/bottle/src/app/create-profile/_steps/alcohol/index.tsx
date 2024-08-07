@@ -2,19 +2,17 @@ import { Control, toggle } from '@/components/control';
 import { Stepper } from '@/components/stepper';
 import { Step } from '@/features/steps/StepContainer';
 import { useStep } from '@/features/steps/StepProvider';
+import { Alcohol as AlcoholType, alcoholList } from '@/models/profile/alcohol';
 import { Button } from '@bottlesteam/ui';
 import { useState } from 'react';
 import { useCreateProfileValues } from '../../CreateProfileProvider';
 import { alcoholStyle } from './alcoholStyle.css';
 
-const alcoholList = ['한 방울도 마시지 않아요', '때에 따라 적당히 즐겨요', '자주 찾는 편이에요'] as const;
-export type AlcoholItem = (typeof alcoholList)[number];
-
 export function Alcohol() {
   const { setValue, getValue } = useCreateProfileValues();
   const { onNextStep } = useStep();
 
-  const [alcohol, setAlcohol] = useState<AlcoholItem | undefined>(getValue('alcohol'));
+  const [alcohol, setAlcohol] = useState<AlcoholType | undefined>(getValue('alcohol'));
 
   return (
     <Step>
