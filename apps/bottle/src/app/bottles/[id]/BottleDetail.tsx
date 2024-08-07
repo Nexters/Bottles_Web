@@ -1,6 +1,6 @@
 'use client';
 
-import { useBottleDetailQuery } from '@/features/query/useBottleDetailQuery';
+import { useBottleDetailQuery } from '../../../store/query/useBottleDetailQuery';
 
 interface Props {
   id: number;

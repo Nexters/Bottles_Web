@@ -1,15 +1,13 @@
 import { Profile } from './profile';
+import { OtherUser } from './user';
 
-export interface BottleDetail {
-  age: number;
+export interface Bottle extends OtherUser {
   id: number;
-  introduction: [
-    {
-      answer: string;
-      question: string;
-    },
-  ];
   likeMessage: string;
-  profileSelect: Profile;
-  userName: string;
+}
+
+export interface PreviewBottle
+  extends Pick<Bottle, 'age' | 'id' | 'userImageUrl' | 'userName'>,
+    Pick<Profile, 'keyword' | 'mbti'> {
+  expiredAt: string;
 }

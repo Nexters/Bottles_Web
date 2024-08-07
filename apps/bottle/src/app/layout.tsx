@@ -1,6 +1,6 @@
 import { AuthProvider } from '@/features/auth/AuthProvider';
-import { QueryClientProvider } from '@/features/query/QueryClientProvider';
 import { UserAgentProvider } from '@/features/web-view/UserAgentProvider';
+import { QueryClientProvider } from '@/store/query/QueryClientProvider';
 import type { Metadata } from 'next';
 import './globals.css';
 import '@bottlesteam/ui/styles';

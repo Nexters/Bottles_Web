@@ -1,5 +1,5 @@
-import { GetBottlesData, useBottlesQuery } from '@/features/query/useBottlesQuery';
 import { ReactNode } from 'react';
+import { GetBottlesData, useBottlesQuery } from '../../../store/query/useBottlesQuery';
 import { BottlesListItem } from './BottlesListItem';
 import { Top } from './Top';
 import { listStyle } from './bottlesListStyle.css';

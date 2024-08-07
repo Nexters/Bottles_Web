@@ -1,6 +1,6 @@
+import { GET, createInit } from '@/features/server';
 import { UseSuspenseQueryOptions, useSuspenseQuery } from '@tanstack/react-query';
 import { getCookie } from 'cookies-next';
-import { GET, createInit } from '../server';
 
 interface GetUserInfoData {
   name: string;

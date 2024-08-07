@@ -1,8 +1,8 @@
-import { PrefetchBoundary } from '@/features/query/PrefetchBoundary';
-import { bottleDetailQueryOptions } from '@/features/query/useBottleDetailQuery';
 import { getCookie } from 'cookies-next';
 import { cookies } from 'next/headers';
 import { Suspense } from 'react';
+import { PrefetchBoundary } from '../../../store/query/PrefetchBoundary';
+import { bottleDetailQueryOptions } from '../../../store/query/useBottleDetailQuery';
 import { BottleDetail } from './BottleDetail';
 
 interface Props {

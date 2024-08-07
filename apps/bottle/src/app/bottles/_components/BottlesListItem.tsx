@@ -1,11 +1,11 @@
-import { Bottle } from '@/features/query/useBottlesQuery';
 import { getTimeDifference } from '@/features/time/getTimeDifference';
+import { PreviewBottle } from '@/models/bottle';
 import { Paragraph, spacings, Asset } from '@bottlesteam/ui';
 import Image from 'next/image';
 import { itemStyle, timeLabelStyle, userInfoContainerStyle, userInfoStyle } from './bottlesListStyle.css';
 
 interface Props {
-  bottle: Bottle;
+  bottle: PreviewBottle;
 }
 
 export function BottlesListItem({ bottle }: Props) {
@@ -46,7 +46,7 @@ export function BottlesListItem({ bottle }: Props) {
   );
 }
 
-export function stringifyKeywords(keyword: Bottle['keyword']) {
+export function stringifyKeywords(keyword: PreviewBottle['keyword']) {
   return keyword.slice(0, 3).reduce((acc, cur) => `${acc}${acc !== '' ? ', ' : ''}${cur}`, '');
 }
 

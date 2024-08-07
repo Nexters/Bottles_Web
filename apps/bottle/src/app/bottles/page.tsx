@@ -1,9 +1,9 @@
-import { PrefetchBoundary } from '@/features/query/PrefetchBoundary';
-import { bottlesQueryOptions } from '@/features/query/useBottlesQuery';
-import { userInfoQueryOptions } from '@/features/query/useNameQuery';
 import { getCookie } from 'cookies-next';
 import { cookies } from 'next/headers';
 import { Suspense } from 'react';
+import { PrefetchBoundary } from '../../store/query/PrefetchBoundary';
+import { bottlesQueryOptions } from '../../store/query/useBottlesQuery';
+import { userInfoQueryOptions } from '../../store/query/useNameQuery';
 import { Bottles } from './Bottles';
 
 export default function BottlesPage() {

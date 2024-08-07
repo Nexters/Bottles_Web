@@ -1,21 +1,11 @@
-import { CreateProfileValues } from '@/app/create-profile/CreateProfileProvider';
+import { GET, createInit } from '@/features/server';
+import { PreviewBottle } from '@/models/bottle';
 import { UseSuspenseQueryOptions, useSuspenseQuery } from '@tanstack/react-query';
 import { getCookie } from 'cookies-next';
-import { GET, createInit } from '../server';
-
-export interface Bottle {
-  age: number;
-  expiredAt: string;
-  id: number;
-  keyword: CreateProfileValues['keyword'];
-  mbti: CreateProfileValues['mbti'];
-  userImageUrl: 'string';
-  userName: 'string';
-}
 
 export interface GetBottlesData {
-  randomBottles: Bottle[];
-  sentBottles: Bottle[];
+  randomBottles: PreviewBottle[];
+  sentBottles: PreviewBottle[];
 }
 
 export const bottlesQueryOptions = (accessToken: string): UseSuspenseQueryOptions<GetBottlesData> => ({
