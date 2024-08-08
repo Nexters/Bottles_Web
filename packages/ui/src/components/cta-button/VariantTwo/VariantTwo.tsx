@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { CSSProperties, ReactNode } from 'react';
 import { LeftButton } from './LeftButton';
 import { RightButton } from './RightButton';
 import { containerStyle } from './variantTwoStyle.css';
@@ -6,11 +6,12 @@ import { containerStyle } from './variantTwoStyle.css';
 export interface VariantTwoProps {
   left: ReactNode;
   right: ReactNode;
+  style?: CSSProperties;
 }
 
-function VariantTwoImpl({ left, right }: VariantTwoProps) {
+function VariantTwoImpl({ left, right, style }: VariantTwoProps) {
   return (
-    <div className={containerStyle}>
+    <div className={containerStyle} style={style}>
       {left}
       {right}
     </div>

@@ -2,15 +2,11 @@ import { Control, toggle } from '@/components/control';
 import { Stepper } from '@/components/stepper';
 import { Step } from '@/features/steps/StepContainer';
 import { useStep } from '@/features/steps/StepProvider';
+import { EIType, JPType, SNType, TFType } from '@/models/profile/MBTI';
 import { Button, ButtonProps } from '@bottlesteam/ui';
 import { useMemo, useState } from 'react';
 import { useCreateProfileValues } from '../../CreateProfileProvider';
 import { bodyStyle, buttonsContainerStyle, controlStyle } from './MBTIStyle.css';
-
-export type EIType = 'E' | 'I';
-export type SNType = 'S' | 'N';
-export type TFType = 'T' | 'F';
-export type JPType = 'J' | 'P';
 
 export function MBTI() {
   const { onNextStep } = useStep();

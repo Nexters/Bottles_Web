@@ -1,4 +1,4 @@
-import { CTAButton, Paragraph, ParagraphProps, VariantOneProps } from '@bottlesteam/ui';
+import { CTAButton, Paragraph, ParagraphProps, VariantOneProps, VariantTwoProps } from '@bottlesteam/ui';
 import { ReactNode } from 'react';
 import { buttonContainer, buttonStyle, containerStyle } from './stepStyle.css';
 
@@ -33,13 +33,30 @@ function Subtitle({ children, ...rest }: Omit<ParagraphProps, 'typography' | 'co
   );
 }
 
-export function FixedButton(props: VariantOneProps) {
+type FixedButtonProps =
+  | ({
+      variant?: 'one';
+    } & VariantOneProps)
+  | ({
+      variant: 'two';
+    } & VariantTwoProps);
+
+function isVariantOne(props: FixedButtonProps): props is VariantOneProps {
+  return props.variant !== 'two';
+}
+
+// FIXME: Move to UI package
+export function FixedButton(props: FixedButtonProps) {
   return (
     <div className={buttonContainer}>
       <div className={buttonStyle}>
-        <CTAButton variant="one" {...props} style={{ width: '100%', maxWidth: '500px' }}>
-          {props.children}
-        </CTAButton>
+        {isVariantOne(props) ? (
+          <CTAButton variant="one" {...props} style={{ width: '100%', maxWidth: '500px' }}>
+            {props.children}
+          </CTAButton>
+        ) : (
+          <CTAButton {...props} variant="two" style={{ width: '100%', maxWidth: '500px' }} />
+        )}
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import { style } from '@vanilla-extract/css';
+import { recipe } from '@vanilla-extract/recipes';
 import { spacings, colors } from '../../foundations';
 
 export const CTA_HEIGHT = 109;
@@ -16,34 +17,57 @@ export const wrapperStyle = style({
   },
 });
 
-export const bodyStyle = style({
-  width: '100%',
-  height: '308px',
-  overflow: 'scroll',
-  margin: '0 auto',
-  '::-webkit-scrollbar': {
-    display: 'none',
+export const bodyStyle = recipe({
+  base: {
+    width: '100%',
+    height: '308px',
+    overflow: 'scroll',
+    margin: '0 auto',
+    '::-webkit-scrollbar': {
+      display: 'none',
+    },
+  },
+  variants: {
+    size: {
+      sm: {
+        height: '232px',
+      },
+      lg: {
+        height: '308px',
+      },
+    },
   },
 });
 
-export const layoutStyle = style({
-  height: `calc(308px + ${CTA_HEIGHT}px)`,
-  borderRadius: '20px 20px 0 0',
-  padding: spacings.md,
-  paddingTop: spacings.xl,
-  margin: 0,
-  backgroundColor: colors.white100,
-  display: 'flex',
-  justifyContent: 'center',
-  width: '100%',
-  minWidth: '360px',
-  '@media': {
-    'screen and (min-width: 500px)': {
-      width: '360px',
+export const layoutStyle = recipe({
+  base: {
+    borderRadius: '20px 20px 0 0',
+    padding: spacings.md,
+    paddingTop: spacings.xl,
+    margin: 0,
+    backgroundColor: colors.white100,
+    display: 'flex',
+    justifyContent: 'center',
+    width: '100%',
+    minWidth: '360px',
+    '@media': {
+      'screen and (min-width: 500px)': {
+        width: '360px',
+      },
+    },
+    '::-webkit-scrollbar': {
+      display: 'none',
     },
   },
-  '::-webkit-scrollbar': {
-    display: 'none',
+  variants: {
+    size: {
+      sm: {
+        height: `calc(232px + ${CTA_HEIGHT}px)`,
+      },
+      lg: {
+        height: `calc(308px + ${CTA_HEIGHT}px)`,
+      },
+    },
   },
 });
 
