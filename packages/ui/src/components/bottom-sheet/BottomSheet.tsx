@@ -14,17 +14,18 @@ export interface BottomSheetProps {
   button: ReturnType<typeof BottomSheetButton>;
   isOpen: boolean;
   onClose(): void;
+  size?: 'sm' | 'lg';
 }
 
-function BottomSheetImpl({ button, body, onClose, isOpen }: BottomSheetProps) {
+function BottomSheetImpl({ button, body, onClose, isOpen, size = 'lg' }: BottomSheetProps) {
   return (
     <>
       {isOpen && (
         <>
           <div className={overlayStyle} onClick={onClose} />
           <div className={wrapperStyle}>
-            <div className={layoutStyle}>
-              <div className={bodyStyle}>{body}</div>
+            <div className={layoutStyle({ size })}>
+              <div className={bodyStyle({ size })}>{body}</div>
               {button}
             </div>
           </div>

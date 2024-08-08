@@ -34,6 +34,9 @@ async function fetchWrapperWithTokenHandler<Data>(input: string, init?: RequestI
       body: init?.body,
       cache: init?.cache,
     });
+  } else if (!response.ok) {
+    // this error will be caught in useQuery hooks
+    throw new Error('');
   }
 
   try {

@@ -8,7 +8,7 @@ export interface GetBottlesData {
   sentBottles: PreviewBottle[];
 }
 
-export const bottlesQueryOptions = (accessToken: string): UseSuspenseQueryOptions<GetBottlesData> => ({
+export const bottlesQueryOptions = (accessToken?: string): UseSuspenseQueryOptions<GetBottlesData> => ({
   queryKey: ['bottles'],
   queryFn: async () =>
     GET<GetBottlesData>(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/bottles`, createInit(accessToken)),
