@@ -1,9 +1,8 @@
+import { LoginResponse } from '@/store/mutation/useLoginMutation';
+
 type ToastMessage = string;
 
-interface Login {
-  accessToken: string;
-  refreshToken: string;
-}
+interface Login extends LoginResponse {}
 
 interface Signup {
   accessToken: string;

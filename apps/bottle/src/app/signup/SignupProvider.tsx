@@ -1,11 +1,12 @@
 import { createFunnelValuesContext } from '@/features/funnel-values/createFunnelValuesContext';
 
 export interface SignupValues {
-  name: string;
-  birthYear: number;
-  birthMonth: number;
+  authCode: string;
   birthDay: number;
+  birthMonth: number;
+  birthYear: number;
   gender: 'MALE' | 'FEMALE';
+  name: string;
   phoneNumber: string;
 }
 

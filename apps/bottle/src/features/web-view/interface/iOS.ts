@@ -1,3 +1,5 @@
+import { LoginResponse } from '@/store/mutation/useLoginMutation';
+
 // 웹뷰 종료 호출
 interface WebviewCloseMessage {
   type: 'onWebViewClose';
@@ -30,10 +32,8 @@ interface BottleAccept {
 }
 
 // 로그인 성공 콜백
-interface onLogin {
+interface onLogin extends LoginResponse {
   type: 'onLogin';
-  accessToken: string;
-  refreshToken: string;
 }
 
 // 회원가입 성공 콜백
