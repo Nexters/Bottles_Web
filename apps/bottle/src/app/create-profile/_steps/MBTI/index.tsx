@@ -3,6 +3,7 @@ import { Stepper } from '@/components/stepper';
 import { Step } from '@/features/steps/StepContainer';
 import { useStep } from '@/features/steps/StepProvider';
 import { EIType, JPType, SNType, TFType } from '@/models/profile/MBTI';
+import { useUserInfoQuery } from '@/store/query/useNameQuery';
 import { Button, ButtonProps } from '@bottlesteam/ui';
 import { useMemo, useState } from 'react';
 import { useCreateProfileValues } from '../../CreateProfileProvider';
@@ -11,7 +12,9 @@ import { bodyStyle, buttonsContainerStyle, controlStyle } from './MBTIStyle.css'
 export function MBTI() {
   const { onNextStep } = useStep();
   const { setValue, getValue } = useCreateProfileValues();
-  //TODO: fetch name from the server
+  const {
+    data: { name },
+  } = useUserInfoQuery();
 
   const selected = getValue('mbti');
 
@@ -25,7 +28,7 @@ export function MBTI() {
   return (
     <Step>
       <Stepper current={1} max={10} />
-      <Step.Title>OO님의 성격에 대해 알고 싶어요</Step.Title>
+      <Step.Title>{name}님의 성격에 대해 알고 싶어요</Step.Title>
       <section className={bodyStyle}>
         <div className={controlStyle}>
           <Step.Subtitle>외향형 · 내향형</Step.Subtitle>
