@@ -1,12 +1,12 @@
 import { Stepper } from '@/components/stepper';
 import { Step } from '@/features/steps/StepContainer';
+import { useLeftTimeCaption } from '@/features/time/useLeftTimeCaption';
 import { useSendAuthCodeMutation } from '@/store/mutation/useSendAuthCodeMutation';
 import { useSignupMutation, WRONG_AUTH_CODE_MESSAGE } from '@/store/mutation/useSignupMutation';
 import { Button, TextField } from '@bottlesteam/ui';
 import { useState } from 'react';
 import { SignupValues, useSignupValues } from '../../SignupProvider';
 import { containerStyle, fieldStyle } from './authorizeStyle.css';
-import { useLeftTimeCaption } from './useLeftTimeCaption';
 
 export function Authorize() {
   const { setValue, getValues } = useSignupValues();
@@ -80,7 +80,7 @@ export function Authorize() {
         </div>
       </section>
       <Step.FixedButton disabled={!isSMSSent || authCode.length === 0} onClick={handleSignup}>
-        다음
+        확인
       </Step.FixedButton>
     </Step>
   );

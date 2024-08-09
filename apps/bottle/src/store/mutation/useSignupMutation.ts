@@ -37,10 +37,10 @@ export function useSignupMutation(onAuthCodeError: () => void) {
     onSuccess: (tokens: Tokens) => {
       console.log('tokens', tokens);
       webViewAPI({
-        type: 'onLogin',
+        type: 'onSignup',
         payload: {
           iOS: {
-            type: 'onLogin',
+            type: 'onSignup',
             ...tokens,
           },
           android: tokens,
