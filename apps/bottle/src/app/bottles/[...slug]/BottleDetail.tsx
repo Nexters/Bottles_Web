@@ -11,6 +11,8 @@ interface Props {
 export function BottleDetail({ id }: Props) {
   const { data: user } = useBottleDetailQuery(id);
 
+  console.log('Bottle Detail', user);
+
   return (
     <>
       <OverlayProvider>
