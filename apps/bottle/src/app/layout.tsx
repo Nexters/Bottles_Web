@@ -5,7 +5,14 @@ import './globals.css';
 import '@bottlesteam/ui/styles';
 import { wantedSansStd } from '../fonts';
 import { layoutStyle } from './layout.css';
+import type { Viewport } from 'next';
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  viewportFit: 'cover',
+};
 export const metadata: Metadata = {
   title: '보틀',
   description: '천생연분을 찾으세요',
@@ -18,13 +25,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, viewport-fit=cover"
-        ></meta>
-      </head>
-
       <body className={wantedSansStd.className}>
         <main className={layoutStyle}>
           <QueryClientProvider>
