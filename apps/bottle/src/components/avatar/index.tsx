@@ -9,7 +9,9 @@ export function Avatar({ size: _size, ...props }: AvatarProps) {
   const size = _size === 'sm' ? 48 : 80;
   return (
     <>
-      <Image {...props} alt="user profile image" width={size} height={size} style={{ borderRadius: '50%' }} />
+      {props.src != null && (
+        <Image {...props} alt="user profile image" width={size} height={size} style={{ borderRadius: '50%' }} />
+      )}
     </>
   );
 }
