@@ -1,10 +1,10 @@
 import { Stepper } from '@/components/stepper';
 import { POST, createInit } from '@/features/server';
+import { getClientSideTokens } from '@/features/server/clientSideTokens';
 import { Step } from '@/features/steps/StepContainer';
 import { useUserAgent } from '@/features/web-view/UserAgentProvider';
 import { webViewAPI } from '@/features/web-view/api';
 import { TextField, spacings } from '@bottlesteam/ui';
-import { getCookie } from 'cookies-next';
 import { useState } from 'react';
 import { useCreateProfileValues } from '../../CreateProfileProvider';
 
@@ -33,7 +33,8 @@ export function KaKaoId() {
 
           await POST(
             `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/profile/choice`,
-            createInit(getCookie('accessToken') ?? '', { ...getValues() })
+            getClientSideTokens(),
+            createInit(getClientSideTokens().accessToken, { ...getValues() })
           );
           webViewAPI({
             type: 'onCreateProfileComplete',

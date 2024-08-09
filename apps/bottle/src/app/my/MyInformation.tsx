@@ -5,7 +5,6 @@ import { useMyInformationQuery } from '@/store/query/useMyInformation';
 
 export function MyInformation() {
   const { data } = useMyInformationQuery();
-
   return (
     <UserInformation>
       <UserInformation.BasicInformationArea imageUrl={data.imageUrl} userName={data.userName} age={data.age} />
