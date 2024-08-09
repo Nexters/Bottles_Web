@@ -1,5 +1,4 @@
-import { getCookie } from 'cookies-next';
-import { refreshAuth } from './auth';
+import { refreshAuth, Tokens } from './auth';
 import { STATUS } from './types';
 
 export function createInit<Body extends object>(
@@ -17,19 +16,19 @@ export function createInit<Body extends object>(
   };
 }
 
-async function fetchWrapperWithTokenHandler<Data>(input: string, init?: RequestInit): Promise<Data> {
+async function fetchWrapperWithTokenHandler<Data>(input: string, tokens: Tokens, init?: RequestInit): Promise<Data> {
   const response = await fetch(input, init);
 
   /**
    * NOTE: handles ONLY Unauthorized status
    */
   if (response.status === STATUS.UNAUTHORIZED) {
-    await refreshAuth();
+    const newTokens = await refreshAuth(tokens);
 
-    return await fetchWrapperWithTokenHandler<Data>(input, {
+    return await fetchWrapperWithTokenHandler<Data>(input, newTokens, {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${getCookie('accessToken') ?? ''}`,
+        Authorization: `Bearer ${newTokens.accessToken}`,
       },
       body: init?.body,
       cache: init?.cache,
@@ -47,10 +46,10 @@ async function fetchWrapperWithTokenHandler<Data>(input: string, init?: RequestI
   }
 }
 
-export function POST<Data>(input: string, init?: RequestInit): Promise<Data | void> {
-  return fetchWrapperWithTokenHandler<Data>(input, { method: 'POST', ...init });
+export function POST<Data>(input: string, tokens: Tokens, init?: RequestInit): Promise<Data | void> {
+  return fetchWrapperWithTokenHandler<Data>(input, tokens, { method: 'POST', ...init });
 }
 
-export function GET<Data>(input: string, init?: RequestInit) {
-  return fetchWrapperWithTokenHandler<Data>(input, init);
+export function GET<Data>(input: string, tokens: Tokens, init?: RequestInit) {
+  return fetchWrapperWithTokenHandler<Data>(input, tokens, init);
 }

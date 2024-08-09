@@ -1,5 +1,6 @@
 import { Stepper } from '@/components/stepper';
 import { GET } from '@/features/server';
+import { getClientSideTokens } from '@/features/server/clientSideTokens';
 import { useFetch } from '@/features/server/useFetch';
 import { Step } from '@/features/steps/StepContainer';
 import { useStep } from '@/features/steps/StepProvider';
@@ -29,7 +30,7 @@ export function Region() {
   const { setValue, getValue } = useCreateProfileValues();
 
   const regionsData = useFetch<Regions>(() =>
-    GET<Regions>(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/profile/choice`)
+    GET<Regions>(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/profile/choice`, getClientSideTokens())
   );
 
   const selected = getValue('region');

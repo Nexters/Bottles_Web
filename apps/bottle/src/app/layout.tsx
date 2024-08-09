@@ -1,10 +1,8 @@
-import { AuthProvider } from '@/features/auth/AuthProvider';
 import { UserAgentProvider } from '@/features/web-view/UserAgentProvider';
 import { QueryClientProvider } from '@/store/query/QueryClientProvider';
 import type { Metadata } from 'next';
 import './globals.css';
 import '@bottlesteam/ui/styles';
-import { cookies } from 'next/headers';
 import { wantedSansStd } from '../fonts';
 import { layoutStyle } from './layout.css';
 
@@ -18,22 +16,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const store = cookies();
-
-  const accessToken = store.get('accessToken')?.value;
-  const refreshToken = store.get('refreshToken')?.value;
-
-  const tokens = accessToken != null && refreshToken != null ? { accessToken, refreshToken } : undefined;
-
   return (
     <html lang="en">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
       <body className={wantedSansStd.className}>
         <main className={layoutStyle}>
-          <AuthProvider tokens={tokens}>
-            <QueryClientProvider>
-              <UserAgentProvider>{children}</UserAgentProvider>
-            </QueryClientProvider>
-          </AuthProvider>
+          <QueryClientProvider>
+            <UserAgentProvider>{children}</UserAgentProvider>
+          </QueryClientProvider>
         </main>
       </body>
     </html>

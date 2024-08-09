@@ -1,5 +1,4 @@
-import { getCookie } from 'cookies-next';
-import { cookies } from 'next/headers';
+import { getServerSideTokens } from '@/features/server/serverSideTokens';
 import { Suspense } from 'react';
 import { PrefetchBoundary } from '../../../store/query/PrefetchBoundary';
 import { bottleDetailQueryOptions } from '../../../store/query/useBottleDetailQuery';
@@ -17,8 +16,7 @@ export default function BottleItemPage({
     slug: [type, id],
   },
 }: Props) {
-  const accessToken = getCookie('accessToken', { cookies }) ?? '';
-  const prefetchOptions = bottleDetailQueryOptions(accessToken, id);
+  const prefetchOptions = bottleDetailQueryOptions(getServerSideTokens(), id);
 
   return (
     <>
