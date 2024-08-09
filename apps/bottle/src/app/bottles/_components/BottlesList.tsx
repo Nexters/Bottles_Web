@@ -12,6 +12,8 @@ interface Props {
 function BottlesListRoot({ top, children }: Props) {
   const { data } = useBottlesQuery();
 
+  console.log('Bottles', data);
+
   return (
     <>
       {top(data)}
