@@ -1,10 +1,12 @@
 'use client';
 
+import NO_BOTTLE_IMAGE from '@/assets/no-bottle.webp';
 import { Control } from '@/components/control';
 import { Header } from '@/components/header';
 import { useUserAgent } from '@/features/web-view/UserAgentProvider';
 import { webViewAPI } from '@/features/web-view/api';
 import { Asset, Button, Paragraph } from '@bottlesteam/ui';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { BottlesList } from './_components/BottlesList';
@@ -67,16 +69,20 @@ export function Bottles() {
             </BottlesList.Top>
           )}
         >
-          {/**
-           * TODO: Add graphic resource when there are no bottles to show
-           */}
-          {data =>
-            (type === 'random' ? data.randomBottles : data.sentBottles)?.map(bottle => (
-              <Link key={bottle.id} href={`/bottles/${type}/${bottle.id}`}>
-                <BottlesList.Item bottle={bottle} />
-              </Link>
-            ))
-          }
+          {data => {
+            const bottles = type === 'random' ? data.randomBottles : data.sentBottles;
+            return bottles.length === 0 ? (
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <Image src={NO_BOTTLE_IMAGE} alt="no bottle" width={250} height={250} />
+              </div>
+            ) : (
+              bottles?.map(bottle => (
+                <Link key={bottle.id} href={`/bottles/${type}/${bottle.id}`}>
+                  <BottlesList.Item bottle={bottle} />
+                </Link>
+              ))
+            );
+          }}
         </BottlesList>
       </div>
     </>
