@@ -180,6 +180,7 @@ button {
 }
 input {
   background-color: transparent;
+  font-size: '16px';
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
