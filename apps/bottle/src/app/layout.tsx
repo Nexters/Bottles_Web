@@ -3,9 +3,9 @@ import { QueryClientProvider } from '@/store/query/QueryClientProvider';
 import type { Metadata } from 'next';
 import './globals.css';
 import '@bottlesteam/ui/styles';
+import type { Viewport } from 'next';
 import { wantedSansStd } from '../fonts';
 import { layoutStyle } from './layout.css';
-import type { Viewport } from 'next';
 
 export const viewport: Viewport = {
   width: 'device-width',
