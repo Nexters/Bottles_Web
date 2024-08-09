@@ -1,5 +1,6 @@
 import type { BottleType } from '@/app/bottles/Bottles';
 import { POST, createInit } from '@/features/server';
+import { getClientSideTokens } from '@/features/server/clientSideTokens';
 import { useUserAgent } from '@/features/web-view/UserAgentProvider';
 import { webViewAPI } from '@/features/web-view/api';
 import { Bottle } from '@/models/bottle';
@@ -21,10 +22,11 @@ export function useAcceptBottleMutation<T extends BottleType>(type: T, id: Bottl
     mutationFn: (likeMessage: string | null) =>
       POST<AcceptBottleBody<T>>(
         `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/bottles/${id}/accept`,
+        getClientSideTokens(),
         createInit(getCookie('accessToken') ?? '', { likeMessage })
       ),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: bottlesQueryOptions().queryKey });
+      queryClient.invalidateQueries({ queryKey: bottlesQueryOptions(getClientSideTokens()).queryKey });
       if (type === 'random') {
         webViewAPI({
           type: 'onToastOpen',
