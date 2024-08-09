@@ -6,6 +6,7 @@ export const bodyStyle = style({
   display: 'flex',
   flexDirection: 'column',
   gap: spacings.xl,
+  paddingBottom: spacings.xxl,
 });
 
 export const controlStyle = style({
