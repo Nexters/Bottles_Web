@@ -1,5 +1,7 @@
 export { Button } from './button';
 export type { ButtonProps } from './button';
+export { Bubble } from './bubble';
+export type { BubbleProps } from './bubble';
 export { ImageButton } from './image-button';
 export type { ImageButtonProps } from './image-button';
 export { CTAButton } from './cta-button';

@@ -18,6 +18,7 @@ export function BottleDetail({ id }: Props) {
       <OverlayProvider>
         <UserInformation>
           <UserInformation.BasicInformationArea
+            likeMessage={user.likeMessage}
             userImageUrl={user.userImageUrl}
             age={user.age}
             userName={user.userName}

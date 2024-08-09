@@ -2,6 +2,7 @@
 
 export {
   Button,
+  Bubble,
   ImageButton,
   CTAButton,
   Paragraph,
@@ -14,6 +15,7 @@ export {
 } from './components';
 export type {
   ButtonProps,
+  BubbleProps,
   ImageButtonProps,
   CTAButtonProps,
   ParagraphProps,
