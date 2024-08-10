@@ -1,6 +1,6 @@
 import { ComponentProps, ReactNode } from 'react';
 import { Asset } from '../asset';
-import { messageContainerstyle, vectorContainerStyle, wrapperStyle } from './bubbleStyle.css';
+import { messageContainerstyle, wrapperStyle } from './bubbleStyle.css';
 
 export interface BubbleProps extends ComponentProps<'div'> {
   children: ReactNode;
