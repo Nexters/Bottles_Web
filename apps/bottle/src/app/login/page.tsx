@@ -1,10 +1,9 @@
 'use client';
 
 import { Header } from '@/components/header';
+import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 import { Step } from '@/features/steps/StepContainer';
 import { useLeftTimeCaption } from '@/features/time/useLeftTimeCaption';
-import { useUserAgent } from '@/features/web-view/UserAgentProvider';
-import { webViewAPI } from '@/features/web-view/api';
 import { useLoginMutation } from '@/store/mutation/useLoginMutation';
 import { useSendAuthCodeMutation } from '@/store/mutation/useSendAuthCodeMutation';
 import { WRONG_AUTH_CODE_MESSAGE } from '@/store/mutation/useSignupMutation';
@@ -13,7 +12,7 @@ import { useState } from 'react';
 import { containerStyle, fieldStyle } from './loginStyle.css';
 
 export default function LoginPage() {
-  const userAgent = useUserAgent();
+  const { send } = useAppBridge();
   const { timeCaption, startTimer } = useLeftTimeCaption();
 
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -44,20 +43,7 @@ export default function LoginPage() {
   return (
     <>
       <Header>
-        <Asset
-          type="icon-arrow-left"
-          onClick={() => {
-            webViewAPI({
-              type: 'onWebViewClose',
-              payload: {
-                iOS: {
-                  type: 'onWebViewClose',
-                },
-              },
-              userAgent,
-            });
-          }}
-        />
+        <Asset type="icon-arrow-left" onClick={() => send({ type: AppBridgeMessageType.WEB_VIEW_CLOSE })} />
       </Header>
       <Step>
         <Step.Title style={{ marginTop: spacings.xl }}>{'휴대폰 번호로\n본인 인증을 진행할게요'}</Step.Title>

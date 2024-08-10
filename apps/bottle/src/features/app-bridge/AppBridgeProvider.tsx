@@ -1,10 +1,11 @@
+'use client';
+
 import { createContext, ReactNode, useContext } from 'react';
-import { UserAgent } from '../web-view/UserAgentProvider';
+import { useUserAgent } from '../web-view/UserAgentProvider';
 import { convertToAndroidAppBridge, convertToIOSAppBridge } from './convertToNativeMessage';
 import { AppBridgeMessage } from './interface';
 
 interface AppBridgeProviderProps {
-  userAgent: UserAgent;
   children: ReactNode;
 }
 
@@ -14,12 +15,18 @@ interface AppBridge {
 
 const AppBridgeContext = createContext<null | AppBridge>(null);
 
-export function AppBridgeProvider({ children, userAgent }: AppBridgeProviderProps) {
+export function AppBridgeProvider({ children }: AppBridgeProviderProps) {
+  const userAgent = useUserAgent();
+
   const isIOS = userAgent.isIOS;
 
   const send = (message: AppBridgeMessage) => {
-    if (isIOS) return convertToIOSAppBridge(message);
-    return convertToAndroidAppBridge(message);
+    try {
+      if (isIOS) return convertToIOSAppBridge(message);
+      return convertToAndroidAppBridge(message);
+    } catch (error) {
+      alert('App Bridge API called: ' + message.type);
+    }
   };
 
   return <AppBridgeContext.Provider value={{ send }}>{children}</AppBridgeContext.Provider>;
@@ -27,6 +34,10 @@ export function AppBridgeProvider({ children, userAgent }: AppBridgeProviderProp
 
 export function useAppBridge() {
   const appBridge = useContext(AppBridgeContext);
+
+  if (appBridge == null) {
+    throw new Error('Wrap App Bridge Provider');
+  }
 
   return appBridge;
 }

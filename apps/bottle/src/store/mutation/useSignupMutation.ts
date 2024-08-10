@@ -1,8 +1,7 @@
 import { SignupValues } from '@/app/signup/SignupProvider';
+import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 import { Tokens } from '@/features/server/auth';
 import { STATUS } from '@/features/server/types';
-import { useUserAgent } from '@/features/web-view/UserAgentProvider';
-import { webViewAPI } from '@/features/web-view/api';
 import { useMutation } from '@tanstack/react-query';
 
 export const WRONG_AUTH_CODE_MESSAGE = '올바른 번호를 입력해주세요';
@@ -30,23 +29,13 @@ const signup = async (signupValues: SignupValues) => {
 };
 
 export function useSignupMutation(onAuthCodeError: () => void) {
-  const userAgent = useUserAgent();
+  const { send } = useAppBridge();
 
   return useMutation({
     mutationFn: signup,
     onSuccess: (tokens: Tokens) => {
       console.log('tokens', tokens);
-      webViewAPI({
-        type: 'onSignup',
-        payload: {
-          iOS: {
-            type: 'onSignup',
-            ...tokens,
-          },
-          android: tokens,
-        },
-        userAgent,
-      });
+      send({ type: AppBridgeMessageType.SIGNUP, payload: tokens });
     },
     onError: error => {
       if (error instanceof Error) {
@@ -54,17 +43,7 @@ export function useSignupMutation(onAuthCodeError: () => void) {
           onAuthCodeError();
         }
         if (error.message === HAS_SIGNED_UP_MESSAGE) {
-          webViewAPI({
-            type: 'onToastOpen',
-            payload: {
-              iOS: {
-                type: 'onToastOpen',
-                message: HAS_SIGNED_UP_MESSAGE,
-              },
-              android: HAS_SIGNED_UP_MESSAGE,
-            },
-            userAgent,
-          });
+          send({ type: AppBridgeMessageType.TOAST_OPEN, payload: { message: HAS_SIGNED_UP_MESSAGE } });
         }
       }
     },

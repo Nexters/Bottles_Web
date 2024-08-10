@@ -1,8 +1,7 @@
 import type { BottleType } from '@/app/bottles/Bottles';
+import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 import { POST, createInit } from '@/features/server';
 import { getClientSideTokens } from '@/features/server/clientSideTokens';
-import { useUserAgent } from '@/features/web-view/UserAgentProvider';
-import { webViewAPI } from '@/features/web-view/api';
 import { Bottle } from '@/models/bottle';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { getCookie } from 'cookies-next';
@@ -15,7 +14,7 @@ interface AcceptBottleBody<T extends BottleType> {
 
 export function useAcceptBottleMutation<T extends BottleType>(type: T, id: Bottle['id']) {
   const router = useRouter();
-  const userAgent = useUserAgent();
+  const { send } = useAppBridge();
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -28,29 +27,11 @@ export function useAcceptBottleMutation<T extends BottleType>(type: T, id: Bottl
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: bottlesQueryOptions(getClientSideTokens()).queryKey });
       if (type === 'random') {
-        webViewAPI({
-          type: 'onToastOpen',
-          payload: {
-            iOS: {
-              type: 'onToastOpen',
-              message: '호감을 보냈어요',
-            },
-            android: '호감을 보냈어요',
-          },
-          userAgent,
-        });
+        send({ type: AppBridgeMessageType.TOAST_OPEN, payload: { message: '호감을 보냈어요' } });
         router.back();
         return;
       }
-      webViewAPI({
-        type: 'onBottleAccept',
-        payload: {
-          iOS: {
-            type: 'onBottleAccept',
-          },
-        },
-        userAgent,
-      });
+      send({ type: AppBridgeMessageType.BOTTLE_ACCEPT });
     },
   });
 }

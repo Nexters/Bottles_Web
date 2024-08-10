@@ -1,15 +1,14 @@
 import { Stepper } from '@/components/stepper';
+import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 import { POST, createInit } from '@/features/server';
 import { getClientSideTokens } from '@/features/server/clientSideTokens';
 import { Step } from '@/features/steps/StepContainer';
-import { useUserAgent } from '@/features/web-view/UserAgentProvider';
-import { webViewAPI } from '@/features/web-view/api';
 import { TextField, spacings } from '@bottlesteam/ui';
 import { useState } from 'react';
 import { useCreateProfileValues } from '../../CreateProfileProvider';
 
 export function KaKaoId() {
-  const userAgent = useUserAgent();
+  const { send } = useAppBridge();
   const { setValue, getValue, getValues } = useCreateProfileValues();
 
   const [kakaoId, setKakaoId] = useState(getValue('kakaoId') ?? '');
@@ -36,11 +35,7 @@ export function KaKaoId() {
             getClientSideTokens(),
             createInit(getClientSideTokens().accessToken, { ...getValues() })
           );
-          webViewAPI({
-            type: 'onCreateProfileComplete',
-            payload: { iOS: { type: 'onCreateProfileComplete' } },
-            userAgent,
-          });
+          send({ type: AppBridgeMessageType.CREATE_PROFILE_COMPLETE });
         }}
       >
         다음

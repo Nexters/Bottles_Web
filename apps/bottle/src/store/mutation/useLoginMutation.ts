@@ -1,7 +1,6 @@
+import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 import { Tokens } from '@/features/server/auth';
 import { STATUS } from '@/features/server/types';
-import { useUserAgent } from '@/features/web-view/UserAgentProvider';
-import { webViewAPI } from '@/features/web-view/api';
 import { useMutation } from '@tanstack/react-query';
 
 interface LoginValues {
@@ -39,22 +38,12 @@ const login = async (loginValues: LoginValues) => {
 };
 
 export function useLoginMutation(onAuthCodeError: () => void) {
-  const userAgent = useUserAgent();
+  const { send } = useAppBridge();
 
   return useMutation({
     mutationFn: login,
     onSuccess: (loginResponse: LoginResponse) => {
-      webViewAPI({
-        type: 'onLogin',
-        payload: {
-          iOS: {
-            type: 'onLogin',
-            ...loginResponse,
-          },
-          android: loginResponse,
-        },
-        userAgent,
-      });
+      send({ type: AppBridgeMessageType.LOGIN, payload: loginResponse });
     },
     onError: error => {
       if (error instanceof Error) {
@@ -62,17 +51,7 @@ export function useLoginMutation(onAuthCodeError: () => void) {
           onAuthCodeError();
           return;
         }
-        webViewAPI({
-          type: 'onToastOpen',
-          payload: {
-            iOS: {
-              type: 'onToastOpen',
-              message: error.message,
-            },
-            android: error.message,
-          },
-          userAgent,
-        });
+        send({ type: AppBridgeMessageType.TOAST_OPEN, payload: { message: error.message } });
       }
     },
   });

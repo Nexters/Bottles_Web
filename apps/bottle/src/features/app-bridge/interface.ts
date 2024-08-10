@@ -20,7 +20,8 @@ export type AppBridgeMessage =
         | AppBridgeMessageType.WEB_VIEW_CLOSE
         | AppBridgeMessageType.CREATE_PROFILE_COMPLETE
         | AppBridgeMessageType.DELETE_USER
-        | AppBridgeMessageType.BOTTLE_ACCEPT;
+        | AppBridgeMessageType.BOTTLE_ACCEPT
+        | AppBridgeMessageType.LOGOUT;
     };
 
 export interface ToastMessage {

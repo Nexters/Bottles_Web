@@ -1,7 +1,6 @@
+import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 import { POST, createInit } from '@/features/server';
 import { getClientSideTokens } from '@/features/server/clientSideTokens';
-import { useUserAgent } from '@/features/web-view/UserAgentProvider';
-import { webViewAPI } from '@/features/web-view/api';
 import { Bottle } from '@/models/bottle';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
@@ -9,8 +8,9 @@ import { bottlesQueryOptions } from '../query/useBottlesQuery';
 
 export function useRefuseBottleMutation() {
   const router = useRouter();
-  const userAgent = useUserAgent();
+  const { send } = useAppBridge();
   const queryClient = useQueryClient();
+
   const tokens = getClientSideTokens();
 
   return useMutation({
@@ -22,11 +22,7 @@ export function useRefuseBottleMutation() {
       ),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: bottlesQueryOptions(tokens).queryKey });
-      webViewAPI({
-        type: 'onToastOpen',
-        payload: { iOS: { type: 'onToastOpen', message: '보틀을 떠내려 보냈어요' }, android: '보틀을 떠내려 보냈어요' },
-        userAgent,
-      });
+      send({ type: AppBridgeMessageType.TOAST_OPEN, payload: { message: '보틀을 떠내려 보냈어요' } });
       router.back();
     },
   });
