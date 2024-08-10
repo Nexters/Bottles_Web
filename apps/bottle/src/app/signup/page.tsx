@@ -1,9 +1,8 @@
 'use client';
 
 import { Header } from '@/components/header';
+import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 import { useStep } from '@/features/steps/StepProvider';
-import { useUserAgent } from '@/features/web-view/UserAgentProvider';
-import { webViewAPI } from '@/features/web-view/api';
 import { Asset } from '@bottlesteam/ui';
 import { useRouter } from 'next/navigation';
 import { Authorize } from './_steps/authorize';
@@ -12,21 +11,13 @@ import { Information } from './_steps/information';
 const steps = [<Information key={1} />, <Authorize key={2} />] as const;
 
 export default function SignupPage() {
+  const { send } = useAppBridge();
   const router = useRouter();
-  const userAgent = useUserAgent();
   const { currentStep } = useStep();
 
   const handleGoBack = () => {
     if (currentStep === 1) {
-      webViewAPI({
-        type: 'onWebViewClose',
-        payload: {
-          iOS: {
-            type: 'onWebViewClose',
-          },
-        },
-        userAgent,
-      });
+      send({ type: AppBridgeMessageType.WEB_VIEW_CLOSE });
       return;
     }
     router.back();

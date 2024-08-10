@@ -1,4 +1,5 @@
-import { UserAgentProvider } from '@/features/web-view/UserAgentProvider';
+import { AppBridgeProvider } from '@/features/app-bridge/AppBridgeProvider';
+import { UserAgentProvider } from '@/features/user-agent/UserAgentProvider';
 import { QueryClientProvider } from '@/store/query/QueryClientProvider';
 import type { Metadata } from 'next';
 import './globals.css';
@@ -28,7 +29,9 @@ export default function RootLayout({
       <body className={wantedSansStd.className}>
         <main className={layoutStyle}>
           <QueryClientProvider>
-            <UserAgentProvider>{children}</UserAgentProvider>
+            <UserAgentProvider>
+              <AppBridgeProvider>{children}</AppBridgeProvider>
+            </UserAgentProvider>
           </QueryClientProvider>
         </main>
       </body>

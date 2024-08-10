@@ -16,7 +16,7 @@ export function BottleDetail({ id }: Props) {
   return (
     <>
       <OverlayProvider>
-        <UserInformation>
+        <UserInformation style={{ paddingBottom: '109px' }}>
           <UserInformation.BasicInformationArea
             likeMessage={user.likeMessage}
             userImageUrl={user.userImageUrl}

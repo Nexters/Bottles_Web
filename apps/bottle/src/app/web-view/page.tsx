@@ -1,6 +1,6 @@
 'use client';
 
-import { useUserAgent } from '@/features/web-view/UserAgentProvider';
+import { useUserAgent } from '@/features/user-agent/UserAgentProvider';
 import { Button, Paragraph, spacings } from '@bottlesteam/ui';
 import Link from 'next/link';
 import { ReactNode, useEffect, useState } from 'react';

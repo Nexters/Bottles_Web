@@ -1,11 +1,10 @@
 import { Stepper } from '@/components/stepper';
+import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 import { GET } from '@/features/server';
 import { getClientSideTokens } from '@/features/server/clientSideTokens';
 import { useFetch } from '@/features/server/useFetch';
 import { Step } from '@/features/steps/StepContainer';
 import { useStep } from '@/features/steps/StepProvider';
-import { useUserAgent } from '@/features/web-view/UserAgentProvider';
-import { webViewAPI } from '@/features/web-view/api';
 import { spacings } from '@bottlesteam/ui';
 import { OverlayProvider, overlay } from 'overlay-kit';
 import { useState } from 'react';
@@ -25,7 +24,7 @@ export interface Regions {
 }
 
 export function Region() {
-  const userAgent = useUserAgent();
+  const { send } = useAppBridge();
   const { onNextStep } = useStep();
   const { setValue, getValue } = useCreateProfileValues();
 
@@ -80,17 +79,7 @@ export function Region() {
         <SelectInput
           onClick={() => {
             if (city === undefined) {
-              webViewAPI({
-                type: 'onToastOpen',
-                payload: {
-                  android: '전체 지역을 먼저 선택해주세요.',
-                  iOS: {
-                    type: 'onToastOpen',
-                    message: '전체 지역을 먼저 선택해주세요.',
-                  },
-                },
-                userAgent,
-              });
+              send({ type: AppBridgeMessageType.TOAST_OPEN, payload: { message: '전체 지역을 먼저 선택해주세요.' } });
               return;
             }
             openRegionBottomSheet('state');

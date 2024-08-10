@@ -9,7 +9,7 @@ export interface UserAgent {
   isMobile: boolean;
 }
 
-const UserAgentContext = createContext<UserAgent | null>(null);
+export const UserAgentContext = createContext<UserAgent | null>(null);
 
 export function UserAgentProvider({ children }: { children: ReactNode }) {
   const [userAgent, setUserAgent] = useState<UserAgent>({ isAndroid: false, isIOS: true, rawUA: '', isMobile: true });

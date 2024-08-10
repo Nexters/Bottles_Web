@@ -3,8 +3,7 @@
 import NO_BOTTLE_IMAGE from '@/assets/no-bottle.webp';
 import { Control } from '@/components/control';
 import { Header } from '@/components/header';
-import { useUserAgent } from '@/features/web-view/UserAgentProvider';
-import { webViewAPI } from '@/features/web-view/api';
+import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 import { Asset, Button, Paragraph } from '@bottlesteam/ui';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -15,16 +14,14 @@ import { contentsContainer, controlStyle } from './pageStyle.css';
 export type BottleType = 'random' | 'sent';
 
 export function Bottles() {
-  const userAgent = useUserAgent();
+  const { send } = useAppBridge();
   const [type, setType] = useState<BottleType>('random');
 
   return (
     <>
       <Header>
         <button
-          onClick={() => {
-            webViewAPI({ type: 'onWebViewClose', payload: { iOS: { type: 'onWebViewClose' } }, userAgent });
-          }}
+          onClick={() => send({ type: AppBridgeMessageType.WEB_VIEW_CLOSE })}
           style={{ background: 'none', border: 'none' }}
         >
           <Asset type="icon-arrow-left" />

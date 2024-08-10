@@ -28,12 +28,9 @@ export function IntroductionCard(props: Props) {
   );
 }
 
-function IntroductionBlock({ field: { question, answer } }: { field: Introduction[number] }) {
+function IntroductionBlock({ field: { answer } }: { field: Introduction[number] }) {
   return (
     <div className={blockStyle}>
-      <Paragraph typography="st2" color="neutral600">
-        {question}
-      </Paragraph>
       <Paragraph typography="bo" color="neutral900">
         {answer}
       </Paragraph>

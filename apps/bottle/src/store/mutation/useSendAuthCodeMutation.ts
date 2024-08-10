@@ -1,5 +1,4 @@
-import { useUserAgent } from '@/features/web-view/UserAgentProvider';
-import { webViewAPI } from '@/features/web-view/api';
+import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 import { useMutation } from '@tanstack/react-query';
 
 const UNKNOWN_ERROR_MESSAGE = '알 수 없는 오류가 발생했어요';
@@ -21,37 +20,17 @@ const sendAuthCode = async (phoneNumber: string) => {
 };
 
 export function useSendAuthCodeMutation(onSendSuccess: () => void) {
-  const userAgent = useUserAgent();
+  const { send } = useAppBridge();
 
   return useMutation({
     mutationFn: sendAuthCode,
     onSuccess: () => {
       onSendSuccess();
-      webViewAPI({
-        type: 'onToastOpen',
-        payload: {
-          iOS: {
-            type: 'onToastOpen',
-            message: CHECK_SMS_MESSAGE,
-          },
-          android: CHECK_SMS_MESSAGE,
-        },
-        userAgent,
-      });
+      send({ type: AppBridgeMessageType.TOAST_OPEN, payload: { message: CHECK_SMS_MESSAGE } });
     },
     onError: error => {
       if (error instanceof Error) {
-        webViewAPI({
-          type: 'onToastOpen',
-          payload: {
-            iOS: {
-              type: 'onToastOpen',
-              message: error.message,
-            },
-            android: error.message,
-          },
-          userAgent,
-        });
+        send({ type: AppBridgeMessageType.TOAST_OPEN, payload: { message: error.message } });
       }
     },
   });
