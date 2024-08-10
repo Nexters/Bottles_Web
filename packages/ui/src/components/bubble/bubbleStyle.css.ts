@@ -12,7 +12,7 @@ export const wrapperStyle = style({
 
 export const messageContainerstyle = style({
   width: 'auto',
-  height: '42px',
+  height: '48px',
   padding: `0 ${spacings.lg}`,
   display: 'flex',
   alignItems: 'center',

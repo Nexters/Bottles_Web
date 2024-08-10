@@ -10,9 +10,7 @@ export function Bubble({ children, ...props }: BubbleProps) {
   return (
     <div className={wrapperStyle} {...props}>
       <div className={messageContainerstyle}>{children}</div>
-      <div className={vectorContainerStyle}>
-        <Asset type="vector" />
-      </div>
+      <Asset type="vector" />
     </div>
   );
 }

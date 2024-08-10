@@ -14,7 +14,6 @@ export const basicInformationAreaStyle = style({
   flexDirection: 'column',
   gap: spacings.sm,
   width: '100%',
-  height: '113px',
   alignItems: 'center',
   marginBottom: spacings.xl,
 });
