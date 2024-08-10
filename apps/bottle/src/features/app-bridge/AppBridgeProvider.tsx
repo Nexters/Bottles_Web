@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, ReactNode, useContext } from 'react';
-import { useUserAgent } from '../web-view/UserAgentProvider';
+import { useUserAgent } from '../user-agent/UserAgentProvider';
 import { convertToAndroidAppBridge, convertToIOSAppBridge } from './convertToNativeMessage';
 import { AppBridgeMessage } from './interface';
 

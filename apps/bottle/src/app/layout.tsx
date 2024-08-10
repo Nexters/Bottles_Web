@@ -1,5 +1,5 @@
 import { AppBridgeProvider } from '@/features/app-bridge/AppBridgeProvider';
-import { UserAgentProvider } from '@/features/web-view/UserAgentProvider';
+import { UserAgentProvider } from '@/features/user-agent/UserAgentProvider';
 import { QueryClientProvider } from '@/store/query/QueryClientProvider';
 import type { Metadata } from 'next';
 import './globals.css';
