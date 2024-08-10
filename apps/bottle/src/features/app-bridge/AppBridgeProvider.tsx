@@ -25,6 +25,7 @@ export function AppBridgeProvider({ children }: AppBridgeProviderProps) {
       if (isIOS) return convertToIOSAppBridge(message);
       return convertToAndroidAppBridge(message);
     } catch (error) {
+      console.log('herer');
       alert('App Bridge API called: ' + message.type);
     }
   };
