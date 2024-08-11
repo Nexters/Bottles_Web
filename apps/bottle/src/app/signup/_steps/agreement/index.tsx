@@ -1,8 +1,8 @@
 import { Stepper } from '@/components/stepper';
 import { Step } from '@/features/steps/StepContainer';
-import { useState } from 'react';
-import { Agreement as AgreementComponent, spacings } from '@bottlesteam/ui';
 import { useStep } from '@/features/steps/StepProvider';
+import { Agreement as AgreementComponent, spacings } from '@bottlesteam/ui';
+import { useState } from 'react';
 
 export function Agreement() {
   const { onNextStep } = useStep();

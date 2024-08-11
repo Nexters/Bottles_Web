@@ -1,7 +1,7 @@
-import { render, screen } from '@testing-library/react';
-import { Agreement } from '.';
 import { Step } from '@/features/steps/StepProvider';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { Agreement } from '.';
 
 describe('Agreement', () => {
   beforeEach(() => {
