@@ -1,4 +1,3 @@
-import { Header } from '@/components/header';
 import { getServerSideTokens } from '@/features/server/serverSideTokens';
 import { PrefetchBoundary } from '@/store/query/PrefetchBoundary';
 import { myInformationQueryOptions } from '@/store/query/useMyInformation';
@@ -10,7 +9,6 @@ export default async function MyPage() {
 
   return (
     <>
-      <Header />
       <Suspense>
         <PrefetchBoundary prefetchOptions={prefetchOptions}>
           <MyInformation />

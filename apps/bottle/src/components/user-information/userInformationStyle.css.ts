@@ -15,7 +15,6 @@ export const layoutStyle = recipe({
     flexDirection: 'column',
     alignItems: 'center',
     margin: '0 auto',
-    height: `calc(100vh - ${CONTAINER_OFFSET_HEIGHT - OVERLAP_HEIGHT}px)`,
     overflow: 'scroll',
     msOverflowStyle: 'none',
     scrollbarWidth: 'none',
@@ -26,7 +25,7 @@ export const layoutStyle = recipe({
   variants: {
     hasCTAButton: {
       true: { height: `calc(100vh - ${CONTAINER_OFFSET_HEIGHT - OVERLAP_HEIGHT}px)` },
-      false: { height: `calc(100vh - ${HEADER_HEIGHT}px)` },
+      false: { height: '100vh' },
     },
   },
 });
