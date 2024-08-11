@@ -7,8 +7,9 @@ import { Asset } from '@bottlesteam/ui';
 import { useRouter } from 'next/navigation';
 import { Authorize } from './_steps/authorize';
 import { Information } from './_steps/information';
+import { Agreement } from './_steps/agreement';
 
-const steps = [<Information key={1} />, <Authorize key={2} />] as const;
+const steps = [<Agreement key={1} />, <Information key={2} />, <Authorize key={3} />] as const;
 
 export default function SignupPage() {
   const { send } = useAppBridge();
