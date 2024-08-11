@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3000",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -24,6 +24,7 @@
     "@bottlesteam/eslint-config": "workspace:*",
     "@bottlesteam/typescript-config": "workspace:*",
     "@bottlesteam/vitest-config": "workspace:*",
+    "@playwright/test": "^1.46.0",
     "@svgr/webpack": "^8.1.0",
     "@testing-library/jest-dom": "^6.4.8",
     "@testing-library/react": "^16.0.0",
