@@ -18,3 +18,5 @@ export { Chip } from './chip';
 export type { ChipProps } from './chip';
 export { TextField } from './text-field';
 export type { TextFieldProps } from './text-field';
+export { Agreement } from './agreement';
+export type { AgreementProps, AgreementItemProps } from './agreement';

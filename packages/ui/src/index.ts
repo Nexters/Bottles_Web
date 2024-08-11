@@ -12,6 +12,7 @@ export {
   BottomSheet,
   Chip,
   TextField,
+  Agreement,
 } from './components';
 export type {
   ButtonProps,
@@ -27,6 +28,8 @@ export type {
   BottomSheetProps,
   ChipProps,
   TextFieldProps,
+  AgreementProps,
+  AgreementItemProps,
 } from './components';
 
 export { colors, colorsMap, typography, spacings, radius, radiusMap } from './foundations';

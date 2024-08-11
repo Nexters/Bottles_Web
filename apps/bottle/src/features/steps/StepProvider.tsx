@@ -9,7 +9,7 @@ interface StepContext {
   onPreviousStep(): void;
 }
 
-const Step = createContext<StepContext | null>(null);
+export const Step = createContext<StepContext | null>(null);
 
 interface StepProviderProps {
   maxStep: number;
