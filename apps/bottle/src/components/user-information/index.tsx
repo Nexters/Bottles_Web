@@ -1,15 +1,16 @@
-import type { CSSProperties, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { BasicInformationArea } from './BasicInformationArea';
 import { IntroductionCard } from './IntroductionCard';
 import { SelectedProfile } from './SelectedProfile';
 import { layoutStyle } from './userInformationStyle.css';
 
-function UserInformationRoot({ children, style }: { children: ReactNode; style?: CSSProperties }) {
-  return (
-    <div className={layoutStyle} style={style}>
-      {children}
-    </div>
-  );
+interface RootProps {
+  children: ReactNode;
+  hasCTAButton: boolean;
+}
+
+function UserInformationRoot({ children, hasCTAButton }: RootProps) {
+  return <div className={layoutStyle({ hasCTAButton })}>{children}</div>;
 }
 
 export const UserInformation = Object.assign(UserInformationRoot, {

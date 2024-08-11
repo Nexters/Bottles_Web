@@ -1,12 +1,34 @@
 import { colors, radius, spacings } from '@bottlesteam/ui';
 import { style } from '@vanilla-extract/css';
+import { recipe } from '@vanilla-extract/recipes';
 
-export const layoutStyle = style({
-  paddingTop: spacings.xxl,
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  margin: '0 auto',
+export const HEADER_HEIGHT = 48;
+export const CTA_HEIGHT = 109;
+
+export const OVERLAP_HEIGHT = 20;
+export const CONTAINER_OFFSET_HEIGHT = HEADER_HEIGHT + CTA_HEIGHT;
+
+export const layoutStyle = recipe({
+  base: {
+    paddingTop: spacings.xxl,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    margin: '0 auto',
+    height: `calc(100vh - ${CONTAINER_OFFSET_HEIGHT - OVERLAP_HEIGHT}px)`,
+    overflow: 'scroll',
+    msOverflowStyle: 'none',
+    scrollbarWidth: 'none',
+    '::-webkit-scrollbar': {
+      display: 'none',
+    },
+  },
+  variants: {
+    hasCTAButton: {
+      true: { height: `calc(100vh - ${CONTAINER_OFFSET_HEIGHT - OVERLAP_HEIGHT}px)` },
+      false: { height: `calc(100vh - ${HEADER_HEIGHT}px)` },
+    },
+  },
 });
 
 export const basicInformationAreaStyle = style({
