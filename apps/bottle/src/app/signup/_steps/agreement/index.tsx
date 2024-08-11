@@ -1,4 +1,5 @@
 import { Stepper } from '@/components/stepper';
+import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 import { Step } from '@/features/steps/StepContainer';
 import { useStep } from '@/features/steps/StepProvider';
 import { Agreement as AgreementComponent, spacings } from '@bottlesteam/ui';
@@ -6,6 +7,8 @@ import { useState } from 'react';
 
 export function Agreement() {
   const { onNextStep } = useStep();
+  const { send } = useAppBridge();
+
   const [privacyPolicyAgreed, setPrivacyPolicyAgreed] = useState(false);
   const [termsOfServiceAgreed, setTermsOfServiceAgreed] = useState(false);
 
@@ -34,7 +37,21 @@ export function Agreement() {
               }}
               checked={privacyPolicyAgreed}
             >
-              [필수] <u>개인정보처리방침</u>
+              [필수]
+              <u
+                style={{ marginLeft: spacings.xs }}
+                onClickCapture={e => {
+                  e.preventDefault();
+                  send({
+                    type: AppBridgeMessageType.OPEN_LINK,
+                    payload: {
+                      href: 'https://spiral-ogre-a4d.notion.site/abb2fd284516408e8c2fc267d07c6421',
+                    },
+                  });
+                }}
+              >
+                개인정보처리방침
+              </u>
             </AgreementComponent.Item>
             <AgreementComponent.Item
               onChange={e => {
@@ -42,7 +59,21 @@ export function Agreement() {
               }}
               checked={termsOfServiceAgreed}
             >
-              [필수] <u>보틀이용약관</u>
+              [필수]
+              <u
+                style={{ marginLeft: spacings.xs }}
+                onClickCapture={e => {
+                  e.preventDefault();
+                  send({
+                    type: AppBridgeMessageType.OPEN_LINK,
+                    payload: {
+                      href: 'https://spiral-ogre-a4d.notion.site/240724-e3676639ea864147bb293cfcda40d99f',
+                    },
+                  });
+                }}
+              >
+                보틀이용약관
+              </u>
             </AgreementComponent.Item>
           </>
         }
