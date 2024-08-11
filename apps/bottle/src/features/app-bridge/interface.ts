@@ -10,11 +10,13 @@ export enum AppBridgeMessageType {
   DELETE_USER = 'deleteUser',
   CREATE_PROFILE_COMPLETE = 'onCreateProfileComplete',
   BOTTLE_ACCEPT = 'onBottleAccept',
+  OPEN_LINK = 'openLink',
 }
 export type AppBridgeMessage =
   | ToastMessage
   | LoginMessage
   | SignupMessage
+  | OpenLinkMessage
   | {
       type:
         | AppBridgeMessageType.WEB_VIEW_CLOSE
@@ -38,4 +40,11 @@ export interface LoginMessage {
 export interface SignupMessage {
   type: AppBridgeMessageType.SIGNUP;
   payload: Tokens;
+}
+
+export interface OpenLinkMessage {
+  type: AppBridgeMessageType.OPEN_LINK;
+  payload: {
+    href: string;
+  };
 }
