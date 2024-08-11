@@ -7,6 +7,7 @@ declare const Native: {
   onBottleAccept: () => void;
   onLogin: (json: string) => void;
   onSignup: (json: string) => void;
+  openLink: (json: string) => void;
 };
 
 interface WebviewCloseMessage {

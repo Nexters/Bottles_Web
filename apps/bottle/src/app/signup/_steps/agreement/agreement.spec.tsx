@@ -1,8 +1,8 @@
+import { AppBridgeContext } from '@/features/app-bridge/AppBridgeProvider';
 import { Step } from '@/features/steps/StepProvider';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Agreement } from '.';
-import { AppBridgeContext } from '@/features/app-bridge/AppBridgeProvider';
 
 describe('Agreement', () => {
   beforeEach(() => {
