@@ -12,18 +12,35 @@ function createTokenParams(tokens: Tokens) {
   return `accessToken=${tokens.accessToken}&refreshToken=${tokens.refreshToken}`;
 }
 
-test('Set MBTI and move to step 2', async ({ page }) => {
-  await page.goto(`/create-profile?${createTokenParams(testTokens)}`);
+test('Create Profile Funnel Flow', async ({ page }) => {
+  await test.step('Set MBTI and move to step 2', async () => {
+    await page.goto(`/create-profile?${createTokenParams(testTokens)}`);
 
-  const nextButtonText = page.getByText('다음');
-  const EButton = page.getByRole('button', { name: 'E', exact: true });
-  const SButton = page.getByRole('button', { name: 'S', exact: true });
-  const FButton = page.getByRole('button', { name: 'F', exact: true });
-  const JButton = page.getByRole('button', { name: 'J', exact: true });
-  await EButton.click();
-  await SButton.click();
-  await FButton.click();
-  await JButton.click();
-  await nextButtonText.click();
-  await page.waitForURL('**/create-profile?step=2');
+    const nextButtonText = page.getByText('다음');
+    const EButton = page.getByRole('button', { name: 'E', exact: true });
+    const SButton = page.getByRole('button', { name: 'S', exact: true });
+    const FButton = page.getByRole('button', { name: 'F', exact: true });
+    const JButton = page.getByRole('button', { name: 'J', exact: true });
+    await EButton.click();
+    await SButton.click();
+    await FButton.click();
+    await JButton.click();
+    await nextButtonText.click();
+    await page.waitForURL('**/create-profile?step=2');
+  });
+  await test.step('Set MBTI and move to step 2', async () => {
+    await page.goto(`/create-profile?${createTokenParams(testTokens)}`);
+
+    const nextButtonText = page.getByText('다음');
+    const EButton = page.getByRole('button', { name: 'E', exact: true });
+    const SButton = page.getByRole('button', { name: 'S', exact: true });
+    const FButton = page.getByRole('button', { name: 'F', exact: true });
+    const JButton = page.getByRole('button', { name: 'J', exact: true });
+    await EButton.click();
+    await SButton.click();
+    await FButton.click();
+    await JButton.click();
+    await nextButtonText.click();
+    await page.waitForURL('**/create-profile?step=2');
+  });
 });
