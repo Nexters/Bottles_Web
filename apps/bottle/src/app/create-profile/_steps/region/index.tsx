@@ -1,10 +1,8 @@
 import { Stepper } from '@/components/stepper';
 import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
-import { GET } from '@/features/server';
-import { getClientSideTokens } from '@/features/server/clientSideTokens';
-import { useFetch } from '@/features/server/useFetch';
 import { Step } from '@/features/steps/StepContainer';
 import { useStep } from '@/features/steps/StepProvider';
+import { useRegionsQuery } from '@/store/query/useRegionsQuery';
 import { spacings } from '@bottlesteam/ui';
 import { OverlayProvider, overlay } from 'overlay-kit';
 import { useState } from 'react';
@@ -28,7 +26,7 @@ export function Region() {
   const { onNextStep } = useStep();
   const { setValue, getValue } = useCreateProfileValues();
 
-  const regionsData = useFetch<Regions>(() => GET<Regions>(`/api/v1/profile/choice`, getClientSideTokens()));
+  const { data: regionsData } = useRegionsQuery();
 
   const selected = getValue('region');
   const [city, setCity] = useState<string | undefined>(selected != null ? selected.city : undefined);
