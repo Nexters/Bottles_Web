@@ -40,7 +40,7 @@ export function Authorize() {
 
   return (
     <Step>
-      <Stepper current={2} max={2} />
+      <Stepper current={3} max={3} />
       <Step.Title>{'휴대폰 번호로\n본인 인증을 진행할게요'}</Step.Title>
       <section className={containerStyle}>
         <div className={fieldStyle}>

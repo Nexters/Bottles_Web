@@ -6,17 +6,11 @@ export interface Tokens {
   refreshToken: string;
 }
 
-const BASE_URL = `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/auth`;
-
-const AuthURLs = {
-  refreshAuth: BASE_URL + '/refresh ',
-};
-
 /**
  * @description fetches a new set of tokens from the server with refresh token
  */
 export async function refreshAuth(tokens: Tokens) {
-  const response = await fetch(AuthURLs.refreshAuth, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/auth/refresh`, {
     method: 'POST',
     ...createInit(tokens.refreshToken),
   });

@@ -8,7 +8,7 @@ export default function SignupLayout({ children }: { children: ReactNode }) {
   return (
     <SignupProvider>
       <Suspense>
-        <StepProvider maxStep={5} uri="/signup">
+        <StepProvider maxStep={3} uri="/signup">
           {children}
         </StepProvider>
       </Suspense>

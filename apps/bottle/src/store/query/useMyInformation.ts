@@ -6,12 +6,7 @@ import { UseSuspenseQueryOptions, useSuspenseQuery } from '@tanstack/react-query
 
 export const myInformationQueryOptions = (tokens: Tokens): UseSuspenseQueryOptions<CurrentUser> => ({
   queryKey: ['bottles'],
-  queryFn: () =>
-    GET<CurrentUser>(
-      `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/profile`,
-      tokens,
-      createInit(tokens.accessToken)
-    ),
+  queryFn: () => GET<CurrentUser>(`/api/v1/profile`, tokens, createInit(tokens.accessToken)),
 });
 export function useMyInformationQuery() {
   return useSuspenseQuery(myInformationQueryOptions(getClientSideTokens()));

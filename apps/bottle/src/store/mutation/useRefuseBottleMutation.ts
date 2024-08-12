@@ -14,12 +14,7 @@ export function useRefuseBottleMutation() {
   const tokens = getClientSideTokens();
 
   return useMutation({
-    mutationFn: (id: Bottle['id']) =>
-      POST(
-        `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/bottles/${id}/refuse`,
-        tokens,
-        createInit(tokens.accessToken)
-      ),
+    mutationFn: (id: Bottle['id']) => POST(`/api/v1/bottles/${id}/refuse`, tokens, createInit(tokens.accessToken)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: bottlesQueryOptions(tokens).queryKey });
       send({ type: AppBridgeMessageType.TOAST_OPEN, payload: { message: '보틀을 떠내려 보냈어요' } });

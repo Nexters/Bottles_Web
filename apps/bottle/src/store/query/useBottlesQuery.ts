@@ -11,12 +11,7 @@ export interface GetBottlesData {
 
 export const bottlesQueryOptions = (tokens: Tokens): UseSuspenseQueryOptions<GetBottlesData> => ({
   queryKey: ['bottles'],
-  queryFn: async () =>
-    GET<GetBottlesData>(
-      `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/bottles`,
-      tokens,
-      createInit(tokens.accessToken)
-    ),
+  queryFn: async () => GET<GetBottlesData>(`/api/v1/bottles`, tokens, createInit(tokens.accessToken)),
 });
 export function useBottlesQuery() {
   return useSuspenseQuery(bottlesQueryOptions(getClientSideTokens()));

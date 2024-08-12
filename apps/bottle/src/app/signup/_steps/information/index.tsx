@@ -29,7 +29,7 @@ export function Information() {
 
   return (
     <Step>
-      <Stepper current={1} max={2} />
+      <Stepper current={2} max={3} />
       <Step.Title>{'프로필 생성을 위해\n개인 정보를 입력해 주세요'}</Step.Title>
       <section className={containerStyle}>
         <div className={fieldStyle}>

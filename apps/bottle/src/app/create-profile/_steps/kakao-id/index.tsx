@@ -31,7 +31,7 @@ export function KaKaoId() {
           setValue('kakaoId', kakaoId);
 
           await POST(
-            `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/profile/choice`,
+            `/api/v1/profile/choice`,
             getClientSideTokens(),
             createInit(getClientSideTokens().accessToken, { ...getValues() })
           );
