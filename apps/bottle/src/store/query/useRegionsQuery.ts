@@ -6,7 +6,7 @@ import { UseQueryOptions, useQuery } from '@tanstack/react-query';
 
 export const regionsQueryOptions = (tokens: Tokens): UseQueryOptions<Regions> => ({
   queryKey: ['regions'],
-  queryFn: async () => GET<Regions>(`/api/v1/profile/choice`, tokens),
+  queryFn: async () => GET<Regions>(`/api/v1/profile/choice`, tokens, { cache: 'force-cache' }),
   staleTime: Infinity,
   gcTime: Infinity,
 });

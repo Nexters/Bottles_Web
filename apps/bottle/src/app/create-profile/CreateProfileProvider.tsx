@@ -1,3 +1,5 @@
+'use client';
+
 import { createFunnelValuesContext } from '@/features/funnel-values/createFunnelValuesContext';
 import { Profile } from '@/models/profile';
 
