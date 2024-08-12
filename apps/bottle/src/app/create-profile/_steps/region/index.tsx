@@ -28,9 +28,7 @@ export function Region() {
   const { onNextStep } = useStep();
   const { setValue, getValue } = useCreateProfileValues();
 
-  const regionsData = useFetch<Regions>(() =>
-    GET<Regions>(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/profile/choice`, getClientSideTokens())
-  );
+  const regionsData = useFetch<Regions>(() => GET<Regions>(`/api/v1/profile/choice`, getClientSideTokens()));
 
   const selected = getValue('region');
   const [city, setCity] = useState<string | undefined>(selected != null ? selected.city : undefined);

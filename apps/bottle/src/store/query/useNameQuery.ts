@@ -9,12 +9,7 @@ interface GetUserInfoData {
 
 export const userInfoQueryOptions = (tokens: Tokens): UseSuspenseQueryOptions<GetUserInfoData> => ({
   queryKey: ['userInfo'],
-  queryFn: () =>
-    GET<GetUserInfoData>(
-      `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/profile/info`,
-      tokens,
-      createInit(tokens.accessToken)
-    ),
+  queryFn: () => GET<GetUserInfoData>(`/api/v1/profile/info`, tokens, createInit(tokens.accessToken)),
 });
 export function useUserInfoQuery() {
   return useSuspenseQuery(userInfoQueryOptions(getClientSideTokens()));

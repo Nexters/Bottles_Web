@@ -20,7 +20,7 @@ export function useAcceptBottleMutation<T extends BottleType>(type: T, id: Bottl
   return useMutation({
     mutationFn: (likeMessage: string | null) =>
       POST<AcceptBottleBody<T>>(
-        `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/bottles/${id}/accept`,
+        `/api/v1/bottles/${id}/accept`,
         getClientSideTokens(),
         createInit(getCookie('accessToken') ?? '', { likeMessage })
       ),
