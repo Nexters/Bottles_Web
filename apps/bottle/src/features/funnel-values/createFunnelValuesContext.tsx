@@ -1,3 +1,5 @@
+'use client';
+
 import { ProviderProps, createContext, useCallback, useContext, useRef } from 'react';
 
 export interface FunnelValuesContext<I extends object> {

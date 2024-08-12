@@ -16,8 +16,8 @@ export function createInit<Body extends object>(
   };
 }
 
-async function fetchWrapperWithTokenHandler<Data>(input: string, tokens: Tokens, init?: RequestInit): Promise<Data> {
-  const response = await fetch(input, init);
+async function fetchWrapperWithTokenHandler<Data>(uri: string, tokens: Tokens, init?: RequestInit): Promise<Data> {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}${uri}`, init);
 
   /**
    * NOTE: handles ONLY Unauthorized status
@@ -25,7 +25,7 @@ async function fetchWrapperWithTokenHandler<Data>(input: string, tokens: Tokens,
   if (response.status === STATUS.UNAUTHORIZED) {
     const newTokens = await refreshAuth(tokens);
 
-    return await fetchWrapperWithTokenHandler<Data>(input, newTokens, {
+    return await fetchWrapperWithTokenHandler<Data>(uri, newTokens, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${newTokens.accessToken}`,

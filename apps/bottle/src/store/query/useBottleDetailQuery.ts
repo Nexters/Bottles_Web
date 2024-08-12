@@ -6,12 +6,7 @@ import { UseSuspenseQueryOptions, useSuspenseQuery } from '@tanstack/react-query
 
 export const bottleDetailQueryOptions = (tokens: Tokens, id: Bottle['id']): UseSuspenseQueryOptions<Bottle> => ({
   queryKey: ['bottle', id],
-  queryFn: () =>
-    GET<Bottle>(
-      `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/bottles/${id}`,
-      tokens,
-      createInit(tokens.accessToken)
-    ),
+  queryFn: () => GET<Bottle>(`/api/v1/bottles/${id}`, tokens, createInit(tokens.accessToken)),
 });
 export function useBottleDetailQuery(id: Bottle['id']) {
   return useSuspenseQuery(bottleDetailQueryOptions(getClientSideTokens(), id));
