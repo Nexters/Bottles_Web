@@ -16,7 +16,7 @@ export const WRONG_AUTH_CODE_MESSAGE = '올바른 번호를 입력해주세요';
 const NOT_SIGNED_UP_MESSAGE = '회원가입을 먼저 진행해주세요';
 
 const login = async (loginValues: LoginValues) => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/auth/login`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/auth/sms/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
