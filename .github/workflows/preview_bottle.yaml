@@ -36,8 +36,8 @@ jobs:
           touch ./apps/bottle/.env.local
           echo "TEST_ACCESS_TOKEN=${{ secrets.TEST_ACCESS_TOKEN }}" >> ./apps/bottle/.env.local
           echo "TEST_REFRESH_TOKEN=${{ secrets.TEST_REFRESH_TOKEN }}" >> ./apps/bottle/.env.local
-      - name: Install Playwright Browsers
-        run: pnpm dlx playwright install --with-deps
+      - name: Install dependencies
+        run: cd apps/bottle && npx pnpm i -r
       - name: Run Playwright E2E Tests
         run: cd apps/bottle && pnpm e2e:test
       - name: Upload Playwright Report
