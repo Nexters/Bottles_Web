@@ -9,6 +9,10 @@
       "outputs": [".next/**", "!.next/cache/**", "dist/**"],
       "env": ["NEXT_PUBLIC_SERVER_BASE_URL", "TEST_ACCESS_TOKEN", "TEST_REFRESH_TOKEN"]
     },
+    "test:e2e": {
+      "dependsOn": ["^build"],
+      "env": ["NEXT_PUBLIC_SERVER_BASE_URL", "TEST_ACCESS_TOKEN", "TEST_REFRESH_TOKEN"]
+    },
     "lint": {
       "dependsOn": ["^lint"]
     },

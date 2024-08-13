@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "vitest run",
-    "e2e:test": "playwright test",
+    "test:e2e": "playwright test",
     "e2e:show-report": "playwright show-report",
     "e2e:ui": "playwright test --ui"
   },
