@@ -37,7 +37,7 @@ function Item(props: ItemProps) {
 
   const selected = Array.isArray(controlValue) ? controlValue.includes(props.value) : controlValue === props.value;
 
-  return <_Slot {...props} selected={selected} />;
+  return <_Slot {...props} selected={selected} aria-selected={selected} />;
 }
 
 Control.Item = Item;

@@ -3,11 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3000",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "e2e:show-report": "playwright show-report",
+    "e2e:ui": "playwright test --ui"
   },
   "dependencies": {
     "@bottlesteam/ui": "workspace:*",
@@ -24,6 +27,7 @@
     "@bottlesteam/eslint-config": "workspace:*",
     "@bottlesteam/typescript-config": "workspace:*",
     "@bottlesteam/vitest-config": "workspace:*",
+    "@playwright/test": "^1.46.0",
     "@svgr/webpack": "^8.1.0",
     "@testing-library/jest-dom": "^6.4.8",
     "@testing-library/react": "^16.0.0",
@@ -36,6 +40,7 @@
     "@vanilla-extract/recipes": "^0.5.3",
     "@vanilla-extract/vite-plugin": "^4.0.13",
     "@vitejs/plugin-react": "^4.3.1",
+    "dotenv": "^16.4.5",
     "eslint": "^8",
     "eslint-config-next": "15.0.0-rc.0",
     "eslint-config-vitest-globals": "^1.0.0",

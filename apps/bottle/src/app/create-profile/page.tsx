@@ -37,7 +37,7 @@ export default function CreateProfilePage() {
       <Header>
         {currentStep > 1 && (
           <button style={{ background: 'none', border: 'none' }}>
-            <Asset onClick={() => router.back()} type="icon-arrow-left" />
+            <Asset onClick={() => router.back()} type="icon-arrow-left" aria-label="go-back-icon" />
           </button>
         )}
       </Header>
