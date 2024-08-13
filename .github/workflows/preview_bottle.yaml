@@ -43,7 +43,7 @@ jobs:
         run: pnpm exec playwright install --with-deps
 
       - name: Build project
-        run: pnpm run build --filter=apps/bottle...
+        run: pnpm run build --filter=./apps/bottle
 
       - name: Start application
         run: |
