@@ -36,7 +36,7 @@ jobs:
           touch ./apps/bottle/.env.local
           echo "TEST_ACCESS_TOKEN=${{ secrets.TEST_ACCESS_TOKEN }}" >> ./apps/bottle/.env.local
           echo "TEST_REFRESH_TOKEN=${{ secrets.TEST_REFRESH_TOKEN }}" >> ./apps/bottle/.env.local
-      - run: pnpm install
+      - run: npx pnpm i -r
       - run: npx playwright install --with-deps
       - run: pnpm run ci
       - name: Install Vercel CLI
