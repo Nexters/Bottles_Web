@@ -39,7 +39,7 @@ jobs:
       - name: Install Playwright Browsers
         run: pnpm dlx playwright install --with-deps
       - name: Run Playwright E2E Tests
-        run: pnpm dlx playwright test
+        run: cd apps/bottle && pnpm e2e:test
       - name: Upload Playwright Report
         uses: actions/upload-artifact@v3
         with:
