@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest run"
+    "test": "vitest run",
+    "e2e:test": "playwright test",
+    "e2e:show-report": "playwright show-report",
+    "e2e:ui": "playwright test --ui"
   },
   "dependencies": {
     "@bottlesteam/ui": "workspace:*",
