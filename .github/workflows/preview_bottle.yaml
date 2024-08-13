@@ -37,8 +37,8 @@ jobs:
           echo "TEST_ACCESS_TOKEN=${{ secrets.TEST_ACCESS_TOKEN }}" >> ./apps/bottle/.env.local
           echo "TEST_REFRESH_TOKEN=${{ secrets.TEST_REFRESH_TOKEN }}" >> ./apps/bottle/.env.local
       - run: npx pnpm i -r
-      - run: npm install @playwright/test
-      - run: npx playwright install --with-deps
+      - run: pnpm install @playwright/test
+      - run: pnpm dlx playwright install --with-deps
       - run: pnpm run ci
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
