@@ -1,6 +1,6 @@
 import { getServerSideTokens } from '@/features/server/serverSideTokens';
 import { Suspense } from 'react';
-import { PrefetchBoundary } from '../../../store/query/PrefetchBoundary';
+import { ServerFetchBoundary } from '../../../store/query/ServerFetchBoundary';
 import { bottleDetailQueryOptions } from '../../../store/query/useBottleDetailQuery';
 import { BottleType } from '../Bottles';
 import { ActionButtons } from './ActionButtons';
@@ -22,9 +22,9 @@ export default function BottleItemPage({
     <>
       <BottlePageHeader />
       <Suspense>
-        <PrefetchBoundary prefetchOptions={prefetchOptions}>
+        <ServerFetchBoundary fetchOptions={prefetchOptions}>
           <BottleDetail id={id} />
-        </PrefetchBoundary>
+        </ServerFetchBoundary>
         <ActionButtons type={type} id={id} />
       </Suspense>
     </>
