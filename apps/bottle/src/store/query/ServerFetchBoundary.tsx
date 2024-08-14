@@ -1,4 +1,4 @@
-import { FetchQueryOptions, HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
+import { type FetchQueryOptions, HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
 import type { ReactNode } from 'react';
 
 export type FetchOptions = Pick<FetchQueryOptions, 'queryKey' | 'queryFn'>;
