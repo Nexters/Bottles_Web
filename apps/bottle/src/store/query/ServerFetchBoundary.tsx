@@ -1,5 +1,6 @@
-import { type FetchQueryOptions, HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
+import { type FetchQueryOptions, HydrationBoundary, dehydrate } from '@tanstack/react-query';
 import type { ReactNode } from 'react';
+import { getQueryClient } from './getQueryClient';
 
 export type FetchOptions = Pick<FetchQueryOptions, 'queryKey' | 'queryFn'>;
 
@@ -9,11 +10,11 @@ type Props = {
 };
 
 export async function ServerFetchBoundary({ fetchOptions, children }: Props) {
-  const queryClient = new QueryClient();
+  const queryClient = getQueryClient();
 
   Array.isArray(fetchOptions)
-    ? await Promise.all(fetchOptions.map(prefetchOption => queryClient.fetchQuery(prefetchOption)))
-    : await queryClient.fetchQuery(fetchOptions);
+    ? Promise.all(fetchOptions.map(prefetchOption => queryClient.fetchQuery(prefetchOption)))
+    : queryClient.fetchQuery(fetchOptions);
 
   return <HydrationBoundary state={dehydrate(queryClient)}>{children}</HydrationBoundary>;
 }
