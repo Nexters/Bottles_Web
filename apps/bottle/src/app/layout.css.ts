@@ -1,4 +1,4 @@
-import { colors } from '@bottlesteam/ui';
+import { colors, spacings } from '@bottlesteam/ui';
 import { style } from '@vanilla-extract/css';
 
 export const layoutStyle = style({
@@ -15,4 +15,12 @@ export const layoutStyle = style({
   backgroundColor: colors.neutral50,
   margin: '0 auto',
   position: 'relative',
+});
+
+export const errorImageContainer = style({
+  width: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  gap: spacings.xl,
 });
