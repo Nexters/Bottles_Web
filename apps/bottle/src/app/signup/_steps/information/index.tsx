@@ -21,6 +21,7 @@ export function Information() {
   const isDisabled =
     name.length === 0 ||
     year.length !== 4 ||
+    Number(year) > 2003 ||
     month.length < 1 ||
     month.length > 2 ||
     day.length < 1 ||
