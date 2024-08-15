@@ -53,7 +53,7 @@ jobs:
       - name: Check for changes in package A using turbo
         id: turbo_check
         run: |
-          pnpx turbo run test:e2e --filter=@bottlesteam/e2e...[HEAD^] --dry-run=json
+          pnpx turbo run test:e2e --filter=@bottlesteam/e2e...[HEAD~1] --dry-run=json
           cat result.json
 
       - name: Determine if A package has changes
