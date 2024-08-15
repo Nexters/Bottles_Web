@@ -25,7 +25,7 @@ export default defineConfig({
   testDir: './tests',
   timeout: 30000,
   /* Run tests in files in parallel */
-  fullyParallel: false,
+  fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   // forbidOnly: !!process.env.CI,
   // /* Retry on CI only */
@@ -42,10 +42,9 @@ export default defineConfig({
     //   name: 'Google Chrome',
     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' }, // or 'chrome-beta'
     // },
-
     {
-      name: 'Mobile Chrome',
-      use: { ...devices['Galaxy Note 3'] },
+      name: 'webkit',
+      use: { ...devices['iPhone 12'] },
     },
 
     /* Test against mobile viewports. */
