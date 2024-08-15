@@ -54,7 +54,8 @@ jobs:
         id: turbo-check
         run: |
           pnpx turbo-ignore @bottlesteam/e2e --task=test:e2e
-
+       continue-on-error: true
+       
       - name: Set CI status
         if: steps.turbo-check.outputs.changed != 'true'
         run: echo "No changes detected. Skipping CI."
