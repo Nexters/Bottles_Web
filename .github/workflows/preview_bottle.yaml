@@ -37,7 +37,7 @@ jobs:
       - run: pnpm install
       - name: Get installed Playwright version
         id: playwright-version
-        run: echo "PLAYWRIGHT_VERSION=1.46" >> $GITHUB_ENV
+        run: echo "PLAYWRIGHT_VERSION=1.46.1" >> $GITHUB_ENV
       - name: Cache playwright binaries
         uses: actions/cache@v4
         id: playwright-cache
@@ -46,6 +46,8 @@ jobs:
             ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
       - run: pnpx playwright install --with-deps
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+      - run: npx playwright install-deps
         if: steps.playwright-cache.outputs.cache-hit != 'true'
       - name: create dotenv
         run: |
