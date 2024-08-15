@@ -50,9 +50,9 @@ jobs:
           echo "NEXT_PUBLIC_SERVER_BASE_URL=${{ secrets.NEXT_PUBLIC_SERVER_BASE_URL }}" >> apps/bottle/.env.local
         env:
           NEXT_PUBLIC_SERVER_BASE_URL: ${{ secrets.NEXT_PUBLIC_SERVER_BASE_URL }}
-      - run: npx playwright install
+      - run: pnpx playwright install
         if: steps.playwright-cache.outputs.cache-hit != 'true'
-      - run: npx playwright install-deps
+      - run: pnpx playwright install-deps
       - run: pnpm run ci
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
