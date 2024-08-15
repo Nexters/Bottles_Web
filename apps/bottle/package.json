@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "test": "vitest run",
-    "test:e2e": "playwright test",
+    "test:e2e-dev": "playwright test",
+    "test:e2e": "start-server-and-test \"pnpm build && pnpm start\" http://localhost:3000 test:e2e-dev",
     "e2e:show-report": "playwright show-report",
     "e2e:ui": "playwright test --ui"
   },
@@ -21,7 +22,8 @@
     "next": "14.2.4",
     "overlay-kit": "^1.3.0",
     "react": "^18.3.1",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "start-server-and-test": "^2.0.5"
   },
   "devDependencies": {
     "@bottlesteam/eslint-config": "workspace:*",

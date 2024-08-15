@@ -12,9 +12,17 @@ type Props = {
 export async function ServerFetchBoundary({ fetchOptions, children }: Props) {
   const queryClient = getQueryClient();
 
-  Array.isArray(fetchOptions)
-    ? Promise.all(fetchOptions.map(prefetchOption => queryClient.fetchQuery(prefetchOption)))
-    : queryClient.fetchQuery(fetchOptions);
+  if (Array.isArray(fetchOptions)) {
+    for (const option of fetchOptions) {
+      await queryClient.prefetchQuery(option);
+    }
+  } else {
+    await queryClient.prefetchQuery(fetchOptions);
+  }
+
+  // Array.isArray(fetchOptions)
+  //   ? await Promise.all(fetchOptions.map(prefetchOption => queryClient.prefetchQuery(prefetchOption)))
+  //   : await queryClient.prefetchQuery(fetchOptions);
 
   return <HydrationBoundary state={dehydrate(queryClient)}>{children}</HydrationBoundary>;
 }
