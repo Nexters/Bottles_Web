@@ -17,7 +17,7 @@ test('Create Profile Funnel Basic Flow', async ({ page }) => {
     const SButton = page.getByRole('button', { name: 'S', exact: true });
     const FButton = page.getByRole('button', { name: 'F', exact: true });
     const JButton = page.getByRole('button', { name: 'J', exact: true });
-    expect(EButton).toBeVisible();
+
     await EButton.click();
     await SButton.click();
     await FButton.click();
@@ -109,7 +109,7 @@ test('Create Profile Funnel Basic Flow', async ({ page }) => {
 
     await page.waitForURL('**/create-profile?step=9');
   });
-  await test.step('Select region and move to step 9', async () => {
+  await test.step('Select region and move to step 10', async () => {
     const cityPlaceholder = page.getByText('전체 지역을 선택해 주세요');
     const statePlaceholder = page.getByText('상세 지역을 선택해 주세요');
 
@@ -129,11 +129,6 @@ test('Create Profile Funnel Basic Flow', async ({ page }) => {
     await nextButtonText.click();
 
     await page.waitForURL('**/create-profile?step=10');
-
-    // const nextButtonText = page.getByText('다음');
-    // await nextButtonText.click();
-
-    // await page.waitForURL('**/create-profile?step=9');
   });
 });
 
