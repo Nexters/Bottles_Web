@@ -63,7 +63,6 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit != 'true'
       - run: pnpx playwright install-deps
         if: steps.turbo_check.outputs.changed == 'true'
-        if: pnpx turbo-ignore
       - run: pnpm run ci
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
