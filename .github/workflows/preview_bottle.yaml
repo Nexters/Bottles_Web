@@ -35,13 +35,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-turbo-
       - run: pnpm install
-      - name: Cache playwright binaries
-        uses: actions/cache@v3
-        id: playwright-cache
-        with:
-          path: |
-            ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
       - run: pnpx playwright install --with-deps
       - run: pnpm run build
       - name: create dotenv
