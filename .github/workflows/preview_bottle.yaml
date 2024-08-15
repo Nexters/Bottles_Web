@@ -4,6 +4,7 @@ env:
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_BOTTLE }}
   TURBO_TOKEN: ${{ secrets.VERCEL_ACCESS_TOKEN }}
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+  NEXT_PUBLIC_SERVER_BASE_URL: ${{secrets.NEXT_PUBLIC_SERVER_BASE_URL }}
 on:
   push:
     branches-ignore:
@@ -33,6 +34,14 @@ jobs:
             ${{ runner.os }}-turbo-
       - run: pnpm install
       - run: pnpx playwright install chromium
+      - name: create dotenv
+      - run: |
+          touch apps/bottle/.env.local
+          echo "TEST_ACCESS_TOKEN=${{ secrets.TEST_ACCESS_TOKEN }}" >> apps/bottle/.env.local
+          echo "TEST_REFRESH_TOKEN=${{ secrets.TEST_REFRESH_TOKEN }}" >> apps/bottle/.env.local
+          echo "NEXT_PUBLIC_SERVER_BASE_URL=${{ secrets.NEXT_PUBLIC_SERVER_BASE_URL }}" >> apps/bottle/.env.local
+        env:
+          NEXT_PUBLIC_SERVER_BASE_URL: ${{ secrets.NEXT_PUBLIC_SERVER_BASE_URL }}
       - run: pnpm run ci
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
