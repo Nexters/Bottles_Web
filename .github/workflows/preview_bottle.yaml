@@ -38,7 +38,7 @@ jobs:
             ${{ runner.os }}-turbo-
       - run: pnpm install
       - run: pnpm run build
-      - run: pnpx playwright install-deps
+      - run: pnpx playwright install --with-deps
       - name: create dotenv
         run: |
           touch apps/bottle/.env.local
