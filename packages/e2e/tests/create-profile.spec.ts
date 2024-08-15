@@ -6,6 +6,8 @@ dotenv.config({ path: path.resolve(__dirname, '..', '.env.local') });
 
 const tokenParams = `accessToken=${process.env.TEST_ACCESS_TOKEN}&refreshToken=${process.env.TEST_REFRESH_TOKEN}`;
 
+console.log('[debug]', `?? + ${process.env.NEXT_PUBLIC_SERVER_BASE_URL}`);
+
 test('Create Profile Funnel Basic Flow', async ({ page }) => {
   await test.step('Set MBTI and move to step 2', async () => {
     await page.goto(`/create-profile?${tokenParams}`);
@@ -15,6 +17,7 @@ test('Create Profile Funnel Basic Flow', async ({ page }) => {
     const SButton = page.getByRole('button', { name: 'S', exact: true });
     const FButton = page.getByRole('button', { name: 'F', exact: true });
     const JButton = page.getByRole('button', { name: 'J', exact: true });
+    expect(EButton).toBeVisible();
     await EButton.click();
     await SButton.click();
     await FButton.click();
