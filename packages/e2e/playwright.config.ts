@@ -46,6 +46,10 @@ export default defineConfig({
       name: 'webkit',
       use: { ...devices['iPhone 12'] },
     },
+    {
+      name: 'Mobile Chrome',
+      use: { ...devices['Galaxy Note 3'] },
+    },
 
     /* Test against mobile viewports. */
     // {
