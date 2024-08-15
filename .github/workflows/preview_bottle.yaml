@@ -38,6 +38,7 @@ jobs:
             ${{ runner.os }}-turbo-
       - run: pnpm install
       - run: pnpm run build
+      - run: pnpm exec install-deps
       - name: create dotenv
         run: |
           touch apps/bottle/.env.local
