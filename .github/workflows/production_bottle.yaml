@@ -47,7 +47,7 @@ jobs:
               "embeds": [
                 {
                   "title": "🎉 Bottle 배포 완료! 🎉",
-                  "description": "👉 https://bottles.asia",
+                  "description": "👉 https://bottle.bottles.asia",
                   "color": 65280
                 }
               ]
