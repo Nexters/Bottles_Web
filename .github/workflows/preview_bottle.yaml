@@ -35,7 +35,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-turbo-
       - run: pnpm install
-      - run: pnpm exec playwright install
+      - run: pnpx playwright install --with-deps
       - run: pnpm run build
       - name: create dotenv
         run: |
