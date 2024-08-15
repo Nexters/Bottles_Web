@@ -18,15 +18,12 @@
     "next": "14.2.4",
     "overlay-kit": "^1.3.0",
     "react": "^18.3.1",
-    "start-server-and-test": "^2.0.5",
     "react-dom": "^18"
   },
   "devDependencies": {
     "@bottlesteam/eslint-config": "workspace:*",
     "@bottlesteam/typescript-config": "workspace:*",
     "@bottlesteam/vitest-config": "workspace:*",
-    "@playwright/test": "^1.46.0",
-    "dotenv": "^16.4.5",
     "@svgr/webpack": "^8.1.0",
     "@testing-library/jest-dom": "^6.4.8",
     "@testing-library/react": "^16.0.0",
