@@ -5,6 +5,8 @@ env:
   TURBO_TOKEN: ${{ secrets.VERCEL_ACCESS_TOKEN }}
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
   NEXT_PUBLIC_SERVER_BASE_URL: ${{secrets.NEXT_PUBLIC_SERVER_BASE_URL }}
+  TEST_ACCESS_TOKEN: ${{secrets.TEST_ACCESS_TOKEN }}
+  TEST_REFRESH_TOKEN: ${{secrets.TEST_REFRESH_TOKEN }}
 on:
   push:
     branches-ignore:
