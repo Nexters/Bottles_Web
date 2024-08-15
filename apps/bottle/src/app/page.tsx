@@ -2,7 +2,6 @@ import { Step } from '@/features/steps/StepContainer';
 import { Asset } from '@bottlesteam/ui';
 
 export default function Home() {
-  // for test commit
   return (
     <div>
       <div style={{ width: '100%', height: '200vh', display: 'flex', alignItems: 'flex-end', marginBottom: '300px' }}>
