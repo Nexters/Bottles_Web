@@ -37,7 +37,7 @@ jobs:
       - run: pnpm install
       - run: pnpx playwright install chromium
       - name: create dotenv
-      - run: |
+        run: |
           touch apps/bottle/.env.local
           echo "TEST_ACCESS_TOKEN=${{ secrets.TEST_ACCESS_TOKEN }}" >> apps/bottle/.env.local
           echo "TEST_REFRESH_TOKEN=${{ secrets.TEST_REFRESH_TOKEN }}" >> apps/bottle/.env.local
