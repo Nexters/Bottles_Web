@@ -45,7 +45,7 @@ jobs:
           path: |
             ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
-      - run: pnpx playwright install-deps webkit
+      - run: pnpx playwright install-deps webkit chromium
       - run: pnpm run build
       - name: create dotenv
         run: |
