@@ -9,7 +9,7 @@
     "lint": "next lint",
     "test": "vitest run",
     "test:e2e-dev": "playwright test",
-    "test:e2e": "start-server-and-test \"pnpm build && pnpm start\" http://localhost:3000 test:e2e-dev",
+    "test:e2e": "start-server-and-test \"pnpm start\" http://localhost:3000 test:e2e-dev",
     "e2e:show-report": "playwright show-report",
     "e2e:ui": "playwright test --ui"
   },
