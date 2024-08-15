@@ -50,11 +50,20 @@ jobs:
           echo "NEXT_PUBLIC_SERVER_BASE_URL=${{ secrets.NEXT_PUBLIC_SERVER_BASE_URL }}" >> apps/bottle/.env.local
         env:
           NEXT_PUBLIC_SERVER_BASE_URL: ${{ secrets.NEXT_PUBLIC_SERVER_BASE_URL }}
-      - name: Check for changes using Turbo
-        id: turbo-check
+      - name: Check for changes in package A using turbo
+        id: turbo_check
         run: |
-          pnpx turbo-ignore @bottlesteam/e2e --task=test:e2e
-        continue-on-error: true
+          pnpx turbo run build --filter="A...[HEAD^]" --dry-run=json > result.json
+          cat result.json
+
+      - name: Determine if A package has changes
+        id: determine_changes
+        run: |
+          if grep -q '"tasks": {}' result.json; then
+            echo "changed=false" >> $GITHUB_ENV
+          else
+            echo "changed=true" >> $GITHUB_ENV
+          fi
 
       - name: Set CI status
         if: steps.turbo-check.outputs.changed != 'true'
@@ -63,7 +72,7 @@ jobs:
       - run: pnpx playwright install
         if: steps.playwright-cache.outputs.cache-hit != 'true'
       - run: pnpx playwright install-deps
-        if: steps.turbo_check.outputs.changed == 'true'
+        if: env.changed == 'true'
       - run: pnpm run ci
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
