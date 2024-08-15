@@ -132,7 +132,7 @@ test('Create Profile Funnel Basic Flow', async ({ page }) => {
   });
 });
 
-test('Previously selected values should be kept when going back between steps.', async ({ page }) => {
+test('Previously selected values should be kept when going back between steps. ', async ({ page }) => {
   await test.step('Set MBTI and move to step 2', async () => {
     await page.goto(`/create-profile?${tokenParams}`);
 
