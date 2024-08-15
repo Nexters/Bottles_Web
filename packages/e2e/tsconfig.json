@@ -1,0 +1,8 @@
+{
+  "extends": "@bottlesteam/typescript-config/react-library.json",
+  "ts-node": {
+    "esm": true
+  },
+  "include": ["tests", "playwright.config.ts"],
+  "exclude": ["node_modules"]
+}

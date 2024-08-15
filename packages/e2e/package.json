@@ -1,0 +1,22 @@
+{
+  "name": "@bottlesteam/e2e",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test:dev": "playwright test",
+    "test:e2e": "start-server-and-test \"(cd ../../apps/bottle && pnpm run start)\" http://localhost:3000 \"playwright test\""
+  },
+  "dependencies": {
+    "@bottlesteam/eslint-config": "workspace:*",
+    "@bottlesteam/typescript-config": "workspace:*",
+    "@bottlesteam/bottle": "workspace:*",
+    "start-server-and-test": "^2.0.5",
+    "@playwright/test": "^1.46.0",
+    "dotenv": "^16.4.5",
+    "eslint": "^8"
+  }
+}
