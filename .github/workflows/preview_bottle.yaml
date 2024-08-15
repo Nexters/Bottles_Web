@@ -55,7 +55,6 @@ jobs:
         run: |
           pnpx turbo run test:e2e --filter=@bottlesteam/e2e... --dry-run=json > result.json
           cat result.json
-
       - name: Determine if A package has changes
         id: determine_changes
         run: |
