@@ -14,6 +14,8 @@ on:
 jobs:
   Deploy-Preview:
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.46.0-jammy
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v3
@@ -36,7 +38,7 @@ jobs:
             ${{ runner.os }}-turbo-
       - run: pnpm install
       - run: pnpm run build
-      - run: pnpx playwright install --with-deps
+      - run: pnpx playwright install-deps
       - name: create dotenv
         run: |
           touch apps/bottle/.env.local
