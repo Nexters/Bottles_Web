@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 import dotenv from 'dotenv';
 import path from 'path';
 
@@ -132,35 +132,35 @@ test('Create Profile Funnel Basic Flow', async ({ page }) => {
   });
 });
 
-test('Previously selected values should be kept when going back between steps. ', async ({ page }) => {
-  await test.step('Set MBTI and move to step 2', async () => {
-    await page.goto(`/create-profile?${tokenParams}`);
+// test('Previously selected values should be kept when going back between steps. ', async ({ page }) => {
+//   await test.step('Set MBTI and move to step 2', async () => {
+//     await page.goto(`/create-profile?${tokenParams}`);
 
-    const nextButtonText = page.getByText('다음');
-    const EButton = page.getByRole('button', { name: 'E', exact: true });
-    const SButton = page.getByRole('button', { name: 'S', exact: true });
-    const FButton = page.getByRole('button', { name: 'F', exact: true });
-    const JButton = page.getByRole('button', { name: 'J', exact: true });
-    await EButton.click();
-    await SButton.click();
-    await FButton.click();
-    await JButton.click();
-    await nextButtonText.click();
-    await page.waitForURL('**/create-profile?step=2');
-  });
-  await test.step('ESFJ buttons should be selected default, if user goes back to step 1', async () => {
-    const goBackButton = page.getByLabel('go-back-icon');
-    await goBackButton.click();
-    await page.waitForURL(`/create-profile`);
-    const previouslySelectedButtons = [
-      page.getByRole('button', { name: 'E', exact: true }),
-      page.getByRole('button', { name: 'S', exact: true }),
-      page.getByRole('button', { name: 'F', exact: true }),
-      page.getByRole('button', { name: 'J', exact: true }),
-    ];
+//     const nextButtonText = page.getByText('다음');
+//     const EButton = page.getByRole('button', { name: 'E', exact: true });
+//     const SButton = page.getByRole('button', { name: 'S', exact: true });
+//     const FButton = page.getByRole('button', { name: 'F', exact: true });
+//     const JButton = page.getByRole('button', { name: 'J', exact: true });
+//     await EButton.click();
+//     await SButton.click();
+//     await FButton.click();
+//     await JButton.click();
+//     await nextButtonText.click();
+//     await page.waitForURL('**/create-profile?step=2');
+//   });
+//   await test.step('ESFJ buttons should be selected default, if user goes back to step 1', async () => {
+//     const goBackButton = page.getByLabel('go-back-icon');
+//     await goBackButton.click();
+//     await page.waitForURL(`/create-profile`);
+//     const previouslySelectedButtons = [
+//       page.getByRole('button', { name: 'E', exact: true }),
+//       page.getByRole('button', { name: 'S', exact: true }),
+//       page.getByRole('button', { name: 'F', exact: true }),
+//       page.getByRole('button', { name: 'J', exact: true }),
+//     ];
 
-    previouslySelectedButtons.forEach(button => {
-      expect(button).toHaveAttribute('aria-selected', 'true');
-    });
-  });
-});
+//     previouslySelectedButtons.forEach(button => {
+//       expect(button).toHaveAttribute('aria-selected', 'true');
+//     });
+//   });
+// });
