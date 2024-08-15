@@ -18,5 +18,8 @@
   "packageManager": "pnpm@8.15.6",
   "engines": {
     "node": ">=18"
+  },
+  "dependencies": {
+    "turbo-ignore": "^2.0.14"
   }
 }

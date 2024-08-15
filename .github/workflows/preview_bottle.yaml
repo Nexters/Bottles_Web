@@ -50,9 +50,20 @@ jobs:
           echo "NEXT_PUBLIC_SERVER_BASE_URL=${{ secrets.NEXT_PUBLIC_SERVER_BASE_URL }}" >> apps/bottle/.env.local
         env:
           NEXT_PUBLIC_SERVER_BASE_URL: ${{ secrets.NEXT_PUBLIC_SERVER_BASE_URL }}
+      - name: Check for changes using Turbo
+        id: turbo-check
+        run: |
+          npx turbo-ignore e2e --task=test:e2e
+
+      - name: Set CI status
+        if: steps.turbo-check.outputs.changed != 'true'
+        run: echo "No changes detected. Skipping CI."
+        continue-on-error: true
       - run: pnpx playwright install
         if: steps.playwright-cache.outputs.cache-hit != 'true'
       - run: pnpx playwright install-deps
+        if: steps.turbo_check.outputs.changed == 'true'
+        if: pnpx turbo-ignore
       - run: pnpm run ci
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
