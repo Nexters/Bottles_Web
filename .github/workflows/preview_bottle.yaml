@@ -36,6 +36,7 @@ jobs:
             ${{ runner.os }}-turbo-
       - run: pnpm install
       - run: pnpx playwright install chromium
+      - run: pnpm run build
       - name: create dotenv
         run: |
           touch apps/bottle/.env.local
