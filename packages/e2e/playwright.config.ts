@@ -42,10 +42,7 @@ export default defineConfig({
     //   name: 'Google Chrome',
     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' }, // or 'chrome-beta'
     // },
-    {
-      name: 'webkit',
-      use: { ...devices['iPhone 12'] },
-    },
+
     {
       name: 'Mobile Chrome',
       use: { ...devices['Galaxy Note 3'] },
