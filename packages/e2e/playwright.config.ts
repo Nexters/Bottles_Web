@@ -16,6 +16,9 @@ export default defineConfig({
   timeout: 30000,
   fullyParallel: true,
 
+  retries: 2,
+  workers: 1,
+
   reporter: 'html',
   projects: [
     {
