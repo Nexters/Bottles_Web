@@ -43,7 +43,7 @@ jobs:
         id: playwright-cache
         with:
           path: |
-          ~/.cache/ms-playwright
+            ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
       - run: pnpx playwright install --with-deps
         if: steps.playwright-cache.outputs.cache-hit != 'true'
