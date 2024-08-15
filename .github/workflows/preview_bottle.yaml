@@ -49,6 +49,7 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit != 'true'
       - run: pnpx playwright install-deps
         if: steps.playwright-cache.outputs.cache-hit != 'true'
+      - run: sudo apt-get install libwoff1
       - run: pnpm run build
       - name: create dotenv
         run: |
