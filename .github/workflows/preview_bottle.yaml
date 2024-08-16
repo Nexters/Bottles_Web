@@ -53,16 +53,9 @@ jobs:
       - name: Check for changes in package A using turbo
         id: turbo_check
         run: |
-          pnpx turbo run test:e2e --filter=@bottlesteam/e2e... --dry-run=json > result.json
-          cat result.json
-      - name: Determine if A package has changes
-        id: determine_changes
-        run: |
-          if grep -q '"tasks": {}' result.json; then
-            echo "changed=false" >> $GITHUB_ENV
-          else
-            echo "changed=true" >> $GITHUB_ENV
-          fi
+          RESULT=$(pnpm exec turbo-ignore @bottlesteam/web build)
+          echo $RESULT
+        continue-on-error: true
 
       - name: Set CI status
         if: steps.turbo-check.outputs.changed != 'true'
