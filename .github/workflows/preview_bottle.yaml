@@ -53,7 +53,7 @@ jobs:
       - name: Check for changes in package A using turbo
         id: turbo_check
         run: |
-          RESULT=$(pnpm exec turbo-ignore @bottlesteam/web build)
+          RESULT=$(npx turbo-ignore @bottlesteam/web build)
           echo $RESULT
         continue-on-error: true
 
