@@ -50,21 +50,27 @@ jobs:
           echo "NEXT_PUBLIC_SERVER_BASE_URL=${{ secrets.NEXT_PUBLIC_SERVER_BASE_URL }}" >> apps/bottle/.env.local
         env:
           NEXT_PUBLIC_SERVER_BASE_URL: ${{ secrets.NEXT_PUBLIC_SERVER_BASE_URL }}
-      - name: Check for changes in package A using turbo
-        id: turbo_check
-        run: |
-          RESULT=$(npx turbo-ignore @bottlesteam/bottle)
-          echo $RESULT
-        continue-on-error: true
 
-      - name: Set CI status
-        if: steps.turbo-check.outputs.changed != 'true'
-        run: echo "No changes detected. Skipping CI."
-        continue-on-error: true
+      - name: Run turbo dry-run for build
+        id: turbo-dry-run
+        run: |
+          pnpm exec turbo run build --dry-run=json > result.json
+
+      - name: Check if @bottlesteam/bottle needs to be built
+        id: check-build
+        run: |
+          build_status=$(jq -r '.tasks[] | select(.taskId == "@bottlesteam/bottle#build") | .cache.status' result.json)
+          if [ "$build_status" == "MISS" ]; then
+            echo "needs_build=true" >> $GITHUB_ENV
+          else
+            echo "needs_build=false" >> $GITHUB_ENV
+          fi
+
       - run: pnpx playwright install
         if: steps.playwright-cache.outputs.cache-hit != 'true'
       - run: pnpx playwright install-deps
-        if: env.changed == 'true'
+        if: env.needs_build == 'true'
+        
       - run: pnpm run ci
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
