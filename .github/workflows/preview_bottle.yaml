@@ -50,28 +50,28 @@ jobs:
           echo "NEXT_PUBLIC_SERVER_BASE_URL=${{ secrets.NEXT_PUBLIC_SERVER_BASE_URL }}" >> apps/bottle/.env.local
         env:
           NEXT_PUBLIC_SERVER_BASE_URL: ${{ secrets.NEXT_PUBLIC_SERVER_BASE_URL }}
-
-      - name: Run turbo dry-run for build
-        id: turbo-dry-run
+      #here
+      - name: Determine build status for @bottlesteam/bottle
+        id: determine-status
         run: |
-          pnpm exec turbo run build --dry-run=json > result.json
+          # turbo run build --dry-run=json 명령어 실행 및 결과 저장
+          pnpx turbo run build --dry-run=json > result.json
 
-      - name: Check if @bottlesteam/bottle needs to be built
-        id: check-build
-        run: |
+          # jq 명령어를 사용하여 @bottlesteam/bottle 패키지의 빌드 필요 여부 확인
           build_status=$(jq -r '.tasks[] | select(.taskId == "@bottlesteam/bottle#build") | .cache.status' result.json)
-          if [ "$build_status" == "MISS" ]; then
-            echo "needs_build=true" >> $GITHUB_ENV
-          else
-            echo "needs_build=false" >> $GITHUB_ENV
-          fi
 
+          echo "Build status for @bottlesteam/bottle: $build_status"
+
+          # Set the build_status as an output variable for the job
+          echo "::set-output name=build_status::$build_status"
+
+      #to here
       - run: pnpx playwright install
         if: steps.playwright-cache.outputs.cache-hit != 'true'
       - run: pnpx playwright install-deps
-        if: env.needs_build == 'true'
-        
+
       - run: pnpm run ci
+        if: steps.determine-status.outputs.build_status == 'MISS'
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
       - name: Pull Vercel Environment Information
