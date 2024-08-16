@@ -78,14 +78,14 @@ jobs:
           exit 0
 
       - name: Deploy to Vercel if needed
-        if: steps.determine-status.outputs.build_status != 'MISS'
+        if: steps.determine-status.outputs.build_status == 'MISS'
         run: |
           npm install --global vercel@latest
           vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
           vercel build --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
           vercel deploy --prebuilt --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
       - name: Get Vercel Preview
-        if: steps.determine-status.outputs.build_status != 'MISS'
+        if: steps.determine-status.outputs.build_status == 'MISS'
         uses: zentered/vercel-preview-url@v1.1.9
         id: vercel_preview_url
         env:
@@ -93,10 +93,10 @@ jobs:
         with:
           vercel_project_id: ${{ secrets.VERCEL_PROJECT_ID_BOTTLE }}
       - name: Get URL
-        if: steps.determine-status.outputs.build_status != 'MISS'
+        if: steps.determine-status.outputs.build_status == 'MISS'
         run: echo "https://${{ steps.vercel_preview_url.outputs.preview_url }}"
       - name: Send Discord Notification
-        if: steps.determine-status.outputs.build_status != 'MISS'
+        if: steps.determine-status.outputs.build_status == 'MISS'
         env:
           DATA: |
             {
