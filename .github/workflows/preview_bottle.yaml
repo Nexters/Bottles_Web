@@ -50,7 +50,7 @@ jobs:
           echo "NEXT_PUBLIC_SERVER_BASE_URL=${{ secrets.NEXT_PUBLIC_SERVER_BASE_URL }}" >> apps/bottle/.env.local
         env:
           NEXT_PUBLIC_SERVER_BASE_URL: ${{ secrets.NEXT_PUBLIC_SERVER_BASE_URL }}
-      #here
+      #Determine whether to build @bottlesteam/bottle
       - name: Determine build status for @bottlesteam/bottle
         id: determine-status
         run: |
@@ -69,13 +69,20 @@ jobs:
       - run: pnpx playwright install
         if: steps.playwright-cache.outputs.cache-hit != 'true'
       - run: pnpx playwright install-deps
-
       - run: pnpm run ci
-        if: steps.determine-status.outputs.build_status == 'MISS'
+
+      - name: Exit without error if no build needed
+        if: steps.determine-status.outputs.build_status != 'MISS'
+        run: |
+          echo "No need to build @bottlesteam/bottle. Exiting..."
+          exit 0
+
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
+        if: steps.determine-status.outputs.build_status == 'MISS'
       - name: Pull Vercel Environment Information
         run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+
       - name: Build Project Artifacts
         run: vercel build --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
       - name: Deploy Project Artifacts to Vercel
