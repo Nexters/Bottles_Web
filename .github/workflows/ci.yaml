@@ -56,7 +56,8 @@ jobs:
 
       - name: Cache Status Print
         run: |
-          echo build_status_bottle: $steps.determine-status.outputs.build_status_bottle
+          echo "build_status_bottle: ${{ steps.determine-status.outputs.build_status_bottle }}"
+          echo "build_status_web: ${{ steps.determine-status.outputs.build_status_web }}"
 
       # install playwright browsers if it is not cached
       - run: pnpx playwright install
