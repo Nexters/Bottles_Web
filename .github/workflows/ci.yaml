@@ -44,8 +44,30 @@ jobs:
         env:
           NEXT_PUBLIC_SERVER_BASE_URL: ${{ secrets.NEXT_PUBLIC_SERVER_BASE_URL }}
 
-      # install playwright dependencies and browsers
-      - run: pnpx playwright install --with-deps
+      # determine whether @bottlesteam/bottle is cached on remote
+      - name: Determine build status for @bottlesteam/bottle
+        id: determine-status
+        run: |
+          pnpx turbo run build --dry-run=json > result.json
+          build_status=$(jq -r '.tasks[] | select(.taskId == "@bottlesteam/bottle#build") | .cache.status' result.json)
+          echo "::set-output name=build_status::$build_status"
+
+      # install playwright browsers if it is not cached
+      - run: pnpx playwright install
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+
+      # install playwright depedencies (NOTE: this is not cache-able)
+      - run: pnpx playwright install-deps
+        if: steps.determine-status.outputs.build_status == 'MISS'
 
       # run turbo tasks
       - run: pnpm run ci
+
+      # Save build_status as an artifact
+      - name: Save build status as artifact
+        run: echo ${{ steps.determine-status.outputs.build_status }} > build_status.txt
+      - name: Upload build status artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-status
+          path: build_status.txt

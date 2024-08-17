@@ -2,7 +2,7 @@ name: Deploy Bottle to Vercel
 
 on:
   workflow_run:
-    workflows: ["Run Turbo Tasks"]
+    workflows: [Run Turbo Tasks]
     types:
       - completed
 
@@ -13,14 +13,27 @@ jobs:
       # checkout and setup (이전 워크플로우에서 이미 설치한 pnpm 등을 재설치할 필요 없음)
       - uses: actions/checkout@v4
 
+      - name: Download build status artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: build-status
+
+      - name: Read build status
+        id: read-status
+        run: |
+          build_status=$(cat build_status.txt)
+          echo "build_status=$build_status" >> $GITHUB_ENV
+
       # deploy Bottle to vercel
       - name: Deploy Bottle to Vercel
+        if: env.build_status == 'MISS'
         run: |
           npm install --global vercel@latest
           vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
           vercel build --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
           vercel deploy --prebuilt --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
       - name: Get Bottle Preview
+        if: env.build_status == 'MISS'
         uses: zentered/vercel-preview-url@v1.1.9
         id: vercel_preview_url
         env:
@@ -28,8 +41,10 @@ jobs:
         with:
           vercel_project_id: ${{ secrets.VERCEL_PROJECT_ID_BOTTLE }}
       - name: Get Bottle preview URL
+        if: env.build_status == 'MISS'
         run: echo "https://${{ steps.vercel_preview_url.outputs.preview_url }}"
       - name: Send Bottle Discord Notification
+        if: env.build_status == 'MISS'
         env:
           DATA: |
             {

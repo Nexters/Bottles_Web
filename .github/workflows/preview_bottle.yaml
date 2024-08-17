@@ -72,6 +72,7 @@ on:
 
       # install playwright depedencies (NOTE: this is not cache-able)
       - run: pnpx playwright install-deps
+        if: steps.determine-status.outputs.build_status == 'MISS'
 
       # run turbo tasks
       - run: pnpm run ci
