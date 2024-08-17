@@ -1,4 +1,4 @@
-name: Parallel Run
+name: Parallel Run - Preview
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   TURBO_TOKEN: ${{ secrets.VERCEL_ACCESS_TOKEN }}
@@ -32,15 +32,6 @@ jobs:
         with:
           node-version: 20
           cache: 'pnpm'
-
-      # playwright browsers cache setup
-      - name: Cache playwright binaries
-        uses: actions/cache@v3
-        id: playwright-cache
-        with:
-          path: |
-            ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-14
 
       # install dependencies
       - run: npx pnpm i -r
