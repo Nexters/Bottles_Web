@@ -10,7 +10,7 @@ export default function Home() {
   // test commit
   return (
     <div className={layoutStyle}>
-      FINAL TEST5
+      FINAL TEST2
       <main className={mainStyle}>
         <Header />
         <Info />

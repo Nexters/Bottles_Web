@@ -1,4 +1,4 @@
-name: Parallel Run - Preview
+name: Preview CI
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   TURBO_TOKEN: ${{ secrets.VERCEL_ACCESS_TOKEN }}
