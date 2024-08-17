@@ -97,6 +97,21 @@ jobs:
     needs: Setup
     if: needs.Setup.outputs.build_status_bottle == 'MISS'
     steps:
+      # checkout and install pnpm
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 8
+          run_install: false
+      # setup node
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
       - name: Deploy to Vercel if needed
         run: |
           npm install --global vercel@latest
