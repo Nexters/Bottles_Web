@@ -5,7 +5,7 @@ import '@bottlesteam/ui/styles';
 
 export const metadata: Metadata = {
   title: 'Bottle',
-  description: '당신의 연애 상담을 위한, 보틀',
+  description: '당신의 연애, 보틀',
 };
 
 export default function RootLayout({
