@@ -9,6 +9,7 @@ import { layoutStyle, mainStyle } from './layout.css';
 export default function Home() {
   return (
     <div className={layoutStyle}>
+      TEST!
       <main className={mainStyle}>
         <Header />
         <Info />
