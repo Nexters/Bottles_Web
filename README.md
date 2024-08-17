@@ -20,6 +20,14 @@ This Turborepo includes the following packages/apps:
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
+### Install Dependencies
+
+To install dependencies for all apps and packages, run the following command:
+
+```
+pnpm install
+```
+
 ### Build
 
 To build all apps and packages, run the following command:
@@ -36,9 +44,9 @@ To develop all apps and packages, run the following command:
 pnpx turbo run dev
 ```
 
-### Develop
+### Test
 
-To develop all apps and packages, run the following command:
+To test apps, run the following command:
 
 ```
 pnpx turbo run test
