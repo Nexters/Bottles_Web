@@ -1,7 +1,7 @@
 name: Parallel Run
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_BOTTLE }}
   VERCEL_PROJECT_ID_WEB: ${{ secrets.VERCEL_PROJECT_ID }}
   TURBO_TOKEN: ${{ secrets.VERCEL_ACCESS_TOKEN }}
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
