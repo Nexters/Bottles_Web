@@ -75,15 +75,13 @@ jobs:
       # Trigger the next workflow
       - name: Trigger Deploy Workflows
         run: |
-          if [ "${{ steps.determine-status.outputs.build_status }}" == "MISS" ]; then
-            curl -X POST \
-              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-              -H "Accept: application/vnd.github.v3+json" \
-              https://api.github.com/repos/${{ github.repository }}/dispatches \
-              -d '{"event_type":"deploy_bottle"}'
-            curl -X POST \
-              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-              -H "Accept: application/vnd.github.v3+json" \
-              https://api.github.com/repos/${{ github.repository }}/dispatches \
-              -d '{"event_type":"deploy_web"}'
-          fi
+          curl -X POST \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/${{ github.repository }}/dispatches \
+            -d '{"event_type":"deploy_bottle"}'
+          curl -X POST \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/${{ github.repository }}/dispatches \
+            -d '{"event_type":"deploy_web"}'
