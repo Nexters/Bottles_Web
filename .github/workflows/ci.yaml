@@ -65,7 +65,7 @@ jobs:
       # run turbo tasks
       - run: pnpm run ci
 
-  Deploy Bottle to Vercel:
+  Deploy_Bottle_to_Vercel:
     # deploy Bottle to vercel
     runs-on: ubuntu-latest
     needs: Setup
@@ -104,7 +104,7 @@ jobs:
           -d "$DATA" \
           ${{ secrets.DISCORD_WEBHOOK_URL }}
 
-  Deploy Web to Vercel:
+  Deploy_Web_to_Vercel:
     # deploy Web to vercel
     runs-on: ubuntu-latest
     needs: Setup
