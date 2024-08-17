@@ -1,0 +1,48 @@
+name: Deploy Web to Vercel
+
+on:
+  workflow_run:
+    workflows: ["Run Turbo Tasks"]
+    types:
+      - completed
+
+jobs:
+  Deploy-Web:
+    runs-on: ubuntu-latest
+    steps:
+      # checkout and setup (이전 워크플로우에서 이미 설치한 pnpm 등을 재설치할 필요 없음)
+      - uses: actions/checkout@v4
+
+      # deploy Web to vercel
+      - name: Deploy Web to Vercel
+        run: |
+          npm install --global vercel@latest
+          vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+          vercel build --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+          vercel deploy --prebuilt --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+      - name: Get Web Preview
+        uses: zentered/vercel-preview-url@v1.1.9
+        id: vercel_preview_url_web
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_ACCESS_TOKEN }}
+        with:
+          vercel_project_id: ${{ secrets.VERCEL_PROJECT_ID }}
+      - name: Get Web preview URL
+        run: echo "https://${{ steps.vercel_preview_url_web.outputs.preview_url }}"
+      - name: Send Web Discord Notification
+        env:
+          DATA: |
+            {
+              "content": "<@stakbucks>",
+              "embeds": [
+                {
+                  "title": "👀 Web 미리보기가 준비되었어요",
+                  "description": "👉 https://${{ steps.vercel_preview_url_web.outputs.preview_url }}",
+                  "color": 65280
+                }
+              ]
+            }
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          -d "$DATA" \
+          ${{ secrets.DISCORD_WEBHOOK_URL }}

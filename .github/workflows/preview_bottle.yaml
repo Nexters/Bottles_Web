@@ -12,10 +12,11 @@ on:
     branches-ignore:
       - main
       - chore/ci-test
-jobs:
+  jobs:
   Deploy-Preview:
     runs-on: ubuntu-latest
     steps:
+      # checkout and install pnpm
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v3
         name: Install pnpm
@@ -23,11 +24,13 @@ jobs:
         with:
           version: 8
           run_install: false
+      # setup node
       - name: Setup Node.js environment
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'pnpm'
+      # turbo cache setup
       - name: Cache turbo build setup
         uses: actions/cache@v4
         with:
@@ -35,6 +38,7 @@ jobs:
           key: ${{ runner.os }}-turbo-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-turbo-
+      # playwright browsers cache setup
       - name: Cache playwright binaries
         uses: actions/cache@v3
         id: playwright-cache
@@ -42,7 +46,9 @@ jobs:
           path: |
             ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-14
+      # install dependencies
       - run: pnpm install
+      # dotenv
       - name: create dotenv
         run: |
           touch apps/bottle/.env.local
@@ -51,33 +57,34 @@ jobs:
           echo "NEXT_PUBLIC_SERVER_BASE_URL=${{ secrets.NEXT_PUBLIC_SERVER_BASE_URL }}" >> apps/bottle/.env.local
         env:
           NEXT_PUBLIC_SERVER_BASE_URL: ${{ secrets.NEXT_PUBLIC_SERVER_BASE_URL }}
-      #Determine whether to build @bottlesteam/bottle
+
+      # determine whether @bottlesteam/bottle is cached on remote
       - name: Determine build status for @bottlesteam/bottle
         id: determine-status
         run: |
-          # turbo run build --dry-run=json 명령어 실행 및 결과 저장
           pnpx turbo run build --dry-run=json > result.json
-
-          # jq 명령어를 사용하여 @bottlesteam/bottle 패키지의 빌드 필요 여부 확인
           build_status=$(jq -r '.tasks[] | select(.taskId == "@bottlesteam/bottle#build") | .cache.status' result.json)
-
-          echo "Build status for @bottlesteam/bottle: $build_status"
-
-          # Set the build_status as an output variable for the job
           echo "::set-output name=build_status::$build_status"
 
+      # install playwright browsers if it is not cached
       - run: pnpx playwright install
         if: steps.playwright-cache.outputs.cache-hit != 'true'
+
+      # install playwright depedencies (NOTE: this is not cache-able)
       - run: pnpx playwright install-deps
+
+      # run turbo tasks
       - run: pnpm run ci
 
+      # if @bottlesteam/bottle is cached, print that there is no need to build it
       - name: Exit without error if no build needed
         if: steps.determine-status.outputs.build_status != 'MISS'
         run: |
           echo "No need to build @bottlesteam/bottle. Exiting..."
           exit 0
 
-      - name: Deploy to Vercel if needed
+      # Deploy to Vercel
+      - name: Deploy Bottle to Vercel if needed
         if: steps.determine-status.outputs.build_status == 'MISS'
         run: |
           npm install --global vercel@latest
