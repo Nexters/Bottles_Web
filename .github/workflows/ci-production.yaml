@@ -13,10 +13,6 @@ on:
 jobs:
   Setup:
     runs-on: ubuntu-latest
-    outputs:
-      cache_status_bottle: ${{ steps.determine-status.outputs.cache_status_bottle }}
-      cache_status_web: ${{ steps.determine-status.outputs.cache_status_web }}
-      cache_status_e2e: ${{ steps.determine-status.outputs.cache_status_e2e }}
     steps:
       # checkout and install pnpm
       - uses: actions/checkout@v4
@@ -79,7 +75,6 @@ jobs:
     env:
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_BOTTLE }}
     needs: Setup
-    if: needs.Setup.outputs.cache_status_bottle == 'MISS'
     steps:
       # checkout and install pnpm
       - uses: actions/checkout@v4
@@ -127,7 +122,6 @@ jobs:
     env:
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_WEB }}
     needs: Setup
-    if: needs.Setup.outputs.cache_status_web == 'MISS'
     steps:
       # checkout and install pnpm
       - uses: actions/checkout@v4
