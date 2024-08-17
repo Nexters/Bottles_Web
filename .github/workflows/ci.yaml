@@ -1,0 +1,119 @@
+name: Preview Deployment - Bottle
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_BOTTLE }}
+  VERCEL_PROJECT_ID_WEB: ${{ secrets.VERCEL_PROJECT_ID }}
+  TURBO_TOKEN: ${{ secrets.VERCEL_ACCESS_TOKEN }}
+  TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+  NEXT_PUBLIC_SERVER_BASE_URL: ${{secrets.NEXT_PUBLIC_SERVER_BASE_URL }}
+  TEST_ACCESS_TOKEN: ${{secrets.TEST_ACCESS_TOKEN }}
+  TEST_REFRESH_TOKEN: ${{secrets.TEST_REFRESH_TOKEN }}
+on:
+  push:
+    branches-ignore:
+      - main
+jobs:
+  Deploy-Preview:
+    runs-on: ubuntu-latest
+    steps:
+      # checkout and install pnpm
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 8
+          run_install: false
+      # setup node
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      # install dependencies
+      - run: pnpm install
+
+      # dotenv
+      - name: create dotenv
+        run: |
+          touch apps/bottle/.env.local
+          echo "TEST_ACCESS_TOKEN=${{ secrets.TEST_ACCESS_TOKEN }}" >> apps/bottle/.env.local
+          echo "TEST_REFRESH_TOKEN=${{ secrets.TEST_REFRESH_TOKEN }}" >> apps/bottle/.env.local
+          echo "NEXT_PUBLIC_SERVER_BASE_URL=${{ secrets.NEXT_PUBLIC_SERVER_BASE_URL }}" >> apps/bottle/.env.local
+        env:
+          NEXT_PUBLIC_SERVER_BASE_URL: ${{ secrets.NEXT_PUBLIC_SERVER_BASE_URL }}
+
+      # install playwright dependencies and browsers
+      - run: pnpx playwright install --with-deps
+
+      # run turbo tasks
+      - run: pnpm run ci
+
+      # deploy Bottle to vercel
+      - name: Deploy to Vercel if needed
+        run: |
+          npm install --global vercel@latest
+          vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+          vercel build --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+          vercel deploy --prebuilt --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+      - name: Get Vercel Preview
+        uses: zentered/vercel-preview-url@v1.1.9
+        id: vercel_preview_url
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_ACCESS_TOKEN }}
+        with:
+          vercel_project_id: ${{ secrets.VERCEL_PROJECT_ID_BOTTLE }}
+      - name: Get URL
+        run: echo "https://${{ steps.vercel_preview_url.outputs.preview_url }}"
+      - name: Send Discord Notification
+        env:
+          DATA: |
+            {
+              "content": "<@stakbucks>",
+              "embeds": [
+                {
+                  "title": "👀 Bottle 미리보기가 준비되었어요",
+                  "description": "👉 https://${{ steps.vercel_preview_url.outputs.preview_url }}",
+                  "color": 65280
+                }
+              ]
+            }
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          -d "$DATA" \
+          ${{ secrets.DISCORD_WEBHOOK_URL }}
+
+      # deploy Web to vercel
+
+      - name: Deploy to Vercel if needed
+        run: |
+          vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+          vercel build --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+          vercel deploy --prebuilt --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+      - name: Get Vercel Preview
+        uses: zentered/vercel-preview-url@v1.1.9
+        id: vercel_preview_url_web
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_ACCESS_TOKEN }}
+        with:
+          vercel_project_id: ${{ secrets.VERCEL_PROJECT_ID }}
+      - name: Get URL
+        run: echo "https://${{ steps.vercel_preview_url_web.outputs.preview_url }}"
+      - name: Send Discord Notification
+        env:
+          DATA: |
+            {
+              "content": "<@stakbucks>",
+              "embeds": [
+                {
+                  "title": "👀 Web 미리보기가 준비되었어요",
+                  "description": "👉 https://${{ steps.vercel_preview_url_web.outputs.preview_url }}",
+                  "color": 65280
+                }
+              ]
+            }
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          -d "$DATA" \
+          ${{ secrets.DISCORD_WEBHOOK_URL }}
