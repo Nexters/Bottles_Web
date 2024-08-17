@@ -1,11 +1,8 @@
 {
   "extends": "@bottlesteam/typescript-config/react-library.json",
-  "compilerOptions": {
-    "types": ["vitest/globals"]
-  },
   "ts-node": {
     "esm": true
   },
-  "include": ["vitest.config.js"],
+  "include": ["tests", "playwright.config.ts"],
   "exclude": ["node_modules"]
 }

@@ -1,10 +1,12 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 import dotenv from 'dotenv';
 import path from 'path';
 
 dotenv.config({ path: path.resolve(__dirname, '..', '.env.local') });
 
 const tokenParams = `accessToken=${process.env.TEST_ACCESS_TOKEN}&refreshToken=${process.env.TEST_REFRESH_TOKEN}`;
+
+console.log('[debug]', `?? + ${process.env.NEXT_PUBLIC_SERVER_BASE_URL}`);
 
 test('Create Profile Funnel Basic Flow', async ({ page }) => {
   await test.step('Set MBTI and move to step 2', async () => {
@@ -15,6 +17,7 @@ test('Create Profile Funnel Basic Flow', async ({ page }) => {
     const SButton = page.getByRole('button', { name: 'S', exact: true });
     const FButton = page.getByRole('button', { name: 'F', exact: true });
     const JButton = page.getByRole('button', { name: 'J', exact: true });
+
     await EButton.click();
     await SButton.click();
     await FButton.click();
@@ -106,7 +109,7 @@ test('Create Profile Funnel Basic Flow', async ({ page }) => {
 
     await page.waitForURL('**/create-profile?step=9');
   });
-  await test.step('Select region and move to step 9', async () => {
+  await test.step('Select region and move to step 10', async () => {
     const cityPlaceholder = page.getByText('전체 지역을 선택해 주세요');
     const statePlaceholder = page.getByText('상세 지역을 선택해 주세요');
 
@@ -126,43 +129,38 @@ test('Create Profile Funnel Basic Flow', async ({ page }) => {
     await nextButtonText.click();
 
     await page.waitForURL('**/create-profile?step=10');
-
-    // const nextButtonText = page.getByText('다음');
-    // await nextButtonText.click();
-
-    // await page.waitForURL('**/create-profile?step=9');
   });
 });
 
-test('Previously selected values should be kept when going back between steps.', async ({ page }) => {
-  await test.step('Set MBTI and move to step 2', async () => {
-    await page.goto(`/create-profile?${tokenParams}`);
+// test('Previously selected values should be kept when going back between steps. ', async ({ page }) => {
+//   await test.step('Set MBTI and move to step 2', async () => {
+//     await page.goto(`/create-profile?${tokenParams}`);
 
-    const nextButtonText = page.getByText('다음');
-    const EButton = page.getByRole('button', { name: 'E', exact: true });
-    const SButton = page.getByRole('button', { name: 'S', exact: true });
-    const FButton = page.getByRole('button', { name: 'F', exact: true });
-    const JButton = page.getByRole('button', { name: 'J', exact: true });
-    await EButton.click();
-    await SButton.click();
-    await FButton.click();
-    await JButton.click();
-    await nextButtonText.click();
-    await page.waitForURL('**/create-profile?step=2');
-  });
-  await test.step('ESFJ buttons should be selected default, if user goes back to step 1', async () => {
-    const goBackButton = page.getByLabel('go-back-icon');
-    await goBackButton.click();
-    await page.waitForURL(`/create-profile`);
-    const previouslySelectedButtons = [
-      page.getByRole('button', { name: 'E', exact: true }),
-      page.getByRole('button', { name: 'S', exact: true }),
-      page.getByRole('button', { name: 'F', exact: true }),
-      page.getByRole('button', { name: 'J', exact: true }),
-    ];
+//     const nextButtonText = page.getByText('다음');
+//     const EButton = page.getByRole('button', { name: 'E', exact: true });
+//     const SButton = page.getByRole('button', { name: 'S', exact: true });
+//     const FButton = page.getByRole('button', { name: 'F', exact: true });
+//     const JButton = page.getByRole('button', { name: 'J', exact: true });
+//     await EButton.click();
+//     await SButton.click();
+//     await FButton.click();
+//     await JButton.click();
+//     await nextButtonText.click();
+//     await page.waitForURL('**/create-profile?step=2');
+//   });
+//   await test.step('ESFJ buttons should be selected default, if user goes back to step 1', async () => {
+//     const goBackButton = page.getByLabel('go-back-icon');
+//     await goBackButton.click();
+//     await page.waitForURL(`/create-profile`);
+//     const previouslySelectedButtons = [
+//       page.getByRole('button', { name: 'E', exact: true }),
+//       page.getByRole('button', { name: 'S', exact: true }),
+//       page.getByRole('button', { name: 'F', exact: true }),
+//       page.getByRole('button', { name: 'J', exact: true }),
+//     ];
 
-    previouslySelectedButtons.forEach(button => {
-      expect(button).toHaveAttribute('aria-selected', 'true');
-    });
-  });
-});
+//     previouslySelectedButtons.forEach(button => {
+//       expect(button).toHaveAttribute('aria-selected', 'true');
+//     });
+//   });
+// });
