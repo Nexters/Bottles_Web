@@ -4,8 +4,8 @@ import './globals.css';
 import '@bottlesteam/ui/styles';
 
 export const metadata: Metadata = {
-  title: '보틀',
-  description: '당신의 마음을 전달하세요, 보틀',
+  title: 'Bottle',
+  description: '당신의 마음을 전달하세요: 보틀',
 };
 
 export default function RootLayout({

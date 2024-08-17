@@ -1,8 +1,7 @@
-name: Preview CI - Serial without cache
+name: Preview CI - Parellel
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   TURBO_TOKEN: ${{ secrets.VERCEL_ACCESS_TOKEN }}
-  TURBO_TEAM: ${{ vars.TURBO_TEAM }}
   NEXT_PUBLIC_SERVER_BASE_URL: ${{secrets.NEXT_PUBLIC_SERVER_BASE_URL }}
   TEST_ACCESS_TOKEN: ${{secrets.TEST_ACCESS_TOKEN }}
   TEST_REFRESH_TOKEN: ${{secrets.TEST_REFRESH_TOKEN }}
@@ -11,7 +10,7 @@ on:
     branches-ignore:
       - main
 jobs:
-  CI:
+  Setup:
     runs-on: ubuntu-latest
     steps:
       # checkout and install pnpm
@@ -32,7 +31,7 @@ jobs:
       # install dependencies
       - run: npx pnpm i -r
 
-      # dotenv
+      # set .env.local
       - name: create dotenv
         run: |
           touch apps/bottle/.env.local
@@ -47,6 +46,24 @@ jobs:
 
       # run turbo tasks
       - run: pnpm run ci
+
+  Deploy-Bottle:
+    runs-on: ubuntu-latest
+    steps:
+      # checkout and install pnpm
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 8
+          run_install: false
+      # setup node
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
 
       - name: Deploy Bottle to Vercel
         run: |
@@ -83,6 +100,23 @@ jobs:
           -d "$DATA" \
           ${{ secrets.DISCORD_WEBHOOK_URL }}
 
+  Deploy-Web:
+    runs-on: ubuntu-latest
+    steps:
+      # checkout and install pnpm
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 8
+          run_install: false
+      # setup node
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
       - name: Deploy Web to Vercel
         run: |
           npm install --global vercel@latest  
