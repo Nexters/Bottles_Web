@@ -45,7 +45,7 @@ jobs:
           NEXT_PUBLIC_SERVER_BASE_URL: ${{ secrets.NEXT_PUBLIC_SERVER_BASE_URL }}
 
       # determine whether @bottlesteam/bottle, @bottlesteam/web is cached on remote
-      - name: Determine build status for @bottlesteam/bottle
+      - name: Determine cache status for each services
         id: determine-status
         run: |
           pnpx turbo run build --dry-run=json > result.json
@@ -54,11 +54,15 @@ jobs:
           echo "build_status_bottle=$build_status_bottle" >> $GITHUB_OUTPUT
           echo "build_status_web=$build_status_web" >> $GITHUB_OUTPUT
 
+      - name: Cache Status Print
+        run: |
+          echo build_status_bottle: $steps.determine-status.outputs.build_status_bottle
+
       # install playwright browsers if it is not cached
       - run: pnpx playwright install
         if: steps.playwright-cache.outputs.cache-hit != 'true'
 
-      # install playwright depedencies only if bottle is not cached
+      # install playwright depedencies only if @bottlesteam/bottle is not cached
       - run: pnpx playwright install-deps
         if: steps.determine-status.outputs.build_status_bottle == 'MISS'
 
