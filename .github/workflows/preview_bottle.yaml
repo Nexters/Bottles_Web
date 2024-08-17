@@ -11,6 +11,7 @@ on:
   push:
     branches-ignore:
       - main
+      - chore/ci-test
 jobs:
   Deploy-Preview:
     runs-on: ubuntu-latest
@@ -65,7 +66,6 @@ jobs:
           # Set the build_status as an output variable for the job
           echo "::set-output name=build_status::$build_status"
 
-    
       - run: pnpx playwright install
         if: steps.playwright-cache.outputs.cache-hit != 'true'
       - run: pnpx playwright install-deps
