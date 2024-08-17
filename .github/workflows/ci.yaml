@@ -103,21 +103,32 @@ jobs:
           node-version: 20
           cache: 'pnpm'
 
-      - name: Deploy to Vercel if needed
-        run: |
-          npm install --global vercel@latest
-          vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
-          vercel build --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
-          vercel deploy --prebuilt --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
-      - name: Get Vercel Preview
-        uses: zentered/vercel-preview-url@v1.1.9
+      # testing part
+      - uses: amondnet/vercel-action@v25 #deploy
         id: vercel_preview_url
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_ACCESS_TOKEN }}
         with:
-          vercel_project_id: ${{ secrets.VERCEL_PROJECT_ID_BOTTLE }}
-      - name: Get URL
-        run: echo "https://${{ steps.vercel_preview_url.outputs.preview_url }}"
+          vercel-token: ${{ secrets.VERCEL_ACCESS_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }} #Optional
+          vercel-args: '--preview' #Optional
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_BOTTLE }}
+      ###
+
+      # - name: Deploy to Vercel if needed
+      #   run: |
+      #     npm install --global vercel@latest
+      #     vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+      #     vercel build --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+      #     vercel deploy --prebuilt --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+      # - name: Get Vercel Preview
+      #   uses: zentered/vercel-preview-url@v1.1.9
+      #   id: vercel_preview_url
+      #   env:
+      #     VERCEL_TOKEN: ${{ secrets.VERCEL_ACCESS_TOKEN }}
+      #   with:
+      #     vercel_project_id: ${{ secrets.VERCEL_PROJECT_ID_BOTTLE }}
+      # - name: Get URL
+      #   run: echo "https://${{ steps.vercel_preview_url.outputs.preview_url }}"
       - name: Send Discord Notification
         env:
           DATA: |
@@ -168,7 +179,7 @@ jobs:
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_ACCESS_TOKEN }}
         with:
-          vercel_project_id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel_project_id: ${{ secrets.VERCEL_PROJECT_ID_WEB }}
       - name: Get URL
         run: echo "https://${{ steps.vercel_preview_url_web.outputs.preview_url }}"
       - name: Send Discord Notification
