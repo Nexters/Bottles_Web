@@ -4,14 +4,12 @@
   "globalEnv": ["IMPORTANT_GLOBAL_VARIABLE"],
   "tasks": {
     "build": {
-      "cache": false,
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": [".next/**", "!.next/cache/**", "dist/**"],
       "env": ["NEXT_PUBLIC_SERVER_BASE_URL", "TEST_ACCESS_TOKEN", "TEST_REFRESH_TOKEN"]
     },
     "test:e2e": {
-      "cache": false,
       "dependsOn": ["^build"],
       "env": ["NEXT_PUBLIC_SERVER_BASE_URL", "TEST_ACCESS_TOKEN", "TEST_REFRESH_TOKEN"]
     },
@@ -23,8 +21,7 @@
       "persistent": true
     },
     "test": {
-      "cache": false,
-      "dependsOn": ["build"]
+      "dependsOn": ["^build"]
     }
   }
 }
