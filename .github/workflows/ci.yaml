@@ -109,7 +109,6 @@ jobs:
         with:
           vercel-token: ${{ secrets.VERCEL_ACCESS_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }} #Optional
-          vercel-args: '--preview' #Optional
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_BOTTLE }}
       ###
