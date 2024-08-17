@@ -8,7 +8,7 @@ export default function Home() {
         <Asset type="icon-down" />
         <Asset type="icon-arrow-left" />
       </div>
-      <Step.FixedButton style={{ marginBottom: '20px' }}>다음</Step.FixedButton>
+      <Step.FixedButton style={{ marginBottom: '20px' }}>fdsfsds</Step.FixedButton>
     </div>
   );
 }

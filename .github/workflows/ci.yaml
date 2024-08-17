@@ -15,6 +15,9 @@ on:
 jobs:
   Setup:
     runs-on: ubuntu-latest
+    outputs:
+      build_status_bottle: ${{ steps.determine-status.outputs.build_status_bottle }}
+      build_status_web: ${{ steps.determine-status.outputs.build_status_web }}
     steps:
       # checkout and install pnpm
       - uses: actions/checkout@v4
