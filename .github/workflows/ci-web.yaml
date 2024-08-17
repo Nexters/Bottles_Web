@@ -1,10 +1,8 @@
 name: Deploy Web to Vercel
 
 on:
-  workflow_run:
-    workflows: [Run Turbo Tasks]
-    types:
-      - completed
+  repository_dispatch:
+    types: [deploy_web]
 
 jobs:
   Deploy-Web:
