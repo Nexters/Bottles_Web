@@ -82,59 +82,59 @@ jobs:
       # run turbo tasks
       - run: pnpm run ci
 
-  Deploy_Bottle_to_Vercel:
-    # deploy Bottle to vercel
-    runs-on: ubuntu-latest
-    needs: Setup
-    if: needs.Setup.outputs.build_status_bottle == 'MISS'
-    steps:
-      # checkout and install pnpm
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3
-        name: Install pnpm
-        id: pnpm-install
-        with:
-          version: 8
-          run_install: false
-      # setup node
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'pnpm'
+  # Deploy_Bottle_to_Vercel:
+  #   # deploy Bottle to vercel
+  #   runs-on: ubuntu-latest
+  #   needs: Setup
+  #   if: needs.Setup.outputs.build_status_bottle == 'MISS'
+  #   steps:
+  #     # checkout and install pnpm
+  #     - uses: actions/checkout@v4
+  #     - uses: pnpm/action-setup@v3
+  #       name: Install pnpm
+  #       id: pnpm-install
+  #       with:
+  #         version: 8
+  #         run_install: false
+  #     # setup node
+  #     - name: Setup Node.js environment
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: 20
+  #         cache: 'pnpm'
 
-      - name: Deploy to Vercel if needed
-        run: |
-          npm install --global vercel@latest
-          vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
-          vercel build --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
-          vercel deploy --prebuilt --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
-      - name: Get Vercel Preview
-        uses: zentered/vercel-preview-url@v1.1.9
-        id: vercel_preview_url
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_ACCESS_TOKEN }}
-        with:
-          vercel_project_id: ${{ secrets.VERCEL_PROJECT_ID_BOTTLE }}
-      - name: Get URL
-        run: echo "https://${{ steps.vercel_preview_url.outputs.preview_url }}"
-      - name: Send Discord Notification
-        env:
-          DATA: |
-            {
-              "content": "<@stakbucks>",
-              "embeds": [
-                {
-                  "tile": "👀 Bottle 미리보기가 준비되었어요",
-                  "description": "👉 https://${{ steps.vercel_preview_url.outputs.preview_url }}",
-                  "color": 65280
-                }
-              ]
-            }
-        run: |
-          curl -X POST -H 'Content-type: application/json' \
-          -d "$DATA" \
-          ${{ secrets.DISCORD_WEBHOOK_URL }}
+  #     - name: Deploy to Vercel if needed
+  #       run: |
+  #         npm install --global vercel@latest
+  #         vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+  #         vercel build --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+  #         vercel deploy --prebuilt --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+  #     - name: Get Vercel Preview
+  #       uses: zentered/vercel-preview-url@v1.1.9
+  #       id: vercel_preview_url
+  #       env:
+  #         VERCEL_TOKEN: ${{ secrets.VERCEL_ACCESS_TOKEN }}
+  #       with:
+  #         vercel_project_id: ${{ secrets.VERCEL_PROJECT_ID_BOTTLE }}
+  #     - name: Get URL
+  #       run: echo "https://${{ steps.vercel_preview_url.outputs.preview_url }}"
+  #     - name: Send Discord Notification
+  #       env:
+  #         DATA: |
+  #           {
+  #             "content": "<@stakbucks>",
+  #             "embeds": [
+  #               {
+  #                 "tile": "👀 Bottle 미리보기가 준비되었어요",
+  #                 "description": "👉 https://${{ steps.vercel_preview_url.outputs.preview_url }}",
+  #                 "color": 65280
+  #               }
+  #             ]
+  #           }
+  #       run: |
+  #         curl -X POST -H 'Content-type: application/json' \
+  #         -d "$DATA" \
+  #         ${{ secrets.DISCORD_WEBHOOK_URL }}
 
   Deploy_Web_to_Vercel:
     # deploy Web to vercel
