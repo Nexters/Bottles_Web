@@ -7,6 +7,7 @@ import { Info } from '../components/info/Info';
 import { layoutStyle, mainStyle } from './layout.css';
 
 export default function Home() {
+  // test commit
   return (
     <div className={layoutStyle}>
       <main className={mainStyle}>
