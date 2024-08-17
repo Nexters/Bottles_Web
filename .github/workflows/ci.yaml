@@ -44,7 +44,7 @@ jobs:
           key: ${{ runner.os }}-playwright-14
 
       # install dependencies
-      - run: pnpm install
+      - run: npx pnpm i -r
 
       # dotenv
       - name: create dotenv
