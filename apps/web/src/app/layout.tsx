@@ -4,7 +4,7 @@ import './globals.css';
 import '@bottlesteam/ui/styles';
 
 export const metadata: Metadata = {
-  title: 'Bottle',
+  title: '보틀',
   description: '당신의 연애, 보틀',
 };
 
