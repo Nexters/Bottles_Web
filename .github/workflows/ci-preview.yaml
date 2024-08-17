@@ -10,179 +10,179 @@ on:
     branches-ignore:
       - main
 jobs:
-  # Setup:
-  #   runs-on: ubuntu-latest
-  #   outputs:
-  #     cache_status_bottle: ${{ steps.determine-status.outputs.cache_status_bottle }}
-  #     cache_status_web: ${{ steps.determine-status.outputs.cache_status_web }}
-  #     cache_status_e2e: ${{ steps.determine-status.outputs.cache_status_e2e }}
-  #   steps:
-  #     # checkout and install pnpm
-  #     - uses: actions/checkout@v4
-  #     - uses: pnpm/action-setup@v3
-  #       name: Install pnpm
-  #       id: pnpm-install
-  #       with:
-  #         version: 8
-  #         run_install: false
-  #     # setup node
-  #     - name: Setup Node.js environment
-  #       uses: actions/setup-node@v4
-  #       with:
-  #         node-version: 20
-  #         cache: 'pnpm'
+  Setup:
+    runs-on: ubuntu-latest
+    outputs:
+      cache_status_bottle: ${{ steps.determine-status.outputs.cache_status_bottle }}
+      cache_status_web: ${{ steps.determine-status.outputs.cache_status_web }}
+      cache_status_e2e: ${{ steps.determine-status.outputs.cache_status_e2e }}
+    steps:
+      # checkout and install pnpm
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 8
+          run_install: false
+      # setup node
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
 
-  #     # install dependencies
-  #     - run: npx pnpm i -r
+      # install dependencies
+      - run: npx pnpm i -r
 
-  #     # dotenv
-  #     - name: create dotenv
-  #       run: |
-  #         touch apps/bottle/.env.local
-  #         echo "TEST_ACCESS_TOKEN=${{ secrets.TEST_ACCESS_TOKEN }}" >> apps/bottle/.env.local
-  #         echo "TEST_REFRESH_TOKEN=${{ secrets.TEST_REFRESH_TOKEN }}" >> apps/bottle/.env.local
-  #         echo "NEXT_PUBLIC_SERVER_BASE_URL=${{ secrets.NEXT_PUBLIC_SERVER_BASE_URL }}" >> apps/bottle/.env.local
-  #       env:
-  #         NEXT_PUBLIC_SERVER_BASE_URL: ${{ secrets.NEXT_PUBLIC_SERVER_BASE_URL }}
+      # set .env.local
+      - name: create dotenv
+        run: |
+          touch apps/bottle/.env.local
+          echo "TEST_ACCESS_TOKEN=${{ secrets.TEST_ACCESS_TOKEN }}" >> apps/bottle/.env.local
+          echo "TEST_REFRESH_TOKEN=${{ secrets.TEST_REFRESH_TOKEN }}" >> apps/bottle/.env.local
+          echo "NEXT_PUBLIC_SERVER_BASE_URL=${{ secrets.NEXT_PUBLIC_SERVER_BASE_URL }}" >> apps/bottle/.env.local
+        env:
+          NEXT_PUBLIC_SERVER_BASE_URL: ${{ secrets.NEXT_PUBLIC_SERVER_BASE_URL }}
 
-  #     # determine whether @bottlesteam/bottle, @bottlesteam/web is cached on remote
-  #     - name: Determine cache status for each services
-  #       id: determine-status
-  #       run: |
-  #         pnpx turbo run build --dry-run=json > result.json
-  #         cache_status_bottle=$(jq -r '.tasks[] | select(.taskId == "@bottlesteam/bottle#build") | .cache.status' result.json)
-  #         cache_status_web=$(jq -r '.tasks[] | select(.taskId == "@bottlesteam/web#build") | .cache.status' result.json)
-  #         pnpx turbo run test:e2e --dry-run=json > result2.json
-  #         cache_status_e2e=$(jq -r '.tasks[] | select(.taskId == "@bottlesteam/e2e#test:e2e") | .cache.status' result2.json)
-  #         echo "cache_status_bottle=$cache_status_bottle" >> $GITHUB_OUTPUT
-  #         echo "cache_status_web=$cache_status_web" >> $GITHUB_OUTPUT
-  #         echo "cache_status_e2e=$cache_status_e2e" >> $GITHUB_OUTPUT
+      # determine whether @bottlesteam/bottle, @bottlesteam/web is cached on remote
+      - name: Determine cache status for each services
+        id: determine-status
+        run: |
+          pnpx turbo run build --dry-run=json > result.json
+          cache_status_bottle=$(jq -r '.tasks[] | select(.taskId == "@bottlesteam/bottle#build") | .cache.status' result.json)
+          cache_status_web=$(jq -r '.tasks[] | select(.taskId == "@bottlesteam/web#build") | .cache.status' result.json)
+          pnpx turbo run test:e2e --dry-run=json > result2.json
+          cache_status_e2e=$(jq -r '.tasks[] | select(.taskId == "@bottlesteam/e2e#test:e2e") | .cache.status' result2.json)
+          echo "cache_status_bottle=$cache_status_bottle" >> $GITHUB_OUTPUT
+          echo "cache_status_web=$cache_status_web" >> $GITHUB_OUTPUT
+          echo "cache_status_e2e=$cache_status_e2e" >> $GITHUB_OUTPUT
 
-  #     - name: Cache Status Print
-  #       run: |
-  #         echo "cache_status_bottle: ${{ steps.determine-status.outputs.cache_status_bottle }}"
-  #         echo "cache_status_web: ${{ steps.determine-status.outputs.cache_status_web }}"
-  #         echo "cache_status_e2e: ${{ steps.determine-status.outputs.cache_status_e2e }}"
+      - name: Cache Status Print
+        run: |
+          echo "cache_status_bottle: ${{ steps.determine-status.outputs.cache_status_bottle }}"
+          echo "cache_status_web: ${{ steps.determine-status.outputs.cache_status_web }}"
+          echo "cache_status_e2e: ${{ steps.determine-status.outputs.cache_status_e2e }}"
 
-  #     # install playwright depedencies only if @bottlesteam/bottle is not cached
-  #     - run: pnpx playwright install --with-deps
-  #       if: steps.determine-status.outputs.cache_status_e2e == 'MISS'
+      # install playwright depedencies only if @bottlesteam/bottle is not cached
+      - run: pnpx playwright install --with-deps
+        if: steps.determine-status.outputs.cache_status_e2e == 'MISS'
 
-  #     # run turbo tasks
-  #     - run: pnpm run ci
+      # run turbo tasks
+      - run: pnpm run ci
 
-  # Deploy_Bottle_to_Vercel:
-  #   # deploy Bottle to vercel
-  #   runs-on: ubuntu-latest
-  #   env:
-  #     VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_BOTTLE }}
-  #   needs: Setup
-  #   if: needs.Setup.outputs.cache_status_bottle == 'MISS'
-  #   steps:
-  #     # checkout and install pnpm
-  #     - uses: actions/checkout@v4
-  #     - uses: pnpm/action-setup@v3
-  #       name: Install pnpm
-  #       id: pnpm-install
-  #       with:
-  #         version: 8
-  #         run_install: false
-  #     # setup node
-  #     - name: Setup Node.js environment
-  #       uses: actions/setup-node@v4
-  #       with:
-  #         node-version: 20
-  #         cache: 'pnpm'
+  Deploy_Bottle_to_Vercel:
+    # deploy Bottle to vercel
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_BOTTLE }}
+    needs: Setup
+    if: needs.Setup.outputs.cache_status_bottle == 'MISS'
+    steps:
+      # checkout and install pnpm
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 8
+          run_install: false
+      # setup node
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
 
-  #     - name: Deploy to Vercel if needed
-  #       run: |
-  #         npm install --global vercel@latest
-  #         vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
-  #         vercel build --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
-  #         vercel deploy --prebuilt --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
-  #     - name: Get Vercel Preview
-  #       uses: zentered/vercel-preview-url@v1.1.9
-  #       id: vercel_preview_url
-  #       env:
-  #         VERCEL_TOKEN: ${{ secrets.VERCEL_ACCESS_TOKEN }}
-  #       with:
-  #         vercel_project_id: ${{ secrets.VERCEL_PROJECT_ID_BOTTLE }}
-  #     - name: Get URL
-  #       run: echo "https://${{ steps.vercel_preview_url.outputs.preview_url }}"
-  #     - name: Send Discord Notification
-  #       env:
-  #         DATA: |
-  #           {
-  #             "content": "<@stakbucks>",
-  #             "embeds": [
-  #               {
-  #                 "tile": "👀 Bottle 미리보기가 준비되었어요",
-  #                 "description": "👉 https://${{ steps.vercel_preview_url.outputs.preview_url }}",
-  #                 "color": 65280
-  #               }
-  #             ]
-  #           }
-  #       run: |
-  #         curl -X POST -H 'Content-type: application/json' \
-  #         -d "$DATA" \
-  #         ${{ secrets.DISCORD_WEBHOOK_URL }}
+      - name: Deploy to Vercel if needed
+        run: |
+          npm install --global vercel@latest
+          vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+          vercel build --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+          vercel deploy --prebuilt --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+      - name: Get Vercel Preview
+        uses: zentered/vercel-preview-url@v1.1.9
+        id: vercel_preview_url
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_ACCESS_TOKEN }}
+        with:
+          vercel_project_id: ${{ secrets.VERCEL_PROJECT_ID_BOTTLE }}
+      - name: Get URL
+        run: echo "https://${{ steps.vercel_preview_url.outputs.preview_url }}"
+      - name: Send Discord Notification
+        env:
+          DATA: |
+            {
+              "content": "<@stakbucks>",
+              "embeds": [
+                {
+                  "tile": "👀 Bottle 미리보기가 준비되었어요",
+                  "description": "👉 https://${{ steps.vercel_preview_url.outputs.preview_url }}",
+                  "color": 65280
+                }
+              ]
+            }
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          -d "$DATA" \
+          ${{ secrets.DISCORD_WEBHOOK_URL }}
 
-  # Deploy_Web_to_Vercel:
-  #   # deploy Web to vercel
-  #   runs-on: ubuntu-latest
-  #   env:
-  #     VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_WEB }}
-  #   needs: Setup
-  #   if: needs.Setup.outputs.cache_status_web == 'MISS'
-  #   steps:
-  #     # checkout and install pnpm
-  #     - uses: actions/checkout@v4
-  #     - uses: pnpm/action-setup@v3
-  #       name: Install pnpm
-  #       id: pnpm-install
-  #       with:
-  #         version: 8
-  #         run_install: false
-  #     # setup node
-  #     - name: Setup Node.js environment
-  #       uses: actions/setup-node@v4
-  #       with:
-  #         node-version: 20
-  #         cache: 'pnpm'
+  Deploy_Web_to_Vercel:
+    # deploy Web to vercel
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_WEB }}
+    needs: Setup
+    if: needs.Setup.outputs.cache_status_web == 'MISS'
+    steps:
+      # checkout and install pnpm
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 8
+          run_install: false
+      # setup node
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
 
-  #     - run: cd apps/web
+      - run: cd apps/web
 
-  #     - name: Deploy to Vercel if needed
-  #       run: |
-  #         npm install --global vercel@latest
-  #         vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
-  #         vercel build --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
-  #         vercel deploy --prebuilt --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
-  #       env:
-  #         VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-  #     - name: Get Vercel Preview
-  #       uses: zentered/vercel-preview-url@v1.1.9
-  #       id: vercel_preview_url_web
-  #       env:
-  #         VERCEL_TOKEN: ${{ secrets.VERCEL_ACCESS_TOKEN }}
-  #       with:
-  #         vercel_project_id: ${{ secrets.VERCEL_PROJECT_ID_WEB }}
-  #     - name: Get URL
-  #       run: echo "https://${{ steps.vercel_preview_url_web.outputs.preview_url }}"
-  #     - name: Send Discord Notification
-  #       env:
-  #         DATA: |
-  #           {
-  #             "content": "<@stakbucks>",
-  #           "embeds": [
-  #             {
-  #               "title": "👀 Web 미리보기가 준비되었어요",
-  #                 "description": "👉 https://${{ steps.vercel_preview_url_web.outputs.preview_url }}",
-  #                 "color": 65280
-  #               }
-  #             ]
-  #           }
-  #       run: |
-  #         curl -X POST -H 'Content-type: application/json' \
-  #         -d "$DATA" \
-  #         ${{ secrets.DISCORD_WEBHOOK_URL }}
+      - name: Deploy to Vercel if needed
+        run: |
+          npm install --global vercel@latest
+          vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+          vercel build --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+          vercel deploy --prebuilt --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+        env:
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      - name: Get Vercel Preview
+        uses: zentered/vercel-preview-url@v1.1.9
+        id: vercel_preview_url_web
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_ACCESS_TOKEN }}
+        with:
+          vercel_project_id: ${{ secrets.VERCEL_PROJECT_ID_WEB }}
+      - name: Get URL
+        run: echo "https://${{ steps.vercel_preview_url_web.outputs.preview_url }}"
+      - name: Send Discord Notification
+        env:
+          DATA: |
+            {
+              "content": "<@stakbucks>",
+            "embeds": [
+              {
+                "title": "👀 Web 미리보기가 준비되었어요",
+                  "description": "👉 https://${{ steps.vercel_preview_url_web.outputs.preview_url }}",
+                  "color": 65280
+                }
+              ]
+            }
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          -d "$DATA" \
+          ${{ secrets.DISCORD_WEBHOOK_URL }}
