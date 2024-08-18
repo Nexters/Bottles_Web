@@ -8,12 +8,10 @@ export default async function MyPage() {
   const serverFetchOptions = myInformationQueryOptions(getServerSideTokens());
 
   return (
-    <>
-      <Suspense>
-        <ServerFetchBoundary fetchOptions={serverFetchOptions}>
-          <MyInformation />
-        </ServerFetchBoundary>
-      </Suspense>
-    </>
+    <Suspense>
+      <ServerFetchBoundary fetchOptions={serverFetchOptions}>
+        <MyInformation />
+      </ServerFetchBoundary>
+    </Suspense>
   );
 }
