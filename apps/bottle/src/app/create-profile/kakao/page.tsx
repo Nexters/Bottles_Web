@@ -4,16 +4,16 @@ import { Header } from '@/components/header';
 import { useStep } from '@/features/steps/StepProvider';
 import { Asset } from '@bottlesteam/ui';
 import { useRouter } from 'next/navigation';
-import { MBTI } from './_steps/MBTI';
-import { Alcohol } from './_steps/alcohol';
-import { Height } from './_steps/height';
-import { Interests } from './_steps/interests';
-import { Job } from './_steps/job';
-import { KaKaoId } from './_steps/kakao-id';
-import { Keywords } from './_steps/keywords';
-import { Region } from './_steps/region';
-import { Religion } from './_steps/religion';
-import { Smoking } from './_steps/smoking';
+import { MBTI } from '../_steps/MBTI';
+import { Alcohol } from '../_steps/alcohol';
+import { Height } from '../_steps/height';
+import { Interests } from '../_steps/interests';
+import { Job } from '../_steps/job';
+import { KaKaoId } from '../_steps/kakao-id';
+import { Keywords } from '../_steps/keywords';
+import { Region } from '../_steps/region';
+import { Religion } from '../_steps/religion';
+import { Smoking } from '../_steps/smoking';
 
 const steps = [
   <MBTI key={1} />,
