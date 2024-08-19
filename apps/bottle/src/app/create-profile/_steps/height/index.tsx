@@ -1,6 +1,5 @@
 'use client';
 
-import { Stepper } from '@/components/stepper';
 import { Step } from '@/features/steps/StepContainer';
 import { useStep } from '@/features/steps/StepProvider';
 import { WheelPicker, colors } from '@bottlesteam/ui';
@@ -24,7 +23,6 @@ export function Height() {
 
   return (
     <Step>
-      <Stepper current={5} max={10} />
       <Step.Title>키는 어떻게 되나요?</Step.Title>
       <div className={wheelPickerContainerStyle}>
         <WheelPicker

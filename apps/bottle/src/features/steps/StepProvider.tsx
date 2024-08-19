@@ -7,6 +7,7 @@ interface StepContext {
   currentStep: number;
   onNextStep(): void;
   onPreviousStep(): void;
+  onComplete?(): void;
 }
 
 export const Step = createContext<StepContext | null>(null);
@@ -16,11 +17,12 @@ interface StepProviderProps {
   uri: string;
   children: ReactNode;
   onExit?: () => void;
+  onComplete?: () => void;
 }
 
 const STEP_PARAM_KEY = 'step';
 
-export function StepProvider({ children, maxStep, uri, onExit }: StepProviderProps) {
+export function StepProvider({ children, maxStep, uri, onExit, onComplete }: StepProviderProps) {
   const searchParams = useSearchParams();
   const step = useMemo(() => Number(searchParams.get(STEP_PARAM_KEY) ?? '1'), [searchParams]);
   const router = useRouter();
@@ -37,7 +39,9 @@ export function StepProvider({ children, maxStep, uri, onExit }: StepProviderPro
     }
   }, [step, router, uri, onExit]);
 
-  return <Step.Provider value={{ onNextStep, currentStep: step, onPreviousStep }}>{children}</Step.Provider>;
+  return (
+    <Step.Provider value={{ onNextStep, currentStep: step, onPreviousStep, onComplete }}>{children}</Step.Provider>
+  );
 }
 
 export function useStep() {

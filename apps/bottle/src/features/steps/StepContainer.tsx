@@ -1,13 +1,20 @@
+import { Stepper } from '@/components/stepper';
 import { CTAButton, Paragraph, ParagraphProps, VariantOneProps, VariantTwoProps } from '@bottlesteam/ui';
 import { ReactNode } from 'react';
 import { buttonContainer, buttonStyle, containerStyle } from './stepStyle.css';
 
 interface Props {
   children: ReactNode;
+  stepper?: { current: number; max: number };
 }
 
-function StepContainer({ children }: Props) {
-  return <div className={containerStyle}>{children}</div>;
+function StepContainer({ children, stepper }: Props) {
+  return (
+    <div className={containerStyle}>
+      {stepper != null && <Stepper current={stepper.current} max={stepper.max} />}
+      {children}
+    </div>
+  );
 }
 
 function Title({ children, ...rest }: Omit<ParagraphProps, 'typography' | 'color'>) {

@@ -1,5 +1,4 @@
 import { Control, toggle } from '@/components/control';
-import { Stepper } from '@/components/stepper';
 import { Step } from '@/features/steps/StepContainer';
 import { useStep } from '@/features/steps/StepProvider';
 import { Smoking as SmokingType, smokingList } from '@/models/profile/smoking';
@@ -16,7 +15,6 @@ export function Smoking() {
 
   return (
     <Step>
-      <Stepper current={6} max={10} />
       <Step.Title>흡연 스타일이 궁금해요</Step.Title>
       <Control value={smoking}>
         <section className={smokingStyle}>

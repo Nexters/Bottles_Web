@@ -1,4 +1,3 @@
-import { Stepper } from '@/components/stepper';
 import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 import { POST, createInit } from '@/features/server';
 import { getClientSideTokens } from '@/features/server/clientSideTokens';
@@ -16,7 +15,6 @@ export function KaKaoId() {
 
   return (
     <Step>
-      <Stepper current={10} max={10} />
       <Step.Title>{'연락처 공유를 위해\n카카오톡 아이디를 입력해 주세요'}</Step.Title>
       <Step.Description style={{ marginTop: spacings.sm }}>오타가 없는지 한 번 더 확인해 주세요</Step.Description>
       <TextField

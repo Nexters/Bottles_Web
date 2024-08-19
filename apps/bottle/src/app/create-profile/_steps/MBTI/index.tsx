@@ -1,5 +1,4 @@
 import { Control, toggle } from '@/components/control';
-import { Stepper } from '@/components/stepper';
 import { Step } from '@/features/steps/StepContainer';
 import { useStep } from '@/features/steps/StepProvider';
 import { EIType, JPType, SNType, TFType } from '@/models/profile/MBTI';
@@ -27,7 +26,6 @@ export function MBTI() {
 
   return (
     <Step>
-      <Stepper current={1} max={10} />
       <Step.Title>{name}님의 성격에 대해 알고 싶어요</Step.Title>
       <section className={bodyStyle}>
         <div className={controlStyle}>
