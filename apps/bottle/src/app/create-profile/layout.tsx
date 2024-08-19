@@ -6,7 +6,9 @@ import { regionsQueryOptions } from '@/store/query/useRegionsQuery';
 import { ReactNode, Suspense } from 'react';
 
 export default async function CreateProfileLayout({ children }: { children: ReactNode }) {
-  const serverFetchOptions = [regionsQueryOptions(getServerSideTokens()), userInfoQueryOptions(getServerSideTokens())];
+  const tokens = getServerSideTokens();
+
+  const serverFetchOptions = [regionsQueryOptions(tokens), userInfoQueryOptions(tokens)];
 
   return (
     <Suspense>

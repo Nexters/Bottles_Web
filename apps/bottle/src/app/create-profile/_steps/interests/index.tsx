@@ -1,5 +1,4 @@
 import { Control } from '@/components/control';
-import { Stepper } from '@/components/stepper';
 import { Step } from '@/features/steps/StepContainer';
 import { useStep } from '@/features/steps/StepProvider';
 import { Culture, ETC, Entertainment, Sports, culture, entertainment, etc, sports } from '@/models/profile/interests';
@@ -48,7 +47,6 @@ export function Interests() {
   return (
     <>
       <Step>
-        <Stepper current={3} max={10} />
         <Step.Title>푹 빠진 취미는 무엇인가요?</Step.Title>
         <Step.Description style={{ marginTop: '12px' }}>최소 3개, 최대 10개까지 선택할 수 있어요</Step.Description>
         <Step.Subtitle style={{ marginTop: spacings.xxl }}>문화 예술</Step.Subtitle>

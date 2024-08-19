@@ -3,8 +3,20 @@ import { Tokens } from '@/features/server/auth';
 import { getClientSideTokens } from '@/features/server/clientSideTokens';
 import { UseSuspenseQueryOptions, useSuspenseQuery } from '@tanstack/react-query';
 
-interface GetUserInfoData {
+export enum SignInUpState {
+  /**
+   * the user has not yet set his name, age, gender
+   */
+  SIGN_UP_SMS_FINISHED = 'SIGN_UP_SMS_FINISHED',
+  /**
+   * the user has set his name, age, gender
+   */
+  SIGN_UP_NAME_GENDER_AGE_FINISHED = 'SIGN_UP_NAME_GENDER_AGE_FINISHED',
+}
+
+export interface GetUserInfoData {
   name: string;
+  signInUpStep: SignInUpState;
 }
 
 export const userInfoQueryOptions = (tokens: Tokens): UseSuspenseQueryOptions<GetUserInfoData> => ({

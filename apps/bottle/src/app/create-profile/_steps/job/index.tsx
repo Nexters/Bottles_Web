@@ -1,5 +1,4 @@
 import { Control, toggle } from '@/components/control';
-import { Stepper } from '@/components/stepper';
 import { Step } from '@/features/steps/StepContainer';
 import { useStep } from '@/features/steps/StepProvider';
 import { Job as JobType, jobList } from '@/models/profile/job';
@@ -15,7 +14,6 @@ export function Job() {
   const [job, setJob] = useState<JobType | undefined>(getValue('job'));
   return (
     <Step>
-      <Stepper current={4} max={10} />
       <Step.Title>지금 어떤 일을 하고 있나요?</Step.Title>
       <section className={jobStyle}>
         <Control value={job}>

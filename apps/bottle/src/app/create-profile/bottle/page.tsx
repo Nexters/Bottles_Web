@@ -1,12 +1,14 @@
 'use client';
 
 import { Header } from '@/components/header';
+import { Step } from '@/features/steps/StepContainer';
 import { useStep } from '@/features/steps/StepProvider';
 import { Asset } from '@bottlesteam/ui';
 import { useRouter } from 'next/navigation';
 import { MBTI } from '../_steps/MBTI';
 import { Alcohol } from '../_steps/alcohol';
 import { Height } from '../_steps/height';
+import { Information } from '../_steps/information';
 import { Interests } from '../_steps/interests';
 import { Job } from '../_steps/job';
 import { KaKaoId } from '../_steps/kakao-id';
@@ -15,17 +17,42 @@ import { Region } from '../_steps/region';
 import { Religion } from '../_steps/religion';
 import { Smoking } from '../_steps/smoking';
 
+const MAX_STEPS = 11;
+
 const steps = [
-  <MBTI key={1} />,
-  <Keywords key={2} />,
-  <Interests key={3} />,
-  <Job key={4} />,
-  <Height key={5} />,
-  <Smoking key={6} />,
-  <Alcohol key={7} />,
-  <Religion key={8} />,
-  <Region key={9} />,
-  <KaKaoId key={10} />,
+  <Step stepper={{ current: 1, max: MAX_STEPS }} key={1}>
+    <Information />
+  </Step>,
+  <Step stepper={{ current: 2, max: MAX_STEPS }} key={2}>
+    <MBTI />
+  </Step>,
+  <Step stepper={{ current: 3, max: MAX_STEPS }} key={3}>
+    <Keywords />
+  </Step>,
+  <Step stepper={{ current: 4, max: MAX_STEPS }} key={4}>
+    <Interests />
+  </Step>,
+  <Step stepper={{ current: 5, max: MAX_STEPS }} key={5}>
+    <Job />
+  </Step>,
+  <Step stepper={{ current: 6, max: MAX_STEPS }} key={6}>
+    <Height />
+  </Step>,
+  <Step stepper={{ current: 7, max: MAX_STEPS }} key={7}>
+    <Smoking />
+  </Step>,
+  <Step stepper={{ current: 8, max: MAX_STEPS }} key={8}>
+    <Alcohol />
+  </Step>,
+  <Step stepper={{ current: 9, max: MAX_STEPS }} key={9}>
+    <Religion />
+  </Step>,
+  <Step stepper={{ current: 10, max: MAX_STEPS }} key={10}>
+    <Region />
+  </Step>,
+  <Step stepper={{ current: 11, max: MAX_STEPS }} key={11}>
+    <KaKaoId />
+  </Step>,
 ] as const;
 
 export default function CreateProfilePage() {

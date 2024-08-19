@@ -4,8 +4,8 @@ import { Header } from '@/components/header';
 import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 import { Step } from '@/features/steps/StepContainer';
 import { useLeftTimeCaption } from '@/features/time/useLeftTimeCaption';
-import { useLoginMutation } from '@/store/mutation/useLoginMutation';
 import { useSendAuthCodeMutation } from '@/store/mutation/useSendAuthCodeMutation';
+import { useSignInUpMutation } from '@/store/mutation/useSignInUpMutation';
 import { WRONG_AUTH_CODE_MESSAGE } from '@/store/mutation/useSignupMutation';
 import { Asset, Button, spacings, TextField } from '@bottlesteam/ui';
 import { useState } from 'react';
@@ -20,7 +20,7 @@ export default function LoginPage() {
   const [isSMSSent, setIsSMSSent] = useState(false);
   const [isAuthCodeError, setIsAuthCodeError] = useState(false);
 
-  const { mutate: login } = useLoginMutation(() => {
+  const { mutate: login } = useSignInUpMutation(() => {
     setIsAuthCodeError(true);
   });
   const { mutate: sendAuthCode } = useSendAuthCodeMutation(() => {

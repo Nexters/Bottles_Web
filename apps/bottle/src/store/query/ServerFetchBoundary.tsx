@@ -14,10 +14,10 @@ export async function ServerFetchBoundary({ fetchOptions, children }: Props) {
 
   if (Array.isArray(fetchOptions)) {
     for (const option of fetchOptions) {
-      await queryClient.prefetchQuery(option);
+      await queryClient.fetchQuery(option);
     }
   } else {
-    await queryClient.prefetchQuery(fetchOptions);
+    await queryClient.fetchQuery(fetchOptions);
   }
 
   // Array.isArray(fetchOptions)

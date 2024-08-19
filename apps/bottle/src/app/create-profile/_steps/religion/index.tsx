@@ -1,5 +1,4 @@
 import { Control, toggle } from '@/components/control';
-import { Stepper } from '@/components/stepper';
 import { Step } from '@/features/steps/StepContainer';
 import { useStep } from '@/features/steps/StepProvider';
 import { Religion as ReligionType, religionList } from '@/models/profile/religion';
@@ -16,7 +15,6 @@ export function Religion() {
 
   return (
     <Step>
-      <Stepper current={8} max={10} />
       <Step.Title>어떤 종교를 가지고 있나요?</Step.Title>
       <section className={religionStyle}>
         <Control value={religion}>

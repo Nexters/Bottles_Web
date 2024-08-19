@@ -1,5 +1,4 @@
 import { Control, toggle } from '@/components/control';
-import { Stepper } from '@/components/stepper';
 import { Step } from '@/features/steps/StepContainer';
 import { useStep } from '@/features/steps/StepProvider';
 import { Alcohol as AlcoholType, alcoholList } from '@/models/profile/alcohol';
@@ -16,7 +15,6 @@ export function Alcohol() {
 
   return (
     <Step>
-      <Stepper current={7} max={10} />
       <Step.Title>술은 얼마나 즐기나요?</Step.Title>
       <Control value={alcohol}>
         <section className={alcoholStyle}>

@@ -1,4 +1,3 @@
-import { Stepper } from '@/components/stepper';
 import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 import { Step } from '@/features/steps/StepContainer';
 import { useStep } from '@/features/steps/StepProvider';
@@ -61,7 +60,6 @@ export function Region() {
   return (
     <Step>
       <OverlayProvider>
-        <Stepper current={9} max={10} />
         <Step.Title>주로 생활하는 지역은 어딘가요?</Step.Title>
         <Step.Subtitle style={{ marginTop: spacings.xxl }}>전체 지역</Step.Subtitle>
         <div aria-hidden={true} className={spacingStyle} />
