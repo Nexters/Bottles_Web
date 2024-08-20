@@ -5,9 +5,10 @@ import { UseSuspenseQueryOptions, useSuspenseQuery } from '@tanstack/react-query
 
 export enum SignInUpState {
   /**
-   * the user has not yet set his name, age, gender
+   * the user has logged in via APPLE
+   * and not yet set his name, age, gender
    */
-  SIGN_UP_SMS_FINISHED = 'SIGN_UP_SMS_FINISHED',
+  SIGN_UP_APPLE_LOGIN_FINISHED = 'SIGN_UP_APPLE_LOGIN_FINISHED',
   /**
    * the user has set his name, age, gender
    */

@@ -7,8 +7,8 @@ import { GetUserInfoData, SignInUpState } from './store/query/useNameQuery';
 export async function middleware(request: NextRequest) {
   const url = new URL(request.url);
   if (String(url).includes('accessToken')) {
-    const accessToken = url.searchParams.get('accessToken');
-    const refreshToken = url.searchParams.get('refreshToken');
+    const accessToken = url.searchParams.get('accessToken') ?? '';
+    const refreshToken = url.searchParams.get('refreshToken') ?? '';
 
     const cleanUrl = new URL(url);
     cleanUrl.searchParams.delete('accessToken');
@@ -24,21 +24,24 @@ export async function middleware(request: NextRequest) {
   }
 
   if (String(url).includes('create-profile') && !String(url).includes('create-profile/bottle')) {
-    console.log('11111', String(url).includes('create-profile/bottle'));
     const tokens = getServerSideTokens();
 
-    const userInfo = await GET<GetUserInfoData>(`/api/v1/profile/info`, tokens, createInit(tokens.accessToken));
+    try {
+      const userInfo = await GET<GetUserInfoData>(`/api/v1/profile/info`, tokens, createInit(tokens.accessToken));
 
-    console.log('[signInUp]', userInfo);
+      console.log('[signInUp]', userInfo);
 
-    if (userInfo.signInUpStep === SignInUpState.SIGN_UP_SMS_FINISHED) {
-      const response = NextResponse.redirect(`${String(url)}/bottle`);
+      if (userInfo.signInUpStep === SignInUpState.SIGN_UP_APPLE_LOGIN_FINISHED) {
+        const response = NextResponse.redirect(`${String(url)}/bottle`);
+        return response;
+      }
+    } catch (error) {
+      const response = NextResponse.next();
       return response;
     }
-
-    const response = NextResponse.next();
-    return response;
   }
+  const response = NextResponse.next();
+  return response;
 }
 
 export const config = {
