@@ -9,7 +9,8 @@ export const CTA_HEIGHT = 109;
  * the Bottom CTA's gradient overlaps with the body of the Step Container.
  */
 export const OVERLAP_HEIGHT = 20;
-export const CONTAINER_OFFSET_HEIGHT = HEADER_HEIGHT + CTA_HEIGHT;
+const STEPPER_HEIGHT = 26;
+export const CONTAINER_OFFSET_HEIGHT = HEADER_HEIGHT + CTA_HEIGHT + STEPPER_HEIGHT;
 
 export const buttonContainer = style({
   position: 'fixed',
