@@ -14,7 +14,7 @@ export function Religion() {
   const [religion, setReligion] = useState<ReligionType | undefined>(getValue('religion'));
 
   return (
-    <Step>
+    <>
       <Step.Title>어떤 종교를 가지고 있나요?</Step.Title>
       <section className={religionStyle}>
         <Control value={religion}>
@@ -39,6 +39,6 @@ export function Religion() {
       >
         다음
       </Step.FixedButton>
-    </Step>
+    </>
   );
 }

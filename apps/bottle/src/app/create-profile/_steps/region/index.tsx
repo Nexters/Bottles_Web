@@ -58,7 +58,7 @@ export function Region() {
   };
 
   return (
-    <Step>
+    <>
       <OverlayProvider>
         <Step.Title>주로 생활하는 지역은 어딘가요?</Step.Title>
         <Step.Subtitle style={{ marginTop: spacings.xxl }}>전체 지역</Step.Subtitle>
@@ -95,6 +95,6 @@ export function Region() {
       >
         다음
       </Step.FixedButton>
-    </Step>
+    </>
   );
 }

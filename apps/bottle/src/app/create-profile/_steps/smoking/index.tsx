@@ -14,7 +14,7 @@ export function Smoking() {
   const [smoking, setSmoking] = useState<SmokingType | undefined>(getValue('smoking'));
 
   return (
-    <Step>
+    <>
       <Step.Title>흡연 스타일이 궁금해요</Step.Title>
       <Control value={smoking}>
         <section className={smokingStyle}>
@@ -39,6 +39,6 @@ export function Smoking() {
       >
         다음
       </Step.FixedButton>
-    </Step>
+    </>
   );
 }

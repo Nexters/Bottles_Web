@@ -14,7 +14,7 @@ export function Alcohol() {
   const [alcohol, setAlcohol] = useState<AlcoholType | undefined>(getValue('alcohol'));
 
   return (
-    <Step>
+    <>
       <Step.Title>술은 얼마나 즐기나요?</Step.Title>
       <Control value={alcohol}>
         <section className={alcoholStyle}>
@@ -39,6 +39,6 @@ export function Alcohol() {
       >
         다음
       </Step.FixedButton>
-    </Step>
+    </>
   );
 }

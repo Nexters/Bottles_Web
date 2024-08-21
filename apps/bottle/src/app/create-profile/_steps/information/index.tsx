@@ -30,7 +30,7 @@ export function Information() {
     gender === undefined;
 
   return (
-    <Step>
+    <>
       <Step.Title>{'프로필 생성을 위해\n개인 정보를 입력해 주세요'}</Step.Title>
       <section className={containerStyle}>
         <div className={fieldStyle}>
@@ -107,6 +107,6 @@ export function Information() {
       >
         다음
       </Step.FixedButton>
-    </Step>
+    </>
   );
 }
