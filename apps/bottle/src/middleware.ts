@@ -1,8 +1,5 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { createInit, GET } from './features/server';
-import { getServerSideTokens } from './features/server/serverSideTokens';
-import { GetUserInfoData, SignInUpState } from './store/query/useNameQuery';
 
 export async function middleware(request: NextRequest) {
   const url = new URL(request.url);
@@ -23,23 +20,24 @@ export async function middleware(request: NextRequest) {
     return response;
   }
 
-  if (String(url).includes('create-profile') && !String(url).includes('create-profile/bottle')) {
-    const tokens = getServerSideTokens();
+  // FIXME: uncomment after app store approval
+  // if (String(url).includes('create-profile') && !String(url).includes('create-profile/bottle')) {
+  //   const tokens = getServerSideTokens();
 
-    try {
-      const userInfo = await GET<GetUserInfoData>(`/api/v1/profile/info`, tokens, createInit(tokens.accessToken));
+  //   try {
+  //     const userInfo = await GET<GetUserInfoData>(`/api/v1/profile/info`, tokens, createInit(tokens.accessToken));
 
-      console.log('[signInUp]', userInfo);
+  //     console.log('[signInUp]', userInfo);
 
-      if (userInfo.signInUpStep === SignInUpState.SIGN_UP_APPLE_LOGIN_FINISHED) {
-        const response = NextResponse.redirect(`${String(url)}/bottle`);
-        return response;
-      }
-    } catch (error) {
-      const response = NextResponse.next();
-      return response;
-    }
-  }
+  //     if (userInfo.signInUpStep === SignInUpState.SIGN_UP_APPLE_LOGIN_FINISHED) {
+  //       const response = NextResponse.redirect(`${String(url)}/bottle`);
+  //       return response;
+  //     }
+  //   } catch (error) {
+  //     const response = NextResponse.next();
+  //     return response;
+  //   }
+  // }
   const response = NextResponse.next();
   return response;
 }
