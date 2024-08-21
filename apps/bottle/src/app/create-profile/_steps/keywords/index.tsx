@@ -17,7 +17,7 @@ export function Keywords() {
   const [keywords, setKeywords] = useState<Keyword[]>(getValue('keyword') ?? []);
 
   return (
-    <Step>
+    <>
       <Step.Title>나를 표현하는 키워드는?</Step.Title>
       <Step.Description style={{ marginTop: '12px' }}>최소 3개, 최대 5개까지 선택할 수 있어요</Step.Description>
       <Control value={keywords}>
@@ -58,6 +58,6 @@ export function Keywords() {
       >
         {`다음 ${keywords.length} / ${MAX_SELECTED}`}
       </Step.FixedButton>
-    </Step>
+    </>
   );
 }

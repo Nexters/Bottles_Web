@@ -13,7 +13,7 @@ export function Job() {
 
   const [job, setJob] = useState<JobType | undefined>(getValue('job'));
   return (
-    <Step>
+    <>
       <Step.Title>지금 어떤 일을 하고 있나요?</Step.Title>
       <section className={jobStyle}>
         <Control value={job}>
@@ -38,6 +38,6 @@ export function Job() {
       >
         다음
       </Step.FixedButton>
-    </Step>
+    </>
   );
 }

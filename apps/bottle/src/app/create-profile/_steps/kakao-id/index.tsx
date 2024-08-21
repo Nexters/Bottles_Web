@@ -14,7 +14,7 @@ export function KaKaoId() {
   const disabled = kakaoId.trim().length === 0;
 
   return (
-    <Step>
+    <>
       <Step.Title>{'연락처 공유를 위해\n카카오톡 아이디를 입력해 주세요'}</Step.Title>
       <Step.Description style={{ marginTop: spacings.sm }}>오타가 없는지 한 번 더 확인해 주세요</Step.Description>
       <TextField
@@ -38,6 +38,6 @@ export function KaKaoId() {
       >
         다음
       </Step.FixedButton>
-    </Step>
+    </>
   );
 }

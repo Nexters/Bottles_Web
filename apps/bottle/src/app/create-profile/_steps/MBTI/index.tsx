@@ -25,7 +25,7 @@ export function MBTI() {
   const isDisabled = useMemo(() => EI == null || SN == null || TF == null || JP == null, [EI, JP, TF, SN]);
 
   return (
-    <Step>
+    <>
       <Step.Title>{name}님의 성격에 대해 알고 싶어요</Step.Title>
       <section className={bodyStyle}>
         <div className={controlStyle}>
@@ -93,7 +93,7 @@ export function MBTI() {
       >
         다음
       </Step.FixedButton>
-    </Step>
+    </>
   );
 }
 

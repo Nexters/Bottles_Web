@@ -22,7 +22,7 @@ export function Height() {
   const [height, setHeight] = useState(getValue('height') ?? Number(DEFAULT_ID));
 
   return (
-    <Step>
+    <>
       <Step.Title>키는 어떻게 되나요?</Step.Title>
       <div className={wheelPickerContainerStyle}>
         <WheelPicker
@@ -46,6 +46,6 @@ export function Height() {
       >
         다음
       </Step.FixedButton>
-    </Step>
+    </>
   );
 }
