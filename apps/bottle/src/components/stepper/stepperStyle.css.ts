@@ -12,4 +12,5 @@ export const containerStyle = style({
   gap: spacings.xxs,
   margin: `${spacings.xl} 0`,
   padding: `0 ${spacings.xs}`,
+  overflow: 'hidden',
 });
