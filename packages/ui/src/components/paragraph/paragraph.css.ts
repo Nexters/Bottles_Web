@@ -5,6 +5,7 @@ import { typography } from '../../foundations/typography';
 export const paragraphStyle = recipe({
   base: {
     whiteSpace: 'pre-wrap',
+    wordBreak: 'break-all',
   },
   variants: {
     color: colorsMap,
