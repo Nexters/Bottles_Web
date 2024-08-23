@@ -6,12 +6,16 @@ import { TextField, spacings } from '@bottlesteam/ui';
 import { useState } from 'react';
 import { useCreateProfileValues } from '../../CreateProfileProvider';
 
+const KAKAO_ID_REGEX = /^[A-Za-z\d._-]{4,20}$/;
+const ERROR_CAPTION = '카카오톡 아이디를 확인해주세요';
+
 export function KaKaoId() {
   const { send } = useAppBridge();
   const { setValue, getValue, getValues } = useCreateProfileValues();
 
   const [kakaoId, setKakaoId] = useState(getValue('kakaoId') ?? '');
-  const disabled = kakaoId.trim().length === 0;
+  const isError = kakaoId.trim().length > 0 && !KAKAO_ID_REGEX.test(kakaoId.trim());
+  const disabled = kakaoId.trim().length === 0 || isError;
 
   return (
     <>
@@ -23,6 +27,7 @@ export function KaKaoId() {
         onChange={e => setKakaoId(e.currentTarget.value)}
         style={{ marginTop: spacings.xxl }}
       />
+      <TextField.Caption>{isError && ERROR_CAPTION}</TextField.Caption>
       <Step.FixedButton
         disabled={disabled}
         onClick={async () => {
