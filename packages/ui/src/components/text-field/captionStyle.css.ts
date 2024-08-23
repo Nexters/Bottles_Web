@@ -1,5 +1,5 @@
 import { recipe } from '@vanilla-extract/recipes';
-import { colorsMap } from '../../foundations';
+import { colorsMap, spacings } from '../../foundations';
 
 export const captionStyle = recipe({
   base: {
@@ -8,6 +8,7 @@ export const captionStyle = recipe({
     lineHeight: '18px',
     height: '18px',
     textAlign: 'start',
+    marginTop: spacings.xxs,
   },
 
   variants: {
