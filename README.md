@@ -1,7 +1,15 @@
 <img width="300" alt="bottle_logo" src="https://github.com/user-attachments/assets/a44026e9-981b-42d0-bbd1-4bcad9b2e58c">
 
-
 #### This is an official repository for @bottlesteam web
+
+
+<span heigth=50px style="margin-top:120px;"></div>
+
+<br>
+
+[<img height=50px  src=https://user-images.githubusercontent.com/42789819/115149387-d42e1980-a09e-11eb-88e3-94ca9b5b604b.png>](https://url.kr/cps1z2)
+[<img height=50px src=https://www.fcsok.org/wp-content/uploads/2020/04/get-it-on-google-play-badge.png>]()
+
 
 ## What's inside?
 
