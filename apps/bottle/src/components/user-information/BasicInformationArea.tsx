@@ -16,7 +16,7 @@ export function BasicInformationArea(props: Props) {
   return (
     <section className={basicInformationAreaStyle}>
       {props.likeMessage && <Bubble style={{ marginBottom: spacings.sm }}>{props.likeMessage}</Bubble>}
-      <Avatar src={isCurrentUser(props) ? props.imageUrl : props.userImageUrl} size="lg" />
+      <Avatar blur src={isCurrentUser(props) ? props.imageUrl : props.userImageUrl} size="lg" />
       <div className={nameAndAgeContainerStyle}>
         <Paragraph typography="st1" color="neutral900">
           {props.userName}
