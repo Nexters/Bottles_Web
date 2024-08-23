@@ -13,7 +13,14 @@ export function Avatar({ size: _size, blur, ...props }: AvatarProps) {
   return (
     <>
       {props.src != null ? (
-        <Image {...props} alt="user profile image" width={size} height={size} className={avatarStyle({ blur })} />
+        <Image
+          priority
+          {...props}
+          alt="user profile image"
+          width={size}
+          height={size}
+          className={avatarStyle({ blur })}
+        />
       ) : (
         <Placeholder size={size} />
       )}

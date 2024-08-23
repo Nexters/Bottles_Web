@@ -1,7 +1,7 @@
+import { Avatar } from '@/components/avatar';
 import { getTimeDifference } from '@/features/time/getTimeDifference';
 import { PreviewBottle } from '@/models/bottle';
 import { Paragraph, spacings, Asset } from '@bottlesteam/ui';
-import Image from 'next/image';
 import { itemStyle, timeLabelStyle, userInfoContainerStyle, userInfoStyle } from './bottlesListStyle.css';
 
 interface Props {
@@ -33,14 +33,7 @@ export function BottlesListItem({ bottle }: Props) {
             <span>{stringifyKeywords(bottle.keyword)}</span>
           </Paragraph>
         </div>
-        <Image
-          src={bottle.userImageUrl}
-          alt="user-profile"
-          priority
-          width={48}
-          height={48}
-          style={{ borderRadius: '50%' }}
-        />
+        <Avatar src={bottle.userImageUrl} size="sm" blur />
       </div>
     </li>
   );
