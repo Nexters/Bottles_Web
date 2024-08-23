@@ -15,7 +15,7 @@ const ERROR_CAPTION = '20자 이내로 작성해 주세요.';
 export function ExpressInterestBottomSheet({ onExpress, ...bottomSheetProps }: Props) {
   const [emoticon, setEmoticon] = useState<(typeof emoticons)[number]>();
   const [message, setMessage] = useState('');
-  const likeMessage = `${emoticon} ${message}`;
+  const likeMessage = `${message} ${emoticon}`;
   const isError = message.length > MAX_MESSAGE_LENGTH;
 
   useEffect(() => {
