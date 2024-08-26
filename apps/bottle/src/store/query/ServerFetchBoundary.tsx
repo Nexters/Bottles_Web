@@ -20,9 +20,5 @@ export async function ServerFetchBoundary({ fetchOptions, children }: Props) {
     await queryClient.fetchQuery(fetchOptions);
   }
 
-  // Array.isArray(fetchOptions)
-  //   ? await Promise.all(fetchOptions.map(prefetchOption => queryClient.prefetchQuery(prefetchOption)))
-  //   : await queryClient.prefetchQuery(fetchOptions);
-
   return <HydrationBoundary state={dehydrate(queryClient)}>{children}</HydrationBoundary>;
 }

@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { useUserInfoQuery } from '../../../store/query/useNameQuery';
+import { useUserInfoQuery } from '../../../store/query/useUserInfoQuery';
 import { titleStyle } from './topStyle.css';
 
 interface Props {

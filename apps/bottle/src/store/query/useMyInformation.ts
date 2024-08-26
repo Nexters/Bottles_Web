@@ -5,7 +5,7 @@ import { CurrentUser } from '@/models/user';
 import { UseSuspenseQueryOptions, useSuspenseQuery } from '@tanstack/react-query';
 
 export const myInformationQueryOptions = (tokens: Tokens): UseSuspenseQueryOptions<CurrentUser> => ({
-  queryKey: ['bottles'],
+  queryKey: ['my'],
   queryFn: () => GET<CurrentUser>(`/api/v1/profile`, tokens, createInit(tokens.accessToken)),
 });
 export function useMyInformationQuery() {
