@@ -21,8 +21,12 @@ export interface GetUserInfoData {
 }
 
 export const userInfoQueryOptions = (tokens: Tokens): UseSuspenseQueryOptions<GetUserInfoData> => ({
-  queryKey: ['userInfo'],
-  queryFn: () => GET<GetUserInfoData>(`/api/v1/profile/info`, tokens, createInit(tokens.accessToken)),
+  queryKey: ['user-info'],
+  queryFn: async () => {
+    const userInfo = await GET<GetUserInfoData>(`/api/v1/profile/info`, tokens, createInit(tokens.accessToken));
+    console.log('CURRENT USER:', userInfo.name);
+    return userInfo;
+  },
 });
 export function useUserInfoQuery() {
   return useSuspenseQuery(userInfoQueryOptions(getClientSideTokens()));

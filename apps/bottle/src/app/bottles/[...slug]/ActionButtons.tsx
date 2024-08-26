@@ -15,7 +15,7 @@ interface Props {
 
 export function ActionButtons({ type, id }: Props) {
   const { mutate: accept } = useAcceptBottleMutation(type, id);
-  const { mutate: refuse } = useRefuseBottleMutation();
+  const { mutate: refuse } = useRefuseBottleMutation(id);
 
   const handleRightClick =
     type === 'random'
@@ -33,7 +33,7 @@ export function ActionButtons({ type, id }: Props) {
   return (
     <FixedButton
       variant="two"
-      left={<CTAButton.Left onClick={() => refuse(id)}>떠내려 보내기</CTAButton.Left>}
+      left={<CTAButton.Left onClick={() => refuse()}>떠내려 보내기</CTAButton.Left>}
       right={
         <CTAButton.Right onClick={handleRightClick}>
           {type === 'random' ? '호감 표현하기' : '문답 시작하기'}

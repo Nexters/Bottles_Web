@@ -7,6 +7,9 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { getCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
 import { bottlesQueryOptions } from '../query/useBottlesQuery';
+import { logAction } from '@/features/server/log';
+import { bottleDetailQueryOptions } from '../query/useBottleDetailQuery';
+import { userInfoQueryOptions } from '../query/useUserInfoQuery';
 
 interface AcceptBottleBody<T extends BottleType> {
   likeMessage: T extends 'random' ? string : null;
@@ -16,6 +19,13 @@ export function useAcceptBottleMutation<T extends BottleType>(type: T, id: Bottl
   const router = useRouter();
   const { send } = useAppBridge();
   const queryClient = useQueryClient();
+  const tokens = getClientSideTokens();
+
+  async function logAcceptBottleAction() {
+    const { name: currentUserName } = await queryClient.ensureQueryData(userInfoQueryOptions(tokens));
+    const { userName: senderName } = await queryClient.ensureQueryData(bottleDetailQueryOptions(tokens, id));
+    await logAction(`${currentUserName} ACCEPTED ${senderName}`);
+  }
 
   return useMutation({
     mutationFn: (likeMessage: string | null) =>
@@ -24,7 +34,7 @@ export function useAcceptBottleMutation<T extends BottleType>(type: T, id: Bottl
         getClientSideTokens(),
         createInit(getCookie('accessToken') ?? '', { likeMessage })
       ),
-    onSuccess: () => {
+    onSuccess: async () => {
       queryClient.invalidateQueries({ queryKey: bottlesQueryOptions(getClientSideTokens()).queryKey });
       if (type === 'random') {
         send({ type: AppBridgeMessageType.TOAST_OPEN, payload: { message: '호감을 보냈어요' } });
@@ -32,6 +42,7 @@ export function useAcceptBottleMutation<T extends BottleType>(type: T, id: Bottl
         return;
       }
       send({ type: AppBridgeMessageType.BOTTLE_ACCEPT });
+      await logAcceptBottleAction();
     },
   });
 }
