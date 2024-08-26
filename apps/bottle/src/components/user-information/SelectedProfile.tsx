@@ -15,10 +15,11 @@ export function SelectedProfile({
     smoking,
     alcohol,
     keyword,
+    height,
     interest: { culture, sports, entertainment, etc },
   },
 }: Props) {
-  const basicInformation = [job, mbti, city, smoking, alcohol];
+  const basicInformation = [job, mbti, city, height, smoking, alcohol];
   const personalities = keyword;
   const hobbies = [
     ...Object.values(culture),
@@ -38,7 +39,7 @@ export function SelectedProfile({
   );
 }
 
-function SelectedProfileBlock({ type, values }: { type: string; values: string[] }) {
+function SelectedProfileBlock({ type, values }: { type: string; values: (string | number)[] }) {
   return (
     <div className={selectedProfileBlockStyle}>
       <Paragraph typography="st2" color="neutral600">

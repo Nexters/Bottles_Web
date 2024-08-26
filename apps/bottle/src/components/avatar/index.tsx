@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import type { ImageProps } from 'next/image';
-import { avatarStyle, placeholderStyle } from './avatarStyle.css';
+import { avatarStyle, containerStyle, placeholderStyle } from './avatarStyle.css';
 
 export interface AvatarProps extends Omit<ImageProps, 'alt' | 'width' | 'height'> {
   size: 'sm' | 'lg';
@@ -11,7 +11,7 @@ export function Avatar({ size: _size, blur, ...props }: AvatarProps) {
   const size = _size === 'sm' ? 48 : 80;
 
   return (
-    <>
+    <div className={containerStyle({ size: _size })}>
       {props.src != null ? (
         <Image
           priority
@@ -24,7 +24,7 @@ export function Avatar({ size: _size, blur, ...props }: AvatarProps) {
       ) : (
         <Placeholder size={size} />
       )}
-    </>
+    </div>
   );
 }
 
