@@ -1,5 +1,5 @@
 import { StepProvider } from '@/features/steps/StepProvider';
-import { userInfoQueryOptions } from '@/store/query/useNameQuery';
+import { userInfoQueryOptions } from '@/store/query/useUserInfoQuery';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render } from '@testing-library/react';
 import { CreateProfileProvider } from '../../CreateProfileProvider';
