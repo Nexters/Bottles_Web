@@ -5,7 +5,7 @@ export const tabBarStyle = style({
   width: '100%',
   display: 'flex',
   alignItems: 'center',
-  gap: spacings.sm,
+  gap: spacings.xxs,
   marginBottom: spacings.xl,
 });
 
