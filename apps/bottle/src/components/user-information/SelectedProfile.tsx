@@ -19,7 +19,7 @@ export function SelectedProfile({
     interest: { culture, sports, entertainment, etc },
   },
 }: Props) {
-  const basicInformation = [job, mbti, city, height, smoking, alcohol];
+  const basicInformation = [job, mbti, city, `${height}cm`, smoking, alcohol];
   const personalities = keyword;
   const hobbies = [
     ...Object.values(culture),
