@@ -110,6 +110,19 @@ jobs:
           vercel_project_id: ${{ secrets.VERCEL_PROJECT_ID_BOTTLE }}
       - name: Get URL
         run: echo "https://${{ steps.vercel_preview_url.outputs.preview_url }}"
+
+      - name: Send Slack Notification
+        env:
+          DATA: |
+            {
+              "channel": "C07N47FH04Q", 
+              "text": "<@U07L87GGHJS> 테스트중~ 👉 https://${{ steps.vercel_preview_url.outputs.preview_url }}",
+            }
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d "$DATA" \
+          ${{ secrets.SLACK_WEBHOOK_URL }}
+
       - name: Send Discord Notification
         env:
           DATA: |
