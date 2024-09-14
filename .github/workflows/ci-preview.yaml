@@ -66,7 +66,7 @@ jobs:
           echo "cache_status_e2e: ${{ steps.determine-status.outputs.cache_status_e2e }}"
 
       # install playwright depedencies only if @bottlesteam/bottle is not cached
-      - run: pnpx playwright@1.37.1 install --with-deps
+      - run: npx playwright install --with-deps
         # if: steps.determine-status.outputs.cache_status_e2e == 'MISS'
 
       # run turbo tasks
