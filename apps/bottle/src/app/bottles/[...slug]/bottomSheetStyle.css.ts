@@ -7,6 +7,10 @@ export const emoticonsContainer = style({
   justifyContent: 'space-between',
   marginTop: spacings.sm,
 });
-// export const emoticonBox=style({
-
-// })
+export const deleteButtonStyle = style({
+  background: 'none',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  border: 'none',
+});

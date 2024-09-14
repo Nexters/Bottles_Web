@@ -48,7 +48,6 @@ export const labelStyle = recipe({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: colors.white100,
     borderRadius: radius.sm,
   },
   variants: {
@@ -66,6 +65,14 @@ export const labelStyle = recipe({
       },
       false: {
         border: `1px solid ${colors.neutral300}`,
+      },
+    },
+    focused: {
+      true: {
+        backgroundColor: colors.neutral100,
+      },
+      false: {
+        backgroundColor: colors.white100,
       },
     },
   },

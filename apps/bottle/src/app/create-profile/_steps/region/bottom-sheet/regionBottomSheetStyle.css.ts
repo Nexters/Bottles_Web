@@ -5,8 +5,15 @@ export const tabBarStyle = style({
   width: '100%',
   display: 'flex',
   alignItems: 'center',
-  gap: spacings.sm,
+  justifyContent: 'space-between',
+
   marginBottom: spacings.xl,
+});
+
+export const tabItemsStyle = style({
+  display: 'flex',
+  gap: spacings.xxs,
+  alignItems: 'center',
 });
 
 export const listStyle = style({
@@ -16,9 +23,6 @@ export const listStyle = style({
   display: 'flex',
   flexDirection: 'column',
   gap: spacings.sm,
-  '::-webkit-scrollbar': {
-    display: 'none',
-  },
 });
 
 export const itemStyle = style({
@@ -26,3 +30,5 @@ export const itemStyle = style({
   display: 'flex',
   alignItems: 'center',
 });
+
+export const closeIconStyle = style({});

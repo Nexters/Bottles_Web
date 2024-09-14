@@ -9,7 +9,7 @@ export const chipStyle = recipe({
     justifyContent: 'center',
     alignItems: 'center',
     ...typography.bo,
-    borderRadius: radius.sm,
+    borderRadius: radius.xs,
     padding: `0 ${spacings.sm}`,
   },
   variants: {

@@ -1,7 +1,7 @@
 import { ChangeEvent, ReactNode, useId } from 'react';
-import { agreementItemStyle, checkboxStyle } from './agreementStyle.css';
 import { Asset } from '../asset';
 import { Paragraph } from '../paragraph';
+import { agreementItemStyle, checkboxStyle } from './agreementStyle.css';
 
 export interface AgreementItemProps {
   checked: boolean;

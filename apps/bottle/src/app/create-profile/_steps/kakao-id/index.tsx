@@ -41,7 +41,7 @@ export function KaKaoId() {
           send({ type: AppBridgeMessageType.CREATE_PROFILE_COMPLETE });
         }}
       >
-        다음
+        완료
       </Step.FixedButton>
     </>
   );

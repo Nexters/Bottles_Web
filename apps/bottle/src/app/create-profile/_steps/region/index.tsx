@@ -31,32 +31,6 @@ export function Region() {
   const [city, setCity] = useState<string | undefined>(selected != null ? selected.city : undefined);
   const [state, setState] = useState<string | undefined>(selected != null ? selected.state : undefined);
 
-  const openRegionBottomSheet = (type: 'city' | 'state') => {
-    overlay.open(({ isOpen, unmount }) => {
-      return (
-        <>
-          {regionsData && (
-            <RegionBottomSheet
-              type={type}
-              selected={type === 'city' ? city : state}
-              onSelect={(item: string) => {
-                type === 'city' ? setCity(item) : setState(item);
-                type === 'city' && city !== item && setState(undefined);
-              }}
-              isOpen={isOpen}
-              onClose={unmount}
-              items={
-                type === 'city'
-                  ? regionsData.regions.map(({ city }) => city)
-                  : (regionsData.regions.find(region => region.city === city) as RegionData).state
-              }
-            />
-          )}
-        </>
-      );
-    });
-  };
-
   return (
     <>
       <OverlayProvider>
@@ -64,19 +38,46 @@ export function Region() {
         <Step.Subtitle style={{ marginTop: spacings.xxl }}>전체 지역</Step.Subtitle>
         <div aria-hidden={true} className={spacingStyle} />
         <SelectInput
-          onClick={() => openRegionBottomSheet('city')}
+          onClick={async () => {
+            if (regionsData == null) {
+              return;
+            }
+            const selectedCity = await openRegionBottomSheet(
+              'city',
+              regionsData?.regions.map(({ city }) => city),
+              city
+            );
+            if (selectedCity !== city) {
+              setCity(selectedCity);
+              setState(undefined);
+            }
+
+            if (selectedCity != null) {
+              const selectedState = await openRegionBottomSheet(
+                'state',
+                (regionsData?.regions.find(region => region.city === selectedCity) as RegionData).state,
+                state
+              );
+              setState(selectedState);
+            }
+          }}
           placeholder={'전체 지역을 선택해 주세요'}
           value={city}
         />
         <Step.Subtitle style={{ marginTop: spacings.xl }}>시 · 군 · 구</Step.Subtitle>
         <div aria-hidden={true} className={spacingStyle} />
         <SelectInput
-          onClick={() => {
+          onClick={async () => {
             if (city === undefined) {
               send({ type: AppBridgeMessageType.TOAST_OPEN, payload: { message: '전체 지역을 먼저 선택해주세요.' } });
               return;
             }
-            openRegionBottomSheet('state');
+            const selectedState = await openRegionBottomSheet(
+              'state',
+              (regionsData?.regions.find(region => region.city === city) as RegionData).state,
+              state
+            );
+            setState(selectedState);
           }}
           placeholder={'상세 지역을 선택해 주세요'}
           value={state}
@@ -98,3 +99,23 @@ export function Region() {
     </>
   );
 }
+
+const openRegionBottomSheet = async (
+  type: 'city' | 'state',
+  items: string[],
+  selected: string | undefined
+): Promise<string | undefined> =>
+  await overlay.openAsync(({ isOpen, close, unmount }) => {
+    return (
+      <>
+        <RegionBottomSheet
+          type={type}
+          selected={selected}
+          onSelect={close}
+          isOpen={isOpen}
+          onClose={unmount}
+          items={items}
+        />
+      </>
+    );
+  });
