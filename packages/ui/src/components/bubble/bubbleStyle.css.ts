@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { colors, spacings } from '../../foundations';
+import { colors, spacings, typography } from '../../foundations';
 
 export const wrapperStyle = style({
   width: 'auto',
@@ -18,6 +18,8 @@ export const messageContainerstyle = style({
   alignItems: 'center',
   backgroundColor: colors.white100,
   borderRadius: '20px',
+  boxShadow: '0px 0px 8px 0px rgba(0, 0, 0, 0.04);',
+  ...typography.st2,
 });
 
 export const vectorContainerStyle = style({
