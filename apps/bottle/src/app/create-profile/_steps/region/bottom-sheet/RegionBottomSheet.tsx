@@ -1,6 +1,6 @@
 import { Asset, Paragraph, colors, BottomSheet, BottomSheetProps, Chip } from '@bottlesteam/ui';
 import { useEffect, useState } from 'react';
-import { itemStyle, listStyle, tabBarStyle } from './regionBottomSheetStyle.css';
+import { itemStyle, listStyle, tabBarStyle, tabItemsStyle } from './regionBottomSheetStyle.css';
 
 interface Props extends Omit<BottomSheetProps, 'button' | 'body'> {
   items: string[];
@@ -25,7 +25,7 @@ export function RegionBottomSheet({ onSelect, selected, items, type, ...bottomSh
       {...bottomSheetProps}
       body={
         <>
-          <TabBar type={type} />
+          <TabBar onClose={bottomSheetProps.onClose} type={type} />
           <ul className={listStyle}>
             {items.map(item => (
               <li
@@ -61,12 +61,17 @@ export function RegionBottomSheet({ onSelect, selected, items, type, ...bottomSh
   );
 }
 
-function TabBar({ type }: { type: 'city' | 'state' }) {
+function TabBar({ type, onClose }: { type: 'city' | 'state'; onClose: BottomSheetProps['onClose'] }) {
   return (
     <div className={tabBarStyle}>
-      <Chip active={type === 'city'}>전체 지역</Chip>
-      <Asset type="icon-right" />
-      <Chip active={type === 'state'}>상세 지역</Chip>
+      <div className={tabItemsStyle}>
+        <Chip active={type === 'city'}>전체 지역</Chip>
+        <Asset type="icon-right" />
+        <Chip active={type === 'state'}>상세 지역</Chip>
+      </div>
+      <div onClick={onClose}>
+        <Asset type="icon-close" />
+      </div>
     </div>
   );
 }
