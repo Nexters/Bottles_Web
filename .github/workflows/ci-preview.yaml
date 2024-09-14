@@ -67,7 +67,7 @@ jobs:
 
       # install playwright depedencies only if @bottlesteam/bottle is not cached
       - run: pnpx playwright install --with-deps
-        if: steps.determine-status.outputs.cache_status_e2e == 'MISS'
+        # if: steps.determine-status.outputs.cache_status_e2e == 'MISS'
 
       # run turbo tasks
       - run: pnpm run ci
