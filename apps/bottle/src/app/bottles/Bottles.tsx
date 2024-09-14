@@ -62,8 +62,18 @@ export function Bottles() {
           {data => {
             const bottles = type === 'random' ? data.randomBottles : data.sentBottles;
             return bottles.length === 0 ? (
-              <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <Image src={NO_BOTTLE_IMAGE} alt="no bottle" width={250} height={250} />
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  width: '100%',
+                  aspectRatio: '1 / 1',
+                  padding: '60px',
+                }}
+              >
+                <div style={{ width: '100%', height: '100%', position: 'relative' }}>
+                  <Image src={NO_BOTTLE_IMAGE} alt="no bottle" fill />
+                </div>
               </div>
             ) : (
               bottles?.map(bottle => (
