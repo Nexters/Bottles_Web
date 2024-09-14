@@ -1,9 +1,8 @@
 'use client';
 
-import { FixedButton } from '@/features/steps/StepContainer';
 import { useAcceptBottleMutation } from '@/store/mutation/useAcceptBottleMutation';
 import { useRefuseBottleMutation } from '@/store/mutation/useRefuseBottleMutation';
-import { CTAButton } from '@bottlesteam/ui';
+import { CTAButton, FixedBottomCTAButton } from '@bottlesteam/ui';
 import { overlay } from 'overlay-kit';
 import { BottleType } from '../Bottles';
 import { ExpressInterestBottomSheet } from './ExpressInterestBottomSheet';
@@ -31,7 +30,7 @@ export function ActionButtons({ type, id }: Props) {
       : () => accept(null);
 
   return (
-    <FixedButton
+    <FixedBottomCTAButton
       variant="two"
       left={<CTAButton.Left onClick={() => refuse()}>떠내려 보내기</CTAButton.Left>}
       right={
