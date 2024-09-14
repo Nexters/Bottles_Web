@@ -3,6 +3,7 @@ import LeftArrowIcon from './icons/icon_arrow_left.svg';
 import CheckIcon from './icons/icon_check.svg';
 import CheckIconColored from './icons/icon_check_colored.svg';
 import IconClose from './icons/icon_close.svg';
+import DeleteIcon from './icons/icon_delete.svg';
 import DownIcon from './icons/icon_down.svg';
 import RightIcon from './icons/icon_right.svg';
 import VerticalBarIcon from './icons/icon_vertical_bar.svg';
@@ -16,7 +17,8 @@ type Type =
   | 'vector'
   | 'icon-check'
   | 'icon-check-colored'
-  | 'icon-close';
+  | 'icon-close'
+  | 'icon-delete';
 
 export interface AssetProps extends ComponentProps<'svg'> {
   type: Type;
@@ -37,6 +39,8 @@ export function Asset({ type, ...rest }: AssetProps) {
     <CheckIconColored />
   ) : type === 'icon-close' ? (
     <IconClose />
+  ) : type === 'icon-delete' ? (
+    <DeleteIcon />
   ) : (
     <VerticalBarIcon />
   );
