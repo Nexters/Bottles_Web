@@ -1,6 +1,6 @@
 import { ComponentProps, ReactNode } from 'react';
-import { agreementListContainerStyle, containerStyle, separatorStyle } from './agreementStyle.css';
 import { AgreementAgreeAllItem, AgreementItem } from './AgreementItem';
+import { agreementListContainerStyle, containerStyle, separatorStyle } from './agreementStyle.css';
 
 export interface AgreementProps extends ComponentProps<'div'> {
   agreeAll: ReactNode;
