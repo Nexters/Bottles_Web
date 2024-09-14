@@ -1,4 +1,4 @@
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
   use: {
@@ -20,10 +20,4 @@ export default defineConfig({
   workers: 1,
 
   reporter: 'html',
-  projects: [
-    {
-      name: 'webkit',
-      use: { ...devices['iPhone 12'] },
-    },
-  ],
 });
