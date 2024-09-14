@@ -98,23 +98,19 @@ jobs:
           vercel build --prod --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
           vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
 
-      - name: Send Discord Notification
+      - name: Send Slack Notification
         env:
           DATA: |
             {
-              "content": "<@stakbucks>",
-              "embeds": [
-                {
-                  "title": "🎉 Bottle 배포 완료! 🎉",
-                  "description": "👉 https://bottle.bottles.asia",
-                  "color": 65280
-                }
-              ]
+              "channel": "C07N47FH04Q", 
+              "text": "<@U07L87GGHJS>
+              🎉 보틀 배포 완료! 🎉
+              👉 https://bottle.bottles.asia",
             }
         run: |
-          curl -X POST -H 'Content-type: application/json' \
+          curl -X POST -H "Content-Type: application/json" \
           -d "$DATA" \
-          ${{ secrets.DISCORD_WEBHOOK_URL }}
+          ${{ secrets.SLACK_WEBHOOK_URL }}
 
   Deploy_Web_to_Vercel:
     # deploy Web to vercel
@@ -146,20 +142,16 @@ jobs:
           vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
         env:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-      - name: Send Discord Notification
+      - name: Send Slack Notification
         env:
           DATA: |
             {
-              "content": "<@stakbucks>",
-              "embeds": [
-                {
-                  "title": "🎉 배포 완료! 🎉",
-                  "description": "👉 https://bottles.asia",
-                  "color": 65280
-                }
-              ]
+              "channel": "C07N47FH04Q", 
+              "text": "<@U07L87GGHJS>
+              🎉 랜딩페이지 배포 완료! 🎉
+              👉 https://bottles.asia",
             }
         run: |
-          curl -X POST -H 'Content-type: application/json' \
+          curl -X POST -H "Content-Type: application/json" \
           -d "$DATA" \
-          ${{ secrets.DISCORD_WEBHOOK_URL }}
+          ${{ secrets.SLACK_WEBHOOK_URL }}
