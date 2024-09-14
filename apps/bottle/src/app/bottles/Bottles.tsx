@@ -46,22 +46,15 @@ export function Bottles() {
           top={data => (
             <BottlesList.Top>
               {name => (
-                <>
-                  <Paragraph typography="t1" color="black100">
-                    {type === 'random'
-                      ? data.randomBottles?.length > 0
-                        ? `${name}님에게\n추천하는 분들이에요!`
-                        : '아직 주변에 새로운\n보틀이 없어요'
-                      : data.sentBottles?.length > 0
-                        ? `${name}님을 마음에\n들어한 분들이에요`
-                        : '아직 받은 보틀이 없어요'}
-                  </Paragraph>
-                  <Paragraph typography="bo" color="neutral600">
-                    {type === 'random'
-                      ? '시간이 지나면 새로운 분들을 추천해 드려요'
-                      : '시간 내에 보틀을 열지 않으면 사라져요'}
-                  </Paragraph>
-                </>
+                <Paragraph typography="t1" color="black100">
+                  {type === 'random'
+                    ? data.randomBottles?.length > 0
+                      ? `${name}님에게\n추천하는 분들이에요!`
+                      : '아직 주변에 새로운\n보틀이 없어요'
+                    : data.sentBottles?.length > 0
+                      ? `${name}님을 마음에\n들어한 분들이에요`
+                      : '아직 받은 보틀이 없어요'}
+                </Paragraph>
               )}
             </BottlesList.Top>
           )}
