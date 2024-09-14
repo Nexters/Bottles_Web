@@ -111,7 +111,6 @@ test('Create Profile Funnel Basic Flow', async ({ page }) => {
   });
   await test.step('Select region and move to step 10', async () => {
     const cityPlaceholder = page.getByText('전체 지역을 선택해 주세요');
-    const statePlaceholder = page.getByText('상세 지역을 선택해 주세요');
 
     await cityPlaceholder.click();
     const city = page.getByRole('listitem').first();
@@ -119,7 +118,6 @@ test('Create Profile Funnel Basic Flow', async ({ page }) => {
     const citySelectButton = page.getByRole('button', { name: '완료', exact: true });
     await citySelectButton.click();
 
-    await statePlaceholder.click();
     const state = page.getByRole('listitem').first();
     await state.click();
     const stateSelectButton = page.getByRole('button', { name: '완료', exact: true });
