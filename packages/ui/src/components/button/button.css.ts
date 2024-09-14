@@ -150,7 +150,7 @@ export const buttonStyle = recipe({
       style: {
         color: colors.white100,
         width: '328px',
-        height: '56px',
+        height: '64px',
         ...typography.st1,
         backgroundColor: colors.purple400,
         borderRadius: radius.sm,
