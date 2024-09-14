@@ -38,14 +38,16 @@ export function ExpressInterestBottomSheet({ onExpress, ...bottomSheetProps }: P
             onChange={e => setMessage(e.currentTarget.value)}
             error={isError}
             rightButton={
-              <button
-                className={deleteButtonStyle}
-                onClick={() => {
-                  setMessage('');
-                }}
-              >
-                <Asset type="icon-delete" />
-              </button>
+              message.length > 0 && (
+                <button
+                  className={deleteButtonStyle}
+                  onClick={() => {
+                    setMessage('');
+                  }}
+                >
+                  <Asset type="icon-delete" />
+                </button>
+              )
             }
           />
           <TextField.Caption>{isError && ERROR_CAPTION}</TextField.Caption>
