@@ -116,30 +116,14 @@ jobs:
           DATA: |
             {
               "channel": "C07N47FH04Q", 
-              "text": "<@U07L87GGHJS> 테스트중~ 👉 https://${{ steps.vercel_preview_url.outputs.preview_url }}",
+              "text": "<@U07L87GGHJS>
+              🍾 보틀 미리보기 배포 완료! 
+              👉 https://${{ steps.vercel_preview_url.outputs.preview_url }}",
             }
         run: |
           curl -X POST -H "Content-Type: application/json" \
           -d "$DATA" \
           ${{ secrets.SLACK_WEBHOOK_URL }}
-
-      - name: Send Discord Notification
-        env:
-          DATA: |
-            {
-              "content": "<@stakbucks>",
-              "embeds": [
-                {
-                  "tile": "👀 Bottle 미리보기가 준비되었어요",
-                  "description": "👉 https://${{ steps.vercel_preview_url.outputs.preview_url }}",
-                  "color": 65280
-                }
-              ]
-            }
-        run: |
-          curl -X POST -H 'Content-type: application/json' \
-          -d "$DATA" \
-          ${{ secrets.DISCORD_WEBHOOK_URL }}
 
   Deploy_Web_to_Vercel:
     # deploy Web to vercel
@@ -183,20 +167,17 @@ jobs:
           vercel_project_id: ${{ secrets.VERCEL_PROJECT_ID_WEB }}
       - name: Get URL
         run: echo "https://${{ steps.vercel_preview_url_web.outputs.preview_url }}"
-      - name: Send Discord Notification
+
+      - name: Send Slack Notification
         env:
           DATA: |
             {
-              "content": "<@stakbucks>",
-            "embeds": [
-              {
-                "title": "👀 Web 미리보기가 준비되었어요",
-                  "description": "👉 https://${{ steps.vercel_preview_url_web.outputs.preview_url }}",
-                  "color": 65280
-                }
-              ]
+              "channel": "C07N47FH04Q", 
+              "text": "<@U07L87GGHJS>
+              랜딩 페이지 미리보기 배포 완료! 
+              👉 https://${{ steps.vercel_preview_url_web.outputs.preview_url }}",
             }
         run: |
-          curl -X POST -H 'Content-type: application/json' \
+          curl -X POST -H "Content-Type: application/json" \
           -d "$DATA" \
-          ${{ secrets.DISCORD_WEBHOOK_URL }}
+          ${{ secrets.SLACK_WEBHOOK_URL }}
