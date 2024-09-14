@@ -46,44 +46,42 @@ export function Interests() {
 
   return (
     <>
-      <Step>
-        <Step.Title>푹 빠진 취미는 무엇인가요?</Step.Title>
-        <Step.Description style={{ marginTop: '12px' }}>최소 3개, 최대 10개까지 선택할 수 있어요</Step.Description>
-        <Step.Subtitle style={{ marginTop: spacings.xxl }}>문화 예술</Step.Subtitle>
-        <Control value={interests}>
-          <section className={interestsStyle}>
-            {culture.map((item, index) => (
-              <Control.Item value={item} key={index} onClick={() => handleClick(item)}>
-                <ItemButton>{item}</ItemButton>
-              </Control.Item>
-            ))}
-          </section>
-          <Step.Subtitle style={{ marginTop: spacings.xl }}>스포츠</Step.Subtitle>
-          <section className={interestsStyle}>
-            {sports.map((item, index) => (
-              <Control.Item value={item} key={index} onClick={() => handleClick(item)}>
-                <ItemButton>{item}</ItemButton>
-              </Control.Item>
-            ))}
-          </section>
-          <Step.Subtitle style={{ marginTop: spacings.xl }}>오락</Step.Subtitle>
-          <section className={interestsStyle}>
-            {entertainment.map((item, index) => (
-              <Control.Item value={item} key={index} onClick={() => handleClick(item)}>
-                <ItemButton>{item}</ItemButton>
-              </Control.Item>
-            ))}
-          </section>
-          <Step.Subtitle style={{ marginTop: spacings.xl }}>기타</Step.Subtitle>
-          <section className={interestsStyle} style={{ marginBottom: spacings.xl }}>
-            {etc.map((item, index) => (
-              <Control.Item value={item} key={index} onClick={() => handleClick(item)}>
-                <ItemButton>{item}</ItemButton>
-              </Control.Item>
-            ))}
-          </section>
-        </Control>
-      </Step>
+      <Step.Title>푹 빠진 취미는 무엇인가요?</Step.Title>
+      <Step.Description style={{ marginTop: '12px' }}>최소 3개, 최대 10개까지 선택할 수 있어요</Step.Description>
+      <Step.Subtitle style={{ marginTop: spacings.xxl }}>문화 예술</Step.Subtitle>
+      <Control value={interests}>
+        <section className={interestsStyle}>
+          {culture.map((item, index) => (
+            <Control.Item value={item} key={index} onClick={() => handleClick(item)}>
+              <ItemButton>{item}</ItemButton>
+            </Control.Item>
+          ))}
+        </section>
+        <Step.Subtitle style={{ marginTop: spacings.xl }}>스포츠</Step.Subtitle>
+        <section className={interestsStyle}>
+          {sports.map((item, index) => (
+            <Control.Item value={item} key={index} onClick={() => handleClick(item)}>
+              <ItemButton>{item}</ItemButton>
+            </Control.Item>
+          ))}
+        </section>
+        <Step.Subtitle style={{ marginTop: spacings.xl }}>오락</Step.Subtitle>
+        <section className={interestsStyle}>
+          {entertainment.map((item, index) => (
+            <Control.Item value={item} key={index} onClick={() => handleClick(item)}>
+              <ItemButton>{item}</ItemButton>
+            </Control.Item>
+          ))}
+        </section>
+        <Step.Subtitle style={{ marginTop: spacings.xl }}>기타</Step.Subtitle>
+        <section className={interestsStyle} style={{ marginBottom: spacings.xl }}>
+          {etc.map((item, index) => (
+            <Control.Item value={item} key={index} onClick={() => handleClick(item)}>
+              <ItemButton>{item}</ItemButton>
+            </Control.Item>
+          ))}
+        </section>
+      </Control>
       <Step.FixedButton
         disabled={interests.length < MIN_SELECTD}
         onClick={() => {
