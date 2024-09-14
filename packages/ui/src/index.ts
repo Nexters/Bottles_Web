@@ -5,6 +5,8 @@ export {
   Bubble,
   ImageButton,
   CTAButton,
+  isVariantOne,
+  FixedBottomCTAButton,
   Paragraph,
   Asset,
   WheelPicker,
@@ -19,6 +21,7 @@ export type {
   BubbleProps,
   ImageButtonProps,
   CTAButtonProps,
+  FixedBottomCTAButtonProps,
   ParagraphProps,
   AssetProps,
   VariantOneProps,
@@ -36,3 +39,5 @@ export { colors, colorsMap, typography, spacings, radius, radiusMap } from './fo
 export type { Color, Typography, Spacing, Radius } from './foundations';
 
 export type * from './types';
+
+export * from './constants';

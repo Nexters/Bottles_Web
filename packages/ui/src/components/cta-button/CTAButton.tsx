@@ -3,6 +3,7 @@ import { VariantOne, VariantOneProps } from './VariantOne/VariantOne';
 import { LeftButton } from './VariantTwo/LeftButton';
 import { RightButton } from './VariantTwo/RightButton';
 import { VariantTwo, VariantTwoProps } from './VariantTwo/VariantTwo';
+import { isVariantOne } from './utils';
 
 export type CTAButtonProps =
   | ({
@@ -11,12 +12,6 @@ export type CTAButtonProps =
   | ({
       variant: 'two';
     } & VariantTwoProps);
-
-export function isVariantOne(props: CTAButtonProps): props is {
-  variant: 'one';
-} & VariantOneProps {
-  return props.variant === 'one';
-}
 
 const CTAButtonImpl = forwardRef<ElementRef<'button'>, CTAButtonProps>((props: CTAButtonProps, ref) => {
   return isVariantOne(props) ? (
