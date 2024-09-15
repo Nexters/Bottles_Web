@@ -1,10 +1,10 @@
 'use client';
 
 import { Card } from '@/components/card';
-import { profileItemLeftStyle, profileItemStyle } from './profileEditStyle.css';
-import { Asset, Paragraph, spacings } from '@bottlesteam/ui';
 import { useMyInformationQuery } from '@/store/query/useMyInformation';
+import { Asset, Paragraph, spacings } from '@bottlesteam/ui';
 import { useMemo } from 'react';
+import { profileItemLeftStyle, profileItemStyle } from './profileEditStyle.css';
 
 export function ProfileArea() {
   const {
@@ -77,14 +77,14 @@ export function ProfileArea() {
         onRightArrowClick: () => {},
       },
     ],
-    [mbti, keyword, culture, sports, entertainment, job, height, smoking, alcohol, religion, city]
+    [mbti, keyword, culture, sports, entertainment, job, height, smoking, alcohol, religion, city, etc]
   );
 
   return (
     <Card asChild style={{ marginTop: spacings.sm, marginBottom: spacings.xl }}>
       <ul>
         {profileItems.map(({ title, description }) => (
-          <li className={profileItemStyle}>
+          <li key={title} className={profileItemStyle}>
             <div className={profileItemLeftStyle}>
               <Paragraph color="neutral900" typography="st2">
                 {title}

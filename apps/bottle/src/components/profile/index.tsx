@@ -1,7 +1,7 @@
 import { Asset, Paragraph } from '@bottlesteam/ui';
+import { ComponentProps } from 'react';
 import { Avatar } from '../avatar';
 import { avatarAreaStyle, editButtonStyle, userInfoAreaStyle, wrapperStyle } from './profileStyle.css';
-import { ComponentProps } from 'react';
 
 interface ProfileProps extends ComponentProps<'div'> {
   image: string;

@@ -1,8 +1,8 @@
-import { BasicInformation } from './BasicInformation';
-import { Suspense } from 'react';
-import { myInformationQueryOptions } from '@/store/query/useMyInformation';
 import { getServerSideTokens } from '@/features/server/serverSideTokens';
 import { ServerFetchBoundary } from '@/store/query/ServerFetchBoundary';
+import { myInformationQueryOptions } from '@/store/query/useMyInformation';
+import { Suspense } from 'react';
+import { BasicInformation } from './BasicInformation';
 import { HeaderArea } from './HeaderArea';
 import { IntroductionArea } from './IntroductionArea';
 import { ProfileArea } from './ProfileArea';

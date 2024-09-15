@@ -1,6 +1,6 @@
+import { Slot } from '@radix-ui/react-slot';
 import { ComponentProps, ReactNode } from 'react';
 import { cardStyle } from './cardStyle.css';
-import { Slot } from '@radix-ui/react-slot';
 
 export interface CardProps extends ComponentProps<'section'> {
   children: ReactNode;

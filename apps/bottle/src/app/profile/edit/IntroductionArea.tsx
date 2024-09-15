@@ -1,9 +1,9 @@
 'use client';
 
 import { Card } from '@/components/card';
+import { useMyInformationQuery } from '@/store/query/useMyInformation';
 import { Paragraph, spacings } from '@bottlesteam/ui';
 import { introductionBoxStyle } from './profileEditStyle.css';
-import { useMyInformationQuery } from '@/store/query/useMyInformation';
 
 export function IntroductionArea() {
   const {
