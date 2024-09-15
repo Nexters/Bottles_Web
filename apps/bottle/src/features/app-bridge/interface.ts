@@ -11,12 +11,14 @@ export enum AppBridgeMessageType {
   CREATE_PROFILE_COMPLETE = 'onCreateProfileComplete',
   BOTTLE_ACCEPT = 'onBottleAccept',
   OPEN_LINK = 'openLink',
+  OPEN_WEB_VIEW = 'openWebView',
 }
 export type AppBridgeMessage =
   | ToastMessage
   | LoginMessage
   | SignupMessage
   | OpenLinkMessage
+  | OpenWebViewMessage
   | {
       type:
         | AppBridgeMessageType.WEB_VIEW_CLOSE
@@ -44,6 +46,13 @@ export interface SignupMessage {
 
 export interface OpenLinkMessage {
   type: AppBridgeMessageType.OPEN_LINK;
+  payload: {
+    href: string;
+  };
+}
+
+export interface OpenWebViewMessage {
+  type: AppBridgeMessageType.OPEN_WEB_VIEW;
   payload: {
     href: string;
   };
