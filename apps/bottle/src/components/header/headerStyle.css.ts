@@ -1,4 +1,5 @@
 import { HEADER_HEIGHT } from '@/features/steps/stepStyle.css';
+import { colors } from '@bottlesteam/ui';
 import { style } from '@vanilla-extract/css';
 
 export const headerStyle = style({
@@ -9,4 +10,5 @@ export const headerStyle = style({
   top: 0,
   display: 'flex',
   alignItems: 'center',
+  backgroundColor: colors.neutral50,
 });

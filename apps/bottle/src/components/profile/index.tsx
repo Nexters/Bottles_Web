@@ -1,17 +1,18 @@
 import { Asset, Paragraph } from '@bottlesteam/ui';
 import { Avatar } from '../avatar';
 import { avatarAreaStyle, editButtonStyle, userInfoAreaStyle, wrapperStyle } from './profileStyle.css';
+import { ComponentProps } from 'react';
 
-interface ProfileProps {
+interface ProfileProps extends ComponentProps<'div'> {
   image: string;
   name: string;
   age: number;
   onEditClick?: () => void;
 }
 
-export function Profile({ image, name, age, onEditClick }: ProfileProps) {
+export function Profile({ image, name, age, onEditClick, ...rest }: ProfileProps) {
   return (
-    <div className={wrapperStyle}>
+    <div className={wrapperStyle} {...rest}>
       {onEditClick != null ? (
         <div className={avatarAreaStyle}>
           <Avatar src={image} size="lg" />

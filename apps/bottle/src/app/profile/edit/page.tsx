@@ -1,22 +1,28 @@
-import { Header } from '@/components/header';
-import { Asset } from '@bottlesteam/ui';
-import { ProfileArea } from './ProfileArea';
+import { BasicInformation } from './BasicInformation';
 import { Suspense } from 'react';
 import { myInformationQueryOptions } from '@/store/query/useMyInformation';
 import { getServerSideTokens } from '@/features/server/serverSideTokens';
 import { ServerFetchBoundary } from '@/store/query/ServerFetchBoundary';
+import { HeaderArea } from './HeaderArea';
+import { IntroductionArea } from './IntroductionArea';
+import { ProfileArea } from './ProfileArea';
+import { contentsContainerStyle } from './profileEditStyle.css';
 
 export default function ProfileEditPage() {
   const prefetchOptions = myInformationQueryOptions(getServerSideTokens());
 
   return (
     <>
-      <Header>{<Asset type="icon-arrow-left" />}</Header>
-      <Suspense>
-        <ServerFetchBoundary fetchOptions={prefetchOptions}>
-          <ProfileArea />
-        </ServerFetchBoundary>
-      </Suspense>
+      <HeaderArea />
+      <div className={contentsContainerStyle}>
+        <Suspense>
+          <ServerFetchBoundary fetchOptions={prefetchOptions}>
+            <BasicInformation />
+            <IntroductionArea />
+            <ProfileArea />
+          </ServerFetchBoundary>
+        </Suspense>
+      </div>
     </>
   );
 }
