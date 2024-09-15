@@ -13,6 +13,7 @@ export {
   WheelPickerItem,
   BottomSheet,
   Chip,
+  Card,
   TextField,
   Agreement,
 } from './components';
@@ -30,6 +31,7 @@ export type {
   WheelPickerItemProps,
   BottomSheetProps,
   ChipProps,
+  CardProps,
   TextFieldProps,
   AgreementProps,
   AgreementItemProps,
