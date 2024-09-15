@@ -1,4 +1,4 @@
-import { spacings } from '@bottlesteam/ui';
+import { colors, spacings } from '@bottlesteam/ui';
 import { style } from '@vanilla-extract/css';
 
 export const wrapperStyle = style({
@@ -19,11 +19,12 @@ export const avatarAreaStyle = style({
 export const editButtonStyle = style({
   width: '24px',
   height: '24px',
+  borderRadius: '50%',
+  border: `1px solid ${colors.neutral300}`,
   position: 'absolute',
   bottom: 0,
-  right: 5,
-  background: 'none',
-  border: 'none',
+  right: -5,
+  backgroundColor: colors.white100,
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',

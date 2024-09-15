@@ -14,7 +14,7 @@ export function Profile({ image, name, age, onEditClick, ...rest }: ProfileProps
   return (
     <div className={wrapperStyle} {...rest}>
       {onEditClick != null ? (
-        <div className={avatarAreaStyle}>
+        <div onClick={onEditClick} className={avatarAreaStyle}>
           <Avatar src={image} size="lg" />
           <button className={editButtonStyle}>
             <Asset type="icon-pencil" />

@@ -1,12 +1,15 @@
 'use client';
 
 import { Card } from '@/components/card';
+import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
+import { buildWebViewUrl } from '@/features/app-bridge/utils';
 import { useMyInformationQuery } from '@/store/query/useMyInformation';
 import { Asset, Paragraph, spacings } from '@bottlesteam/ui';
 import { useMemo } from 'react';
 import { profileItemLeftStyle, profileItemStyle } from './profileEditStyle.css';
 
 export function ProfileArea() {
+  const { send } = useAppBridge();
   const {
     data: {
       profileSelect: {
@@ -23,18 +26,18 @@ export function ProfileArea() {
     },
   } = useMyInformationQuery();
 
-  const profileItems = useMemo(
+  const editProfileItems = useMemo(
     () => [
-      { title: '카카오톡 아이디', description: 'dhassidu11', onRightArrowClick: () => {} },
+      { title: '카카오톡 아이디', description: 'dhassidu11', endpoint: '/profile/edit/kakaoId' },
       {
         title: '나의 성격',
         description: mbti,
-        onRightArrowClick: () => {},
+        endpoint: '/profile/edit/mbti',
       },
       {
         title: '나를 표현하는 키워드',
         description: keyword.join(', '),
-        onRightArrowClick: () => {},
+        endpoint: '/profile/edit/keyword',
       },
       {
         title: '푹 빠진 취미',
@@ -44,37 +47,37 @@ export function ProfileArea() {
           ...Object.values(entertainment),
           ...Object.values(etc),
         ].join(', '),
-        onRightArrowClick: () => {},
+        endpoint: '/profile/edit/interest',
       },
       {
         title: '직업 · 직무',
         description: job,
-        onRightArrowClick: () => {},
+        endpoint: '/profile/edit/job',
       },
       {
         title: '키',
         description: `${height}cm`,
-        onRightArrowClick: () => {},
+        endpoint: '/profile/edit/height',
       },
       {
         title: '흡연 스타일',
         description: smoking,
-        onRightArrowClick: () => {},
+        endpoint: '/profile/edit/smoking',
       },
       {
         title: '음주 스타일',
         description: alcohol,
-        onRightArrowClick: () => {},
+        endpoint: '/profile/edit/alcohol',
       },
       {
         title: '종교',
         description: religion,
-        onRightArrowClick: () => {},
+        endpoint: '/profile/edit/religion',
       },
       {
         title: '지역',
         description: city,
-        onRightArrowClick: () => {},
+        endpoint: '/profile/edit/region',
       },
     ],
     [mbti, keyword, culture, sports, entertainment, job, height, smoking, alcohol, religion, city, etc]
@@ -83,8 +86,14 @@ export function ProfileArea() {
   return (
     <Card asChild style={{ marginTop: spacings.sm, marginBottom: spacings.xl }}>
       <ul>
-        {profileItems.map(({ title, description }) => (
-          <li key={title} className={profileItemStyle}>
+        {editProfileItems.map(({ title, description, endpoint }) => (
+          <li
+            key={title}
+            className={profileItemStyle}
+            onClick={() => {
+              send({ type: AppBridgeMessageType.OPEN_WEB_VIEW, payload: { href: buildWebViewUrl(endpoint) } });
+            }}
+          >
             <div className={profileItemLeftStyle}>
               <Paragraph color="neutral900" typography="st2">
                 {title}
