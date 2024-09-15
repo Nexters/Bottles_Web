@@ -4,6 +4,9 @@ import { avatarStyle, containerStyle, placeholderStyle } from './avatarStyle.css
 
 export interface AvatarProps extends Omit<ImageProps, 'alt' | 'width' | 'height'> {
   size: 'sm' | 'lg';
+  /**
+   * @deprecated server will process blur images
+   */
   blur?: boolean;
 }
 
