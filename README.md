@@ -8,7 +8,7 @@
 <br>
 
 [<img height=50px  src=https://user-images.githubusercontent.com/42789819/115149387-d42e1980-a09e-11eb-88e3-94ca9b5b604b.png>](https://url.kr/cps1z2)
-[<img height=50px src=https://www.fcsok.org/wp-content/uploads/2020/04/get-it-on-google-play-badge.png>]()
+[<img height=50px src=https://www.fcsok.org/wp-content/uploads/2020/04/get-it-on-google-play-badge.png>](https://play.google.com/store/apps/details?id=com.team.bottles)
 
 
 ## What's inside?
@@ -17,7 +17,7 @@ This Turborepo includes the following packages/apps:
 
 ### Apps and Packages
 
-- `bottle`: a Next.js project for web view inside the [Bottle](https://bottle.bottles.asia/login) native app
+- `bottle`: a Next.js project for web view inside the [Bottle](https://url.kr/cps1z2) native app
 - `web`: a Next.js project for a [promotional website](https://bottles.asia)
 - `admin`: a React project for the admin panel managing the Bottle app 
 - `@bottlesteam/ui`: a stub React component library shared by services located in `apps/**`
