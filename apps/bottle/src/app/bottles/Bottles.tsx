@@ -72,7 +72,7 @@ export function Bottles() {
                 }}
               >
                 <div style={{ width: '100%', height: '100%', position: 'relative' }}>
-                  <Image src={NO_BOTTLE_IMAGE} alt="no bottle" fill />
+                  <Image src={NO_BOTTLE_IMAGE} alt="no bottle" fill objectFit="contain" />
                 </div>
               </div>
             ) : (
