@@ -9,6 +9,9 @@ export interface FunnelValuesContext<I extends object> {
   getValue<K extends keyof I>(key: K): I[K] | undefined;
 }
 
+/**
+ * @deprecated
+ */
 export function createFunnelValuesContext<I extends object>() {
   const Context = createContext<FunnelValuesContext<I> | null>(null);
 

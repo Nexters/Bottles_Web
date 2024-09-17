@@ -22,6 +22,9 @@ interface StepProviderProps {
 
 const STEP_PARAM_KEY = 'step';
 
+/**
+ * @deprecated
+ */
 export function StepProvider({ children, maxStep, uri, onExit, onComplete }: StepProviderProps) {
   const searchParams = useSearchParams();
   const step = useMemo(() => Number(searchParams.get(STEP_PARAM_KEY) ?? '1'), [searchParams]);
