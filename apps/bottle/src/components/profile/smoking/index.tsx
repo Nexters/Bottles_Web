@@ -1,12 +1,12 @@
-import { Control, toggle } from '@/components/control';
+import { Control, toggle } from '@/components/common/control';
 import { Step } from '@/features/steps/StepContainer';
 import { Smoking as SmokingType, smokingList } from '@/models/profile/smoking';
 import { Button } from '@bottlesteam/ui';
 import { useState } from 'react';
-import { BaseFunnelComponentProps } from '../types';
+import { BaseProfileComponentProps } from '../types';
 import { smokingStyle } from './smokingStyle.css';
 
-export function Smoking({ initialValue, onNext, ctaButtonText = '완료' }: BaseFunnelComponentProps<SmokingType>) {
+export function Smoking({ initialValue, onNext, ctaButtonText = '완료' }: BaseProfileComponentProps<SmokingType>) {
   const [smoking, setSmoking] = useState<SmokingType | undefined>(initialValue);
 
   return (

@@ -1,4 +1,4 @@
-import { Avatar } from '@/components/avatar';
+import { Avatar } from '@/components/common/avatar';
 import { getTimeDifference } from '@/features/time/getTimeDifference';
 import { PreviewBottle } from '@/models/bottle';
 import { Paragraph, spacings, Asset } from '@bottlesteam/ui';

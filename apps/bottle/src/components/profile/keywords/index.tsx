@@ -1,15 +1,15 @@
-import { Control } from '@/components/control';
+import { Control } from '@/components/common/control';
 import { Step } from '@/features/steps/StepContainer';
 import { Keyword, keywordList } from '@/models/profile/keywords';
 import { Button } from '@bottlesteam/ui';
 import { useState } from 'react';
-import { BaseFunnelComponentProps } from '../types';
+import { BaseProfileComponentProps } from '../types';
 import { keywordsStyle } from './keywordsStyle.css';
 
 const MIN_SELECTED = 3;
 const MAX_SELECTED = 5;
 
-export function Keywords({ initialValue, ctaButtonText = '완료', onNext }: BaseFunnelComponentProps<Keyword[]>) {
+export function Keywords({ initialValue, ctaButtonText = '완료', onNext }: BaseProfileComponentProps<Keyword[]>) {
   const [keywords, setKeywords] = useState<Keyword[]>(initialValue ?? []);
 
   return (

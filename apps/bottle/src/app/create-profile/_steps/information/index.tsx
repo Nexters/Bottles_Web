@@ -1,4 +1,4 @@
-import { Control } from '@/components/control';
+import { Control } from '@/components/common/control';
 import { Step } from '@/features/steps/StepContainer';
 import { useStep } from '@/features/steps/StepProvider';
 import { useSignupProfileMutation } from '@/store/mutation/useSignupProfileMutation';

@@ -1,6 +1,6 @@
 'use client';
 
-import { UserInformation } from '@/components/user-information';
+import { UserInformation } from '@/components/common/user-information';
 import { OverlayProvider } from 'overlay-kit';
 import { useBottleDetailQuery } from '../../../store/query/useBottleDetailQuery';
 

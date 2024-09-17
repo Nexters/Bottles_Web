@@ -1,10 +1,10 @@
-import { Control } from '@/components/control';
+import { Control } from '@/components/common/control';
 import { Step } from '@/features/steps/StepContainer';
 import { Profile } from '@/models/profile';
 import { Culture, ETC, Entertainment, Sports, culture, entertainment, etc, sports } from '@/models/profile/interests';
 import { Button, ButtonProps, spacings } from '@bottlesteam/ui';
 import { useState } from 'react';
-import { BaseFunnelComponentProps } from '../types';
+import { BaseProfileComponentProps } from '../types';
 import { interestsStyle } from './interestsStyle.css';
 
 export type Interest = Culture | Sports | Entertainment | ETC;
@@ -16,7 +16,7 @@ export function Interests({
   initialValue,
   onNext,
   ctaButtonText = '완료',
-}: BaseFunnelComponentProps<Profile['interest']>) {
+}: BaseProfileComponentProps<Profile['interest']>) {
   const [interests, setInterests] = useState<Interest[]>(initialValue != null ? processSelected(initialValue) : []);
 
   const filterPredicate = (item: Interest) => interests.includes(item);

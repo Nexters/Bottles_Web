@@ -1,6 +1,6 @@
 'use client';
 
-import { Header } from '@/components/header';
+import { Header } from '@/components/common/header';
 import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 import { Asset } from '@bottlesteam/ui';
 

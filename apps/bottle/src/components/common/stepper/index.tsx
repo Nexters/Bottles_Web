@@ -1,5 +1,5 @@
+import SlashIcon from '@/assets/icons/slash.svg';
 import { Paragraph } from '@bottlesteam/ui';
-import SlashIcon from '../../../assets/icons/slash.svg';
 import { containerStyle } from './stepperStyle.css';
 
 interface StepperProps {

@@ -1,6 +1,6 @@
 'use client';
 
-import { Card } from '@/components/card';
+import { Card } from '@/components/common/card';
 import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 import { buildWebViewUrl } from '@/features/app-bridge/utils';
 import { useMyInformationQuery } from '@/store/query/useMyInformation';

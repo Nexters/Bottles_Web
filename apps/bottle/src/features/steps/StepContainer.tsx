@@ -1,4 +1,4 @@
-import { Stepper } from '@/components/stepper';
+import { Stepper } from '@/components/common/stepper';
 import { FixedBottomCTAButton, Paragraph, ParagraphProps, VariantOneProps } from '@bottlesteam/ui';
 import { ReactNode } from 'react';
 import { containerStyle } from './stepStyle.css';

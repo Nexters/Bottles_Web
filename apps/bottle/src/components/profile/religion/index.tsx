@@ -1,12 +1,12 @@
-import { Control, toggle } from '@/components/control';
+import { Control, toggle } from '@/components/common/control';
 import { Step } from '@/features/steps/StepContainer';
 import { Religion as ReligionType, religionList } from '@/models/profile/religion';
 import { Button } from '@bottlesteam/ui';
 import { useState } from 'react';
-import { BaseFunnelComponentProps } from '../types';
+import { BaseProfileComponentProps } from '../types';
 import { religionStyle } from './religionStyle.css';
 
-export function Religion({ onNext, initialValue, ctaButtonText = '완료' }: BaseFunnelComponentProps<ReligionType>) {
+export function Religion({ onNext, initialValue, ctaButtonText = '완료' }: BaseProfileComponentProps<ReligionType>) {
   const [religion, setReligion] = useState<ReligionType | undefined>(initialValue);
 
   return (

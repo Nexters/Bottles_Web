@@ -1,10 +1,10 @@
-import { Control } from '@/components/control';
+import { SignupProfileValues, useSignupProfileValues } from '@/app/create-profile/SignupProvider';
+import { Control } from '@/components/common/control';
 import { Step } from '@/features/steps/StepContainer';
 import { useStep } from '@/features/steps/StepProvider';
 import { useSignupProfileMutation } from '@/store/mutation/useSignupProfileMutation';
 import { Button, TextField } from '@bottlesteam/ui';
 import { useState } from 'react';
-import { useSignupProfileValues, SignupProfileValues } from '../../SignupProvider';
 import { birthDateWrapper, buttonsWrapper, containerStyle, fieldStyle } from './informationStyle.css';
 
 export function Information() {

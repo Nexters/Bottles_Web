@@ -2,12 +2,12 @@ import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 import { Step } from '@/features/steps/StepContainer';
 import { TextField, spacings } from '@bottlesteam/ui';
 import { useState } from 'react';
-import { BaseFunnelComponentProps } from '../types';
+import { BaseProfileComponentProps } from '../types';
 
 const KAKAO_ID_REGEX = /^[A-Za-z\d._-]{4,20}$/;
 const ERROR_CAPTION = '카카오톡 아이디를 확인해주세요';
 
-export function KakaoId({ onNext, initialValue, ctaButtonText = '완료' }: BaseFunnelComponentProps<string>) {
+export function KakaoId({ onNext, initialValue, ctaButtonText = '완료' }: BaseProfileComponentProps<string>) {
   const { send } = useAppBridge();
 
   const [kakaoId, setKakaoId] = useState(initialValue ?? '');

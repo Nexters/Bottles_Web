@@ -1,7 +1,7 @@
 'use client';
 
-import { Header } from '@/components/header';
-import { UserInformation } from '@/components/user-information';
+import { Header } from '@/components/common/header';
+import { UserInformation } from '@/components/common/user-information';
 import { useMyInformationQuery } from '@/store/query/useMyInformation';
 import { ActionButtons } from './_components/ActionButtons';
 

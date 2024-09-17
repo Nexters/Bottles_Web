@@ -1,4 +1,4 @@
-import { Stepper } from '@/components/stepper';
+import { Stepper } from '@/components/common/stepper';
 import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 import { Step } from '@/features/steps/StepContainer';
 import { useStep } from '@/features/steps/StepProvider';

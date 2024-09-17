@@ -3,7 +3,7 @@
 import { Step } from '@/features/steps/StepContainer';
 import { WheelPicker, colors } from '@bottlesteam/ui';
 import { useState } from 'react';
-import { BaseFunnelComponentProps } from '../types';
+import { BaseProfileComponentProps } from '../types';
 import { wheelPickerContainerStyle } from './heightStyle.css';
 
 const OFFSET = 140;
@@ -14,7 +14,7 @@ const heightData = Array.from({ length: 61 }, (_, index) => ({
   value: `${index + OFFSET}cm`,
 }));
 
-export function Height({ initialValue, onNext, ctaButtonText = '완료' }: BaseFunnelComponentProps<number>) {
+export function Height({ initialValue, onNext, ctaButtonText = '완료' }: BaseProfileComponentProps<number>) {
   const [height, setHeight] = useState(initialValue ?? Number(DEFAULT_ID));
 
   return (

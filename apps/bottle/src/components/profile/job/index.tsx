@@ -1,12 +1,12 @@
-import { Control, toggle } from '@/components/control';
+import { Control, toggle } from '@/components/common/control';
 import { Step } from '@/features/steps/StepContainer';
 import { Job as JobType, jobList } from '@/models/profile/job';
 import { Button } from '@bottlesteam/ui';
 import { useState } from 'react';
-import { BaseFunnelComponentProps } from '../types';
+import { BaseProfileComponentProps } from '../types';
 import { jobStyle } from './jobStyle.css';
 
-export function Job({ initialValue, onNext, ctaButtonText = '완료' }: BaseFunnelComponentProps<JobType>) {
+export function Job({ initialValue, onNext, ctaButtonText = '완료' }: BaseProfileComponentProps<JobType>) {
   const [job, setJob] = useState<JobType | undefined>(initialValue);
 
   return (

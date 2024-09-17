@@ -1,12 +1,12 @@
-import { Control, toggle } from '@/components/control';
+import { Control, toggle } from '@/components/common/control';
 import { Step } from '@/features/steps/StepContainer';
 import { Alcohol as AlcoholType, alcoholList } from '@/models/profile/alcohol';
 import { Button } from '@bottlesteam/ui';
 import { useState } from 'react';
-import { BaseFunnelComponentProps } from '../types';
+import { BaseProfileComponentProps } from '../types';
 import { alcoholStyle } from './alcoholStyle.css';
 
-export function Alcohol({ initialValue, onNext, ctaButtonText = '완료' }: BaseFunnelComponentProps<AlcoholType>) {
+export function Alcohol({ initialValue, onNext, ctaButtonText = '완료' }: BaseProfileComponentProps<AlcoholType>) {
   const [alcohol, setAlcohol] = useState<AlcoholType | undefined>(initialValue);
 
   return (

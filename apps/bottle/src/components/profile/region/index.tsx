@@ -5,7 +5,7 @@ import { spacings } from '@bottlesteam/ui';
 import { OverlayProvider, overlay } from 'overlay-kit';
 import { useState } from 'react';
 import { spacingStyle } from '../MBTI/MBTIStyle.css';
-import { BaseFunnelComponentProps } from '../types';
+import { BaseProfileComponentProps } from '../types';
 import { RegionBottomSheet } from './bottom-sheet/RegionBottomSheet';
 import { regionStyle } from './regionStyle.css';
 import { SelectInput } from './select-input/SelectInput';
@@ -23,7 +23,7 @@ export function Region({
   initialValue,
   onNext,
   ctaButtonText = '완료',
-}: BaseFunnelComponentProps<{ city: string; state: string }>) {
+}: BaseProfileComponentProps<{ city: string; state: string }>) {
   const { send } = useAppBridge();
 
   const { data: regionsData } = useRegionsQuery();

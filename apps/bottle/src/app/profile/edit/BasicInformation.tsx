@@ -1,6 +1,6 @@
 'use client';
 
-import { Profile } from '@/components/profile';
+import { Profile } from '@/components/common/profile';
 import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 import { buildWebViewUrl } from '@/features/app-bridge/utils';
 import { useMyInformationQuery } from '@/store/query/useMyInformation';

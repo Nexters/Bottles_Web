@@ -1,6 +1,16 @@
 'use client';
 
-import { Header } from '@/components/header';
+import { Header } from '@/components/common/header';
+import { MBTI } from '@/components/profile/MBTI';
+import { Alcohol } from '@/components/profile/alcohol';
+import { Height } from '@/components/profile/height';
+import { Interests } from '@/components/profile/interests';
+import { Job } from '@/components/profile/job';
+import { KakaoId } from '@/components/profile/kakao-id';
+import { Keywords } from '@/components/profile/keywords';
+import { Region } from '@/components/profile/region';
+import { Religion } from '@/components/profile/religion';
+import { Smoking } from '@/components/profile/smoking';
 import { useFunnel } from '@/features/funnel';
 import { createInit, POST } from '@/features/server';
 import { getClientSideTokens } from '@/features/server/clientSideTokens';
@@ -9,16 +19,6 @@ import { Profile } from '@/models/profile';
 import { Asset } from '@bottlesteam/ui';
 import { useRouter } from 'next/navigation';
 import { CreateProfileProvider } from './CreateProfileProvider';
-import { MBTI } from './_steps/MBTI';
-import { Alcohol } from './_steps/alcohol';
-import { Height } from './_steps/height';
-import { Interests } from './_steps/interests';
-import { Job } from './_steps/job';
-import { KakaoId } from './_steps/kakao-id';
-import { Keywords } from './_steps/keywords';
-import { Region } from './_steps/region';
-import { Religion } from './_steps/religion';
-import { Smoking } from './_steps/smoking';
 
 const MAX_STEPS = 10;
 

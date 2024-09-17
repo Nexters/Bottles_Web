@@ -1,13 +1,13 @@
-import { Control, toggle } from '@/components/control';
+import { Control, toggle } from '@/components/common/control';
 import { Step } from '@/features/steps/StepContainer';
 import { EIType, JPType, type MBTI as MBTIType, SNType, TFType } from '@/models/profile/MBTI';
 import { useUserInfoQuery } from '@/store/query/useUserInfoQuery';
 import { Button, ButtonProps } from '@bottlesteam/ui';
 import { useMemo, useState } from 'react';
-import { BaseFunnelComponentProps } from '../types';
+import { BaseProfileComponentProps } from '../types';
 import { bodyStyle, buttonsContainerStyle, controlStyle } from './MBTIStyle.css';
 
-export function MBTI({ initialValue, ctaButtonText = '완료', onNext }: BaseFunnelComponentProps<MBTIType>) {
+export function MBTI({ initialValue, ctaButtonText = '완료', onNext }: BaseProfileComponentProps<MBTIType>) {
   const {
     data: { name },
   } = useUserInfoQuery();

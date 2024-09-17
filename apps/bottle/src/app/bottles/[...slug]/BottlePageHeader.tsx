@@ -1,6 +1,6 @@
 'use client';
 
-import { Header } from '@/components/header';
+import { Header } from '@/components/common/header';
 import { Asset } from '@bottlesteam/ui';
 import { useRouter } from 'next/navigation';
 
