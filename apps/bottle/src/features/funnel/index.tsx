@@ -1,7 +1,7 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useMemo, useRef } from 'react';
 
-const STEP_PARAM_KEY = 'step';
+export const STEP_PARAM_KEY = 'step';
 
 export function useFunnel<V extends Record<string, any>>(uri: string, initialValues?: Partial<V>) {
   const valuesRef = useRef<Partial<V>>(initialValues ?? {});
@@ -24,6 +24,8 @@ export function useFunnel<V extends Record<string, any>>(uri: string, initialVal
     valuesRef.current = prev;
   }, []);
 
+  const getValue = useCallback(<K extends keyof V>(key: K) => valuesRef.current[key], []);
+
   const getValues = useCallback(() => valuesRef.current, []);
 
   const searchParams = useSearchParams();
@@ -45,7 +47,8 @@ export function useFunnel<V extends Record<string, any>>(uri: string, initialVal
   return {
     setValue,
     setValues,
-    values: getValues(),
+    getValues,
+    getValue,
     currentStep: step,
     onNextStep,
     onPreviousStep,

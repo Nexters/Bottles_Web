@@ -29,12 +29,12 @@ interface CreateProfileFunnel extends Profile {
 export default function CreateProfilePage() {
   const router = useRouter();
 
-  const { onNextStep, currentStep, values } = useFunnel<CreateProfileFunnel>('/profile/create');
+  const { onNextStep, currentStep, getValue, getValues } = useFunnel<CreateProfileFunnel>('/profile/create');
 
   const steps = [
     <Step stepper={{ current: 1, max: MAX_STEPS }} key={2}>
       <MBTI
-        initialValue={values.mbti}
+        initialValue={getValue('mbti')}
         onNext={mbti => {
           onNextStep('mbti', mbti);
         }}
@@ -43,7 +43,7 @@ export default function CreateProfilePage() {
     </Step>,
     <Step stepper={{ current: 2, max: MAX_STEPS }} key={3}>
       <Keywords
-        initialValue={values.keyword}
+        initialValue={getValue('keyword')}
         onNext={keyword => {
           onNextStep('keyword', keyword);
         }}
@@ -52,7 +52,7 @@ export default function CreateProfilePage() {
     </Step>,
     <Step stepper={{ current: 3, max: MAX_STEPS }} key={4}>
       <Interests
-        initialValue={values.interest}
+        initialValue={getValue('interest')}
         onNext={interest => {
           onNextStep('interest', interest);
         }}
@@ -61,7 +61,7 @@ export default function CreateProfilePage() {
     </Step>,
     <Step stepper={{ current: 4, max: MAX_STEPS }} key={5}>
       <Job
-        initialValue={values.job}
+        initialValue={getValue('job')}
         onNext={job => {
           onNextStep('job', job);
         }}
@@ -70,7 +70,7 @@ export default function CreateProfilePage() {
     </Step>,
     <Step stepper={{ current: 5, max: MAX_STEPS }} key={6}>
       <Height
-        initialValue={values.height}
+        initialValue={getValue('height')}
         onNext={height => {
           onNextStep('height', height);
         }}
@@ -79,7 +79,7 @@ export default function CreateProfilePage() {
     </Step>,
     <Step stepper={{ current: 6, max: MAX_STEPS }} key={7}>
       <Smoking
-        initialValue={values.smoking}
+        initialValue={getValue('smoking')}
         onNext={smoking => {
           onNextStep('smoking', smoking);
         }}
@@ -88,7 +88,7 @@ export default function CreateProfilePage() {
     </Step>,
     <Step stepper={{ current: 7, max: MAX_STEPS }} key={8}>
       <Alcohol
-        initialValue={values.alcohol}
+        initialValue={getValue('alcohol')}
         onNext={alcohol => {
           onNextStep('alcohol', alcohol);
         }}
@@ -97,7 +97,7 @@ export default function CreateProfilePage() {
     </Step>,
     <Step stepper={{ current: 8, max: MAX_STEPS }} key={9}>
       <Religion
-        initialValue={values.religion}
+        initialValue={getValue('religion')}
         onNext={religion => {
           onNextStep('religion', religion);
         }}
@@ -106,7 +106,7 @@ export default function CreateProfilePage() {
     </Step>,
     <Step stepper={{ current: 9, max: MAX_STEPS }} key={10}>
       <Region
-        initialValue={values.region}
+        initialValue={getValue('region')}
         onNext={region => {
           onNextStep('region', region);
         }}
@@ -115,12 +115,12 @@ export default function CreateProfilePage() {
     </Step>,
     <Step stepper={{ current: 10, max: MAX_STEPS }} key={11}>
       <KakaoId
-        initialValue={values.kakaoId}
+        initialValue={getValue('kakaoId')}
         onNext={async kakaoId => {
           await POST(
             `/api/v1/profile/choice`,
             getClientSideTokens(),
-            createInit(getClientSideTokens().accessToken, { ...values, kakaoId })
+            createInit(getClientSideTokens().accessToken, { ...getValues(), kakaoId })
           );
         }}
       />
