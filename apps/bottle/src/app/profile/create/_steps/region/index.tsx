@@ -1,12 +1,11 @@
 import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 import { Step } from '@/features/steps/StepContainer';
-import { useStep } from '@/features/steps/StepProvider';
 import { useRegionsQuery } from '@/store/query/useRegionsQuery';
 import { spacings } from '@bottlesteam/ui';
 import { OverlayProvider, overlay } from 'overlay-kit';
 import { useState } from 'react';
-import { useCreateProfileValues } from '../../CreateProfileProvider';
 import { spacingStyle } from '../MBTI/MBTIStyle.css';
+import { BaseFunnelComponentProps } from '../types';
 import { RegionBottomSheet } from './bottom-sheet/RegionBottomSheet';
 import { regionStyle } from './regionStyle.css';
 import { SelectInput } from './select-input/SelectInput';
@@ -20,16 +19,17 @@ export interface Regions {
   regions: RegionData[];
 }
 
-export function Region() {
+export function Region({
+  initialValue,
+  onNext,
+  ctaButtonText = '완료',
+}: BaseFunnelComponentProps<{ city: string; state: string }>) {
   const { send } = useAppBridge();
-  const { onNextStep } = useStep();
-  const { setValue, getValue } = useCreateProfileValues();
 
   const { data: regionsData } = useRegionsQuery();
 
-  const selected = getValue('region');
-  const [city, setCity] = useState<string | undefined>(selected != null ? selected.city : undefined);
-  const [state, setState] = useState<string | undefined>(selected != null ? selected.state : undefined);
+  const [city, setCity] = useState<string | undefined>(initialValue != null ? initialValue.city : undefined);
+  const [state, setState] = useState<string | undefined>(initialValue != null ? initialValue.state : undefined);
 
   return (
     <>
@@ -90,11 +90,10 @@ export function Region() {
           if (city === undefined || state === undefined) {
             return;
           }
-          setValue('region', { city, state });
-          onNextStep();
+          onNext({ city, state });
         }}
       >
-        다음
+        {ctaButtonText}
       </Step.FixedButton>
     </>
   );

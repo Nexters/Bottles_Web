@@ -1,17 +1,13 @@
 import { Control, toggle } from '@/components/control';
 import { Step } from '@/features/steps/StepContainer';
-import { useStep } from '@/features/steps/StepProvider';
 import { Alcohol as AlcoholType, alcoholList } from '@/models/profile/alcohol';
 import { Button } from '@bottlesteam/ui';
 import { useState } from 'react';
-import { useCreateProfileValues } from '../../CreateProfileProvider';
+import { BaseFunnelComponentProps } from '../types';
 import { alcoholStyle } from './alcoholStyle.css';
 
-export function Alcohol() {
-  const { setValue, getValue } = useCreateProfileValues();
-  const { onNextStep } = useStep();
-
-  const [alcohol, setAlcohol] = useState<AlcoholType | undefined>(getValue('alcohol'));
+export function Alcohol({ initialValue, onNext, ctaButtonText = '완료' }: BaseFunnelComponentProps<AlcoholType>) {
+  const [alcohol, setAlcohol] = useState<AlcoholType | undefined>(initialValue);
 
   return (
     <>
@@ -33,11 +29,10 @@ export function Alcohol() {
           if (alcohol === undefined) {
             throw new Error();
           }
-          setValue('alcohol', alcohol);
-          onNextStep();
+          onNext(alcohol);
         }}
       >
-        다음
+        {ctaButtonText}
       </Step.FixedButton>
     </>
   );

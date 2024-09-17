@@ -1,17 +1,13 @@
 import { Control, toggle } from '@/components/control';
 import { Step } from '@/features/steps/StepContainer';
-import { useStep } from '@/features/steps/StepProvider';
 import { Religion as ReligionType, religionList } from '@/models/profile/religion';
 import { Button } from '@bottlesteam/ui';
 import { useState } from 'react';
-import { useCreateProfileValues } from '../../CreateProfileProvider';
+import { BaseFunnelComponentProps } from '../types';
 import { religionStyle } from './religionStyle.css';
 
-export function Religion() {
-  const { setValue, getValue } = useCreateProfileValues();
-  const { onNextStep } = useStep();
-
-  const [religion, setReligion] = useState<ReligionType | undefined>(getValue('religion'));
+export function Religion({ onNext, initialValue, ctaButtonText = '완료' }: BaseFunnelComponentProps<ReligionType>) {
+  const [religion, setReligion] = useState<ReligionType | undefined>(initialValue);
 
   return (
     <>
@@ -33,11 +29,10 @@ export function Religion() {
           if (religion === undefined) {
             return;
           }
-          setValue('religion', religion);
-          onNextStep();
+          onNext(religion);
         }}
       >
-        다음
+        {ctaButtonText}
       </Step.FixedButton>
     </>
   );

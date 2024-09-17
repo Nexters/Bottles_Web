@@ -1,21 +1,18 @@
 import { Control, toggle } from '@/components/control';
 import { Step } from '@/features/steps/StepContainer';
-import { useStep } from '@/features/steps/StepProvider';
-import { EIType, JPType, SNType, TFType } from '@/models/profile/MBTI';
+import { EIType, JPType, type MBTI as MBTIType, SNType, TFType } from '@/models/profile/MBTI';
 import { useUserInfoQuery } from '@/store/query/useUserInfoQuery';
 import { Button, ButtonProps } from '@bottlesteam/ui';
 import { useMemo, useState } from 'react';
-import { useCreateProfileValues } from '../../CreateProfileProvider';
+import { BaseFunnelComponentProps } from '../types';
 import { bodyStyle, buttonsContainerStyle, controlStyle } from './MBTIStyle.css';
 
-export function MBTI() {
-  const { onNextStep } = useStep();
-  const { setValue, getValue } = useCreateProfileValues();
+export function MBTI({ initialValue, ctaButtonText = '완료', onNext }: BaseFunnelComponentProps<MBTIType>) {
   const {
     data: { name },
   } = useUserInfoQuery();
 
-  const selected = getValue('mbti');
+  const selected = initialValue;
 
   const [EI, setEI] = useState<EIType | undefined>(() => (selected != null ? (selected[0] as EIType) : undefined));
   const [SN, setSN] = useState<SNType | undefined>(selected != null ? (selected[1] as SNType) : undefined);
@@ -87,11 +84,10 @@ export function MBTI() {
           if (EI == null || SN == null || TF == null || JP == null) {
             return;
           }
-          setValue('mbti', `${EI}${SN}${TF}${JP}`);
-          onNextStep();
+          onNext(`${EI}${SN}${TF}${JP}`);
         }}
       >
-        다음
+        {ctaButtonText}
       </Step.FixedButton>
     </>
   );

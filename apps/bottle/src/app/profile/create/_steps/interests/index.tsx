@@ -1,10 +1,10 @@
 import { Control } from '@/components/control';
 import { Step } from '@/features/steps/StepContainer';
-import { useStep } from '@/features/steps/StepProvider';
+import { Profile } from '@/models/profile';
 import { Culture, ETC, Entertainment, Sports, culture, entertainment, etc, sports } from '@/models/profile/interests';
 import { Button, ButtonProps, spacings } from '@bottlesteam/ui';
 import { useState } from 'react';
-import { CreateProfileValues, useCreateProfileValues } from '../../CreateProfileProvider';
+import { BaseFunnelComponentProps } from '../types';
 import { interestsStyle } from './interestsStyle.css';
 
 export type Interest = Culture | Sports | Entertainment | ETC;
@@ -12,21 +12,12 @@ export type Interest = Culture | Sports | Entertainment | ETC;
 const MIN_SELECTD = 3;
 const MAX_SELECTED = 10;
 
-function processSelected(selected: CreateProfileValues['interest']) {
-  /**
-   * NOTE: Prototype Object.values() causes incorrect type inference
-   * used spread operator instead
-   */
-  return [...selected.culture, ...selected.sports, ...selected.entertainment, ...selected.etc] as Interest[];
-}
-
-export function Interests() {
-  const { onNextStep } = useStep();
-  const { setValue, getValue } = useCreateProfileValues();
-
-  const selected = getValue('interest');
-
-  const [interests, setInterests] = useState<Interest[]>(selected != null ? processSelected(selected) : []);
+export function Interests({
+  initialValue,
+  onNext,
+  ctaButtonText = '완료',
+}: BaseFunnelComponentProps<Profile['interest']>) {
+  const [interests, setInterests] = useState<Interest[]>(initialValue != null ? processSelected(initialValue) : []);
 
   const filterPredicate = (item: Interest) => interests.includes(item);
 
@@ -85,16 +76,15 @@ export function Interests() {
       <Step.FixedButton
         disabled={interests.length < MIN_SELECTD}
         onClick={() => {
-          setValue('interest', {
+          onNext({
             culture: culture.filter(filterPredicate),
             sports: sports.filter(filterPredicate),
             entertainment: entertainment.filter(filterPredicate),
             etc: etc.filter(filterPredicate),
           });
-          onNextStep();
         }}
       >
-        {`다음 ${interests.length} / ${MAX_SELECTED}`}
+        {`${ctaButtonText} ${interests.length} / ${MAX_SELECTED}`}
       </Step.FixedButton>
     </>
   );
@@ -106,4 +96,12 @@ function ItemButton(props: Omit<ButtonProps, 'variant' | 'size'>) {
       {props.children}
     </Button>
   );
+}
+
+function processSelected(selected: Profile['interest']) {
+  /**
+   * NOTE: Prototype Object.values() causes incorrect type inference
+   * used spread operator instead
+   */
+  return [...selected.culture, ...selected.sports, ...selected.entertainment, ...selected.etc] as Interest[];
 }

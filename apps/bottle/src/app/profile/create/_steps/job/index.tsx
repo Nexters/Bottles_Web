@@ -1,17 +1,14 @@
 import { Control, toggle } from '@/components/control';
 import { Step } from '@/features/steps/StepContainer';
-import { useStep } from '@/features/steps/StepProvider';
 import { Job as JobType, jobList } from '@/models/profile/job';
 import { Button } from '@bottlesteam/ui';
 import { useState } from 'react';
-import { useCreateProfileValues } from '../../CreateProfileProvider';
+import { BaseFunnelComponentProps } from '../types';
 import { jobStyle } from './jobStyle.css';
 
-export function Job() {
-  const { setValue, getValue } = useCreateProfileValues();
-  const { onNextStep } = useStep();
+export function Job({ initialValue, onNext, ctaButtonText = '완료' }: BaseFunnelComponentProps<JobType>) {
+  const [job, setJob] = useState<JobType | undefined>(initialValue);
 
-  const [job, setJob] = useState<JobType | undefined>(getValue('job'));
   return (
     <>
       <Step.Title>지금 어떤 일을 하고 있나요?</Step.Title>
@@ -32,11 +29,10 @@ export function Job() {
           if (job === undefined) {
             return;
           }
-          setValue('job', job);
-          onNextStep();
+          onNext(job);
         }}
       >
-        다음
+        {ctaButtonText}
       </Step.FixedButton>
     </>
   );

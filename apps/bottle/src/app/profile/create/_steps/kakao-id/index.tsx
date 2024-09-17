@@ -1,19 +1,16 @@
 import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
-import { POST, createInit } from '@/features/server';
-import { getClientSideTokens } from '@/features/server/clientSideTokens';
 import { Step } from '@/features/steps/StepContainer';
 import { TextField, spacings } from '@bottlesteam/ui';
 import { useState } from 'react';
-import { useCreateProfileValues } from '../../CreateProfileProvider';
+import { BaseFunnelComponentProps } from '../types';
 
 const KAKAO_ID_REGEX = /^[A-Za-z\d._-]{4,20}$/;
 const ERROR_CAPTION = '카카오톡 아이디를 확인해주세요';
 
-export function KaKaoId() {
+export function KakaoId({ onNext, initialValue, ctaButtonText = '완료' }: BaseFunnelComponentProps<string>) {
   const { send } = useAppBridge();
-  const { setValue, getValue, getValues } = useCreateProfileValues();
 
-  const [kakaoId, setKakaoId] = useState(getValue('kakaoId') ?? '');
+  const [kakaoId, setKakaoId] = useState(initialValue ?? '');
   const isError = kakaoId.trim().length > 0 && !KAKAO_ID_REGEX.test(kakaoId.trim());
   const disabled = kakaoId.trim().length === 0 || isError;
 
@@ -31,17 +28,17 @@ export function KaKaoId() {
       <Step.FixedButton
         disabled={disabled}
         onClick={async () => {
-          setValue('kakaoId', kakaoId);
+          await onNext(kakaoId);
 
-          await POST(
-            `/api/v1/profile/choice`,
-            getClientSideTokens(),
-            createInit(getClientSideTokens().accessToken, { ...getValues() })
-          );
+          // await POST(
+          //   `/api/v1/profile/choice`,
+          //   getClientSideTokens(),
+          //   createInit(getClientSideTokens().accessToken, { ...getValues() })
+          // );
           send({ type: AppBridgeMessageType.CREATE_PROFILE_COMPLETE });
         }}
       >
-        완료
+        {ctaButtonText}
       </Step.FixedButton>
     </>
   );

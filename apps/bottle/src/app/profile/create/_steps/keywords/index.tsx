@@ -1,20 +1,16 @@
 import { Control } from '@/components/control';
 import { Step } from '@/features/steps/StepContainer';
-import { useStep } from '@/features/steps/StepProvider';
 import { Keyword, keywordList } from '@/models/profile/keywords';
 import { Button } from '@bottlesteam/ui';
 import { useState } from 'react';
-import { useCreateProfileValues } from '../../CreateProfileProvider';
+import { BaseFunnelComponentProps } from '../types';
 import { keywordsStyle } from './keywordsStyle.css';
 
 const MIN_SELECTED = 3;
 const MAX_SELECTED = 5;
 
-export function Keywords() {
-  const { onNextStep } = useStep();
-  const { setValue, getValue } = useCreateProfileValues();
-
-  const [keywords, setKeywords] = useState<Keyword[]>(getValue('keyword') ?? []);
+export function Keywords({ initialValue, ctaButtonText = '완료', onNext }: BaseFunnelComponentProps<Keyword[]>) {
+  const [keywords, setKeywords] = useState<Keyword[]>(initialValue ?? []);
 
   return (
     <>
@@ -52,11 +48,10 @@ export function Keywords() {
           if (keywords.length === 0) {
             return;
           }
-          setValue('keyword', keywords);
-          onNextStep();
+          onNext(keywords);
         }}
       >
-        {`다음 ${keywords.length} / ${MAX_SELECTED}`}
+        {`${ctaButtonText} ${keywords.length} / ${MAX_SELECTED}`}
       </Step.FixedButton>
     </>
   );

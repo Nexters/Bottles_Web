@@ -1,10 +1,9 @@
 'use client';
 
 import { Step } from '@/features/steps/StepContainer';
-import { useStep } from '@/features/steps/StepProvider';
 import { WheelPicker, colors } from '@bottlesteam/ui';
 import { useState } from 'react';
-import { useCreateProfileValues } from '../../CreateProfileProvider';
+import { BaseFunnelComponentProps } from '../types';
 import { wheelPickerContainerStyle } from './heightStyle.css';
 
 const OFFSET = 140;
@@ -15,11 +14,8 @@ const heightData = Array.from({ length: 61 }, (_, index) => ({
   value: `${index + OFFSET}cm`,
 }));
 
-export function Height() {
-  const { setValue, getValue } = useCreateProfileValues();
-  const { onNextStep } = useStep();
-
-  const [height, setHeight] = useState(getValue('height') ?? Number(DEFAULT_ID));
+export function Height({ initialValue, onNext, ctaButtonText = '완료' }: BaseFunnelComponentProps<number>) {
+  const [height, setHeight] = useState(initialValue ?? Number(DEFAULT_ID));
 
   return (
     <>
@@ -40,11 +36,10 @@ export function Height() {
       </div>
       <Step.FixedButton
         onClick={() => {
-          setValue('height', height);
-          onNextStep();
+          onNext(height);
         }}
       >
-        다음
+        {ctaButtonText}
       </Step.FixedButton>
     </>
   );

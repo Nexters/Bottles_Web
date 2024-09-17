@@ -1,17 +1,13 @@
 import { Control, toggle } from '@/components/control';
 import { Step } from '@/features/steps/StepContainer';
-import { useStep } from '@/features/steps/StepProvider';
 import { Smoking as SmokingType, smokingList } from '@/models/profile/smoking';
 import { Button } from '@bottlesteam/ui';
 import { useState } from 'react';
-import { useCreateProfileValues } from '../../CreateProfileProvider';
+import { BaseFunnelComponentProps } from '../types';
 import { smokingStyle } from './smokingStyle.css';
 
-export function Smoking() {
-  const { setValue, getValue } = useCreateProfileValues();
-  const { onNextStep } = useStep();
-
-  const [smoking, setSmoking] = useState<SmokingType | undefined>(getValue('smoking'));
+export function Smoking({ initialValue, onNext, ctaButtonText = '완료' }: BaseFunnelComponentProps<SmokingType>) {
+  const [smoking, setSmoking] = useState<SmokingType | undefined>(initialValue);
 
   return (
     <>
@@ -33,11 +29,10 @@ export function Smoking() {
           if (smoking === undefined) {
             throw new Error();
           }
-          setValue('smoking', smoking);
-          onNextStep();
+          onNext(smoking);
         }}
       >
-        다음
+        {ctaButtonText}
       </Step.FixedButton>
     </>
   );
