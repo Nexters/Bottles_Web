@@ -1,9 +1,9 @@
 import { Control, toggle } from '@/components/common/control';
-import { Step } from '@/features/steps/StepContainer';
 import { EIType, JPType, type MBTI as MBTIType, SNType, TFType } from '@/models/profile/MBTI';
 import { useUserInfoQuery } from '@/store/query/useUserInfoQuery';
 import { Button, ButtonProps } from '@bottlesteam/ui';
 import { useMemo, useState } from 'react';
+import { ProfileLayout } from '../layout';
 import { BaseProfileComponentProps } from '../types';
 import { bodyStyle, buttonsContainerStyle, controlStyle } from './MBTIStyle.css';
 
@@ -23,10 +23,10 @@ export function MBTI({ initialValue, ctaButtonText = '완료', onNext }: BasePro
 
   return (
     <>
-      <Step.Title>{name}님의 성격에 대해 알고 싶어요</Step.Title>
+      <ProfileLayout.Title>{name}님의 성격에 대해 알고 싶어요</ProfileLayout.Title>
       <section className={bodyStyle}>
         <div className={controlStyle}>
-          <Step.Subtitle>외향형 · 내향형</Step.Subtitle>
+          <ProfileLayout.Subtitle>외향형 · 내향형</ProfileLayout.Subtitle>
           <div className={buttonsContainerStyle}>
             <Control value={EI}>
               <Control.Item value={'E'} onClick={() => setEI(prev => toggle(prev, 'E'))}>
@@ -39,7 +39,7 @@ export function MBTI({ initialValue, ctaButtonText = '완료', onNext }: BasePro
           </div>
         </div>
         <div className={controlStyle}>
-          <Step.Subtitle>감각형 · 직관형</Step.Subtitle>
+          <ProfileLayout.Subtitle>감각형 · 직관형</ProfileLayout.Subtitle>
           <div className={buttonsContainerStyle}>
             <Control value={SN}>
               <Control.Item value={'S'} onClick={() => setSN(prev => toggle(prev, 'S'))}>
@@ -52,7 +52,7 @@ export function MBTI({ initialValue, ctaButtonText = '완료', onNext }: BasePro
           </div>
         </div>
         <div className={controlStyle}>
-          <Step.Subtitle>사고형 · 감정형</Step.Subtitle>
+          <ProfileLayout.Subtitle>사고형 · 감정형</ProfileLayout.Subtitle>
           <div className={buttonsContainerStyle}>
             <Control value={TF}>
               <Control.Item value={'T'} onClick={() => setTF(prev => toggle(prev, 'T'))}>
@@ -65,7 +65,7 @@ export function MBTI({ initialValue, ctaButtonText = '완료', onNext }: BasePro
           </div>
         </div>
         <div className={controlStyle}>
-          <Step.Subtitle>판단형 · 인식형</Step.Subtitle>
+          <ProfileLayout.Subtitle>판단형 · 인식형</ProfileLayout.Subtitle>
           <div className={buttonsContainerStyle}>
             <Control value={JP}>
               <Control.Item value={'J'} onClick={() => setJP(prev => toggle(prev, 'J'))}>
@@ -78,7 +78,7 @@ export function MBTI({ initialValue, ctaButtonText = '완료', onNext }: BasePro
           </div>
         </div>
       </section>
-      <Step.FixedButton
+      <ProfileLayout.FixedButton
         disabled={isDisabled}
         onClick={() => {
           if (EI == null || SN == null || TF == null || JP == null) {
@@ -88,7 +88,7 @@ export function MBTI({ initialValue, ctaButtonText = '완료', onNext }: BasePro
         }}
       >
         {ctaButtonText}
-      </Step.FixedButton>
+      </ProfileLayout.FixedButton>
     </>
   );
 }

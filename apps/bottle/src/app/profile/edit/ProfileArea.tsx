@@ -3,12 +3,14 @@
 import { Card } from '@/components/common/card';
 import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 import { buildWebViewUrl } from '@/features/app-bridge/utils';
+import { useUserAgent } from '@/features/user-agent/UserAgentProvider';
 import { useMyInformationQuery } from '@/store/query/useMyInformation';
 import { Asset, Paragraph, spacings } from '@bottlesteam/ui';
 import { useMemo } from 'react';
 import { profileItemLeftStyle, profileItemStyle } from './profileEditStyle.css';
 
 export function ProfileArea() {
+  const { isMobile } = useUserAgent();
   const { send } = useAppBridge();
   const {
     data: {
@@ -28,7 +30,7 @@ export function ProfileArea() {
 
   const editProfileItems = useMemo(
     () => [
-      { title: '카카오톡 아이디', description: 'dhassidu11', endpoint: '/profile/edit/kakaoId' },
+      { title: '카카오톡 아이디', description: 'dhassidu11', endpoint: '/profile/edit/kakao-id' },
       {
         title: '나의 성격',
         description: mbti,
@@ -37,7 +39,7 @@ export function ProfileArea() {
       {
         title: '나를 표현하는 키워드',
         description: keyword.join(', '),
-        endpoint: '/profile/edit/keyword',
+        endpoint: '/profile/edit/keywords',
       },
       {
         title: '푹 빠진 취미',
@@ -91,6 +93,11 @@ export function ProfileArea() {
             key={title}
             className={profileItemStyle}
             onClick={() => {
+              if (!isMobile && process.env.NEXT_PUBLIC_MODE === 'DEVELOPMENT') {
+                window.open(`http://localhost:3000${endpoint}`, '_blank');
+                console.log('???');
+                return;
+              }
               send({ type: AppBridgeMessageType.OPEN_WEB_VIEW, payload: { href: buildWebViewUrl(endpoint) } });
             }}
           >

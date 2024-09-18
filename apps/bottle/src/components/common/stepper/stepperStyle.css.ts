@@ -10,7 +10,7 @@ export const containerStyle = style({
   backgroundColor: colors.purple100,
   borderRadius: radius.xs,
   gap: spacings.xxs,
-  margin: `${spacings.xl} 0`,
+  marginTop: spacings.xl,
   padding: `0 ${spacings.xs}`,
   overflow: 'hidden',
 });

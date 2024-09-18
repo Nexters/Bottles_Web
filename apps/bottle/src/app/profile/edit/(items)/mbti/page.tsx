@@ -1,13 +1,13 @@
 'use client';
 
-import { KakaoId } from '@/components/profile/kakao-id';
+import { MBTI } from '@/components/profile/MBTI';
 import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 
-export default function KakaoIdEditPage() {
+export default function MBTIEditPage() {
   const { send } = useAppBridge();
 
   return (
-    <KakaoId
+    <MBTI
       onNext={() => {
         send({ type: AppBridgeMessageType.WEB_VIEW_CLOSE });
       }}

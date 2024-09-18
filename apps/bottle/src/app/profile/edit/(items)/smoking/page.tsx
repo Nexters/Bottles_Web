@@ -1,13 +1,13 @@
 'use client';
 
-import { KakaoId } from '@/components/profile/kakao-id';
+import { Smoking } from '@/components/profile/smoking';
 import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 
-export default function KakaoIdEditPage() {
+export default function SmokingEditPage() {
   const { send } = useAppBridge();
 
   return (
-    <KakaoId
+    <Smoking
       onNext={() => {
         send({ type: AppBridgeMessageType.WEB_VIEW_CLOSE });
       }}

@@ -1,13 +1,13 @@
 'use client';
 
-import { KakaoId } from '@/components/profile/kakao-id';
+import { Region } from '@/components/profile/region';
 import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 
-export default function KakaoIdEditPage() {
+export default function RegionEditPage() {
   const { send } = useAppBridge();
 
   return (
-    <KakaoId
+    <Region
       onNext={() => {
         send({ type: AppBridgeMessageType.WEB_VIEW_CLOSE });
       }}

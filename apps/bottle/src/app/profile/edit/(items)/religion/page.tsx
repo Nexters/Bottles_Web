@@ -1,13 +1,13 @@
 'use client';
 
-import { KakaoId } from '@/components/profile/kakao-id';
+import { Religion } from '@/components/profile/religion';
 import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 
-export default function KakaoIdEditPage() {
+export default function ReligionEditPage() {
   const { send } = useAppBridge();
 
   return (
-    <KakaoId
+    <Religion
       onNext={() => {
         send({ type: AppBridgeMessageType.WEB_VIEW_CLOSE });
       }}

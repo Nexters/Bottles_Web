@@ -1,8 +1,8 @@
 'use client';
 
-import { Step } from '@/features/steps/StepContainer';
 import { WheelPicker, colors } from '@bottlesteam/ui';
 import { useState } from 'react';
+import { ProfileLayout } from '../layout';
 import { BaseProfileComponentProps } from '../types';
 import { wheelPickerContainerStyle } from './heightStyle.css';
 
@@ -19,7 +19,7 @@ export function Height({ initialValue, onNext, ctaButtonText = '완료' }: BaseP
 
   return (
     <>
-      <Step.Title>키는 어떻게 되나요?</Step.Title>
+      <ProfileLayout.Title>키는 어떻게 되나요?</ProfileLayout.Title>
       <div className={wheelPickerContainerStyle}>
         <WheelPicker
           data={heightData}
@@ -34,13 +34,13 @@ export function Height({ initialValue, onNext, ctaButtonText = '완료' }: BaseP
           color={colors.neutral600}
         />
       </div>
-      <Step.FixedButton
+      <ProfileLayout.FixedButton
         onClick={() => {
           onNext(height);
         }}
       >
         {ctaButtonText}
-      </Step.FixedButton>
+      </ProfileLayout.FixedButton>
     </>
   );
 }

@@ -1,9 +1,9 @@
 import { Control } from '@/components/common/control';
-import { Step } from '@/features/steps/StepContainer';
 import { Profile } from '@/models/profile';
 import { Culture, ETC, Entertainment, Sports, culture, entertainment, etc, sports } from '@/models/profile/interests';
 import { Button, ButtonProps, spacings } from '@bottlesteam/ui';
 import { useState } from 'react';
+import { ProfileLayout } from '../layout';
 import { BaseProfileComponentProps } from '../types';
 import { interestsStyle } from './interestsStyle.css';
 
@@ -37,9 +37,11 @@ export function Interests({
 
   return (
     <>
-      <Step.Title>푹 빠진 취미는 무엇인가요?</Step.Title>
-      <Step.Description style={{ marginTop: '12px' }}>최소 3개, 최대 10개까지 선택할 수 있어요</Step.Description>
-      <Step.Subtitle style={{ marginTop: spacings.xxl }}>문화 예술</Step.Subtitle>
+      <ProfileLayout.Title>푹 빠진 취미는 무엇인가요?</ProfileLayout.Title>
+      <ProfileLayout.Description style={{ marginTop: '12px' }}>
+        최소 3개, 최대 10개까지 선택할 수 있어요
+      </ProfileLayout.Description>
+      <ProfileLayout.Subtitle style={{ marginTop: spacings.xxl }}>문화 예술</ProfileLayout.Subtitle>
       <Control value={interests}>
         <section className={interestsStyle}>
           {culture.map((item, index) => (
@@ -48,7 +50,7 @@ export function Interests({
             </Control.Item>
           ))}
         </section>
-        <Step.Subtitle style={{ marginTop: spacings.xl }}>스포츠</Step.Subtitle>
+        <ProfileLayout.Subtitle style={{ marginTop: spacings.xl }}>스포츠</ProfileLayout.Subtitle>
         <section className={interestsStyle}>
           {sports.map((item, index) => (
             <Control.Item value={item} key={index} onClick={() => handleClick(item)}>
@@ -56,7 +58,7 @@ export function Interests({
             </Control.Item>
           ))}
         </section>
-        <Step.Subtitle style={{ marginTop: spacings.xl }}>오락</Step.Subtitle>
+        <ProfileLayout.Subtitle style={{ marginTop: spacings.xl }}>오락</ProfileLayout.Subtitle>
         <section className={interestsStyle}>
           {entertainment.map((item, index) => (
             <Control.Item value={item} key={index} onClick={() => handleClick(item)}>
@@ -64,7 +66,7 @@ export function Interests({
             </Control.Item>
           ))}
         </section>
-        <Step.Subtitle style={{ marginTop: spacings.xl }}>기타</Step.Subtitle>
+        <ProfileLayout.Subtitle style={{ marginTop: spacings.xl }}>기타</ProfileLayout.Subtitle>
         <section className={interestsStyle} style={{ marginBottom: spacings.xl }}>
           {etc.map((item, index) => (
             <Control.Item value={item} key={index} onClick={() => handleClick(item)}>
@@ -73,7 +75,7 @@ export function Interests({
           ))}
         </section>
       </Control>
-      <Step.FixedButton
+      <ProfileLayout.FixedButton
         disabled={interests.length < MIN_SELECTD}
         onClick={() => {
           onNext({
@@ -85,7 +87,7 @@ export function Interests({
         }}
       >
         {`${ctaButtonText} ${interests.length} / ${MAX_SELECTED}`}
-      </Step.FixedButton>
+      </ProfileLayout.FixedButton>
     </>
   );
 }

@@ -1,5 +1,5 @@
 import { Stepper } from '@/components/common/stepper';
-import { FixedBottomCTAButton, Paragraph, ParagraphProps, VariantOneProps } from '@bottlesteam/ui';
+import { FixedBottomCTAButton, Paragraph, ParagraphProps, spacings, VariantOneProps } from '@bottlesteam/ui';
 import { ReactNode } from 'react';
 import { containerStyle } from './stepStyle.css';
 
@@ -19,7 +19,7 @@ function StepContainer({ children, stepper }: Props) {
 
 function Title({ children, ...rest }: Omit<ParagraphProps, 'typography' | 'color'>) {
   return (
-    <Paragraph typography="t1" color="black100" {...rest}>
+    <Paragraph style={{ marginTop: spacings.xl }} typography="t1" color="black100" {...rest}>
       {children}
     </Paragraph>
   );

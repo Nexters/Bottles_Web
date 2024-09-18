@@ -1,10 +1,12 @@
+'use client';
+
 import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
-import { Step } from '@/features/steps/StepContainer';
 import { useRegionsQuery } from '@/store/query/useRegionsQuery';
 import { spacings } from '@bottlesteam/ui';
 import { OverlayProvider, overlay } from 'overlay-kit';
 import { useState } from 'react';
 import { spacingStyle } from '../MBTI/MBTIStyle.css';
+import { ProfileLayout } from '../layout';
 import { BaseProfileComponentProps } from '../types';
 import { RegionBottomSheet } from './bottom-sheet/RegionBottomSheet';
 import { regionStyle } from './regionStyle.css';
@@ -34,8 +36,8 @@ export function Region({
   return (
     <>
       <OverlayProvider>
-        <Step.Title>주로 생활하는 지역은 어딘가요?</Step.Title>
-        <Step.Subtitle style={{ marginTop: spacings.xxl }}>전체 지역</Step.Subtitle>
+        <ProfileLayout.Title>주로 생활하는 지역은 어딘가요?</ProfileLayout.Title>
+        <ProfileLayout.Subtitle style={{ marginTop: spacings.xxl }}>전체 지역</ProfileLayout.Subtitle>
         <div aria-hidden={true} className={spacingStyle} />
         <SelectInput
           onClick={async () => {
@@ -64,7 +66,7 @@ export function Region({
           placeholder={'전체 지역을 선택해 주세요'}
           value={city}
         />
-        <Step.Subtitle style={{ marginTop: spacings.xl }}>시 · 군 · 구</Step.Subtitle>
+        <ProfileLayout.Subtitle style={{ marginTop: spacings.xl }}>시 · 군 · 구</ProfileLayout.Subtitle>
         <div aria-hidden={true} className={spacingStyle} />
         <SelectInput
           onClick={async () => {
@@ -84,7 +86,7 @@ export function Region({
         />
         <section className={regionStyle}></section>
       </OverlayProvider>
-      <Step.FixedButton
+      <ProfileLayout.FixedButton
         disabled={city === undefined || state === undefined}
         onClick={async () => {
           if (city === undefined || state === undefined) {
@@ -94,7 +96,7 @@ export function Region({
         }}
       >
         {ctaButtonText}
-      </Step.FixedButton>
+      </ProfileLayout.FixedButton>
     </>
   );
 }

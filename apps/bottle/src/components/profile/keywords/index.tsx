@@ -1,8 +1,8 @@
 import { Control } from '@/components/common/control';
-import { Step } from '@/features/steps/StepContainer';
 import { Keyword, keywordList } from '@/models/profile/keywords';
 import { Button } from '@bottlesteam/ui';
 import { useState } from 'react';
+import { ProfileLayout } from '../layout';
 import { BaseProfileComponentProps } from '../types';
 import { keywordsStyle } from './keywordsStyle.css';
 
@@ -14,8 +14,10 @@ export function Keywords({ initialValue, ctaButtonText = '완료', onNext }: Bas
 
   return (
     <>
-      <Step.Title>나를 표현하는 키워드는?</Step.Title>
-      <Step.Description style={{ marginTop: '12px' }}>최소 3개, 최대 5개까지 선택할 수 있어요</Step.Description>
+      <ProfileLayout.Title>나를 표현하는 키워드는?</ProfileLayout.Title>
+      <ProfileLayout.Description style={{ marginTop: '12px' }}>
+        최소 3개, 최대 5개까지 선택할 수 있어요
+      </ProfileLayout.Description>
       <Control value={keywords}>
         <section className={keywordsStyle}>
           {keywordList.map((item, index) => (
@@ -42,7 +44,7 @@ export function Keywords({ initialValue, ctaButtonText = '완료', onNext }: Bas
           ))}
         </section>
       </Control>
-      <Step.FixedButton
+      <ProfileLayout.FixedButton
         disabled={keywords.length < MIN_SELECTED}
         onClick={() => {
           if (keywords.length === 0) {
@@ -52,7 +54,7 @@ export function Keywords({ initialValue, ctaButtonText = '완료', onNext }: Bas
         }}
       >
         {`${ctaButtonText} ${keywords.length} / ${MAX_SELECTED}`}
-      </Step.FixedButton>
+      </ProfileLayout.FixedButton>
     </>
   );
 }

@@ -1,7 +1,7 @@
 import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
-import { Step } from '@/features/steps/StepContainer';
 import { TextField, spacings } from '@bottlesteam/ui';
 import { useState } from 'react';
+import { ProfileLayout } from '../layout';
 import { BaseProfileComponentProps } from '../types';
 
 const KAKAO_ID_REGEX = /^[A-Za-z\d._-]{4,20}$/;
@@ -16,8 +16,10 @@ export function KakaoId({ onNext, initialValue, ctaButtonText = '완료' }: Base
 
   return (
     <>
-      <Step.Title>{'연락처 공유를 위해\n카카오톡 아이디를 입력해 주세요'}</Step.Title>
-      <Step.Description style={{ marginTop: spacings.sm }}>오타가 없는지 한 번 더 확인해 주세요</Step.Description>
+      <ProfileLayout.Title>{'연락처 공유를 위해\n카카오톡 아이디를 입력해 주세요'}</ProfileLayout.Title>
+      <ProfileLayout.Description style={{ marginTop: spacings.sm }}>
+        오타가 없는지 한 번 더 확인해 주세요
+      </ProfileLayout.Description>
       <TextField
         placeholder="영문, 숫자, 특수문자 포함 4-20자"
         value={kakaoId}
@@ -25,7 +27,7 @@ export function KakaoId({ onNext, initialValue, ctaButtonText = '완료' }: Base
         style={{ marginTop: spacings.xxl }}
       />
       <TextField.Caption>{isError && ERROR_CAPTION}</TextField.Caption>
-      <Step.FixedButton
+      <ProfileLayout.FixedButton
         disabled={disabled}
         onClick={async () => {
           await onNext(kakaoId);
@@ -39,7 +41,7 @@ export function KakaoId({ onNext, initialValue, ctaButtonText = '완료' }: Base
         }}
       >
         {ctaButtonText}
-      </Step.FixedButton>
+      </ProfileLayout.FixedButton>
     </>
   );
 }

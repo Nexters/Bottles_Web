@@ -1,13 +1,13 @@
 'use client';
 
-import { KakaoId } from '@/components/profile/kakao-id';
+import { Keywords } from '@/components/profile/keywords';
 import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 
-export default function KakaoIdEditPage() {
+export default function KeywordsEditPage() {
   const { send } = useAppBridge();
 
   return (
-    <KakaoId
+    <Keywords
       onNext={() => {
         send({ type: AppBridgeMessageType.WEB_VIEW_CLOSE });
       }}

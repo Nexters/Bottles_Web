@@ -1,14 +1,14 @@
 'use client';
 
-import { KakaoId } from '@/components/profile/kakao-id';
+import { Header } from '@/components/common/header';
 import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 
-export default function KakaoIdEditPage() {
+export function HeaderArea() {
   const { send } = useAppBridge();
 
   return (
-    <KakaoId
-      onNext={() => {
+    <Header
+      onGoBack={() => {
         send({ type: AppBridgeMessageType.WEB_VIEW_CLOSE });
       }}
     />

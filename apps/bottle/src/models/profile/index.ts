@@ -24,4 +24,5 @@ export interface Profile {
   };
   religion: Religion;
   smoking: Smoking;
+  kakaoId: string;
 }

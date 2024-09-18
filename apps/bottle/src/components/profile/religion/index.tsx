@@ -1,8 +1,8 @@
 import { Control, toggle } from '@/components/common/control';
-import { Step } from '@/features/steps/StepContainer';
 import { Religion as ReligionType, religionList } from '@/models/profile/religion';
 import { Button } from '@bottlesteam/ui';
 import { useState } from 'react';
+import { ProfileLayout } from '../layout';
 import { BaseProfileComponentProps } from '../types';
 import { religionStyle } from './religionStyle.css';
 
@@ -11,7 +11,7 @@ export function Religion({ onNext, initialValue, ctaButtonText = '완료' }: Bas
 
   return (
     <>
-      <Step.Title>어떤 종교를 가지고 있나요?</Step.Title>
+      <ProfileLayout.Title>어떤 종교를 가지고 있나요?</ProfileLayout.Title>
       <section className={religionStyle}>
         <Control value={religion}>
           {religionList.map((item, index) => (
@@ -23,7 +23,7 @@ export function Religion({ onNext, initialValue, ctaButtonText = '완료' }: Bas
           ))}
         </Control>
       </section>
-      <Step.FixedButton
+      <ProfileLayout.FixedButton
         disabled={religion === undefined}
         onClick={() => {
           if (religion === undefined) {
@@ -33,7 +33,7 @@ export function Religion({ onNext, initialValue, ctaButtonText = '완료' }: Bas
         }}
       >
         {ctaButtonText}
-      </Step.FixedButton>
+      </ProfileLayout.FixedButton>
     </>
   );
 }

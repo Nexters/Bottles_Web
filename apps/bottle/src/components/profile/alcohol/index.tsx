@@ -1,8 +1,10 @@
+'use client';
+
 import { Control, toggle } from '@/components/common/control';
-import { Step } from '@/features/steps/StepContainer';
 import { Alcohol as AlcoholType, alcoholList } from '@/models/profile/alcohol';
 import { Button } from '@bottlesteam/ui';
 import { useState } from 'react';
+import { ProfileLayout } from '../layout';
 import { BaseProfileComponentProps } from '../types';
 import { alcoholStyle } from './alcoholStyle.css';
 
@@ -11,7 +13,7 @@ export function Alcohol({ initialValue, onNext, ctaButtonText = '완료' }: Base
 
   return (
     <>
-      <Step.Title>술은 얼마나 즐기나요?</Step.Title>
+      <ProfileLayout.Title>술은 얼마나 즐기나요?</ProfileLayout.Title>
       <Control value={alcohol}>
         <section className={alcoholStyle}>
           {alcoholList.map((item, index) => (
@@ -23,7 +25,7 @@ export function Alcohol({ initialValue, onNext, ctaButtonText = '완료' }: Base
           ))}
         </section>
       </Control>
-      <Step.FixedButton
+      <ProfileLayout.FixedButton
         disabled={alcohol === undefined}
         onClick={() => {
           if (alcohol === undefined) {
@@ -33,7 +35,7 @@ export function Alcohol({ initialValue, onNext, ctaButtonText = '완료' }: Base
         }}
       >
         {ctaButtonText}
-      </Step.FixedButton>
+      </ProfileLayout.FixedButton>
     </>
   );
 }

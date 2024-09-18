@@ -1,8 +1,8 @@
 import { Control, toggle } from '@/components/common/control';
-import { Step } from '@/features/steps/StepContainer';
 import { Job as JobType, jobList } from '@/models/profile/job';
 import { Button } from '@bottlesteam/ui';
 import { useState } from 'react';
+import { ProfileLayout } from '../layout';
 import { BaseProfileComponentProps } from '../types';
 import { jobStyle } from './jobStyle.css';
 
@@ -11,7 +11,7 @@ export function Job({ initialValue, onNext, ctaButtonText = '완료' }: BaseProf
 
   return (
     <>
-      <Step.Title>지금 어떤 일을 하고 있나요?</Step.Title>
+      <ProfileLayout.Title>지금 어떤 일을 하고 있나요?</ProfileLayout.Title>
       <section className={jobStyle}>
         <Control value={job}>
           {jobList.map((item, index) => (
@@ -23,7 +23,7 @@ export function Job({ initialValue, onNext, ctaButtonText = '완료' }: BaseProf
           ))}
         </Control>
       </section>
-      <Step.FixedButton
+      <ProfileLayout.FixedButton
         disabled={job === undefined}
         onClick={() => {
           if (job === undefined) {
@@ -33,7 +33,7 @@ export function Job({ initialValue, onNext, ctaButtonText = '완료' }: BaseProf
         }}
       >
         {ctaButtonText}
-      </Step.FixedButton>
+      </ProfileLayout.FixedButton>
     </>
   );
 }
