@@ -1,7 +1,8 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "ui": "tui",
-  "globalEnv": ["NEXT_PUBLIC_SERVER_BASE_URL", "TEST_ACCESS_TOKEN", "TEST_REFRESH_TOKEN"],
+  "globalEnv": ["NEXT_PUBLIC_SERVER_BASE_URL"],
+  "globalPassThroughEnv": ["TEST_ACCESS_TOKEN", "TEST_REFRESH_TOKEN", "NEXT_PUBLIC_MODE"],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
