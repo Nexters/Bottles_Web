@@ -3,6 +3,7 @@ import type { NextRequest } from 'next/server';
 
 export async function middleware(request: NextRequest) {
   const url = new URL(request.url);
+  console.log('MIDDLE HIT');
   if (String(url).includes('accessToken')) {
     const accessToken = url.searchParams.get('accessToken') ?? '';
     const refreshToken = url.searchParams.get('refreshToken') ?? '';
@@ -25,5 +26,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/bottles/:path*', '/my', '/create-profile/:path*', '/profile/create/:path*'],
+  matcher: ['/bottles/:path*', '/my', '/create-profile/:path*', '/profile/create/:path*', '/profile/edit/:path*'],
 };

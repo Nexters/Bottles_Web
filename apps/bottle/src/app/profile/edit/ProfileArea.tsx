@@ -1,7 +1,7 @@
 'use client';
 
 import { Card } from '@/components/common/card';
-import { useCurrentUserProfileQuery } from '@/store/query/useMyInformation';
+import { useCurrentUserProfileQuery } from '@/store/query/useCurrentUserProfileQuery';
 import { Asset, Paragraph, spacings } from '@bottlesteam/ui';
 import Link from 'next/link';
 import { useMemo } from 'react';
@@ -14,7 +14,7 @@ export function ProfileArea() {
       profileSelect: {
         job,
         mbti,
-        region: { city },
+        region: { city, state },
         smoking,
         alcohol,
         keyword,
@@ -46,7 +46,7 @@ export function ProfileArea() {
           ...Object.values(entertainment),
           ...Object.values(etc),
         ].join(', '),
-        endpoint: '/profile/edit/interest',
+        endpoint: '/profile/edit/interests',
       },
       {
         title: '직업 · 직무',
@@ -75,11 +75,11 @@ export function ProfileArea() {
       },
       {
         title: '지역',
-        description: city,
+        description: `${city} ${state}`,
         endpoint: '/profile/edit/region',
       },
     ],
-    [mbti, keyword, kakaoId, culture, sports, entertainment, job, height, smoking, alcohol, religion, city, etc]
+    [mbti, keyword, kakaoId, culture, sports, entertainment, job, height, smoking, alcohol, religion, city, state, etc]
   );
 
   return (

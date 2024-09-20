@@ -1,6 +1,6 @@
 import { ProfileLayout } from '@/components/profile/layout';
 import { ReactNode } from 'react';
-import { HeaderArea } from '../HeaderArea';
+import { HeaderArea } from './HeaderArea';
 
 interface Props {
   children: ReactNode;

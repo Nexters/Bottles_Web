@@ -13,7 +13,6 @@ import { ProfileLayout } from '@/components/profile/layout';
 import { Region } from '@/components/profile/region';
 import { Religion } from '@/components/profile/religion';
 import { Smoking } from '@/components/profile/smoking';
-import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 import { useFunnel } from '@/features/funnel';
 import { Profile } from '@/models/profile';
 import { User } from '@/models/user';
@@ -23,14 +22,13 @@ import { CreateProfileProvider } from './CreateProfileProvider';
 
 const MAX_STEPS = 10;
 
-type CreateProfileFunnelValues = Profile & User['kakaoId'];
+type CreateProfileFunnelValues = Profile & Pick<User, 'kakaoId'>;
 
 export default function CreateProfilePage() {
   const router = useRouter();
-  const { send } = useAppBridge();
 
   const { onNextStep, currentStep, getValue, getValues } = useFunnel<CreateProfileFunnelValues>('/profile/create');
-  const { mutateAsync } = useProfileMutation();
+  const { mutate } = useProfileMutation({ type: 'create' });
 
   const steps = [
     <ProfileLayout key={1}>
@@ -137,9 +135,8 @@ export default function CreateProfilePage() {
       <Stepper current={10} max={MAX_STEPS} />
       <KakaoId
         initialValue={getValue('kakaoId')}
-        onNext={async kakaoId => {
-          await mutateAsync({ ...(getValues() as Omit<Profile, 'kakaoId'>), kakaoId });
-          send({ type: AppBridgeMessageType.CREATE_PROFILE_COMPLETE });
+        onNext={kakaoId => {
+          mutate({ ...(getValues() as Profile), kakaoId });
         }}
       />
     </ProfileLayout>,

@@ -1,6 +1,6 @@
 import { getServerSideTokens } from '@/features/server/serverSideTokens';
 import { ServerFetchBoundary } from '@/store/query/ServerFetchBoundary';
-import { currentUserProfileQueryOptions } from '@/store/query/useMyInformation';
+import { currentUserProfileQueryOptions } from '@/store/query/useCurrentUserProfileQuery';
 import { Suspense } from 'react';
 import { BasicInformation } from './BasicInformation';
 import { HeaderArea } from './HeaderArea';

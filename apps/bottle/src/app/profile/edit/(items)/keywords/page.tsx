@@ -1,20 +1,28 @@
 'use client';
 
 import { Keywords } from '@/components/profile/keywords';
-import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
-import { useCurrentUserProfileQuery } from '@/store/query/useMyInformation';
+import { useProfileMutation } from '@/store/mutation/useProfileMuatation';
+import { useCurrentUserProfileQuery } from '@/store/query/useCurrentUserProfileQuery';
+import { isSameArray } from '@/utils';
+import { useRouter } from 'next/navigation';
 
 export default function KeywordsEditPage() {
-  const { send } = useAppBridge();
+  const router = useRouter();
+
   const {
-    data: { profileSelect },
+    data: { kakaoId, profileSelect },
   } = useCurrentUserProfileQuery();
+  const { mutate } = useProfileMutation({ type: 'edit' });
 
   return (
     <Keywords
       initialValue={profileSelect.keyword}
-      onNext={() => {
-        send({ type: AppBridgeMessageType.WEB_VIEW_CLOSE });
+      onNext={keyword => {
+        if (isSameArray(keyword, profileSelect.keyword)) {
+          router.back();
+          return;
+        }
+        mutate({ ...profileSelect, kakaoId, keyword });
       }}
     />
   );

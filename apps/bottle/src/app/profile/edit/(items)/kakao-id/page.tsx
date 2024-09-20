@@ -1,27 +1,26 @@
 'use client';
 
 import { KakaoId } from '@/components/profile/kakao-id';
-import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 import { useProfileMutation } from '@/store/mutation/useProfileMuatation';
-import { useCurrentUserProfileQuery } from '@/store/query/useMyInformation';
+import { useCurrentUserProfileQuery } from '@/store/query/useCurrentUserProfileQuery';
 import { useRouter } from 'next/navigation';
 
 export default function KakaoIdEditPage() {
-  const { send } = useAppBridge();
   const router = useRouter();
-
   const {
-    data: { kakaoId, profileSelect },
+    data: { kakaoId: initialKakaoId, profileSelect },
   } = useCurrentUserProfileQuery();
-  const { mutateAsync } = useProfileMutation();
+  const { mutate } = useProfileMutation({ type: 'edit' });
 
   return (
     <KakaoId
-      initialValue={kakaoId}
-      onNext={async kakaoId => {
-        await mutateAsync({ ...profileSelect, kakaoId });
-        send({ type: AppBridgeMessageType.TOAST_OPEN, payload: { message: '프로필 수정에 성공했어요.' } });
-        router.back();
+      initialValue={initialKakaoId}
+      onNext={kakaoId => {
+        if (kakaoId === initialKakaoId) {
+          router.back();
+          return;
+        }
+        mutate({ ...profileSelect, kakaoId });
       }}
     />
   );

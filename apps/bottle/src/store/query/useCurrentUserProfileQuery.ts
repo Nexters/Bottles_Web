@@ -8,6 +8,7 @@ export const currentUserProfileQueryOptions = (tokens: Tokens): UseSuspenseQuery
   queryKey: ['user', 'profile'],
   queryFn: () => GET<CurrentUser>(`/api/v1/profile`, tokens, createInit(tokens.accessToken)),
 });
+
 export function useCurrentUserProfileQuery() {
   return useSuspenseQuery(currentUserProfileQueryOptions(getClientSideTokens()));
 }

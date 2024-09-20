@@ -2,7 +2,7 @@
 
 import { Header } from '@/components/common/header';
 import { UserInformation } from '@/components/common/user-information';
-import { useCurrentUserProfileQuery } from '@/store/query/useMyInformation';
+import { useCurrentUserProfileQuery } from '@/store/query/useCurrentUserProfileQuery';
 import { ActionButtons } from './_components/ActionButtons';
 
 export function MyInformation() {

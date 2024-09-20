@@ -4,7 +4,7 @@ import { Card } from '../card';
 import { chipWrapper, informationContainer, selectedProfileBlockStyle } from './userInformationStyle.css';
 
 interface Props {
-  profile: Profile;
+  profile: Omit<Profile, 'kakaoId'>;
 }
 
 export function SelectedProfile({

@@ -4,7 +4,7 @@ import { Profile } from './profile';
 interface UserBase {
   age: number;
   introduction: Introduction;
-  profileSelect: Profile;
+  profileSelect: Omit<Profile, 'kakaoId'>;
   userName: string;
   kakaoId: string;
 }
