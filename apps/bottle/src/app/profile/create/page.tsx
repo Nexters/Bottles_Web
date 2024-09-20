@@ -13,23 +13,24 @@ import { ProfileLayout } from '@/components/profile/layout';
 import { Region } from '@/components/profile/region';
 import { Religion } from '@/components/profile/religion';
 import { Smoking } from '@/components/profile/smoking';
+import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 import { useFunnel } from '@/features/funnel';
-import { createInit, POST } from '@/features/server';
-import { getClientSideTokens } from '@/features/server/clientSideTokens';
 import { Profile } from '@/models/profile';
+import { User } from '@/models/user';
+import { useProfileMutation } from '@/store/mutation/useProfileMuatation';
 import { useRouter } from 'next/navigation';
 import { CreateProfileProvider } from './CreateProfileProvider';
 
 const MAX_STEPS = 10;
 
-interface CreateProfileFunnel extends Profile {
-  kakaoId: string;
-}
+type CreateProfileFunnelValues = Profile & User['kakaoId'];
 
 export default function CreateProfilePage() {
   const router = useRouter();
+  const { send } = useAppBridge();
 
-  const { onNextStep, currentStep, getValue, getValues } = useFunnel<CreateProfileFunnel>('/profile/create');
+  const { onNextStep, currentStep, getValue, getValues } = useFunnel<CreateProfileFunnelValues>('/profile/create');
+  const { mutateAsync } = useProfileMutation();
 
   const steps = [
     <ProfileLayout key={1}>
@@ -137,19 +138,12 @@ export default function CreateProfilePage() {
       <KakaoId
         initialValue={getValue('kakaoId')}
         onNext={async kakaoId => {
-          await POST(
-            `/api/v1/profile/choice`,
-            getClientSideTokens(),
-            createInit(getClientSideTokens().accessToken, { ...getValues(), kakaoId })
-          );
+          await mutateAsync({ ...(getValues() as Omit<Profile, 'kakaoId'>), kakaoId });
+          send({ type: AppBridgeMessageType.CREATE_PROFILE_COMPLETE });
         }}
       />
     </ProfileLayout>,
   ];
 
-  return (
-    <>
-      <CreateProfileProvider>{steps[currentStep - 1]}</CreateProfileProvider>
-    </>
-  );
+  return <CreateProfileProvider>{steps[currentStep - 1]}</CreateProfileProvider>;
 }

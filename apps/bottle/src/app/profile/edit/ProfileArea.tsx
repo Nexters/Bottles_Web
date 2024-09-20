@@ -1,19 +1,16 @@
 'use client';
 
 import { Card } from '@/components/common/card';
-import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
-import { buildWebViewUrl } from '@/features/app-bridge/utils';
-import { useUserAgent } from '@/features/user-agent/UserAgentProvider';
-import { useMyInformationQuery } from '@/store/query/useMyInformation';
+import { useCurrentUserProfileQuery } from '@/store/query/useMyInformation';
 import { Asset, Paragraph, spacings } from '@bottlesteam/ui';
+import Link from 'next/link';
 import { useMemo } from 'react';
 import { profileItemLeftStyle, profileItemStyle } from './profileEditStyle.css';
 
 export function ProfileArea() {
-  const { isMobile } = useUserAgent();
-  const { send } = useAppBridge();
   const {
     data: {
+      kakaoId,
       profileSelect: {
         job,
         mbti,
@@ -26,11 +23,11 @@ export function ProfileArea() {
         religion,
       },
     },
-  } = useMyInformationQuery();
+  } = useCurrentUserProfileQuery();
 
   const editProfileItems = useMemo(
     () => [
-      { title: '카카오톡 아이디', description: 'dhassidu11', endpoint: '/profile/edit/kakao-id' },
+      { title: '카카오톡 아이디', description: kakaoId, endpoint: '/profile/edit/kakao-id' },
       {
         title: '나의 성격',
         description: mbti,
@@ -82,35 +79,26 @@ export function ProfileArea() {
         endpoint: '/profile/edit/region',
       },
     ],
-    [mbti, keyword, culture, sports, entertainment, job, height, smoking, alcohol, religion, city, etc]
+    [mbti, keyword, kakaoId, culture, sports, entertainment, job, height, smoking, alcohol, religion, city, etc]
   );
 
   return (
     <Card asChild style={{ marginTop: spacings.sm, marginBottom: spacings.xl }}>
       <ul>
         {editProfileItems.map(({ title, description, endpoint }) => (
-          <li
-            key={title}
-            className={profileItemStyle}
-            onClick={() => {
-              if (!isMobile && process.env.NEXT_PUBLIC_MODE === 'DEVELOPMENT') {
-                window.open(`http://localhost:3000${endpoint}`, '_blank');
-                console.log('???');
-                return;
-              }
-              send({ type: AppBridgeMessageType.OPEN_WEB_VIEW, payload: { href: buildWebViewUrl(endpoint) } });
-            }}
-          >
-            <div className={profileItemLeftStyle}>
-              <Paragraph color="neutral900" typography="st2">
-                {title}
-              </Paragraph>
-              <Paragraph color="neutral600" typography="ca">
-                {description}
-              </Paragraph>
-            </div>
-            <Asset type="icon-right" />
-          </li>
+          <Link href={endpoint} key={title}>
+            <li key={title} className={profileItemStyle} onClick={() => {}}>
+              <div className={profileItemLeftStyle}>
+                <Paragraph color="neutral900" typography="st2">
+                  {title}
+                </Paragraph>
+                <Paragraph color="neutral600" typography="ca">
+                  {description}
+                </Paragraph>
+              </div>
+              <Asset type="icon-right" />
+            </li>
+          </Link>
         ))}
       </ul>
     </Card>

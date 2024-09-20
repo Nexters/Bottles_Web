@@ -6,6 +6,7 @@ interface UserBase {
   introduction: Introduction;
   profileSelect: Profile;
   userName: string;
+  kakaoId: string;
 }
 
 export interface CurrentUser extends UserBase {

@@ -34,7 +34,6 @@ export function useSignupMutation(onAuthCodeError: () => void) {
   return useMutation({
     mutationFn: signup,
     onSuccess: (tokens: Tokens) => {
-      console.log('tokens', tokens);
       send({ type: AppBridgeMessageType.SIGNUP, payload: tokens });
     },
     onError: error => {

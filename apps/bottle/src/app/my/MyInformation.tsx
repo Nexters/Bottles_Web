@@ -2,11 +2,11 @@
 
 import { Header } from '@/components/common/header';
 import { UserInformation } from '@/components/common/user-information';
-import { useMyInformationQuery } from '@/store/query/useMyInformation';
+import { useCurrentUserProfileQuery } from '@/store/query/useMyInformation';
 import { ActionButtons } from './_components/ActionButtons';
 
 export function MyInformation() {
-  const { data } = useMyInformationQuery();
+  const { data } = useCurrentUserProfileQuery();
 
   console.log('my information', data);
 

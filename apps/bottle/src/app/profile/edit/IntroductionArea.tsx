@@ -1,14 +1,14 @@
 'use client';
 
 import { Card } from '@/components/common/card';
-import { useMyInformationQuery } from '@/store/query/useMyInformation';
+import { useCurrentUserProfileQuery } from '@/store/query/useMyInformation';
 import { Paragraph, spacings } from '@bottlesteam/ui';
 import { introductionBoxStyle } from './profileEditStyle.css';
 
 export function IntroductionArea() {
   const {
     data: { introduction },
-  } = useMyInformationQuery();
+  } = useCurrentUserProfileQuery();
 
   return (
     <Card style={{ marginTop: spacings.xl }}>

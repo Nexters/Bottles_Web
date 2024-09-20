@@ -3,14 +3,14 @@
 import { Profile } from '@/components/common/profile';
 import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 import { buildWebViewUrl } from '@/features/app-bridge/utils';
-import { useMyInformationQuery } from '@/store/query/useMyInformation';
+import { useCurrentUserProfileQuery } from '@/store/query/useMyInformation';
 import { spacings } from '@bottlesteam/ui';
 
 export function BasicInformation() {
   const { send } = useAppBridge();
   const {
     data: { imageUrl, age, userName },
-  } = useMyInformationQuery();
+  } = useCurrentUserProfileQuery();
 
   return (
     <Profile
