@@ -1,11 +1,12 @@
 import { Introduction } from './introduction';
-import { Profile } from './profile';
+import { ProfileSelect } from './profile';
 
 interface UserBase {
   age: number;
   introduction: Introduction;
-  profileSelect: Profile;
+  profileSelect: ProfileSelect;
   userName: string;
+  kakaoId: string;
 }
 
 export interface CurrentUser extends UserBase {

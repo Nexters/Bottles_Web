@@ -1,4 +1,4 @@
-import { Control, toggle } from '@/components/control';
+import { Control, toggle } from '@/components/common/control';
 import { Step } from '@/features/steps/StepContainer';
 import { useStep } from '@/features/steps/StepProvider';
 import { Alcohol as AlcoholType, alcoholList } from '@/models/profile/alcohol';

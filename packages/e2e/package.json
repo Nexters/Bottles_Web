@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test:dev": "playwright test",
-    "test:e2e": "start-server-and-test \"(cd ../../apps/bottle && pnpm run start)\" http://localhost:3000 \"playwright test\""
+    "test:e2e": "start-server-and-test \"(cd ../../apps/bottle && pnpm run start)\" http://localhost:3000 \"playwright test\"",
+    "test:e2e-ui": "start-server-and-test \"(cd ../../apps/bottle && pnpm run start)\" http://localhost:3000 \"playwright test --ui\""
   },
   "dependencies": {
     "@bottlesteam/eslint-config": "workspace:*",

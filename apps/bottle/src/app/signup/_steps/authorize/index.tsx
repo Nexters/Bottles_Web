@@ -1,4 +1,4 @@
-import { Stepper } from '@/components/stepper';
+import { Stepper } from '@/components/common/stepper';
 import { Step } from '@/features/steps/StepContainer';
 import { useLeftTimeCaption } from '@/features/time/useLeftTimeCaption';
 import { useSendAuthCodeMutation } from '@/store/mutation/useSendAuthCodeMutation';

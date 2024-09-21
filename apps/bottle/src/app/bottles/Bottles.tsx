@@ -1,8 +1,8 @@
 'use client';
 
 import NO_BOTTLE_IMAGE from '@/assets/no-bottle.webp';
-import { Control } from '@/components/control';
-import { Header } from '@/components/header';
+import { Control } from '@/components/common/control';
+import { Header } from '@/components/common/header';
 import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 import { Asset, Button, Paragraph } from '@bottlesteam/ui';
 import Image from 'next/image';

@@ -23,7 +23,8 @@
     "**/css.js",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "vitest.config.mjs"
+    "vitest.config.mjs",
+    ".eslintrc.cjs"
   ],
   "exclude": ["node_modules"]
 }

@@ -1,12 +1,12 @@
 'use client';
 
-import { Header } from '@/components/header';
-import { UserInformation } from '@/components/user-information';
-import { useMyInformationQuery } from '@/store/query/useMyInformation';
+import { Header } from '@/components/common/header';
+import { UserInformation } from '@/components/common/user-information';
+import { useCurrentUserProfileQuery } from '@/store/query/useCurrentUserProfileQuery';
 import { ActionButtons } from './_components/ActionButtons';
 
 export function MyInformation() {
-  const { data } = useMyInformationQuery();
+  const { data } = useCurrentUserProfileQuery();
 
   console.log('my information', data);
 

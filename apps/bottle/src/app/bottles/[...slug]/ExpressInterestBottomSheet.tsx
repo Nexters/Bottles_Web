@@ -1,4 +1,4 @@
-import { Control } from '@/components/control';
+import { Control } from '@/components/common/control';
 import { Asset, BottomSheet, BottomSheetProps, Button, Paragraph, TextField, spacings } from '@bottlesteam/ui';
 import { useEffect, useState } from 'react';
 import { deleteButtonStyle, emoticonsContainer } from './bottomSheetStyle.css';

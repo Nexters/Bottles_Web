@@ -1,11 +1,11 @@
-const { resolve } = require("node:path");
+const { resolve } = require('node:path');
 
-const project = resolve(process.cwd(), "tsconfig.json");
+const project = resolve(process.cwd(), 'tsconfig.json');
 
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
-  extends: ["eslint:recommended", "eslint-config-prettier", "turbo", "next"],
-  plugins: ["@typescript-eslint/eslint-plugin", "import", "prettier", "react", "react-hooks"],
+  extends: ['eslint:recommended', 'eslint-config-prettier', 'turbo', 'next'],
+  plugins: ['@typescript-eslint/eslint-plugin', 'import', 'prettier', 'react'],
   globals: {
     React: true,
     JSX: true,
@@ -14,7 +14,7 @@ module.exports = {
     node: true,
   },
   settings: {
-    "import/resolver": {
+    'import/resolver': {
       typescript: {
         project,
       },
@@ -22,31 +22,31 @@ module.exports = {
   },
   ignorePatterns: [
     // Ignore dotfiles
-    ".*.js",
-    "node_modules/",
-    "dist/",
+    '.*.js',
+    'node_modules/',
+    'dist/',
   ],
   overrides: [
     {
-      files: ["*.js?(x)", "*.ts?(x)"],
+      files: ['*.js?(x)', '*.ts?(x)'],
     },
   ],
   rules: {
-    "prettier/prettier": "error",
-    "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": [
-      "error",
+    'prettier/prettier': 'error',
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': [
+      'error',
       {
-        argsIgnorePattern: "^_",
-        varsIgnorePattern: "^_",
-        caughtErrorsIgnorePattern: "^_",
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+        caughtErrorsIgnorePattern: '^_',
       },
     ],
-    "import/order": [
-      "error",
+    'import/order': [
+      'error',
       {
-        groups: [["builtin", "external", "internal"], "parent", "sibling", "index"],
-        alphabetize: { order: "asc" },
+        groups: [['builtin', 'external', 'internal'], 'parent', 'sibling', 'index'],
+        alphabetize: { order: 'asc' },
       },
     ],
   },

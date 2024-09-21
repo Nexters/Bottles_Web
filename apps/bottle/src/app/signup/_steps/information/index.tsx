@@ -1,5 +1,5 @@
-import { Control } from '@/components/control';
-import { Stepper } from '@/components/stepper';
+import { Control } from '@/components/common/control';
+import { Stepper } from '@/components/common/stepper';
 import { Step } from '@/features/steps/StepContainer';
 import { useStep } from '@/features/steps/StepProvider';
 import { Button, TextField } from '@bottlesteam/ui';

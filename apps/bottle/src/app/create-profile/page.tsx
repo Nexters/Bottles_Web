@@ -1,6 +1,6 @@
 'use client';
 
-import { Header } from '@/components/header';
+import { Header } from '@/components/common/header';
 import { Step } from '@/features/steps/StepContainer';
 import { useStep } from '@/features/steps/StepProvider';
 import { Asset } from '@bottlesteam/ui';
@@ -51,6 +51,9 @@ const steps = [
     <KaKaoId />
   </Step>,
 ] as const;
+/**
+ * @deprecated
+ */
 export default function CreateProfilePage() {
   const router = useRouter();
   const { currentStep } = useStep();

@@ -1,4 +1,4 @@
-import { Control, toggle } from '@/components/control';
+import { Control, toggle } from '@/components/common/control';
 import { Step } from '@/features/steps/StepContainer';
 import { useStep } from '@/features/steps/StepProvider';
 import { EIType, JPType, SNType, TFType } from '@/models/profile/MBTI';
