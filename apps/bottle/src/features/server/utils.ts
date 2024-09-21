@@ -23,7 +23,6 @@ async function fetchWrapperWithTokenHandler<Data>(uri: string, tokens: Tokens, i
    * NOTE: handles ONLY Unauthorized status
    */
   if (response.status === STATUS.UNAUTHORIZED) {
-    console.log('HERE', tokens.accessToken);
     const newTokens = await refreshAuth(tokens);
 
     return await fetchWrapperWithTokenHandler<Data>(uri, newTokens, {
