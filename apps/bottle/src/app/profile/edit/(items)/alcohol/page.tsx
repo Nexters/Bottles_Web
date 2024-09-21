@@ -1,27 +1,20 @@
 'use client';
 
 import { Alcohol } from '@/components/profile/alcohol';
-import { useProfileMutation } from '@/store/mutation/useProfileMuatation';
-import { useCurrentUserProfileQuery } from '@/store/query/useCurrentUserProfileQuery';
-import { useRouter } from 'next/navigation';
+import { useProfileEditPage } from '@/hooks/useProfileEditPage';
 
 export default function AlcoholEditPage() {
-  const router = useRouter();
-
-  const {
-    data: { kakaoId, profileSelect },
-  } = useCurrentUserProfileQuery();
-  const { mutate } = useProfileMutation({ type: 'edit' });
+  const { goBack, profile, edit, kakaoId } = useProfileEditPage();
 
   return (
     <Alcohol
-      initialValue={profileSelect.alcohol}
+      initialValue={profile.alcohol}
       onNext={alcohol => {
-        if (alcohol === profileSelect.alcohol) {
-          router.back();
+        if (alcohol === profile.alcohol) {
+          goBack();
           return;
         }
-        mutate({ ...profileSelect, kakaoId, alcohol });
+        edit({ ...profile, kakaoId, alcohol });
       }}
     />
   );

@@ -1,27 +1,20 @@
 'use client';
 
 import { Height } from '@/components/profile/height';
-import { useProfileMutation } from '@/store/mutation/useProfileMuatation';
-import { useCurrentUserProfileQuery } from '@/store/query/useCurrentUserProfileQuery';
-import { useRouter } from 'next/navigation';
+import { useProfileEditPage } from '@/hooks/useProfileEditPage';
 
 export default function HeightEditPage() {
-  const router = useRouter();
-
-  const {
-    data: { kakaoId, profileSelect },
-  } = useCurrentUserProfileQuery();
-  const { mutate } = useProfileMutation({ type: 'edit' });
+  const { goBack, profile, edit, kakaoId } = useProfileEditPage();
 
   return (
     <Height
-      initialValue={profileSelect.height}
+      initialValue={profile.height}
       onNext={height => {
-        if (height === profileSelect.height) {
-          router.back();
+        if (height === profile.height) {
+          goBack();
           return;
         }
-        mutate({ ...profileSelect, kakaoId, height });
+        edit({ ...profile, kakaoId, height });
       }}
     />
   );

@@ -1,27 +1,20 @@
 'use client';
 
 import { Religion } from '@/components/profile/religion';
-import { useProfileMutation } from '@/store/mutation/useProfileMuatation';
-import { useCurrentUserProfileQuery } from '@/store/query/useCurrentUserProfileQuery';
-import { useRouter } from 'next/navigation';
+import { useProfileEditPage } from '@/hooks/useProfileEditPage';
 
 export default function ReligionEditPage() {
-  const router = useRouter();
-
-  const {
-    data: { kakaoId, profileSelect },
-  } = useCurrentUserProfileQuery();
-  const { mutate } = useProfileMutation({ type: 'edit' });
+  const { goBack, profile, edit, kakaoId } = useProfileEditPage();
 
   return (
     <Religion
-      initialValue={profileSelect.religion}
+      initialValue={profile.religion}
       onNext={religion => {
-        if (religion === profileSelect.religion) {
-          router.back();
+        if (religion === profile.religion) {
+          goBack();
           return;
         }
-        mutate({ ...profileSelect, kakaoId, religion });
+        edit({ ...profile, kakaoId, religion });
       }}
     />
   );

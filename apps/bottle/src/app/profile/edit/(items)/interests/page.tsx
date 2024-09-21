@@ -1,11 +1,9 @@
 'use client';
 
 import { Interests } from '@/components/profile/interests';
+import { useProfileEditPage } from '@/hooks/useProfileEditPage';
 import { Profile } from '@/models/profile';
-import { useProfileMutation } from '@/store/mutation/useProfileMuatation';
-import { useCurrentUserProfileQuery } from '@/store/query/useCurrentUserProfileQuery';
 import { isSameArray } from '@/utils';
-import { useRouter } from 'next/navigation';
 
 function isSameInterests(interest1: Profile['interest'], interest2: Profile['interest']) {
   return (
@@ -17,22 +15,17 @@ function isSameInterests(interest1: Profile['interest'], interest2: Profile['int
 }
 
 export default function InterestsEditPage() {
-  const router = useRouter();
-
-  const {
-    data: { kakaoId, profileSelect },
-  } = useCurrentUserProfileQuery();
-  const { mutate } = useProfileMutation({ type: 'edit' });
+  const { goBack, profile, edit, kakaoId } = useProfileEditPage();
 
   return (
     <Interests
-      initialValue={profileSelect.interest}
+      initialValue={profile.interest}
       onNext={interest => {
-        if (isSameInterests(profileSelect.interest, interest)) {
-          router.back();
+        if (isSameInterests(profile.interest, interest)) {
+          goBack();
           return;
         }
-        mutate({ ...profileSelect, interest, kakaoId });
+        edit({ ...profile, interest, kakaoId });
       }}
     />
   );

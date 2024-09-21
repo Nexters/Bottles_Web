@@ -1,27 +1,20 @@
 'use client';
 
 import { Job } from '@/components/profile/job';
-import { useProfileMutation } from '@/store/mutation/useProfileMuatation';
-import { useCurrentUserProfileQuery } from '@/store/query/useCurrentUserProfileQuery';
-import { useRouter } from 'next/navigation';
+import { useProfileEditPage } from '@/hooks/useProfileEditPage';
 
 export default function JobEditPage() {
-  const router = useRouter();
-
-  const {
-    data: { kakaoId, profileSelect },
-  } = useCurrentUserProfileQuery();
-  const { mutate } = useProfileMutation({ type: 'edit' });
+  const { goBack, profile, edit, kakaoId } = useProfileEditPage();
 
   return (
     <Job
-      initialValue={profileSelect.job}
+      initialValue={profile.job}
       onNext={job => {
-        if (job === profileSelect.job) {
-          router.back();
+        if (job === profile.job) {
+          goBack();
           return;
         }
-        mutate({ ...profileSelect, kakaoId, job });
+        edit({ ...profile, kakaoId, job });
       }}
     />
   );

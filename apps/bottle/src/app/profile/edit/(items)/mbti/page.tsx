@@ -1,26 +1,19 @@
 'use client';
 
 import { MBTI } from '@/components/profile/MBTI';
-import { useProfileMutation } from '@/store/mutation/useProfileMuatation';
-import { useCurrentUserProfileQuery } from '@/store/query/useCurrentUserProfileQuery';
-import { useRouter } from 'next/navigation';
+import { useProfileEditPage } from '@/hooks/useProfileEditPage';
 
 export default function MBTIEditPage() {
-  const router = useRouter();
-  const {
-    data: { profileSelect, kakaoId },
-  } = useCurrentUserProfileQuery();
-  const { mutate } = useProfileMutation({ type: 'edit' });
-
+  const { goBack, profile, edit, kakaoId } = useProfileEditPage();
   return (
     <MBTI
-      initialValue={profileSelect?.mbti}
+      initialValue={profile?.mbti}
       onNext={mbti => {
-        if (profileSelect.mbti === mbti) {
-          router.back();
+        if (profile.mbti === mbti) {
+          goBack();
           return;
         }
-        mutate({ ...profileSelect, kakaoId, mbti });
+        edit({ ...profile, kakaoId, mbti });
       }}
     />
   );

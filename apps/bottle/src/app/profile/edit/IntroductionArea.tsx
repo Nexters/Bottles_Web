@@ -1,7 +1,7 @@
 'use client';
 
 import { Card } from '@/components/common/card';
-import { useCurrentUserProfileQuery } from '@/store/query/useMyInformation';
+import { useCurrentUserProfileQuery } from '@/store/query/useCurrentUserProfileQuery';
 import { Paragraph, spacings } from '@bottlesteam/ui';
 import { introductionBoxStyle } from './profileEditStyle.css';
 

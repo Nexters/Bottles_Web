@@ -1,10 +1,10 @@
 import { Introduction } from './introduction';
-import { Profile } from './profile';
+import { ProfileSelect } from './profile';
 
 interface UserBase {
   age: number;
   introduction: Introduction;
-  profileSelect: Omit<Profile, 'kakaoId'>;
+  profileSelect: ProfileSelect;
   userName: string;
   kakaoId: string;
 }

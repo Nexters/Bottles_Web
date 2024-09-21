@@ -1,27 +1,20 @@
 'use client';
 
 import { Smoking } from '@/components/profile/smoking';
-import { useProfileMutation } from '@/store/mutation/useProfileMuatation';
-import { useCurrentUserProfileQuery } from '@/store/query/useCurrentUserProfileQuery';
-import { useRouter } from 'next/navigation';
+import { useProfileEditPage } from '@/hooks/useProfileEditPage';
 
 export default function SmokingEditPage() {
-  const router = useRouter();
-
-  const {
-    data: { kakaoId, profileSelect },
-  } = useCurrentUserProfileQuery();
-  const { mutate } = useProfileMutation({ type: 'edit' });
+  const { goBack, profile, edit, kakaoId } = useProfileEditPage();
 
   return (
     <Smoking
-      initialValue={profileSelect.smoking}
+      initialValue={profile.smoking}
       onNext={smoking => {
-        if (smoking === profileSelect.smoking) {
-          router.back();
+        if (smoking === profile.smoking) {
+          goBack();
           return;
         }
-        mutate({ ...profileSelect, kakaoId, smoking });
+        edit({ ...profile, kakaoId, smoking });
       }}
     />
   );

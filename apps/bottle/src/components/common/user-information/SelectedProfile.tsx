@@ -1,10 +1,10 @@
-import { Profile } from '@/models/profile';
+import { ProfileSelect } from '@/models/profile';
 import { Chip, Paragraph, spacings } from '@bottlesteam/ui';
 import { Card } from '../card';
 import { chipWrapper, informationContainer, selectedProfileBlockStyle } from './userInformationStyle.css';
 
 interface Props {
-  profile: Omit<Profile, 'kakaoId'>;
+  profile: ProfileSelect;
 }
 
 export function SelectedProfile({

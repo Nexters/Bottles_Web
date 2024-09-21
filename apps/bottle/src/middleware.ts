@@ -3,7 +3,6 @@ import type { NextRequest } from 'next/server';
 
 export async function middleware(request: NextRequest) {
   const url = new URL(request.url);
-  console.log('MIDDLE HIT');
   if (String(url).includes('accessToken')) {
     const accessToken = url.searchParams.get('accessToken') ?? '';
     const refreshToken = url.searchParams.get('refreshToken') ?? '';
