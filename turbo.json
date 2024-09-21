@@ -2,7 +2,14 @@
   "$schema": "https://turbo.build/schema.json",
   "ui": "tui",
   "globalEnv": ["NEXT_PUBLIC_SERVER_BASE_URL"],
-  "globalPassThroughEnv": ["TEST_ACCESS_TOKEN", "TEST_REFRESH_TOKEN", "NEXT_PUBLIC_MODE"],
+  "globalPassThroughEnv": [
+    "TEST_ACCESS_TOKEN",
+    "TEST_REFRESH_TOKEN",
+    "NEXT_PUBLIC_MODE",
+    "NEXT_PUBLIC_ADMIN_ID_1",
+    "NEXT_PUBLIC_ADMIN_ID_2",
+    "NEXT_PUBLIC_ADMIN_PASSWORD"
+  ],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
