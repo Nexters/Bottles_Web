@@ -1,10 +1,12 @@
 import { AppBridgeProvider } from '@/features/app-bridge/AppBridgeProvider';
 import { UserAgentProvider } from '@/features/user-agent/UserAgentProvider';
 import { QueryClientProvider } from '@/store/query/QueryClientProvider';
+import { getCookie } from 'cookies-next';
 import type { Metadata } from 'next';
 import './globals.css';
 import '@bottlesteam/ui/styles';
 import type { Viewport } from 'next';
+import { cookies } from 'next/headers';
 import { wantedSansStd } from '../fonts';
 import { layoutStyle } from './layout.css';
 
@@ -27,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={wantedSansStd.className}>
-        <main className={layoutStyle}>
+        <main className={layoutStyle({ notch: getCookie('version', { cookies }) != null })}>
           <QueryClientProvider>
             <UserAgentProvider>
               <AppBridgeProvider>{children}</AppBridgeProvider>
