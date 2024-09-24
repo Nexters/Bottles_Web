@@ -24,7 +24,7 @@ export async function middleware(request: NextRequest) {
     cleanUrl.searchParams.delete('version');
   }
 
-  if (url != cleanUrl) {
+  if (url.toString() !== cleanUrl.toString()) {
     const response = NextResponse.redirect(cleanUrl.toString());
     if (accessToken != null && refreshToken != null) {
       response.cookies.set('accessToken', accessToken, { httpOnly: false });
@@ -34,6 +34,8 @@ export async function middleware(request: NextRequest) {
       response.cookies.set('device', device, { httpOnly: false });
       response.cookies.set('version', version, { httpOnly: false });
     }
+
+    return response;
   }
 
   const response = NextResponse.next();
@@ -42,5 +44,12 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/bottles/:path*', '/my', '/create-profile/:path*', '/profile/create/:path*', '/profile/edit/:path*'],
+  matcher: [
+    '/bottles/:path*',
+    '/my',
+    '/create-profile/:path*',
+    '/profile/create/:path*',
+    '/profile/edit/:path*',
+    '/admin/:path*',
+  ],
 };
