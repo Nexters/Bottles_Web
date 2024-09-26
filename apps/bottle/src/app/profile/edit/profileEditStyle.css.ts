@@ -4,7 +4,7 @@ import { style } from '@vanilla-extract/css';
 
 export const contentsContainerStyle = style({
   width: '100%',
-  height: `calc(100vh - ${HEADER_HEIGHT}px)`,
+  height: `calc(100vh - ${HEADER_HEIGHT}px + env(safe-area-inset-top))`,
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
