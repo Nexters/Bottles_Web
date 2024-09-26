@@ -21,7 +21,7 @@ export const buttonContainer = style({
 });
 
 export const containerStyle = style({
-  height: `calc(100vh - ${CONTAINER_OFFSET_HEIGHT - OVERLAP_HEIGHT}px + env(safe-area-inset-top))`,
+  height: `calc(100vh - ${CONTAINER_OFFSET_HEIGHT - OVERLAP_HEIGHT}px - env(safe-area-inset-top))`,
   overflow: 'scroll',
   msOverflowStyle: 'none',
   scrollbarWidth: 'none',
