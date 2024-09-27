@@ -1,5 +1,4 @@
 import { getServerSideTokens } from '@/features/server/serverSideTokens';
-import { StepProvider } from '@/features/steps/StepProvider';
 import { ServerFetchBoundary } from '@/store/query/ServerFetchBoundary';
 import { regionsQueryOptions } from '@/store/query/useRegionsQuery';
 import { userInfoQueryOptions } from '@/store/query/useUserInfoQuery';
@@ -12,11 +11,7 @@ export default async function CreateProfileLayout({ children }: { children: Reac
 
   return (
     <Suspense>
-      <ServerFetchBoundary fetchOptions={serverFetchOptions}>
-        <StepProvider maxStep={10} uri="/profile/create">
-          {children}
-        </StepProvider>
-      </ServerFetchBoundary>
+      <ServerFetchBoundary fetchOptions={serverFetchOptions}>{children}</ServerFetchBoundary>
     </Suspense>
   );
 }
