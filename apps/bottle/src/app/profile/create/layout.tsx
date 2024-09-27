@@ -2,16 +2,12 @@ import { getServerSideTokens } from '@/features/server/serverSideTokens';
 import { ServerFetchBoundary } from '@/store/query/ServerFetchBoundary';
 import { regionsQueryOptions } from '@/store/query/useRegionsQuery';
 import { userInfoQueryOptions } from '@/store/query/useUserInfoQuery';
-import { ReactNode, Suspense } from 'react';
+import type { ReactNode } from 'react';
 
 export default async function CreateProfileLayout({ children }: { children: ReactNode }) {
   const tokens = getServerSideTokens();
 
   const serverFetchOptions = [regionsQueryOptions(tokens), userInfoQueryOptions(tokens)];
 
-  return (
-    <Suspense>
-      <ServerFetchBoundary fetchOptions={serverFetchOptions}>{children}</ServerFetchBoundary>
-    </Suspense>
-  );
+  return <ServerFetchBoundary fetchOptions={serverFetchOptions}>{children}</ServerFetchBoundary>;
 }

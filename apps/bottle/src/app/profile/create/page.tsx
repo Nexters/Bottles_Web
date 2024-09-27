@@ -18,7 +18,6 @@ import { Profile } from '@/models/profile';
 import { User } from '@/models/user';
 import { useProfileMutation } from '@/store/mutation/useProfileMuatation';
 import { useRouter } from 'next/navigation';
-import { CreateProfileProvider } from './CreateProfileProvider';
 
 const MAX_STEPS = 10;
 
@@ -142,5 +141,5 @@ export default function CreateProfilePage() {
     </ProfileLayout>,
   ];
 
-  return <CreateProfileProvider>{steps[currentStep - 1]}</CreateProfileProvider>;
+  return <>{steps[currentStep - 1]}</>;
 }
