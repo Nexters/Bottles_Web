@@ -12,13 +12,14 @@ import {
 export interface TextareaProps extends ComponentPropsWithoutRef<'textarea'> {
   caption?: ReactNode;
   error?: boolean;
+  maxLength?: number;
 }
 
 /**
  * NOTE: needs to be controlled
  */
 const TextareaImpl = forwardRef<ElementRef<'textarea'>, TextareaProps>(
-  ({ caption, error = false, style, value, ...textareaProps }, ref) => {
+  ({ caption, error = false, style, value, maxLength, ...textareaProps }, ref) => {
     const id = useId();
 
     const counterTextColor = value != null && String(value).length > 0 ? 'neutral600' : 'neutral400';
@@ -28,9 +29,14 @@ const TextareaImpl = forwardRef<ElementRef<'textarea'>, TextareaProps>(
         <label htmlFor={id} className={labelStyle({ error })}>
           <div className={textAreaWrapperStyle}>
             <textarea ref={ref} id={id} className={textareaStyle} {...textareaProps} />
-            <div className={counterTextWrapperStyle}>
-              <Paragraph typography="bo" color={counterTextColor}>{`${String(value).length ?? 0} / 300`}</Paragraph>
-            </div>
+            {maxLength != null && (
+              <div className={counterTextWrapperStyle}>
+                <Paragraph
+                  typography="bo"
+                  color={counterTextColor}
+                >{`${String(value).length ?? 0} / ${maxLength}`}</Paragraph>
+              </div>
+            )}
           </div>
         </label>
         {caption}
