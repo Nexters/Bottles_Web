@@ -1,55 +1,23 @@
+'use client';
+
 import { ProfileSelect } from '@/models/profile';
-import { Chip, Paragraph, spacings } from '@bottlesteam/ui';
-import { Card } from '../card';
-import { chipWrapper, informationContainer, selectedProfileBlockStyle } from './userInformationStyle.css';
+import { SelectedProfile } from '../selected-profile';
 
 interface Props {
   profile: ProfileSelect;
 }
 
-export function SelectedProfile({
-  profile: {
-    job,
-    mbti,
-    region: { city },
-    smoking,
-    alcohol,
-    keyword,
-    height,
-    interest: { culture, sports, entertainment, etc },
-  },
-}: Props) {
-  const basicInformation = [job, mbti, city, `${height}cm`, smoking, alcohol];
-  const personalities = keyword;
-  const hobbies = [
-    ...Object.values(culture),
-    ...Object.values(sports),
-    ...Object.values(entertainment),
-    ...Object.values(etc),
-  ];
-
+export function UserInformationSelectedProfile({ profile }: Props) {
   return (
-    <Card style={{ marginBottom: spacings.xl }}>
-      <div className={informationContainer}>
-        <SelectedProfileBlock type="기본 정보" values={basicInformation} />
-        <SelectedProfileBlock type="나의 성격은" values={personalities} />
-        <SelectedProfileBlock type="내가 푹 빠진 취미는" values={hobbies} />
-      </div>
-    </Card>
-  );
-}
-
-function SelectedProfileBlock({ type, values }: { type: string; values: (string | number)[] }) {
-  return (
-    <div className={selectedProfileBlockStyle}>
-      <Paragraph typography="st2" color="neutral600">
-        {type}
-      </Paragraph>
-      <div className={chipWrapper}>
-        {values.map(value => (
-          <Chip key={value}>{value}</Chip>
-        ))}
-      </div>
-    </div>
+    <SelectedProfile
+      profile={profile}
+      items={({ basicInformation, personalities, hobbies }) => (
+        <>
+          <SelectedProfile.Item type="기본 정보" values={basicInformation} />
+          <SelectedProfile.Item type="나의 성격은" values={personalities} />
+          <SelectedProfile.Item type="내가 푹 빠진 취미는" values={hobbies} />
+        </>
+      )}
+    />
   );
 }

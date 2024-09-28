@@ -18,7 +18,7 @@ export function Introduction({ ctaButtonText }: BaseProfileComponentProps<Curren
   return (
     <>
       <ProfileLayout.Title>{'보틀에 담을\n소개를 작성해 주세요'}</ProfileLayout.Title>
-      <div style={{ display: 'flex', flexDirection: 'column', marginTop: spacings.xxl }}>
+      <div style={{ display: 'flex', flexDirection: 'column', marginTop: spacings.xxl, gap: spacings.sm }}>
         <Textarea
           placeholder={PLACEHOLDER}
           value={value}
@@ -28,6 +28,19 @@ export function Introduction({ ctaButtonText }: BaseProfileComponentProps<Curren
           error={isError}
           caption={<Textarea.Caption>{isError && '최소 50글자 이상 작성해주세요'}</Textarea.Caption>}
         />
+        {/* <Card style={{ marginBottom: spacings.xl }}>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: spacings.xl,
+            }}
+          >
+            <SelectedProfileBlock type="기본 정보" values={basicInformation} />
+            <SelectedProfileBlock type="나의 성격은" values={personalities} />
+            <SelectedProfileBlock type="내가 푹 빠진 취미는" values={hobbies} />
+          </div>
+        </Card> */}
       </div>
       <ProfileLayout.FixedButton onClick={() => {}}>{ctaButtonText}</ProfileLayout.FixedButton>
     </>
