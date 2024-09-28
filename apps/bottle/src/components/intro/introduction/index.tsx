@@ -17,7 +17,7 @@ export function Introduction({
   onNext,
   ctaButtonText,
 }: BaseProfileComponentProps<CurrentUser['introduction']>) {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(initialValue != null ? (initialValue[0]?.answer ?? '') : '');
   const { data } = useCurrentUserProfileQuery();
 
   const isError = value.length < MINIMUM_TEXT_LENGTH && value.length > 0;
@@ -50,6 +50,7 @@ export function Introduction({
         />
       </div>
       <ProfileLayout.FixedButton
+        disabled={isError || value.length === 0}
         onClick={() => {
           onNext([{ question: '', answer: value }]);
         }}
