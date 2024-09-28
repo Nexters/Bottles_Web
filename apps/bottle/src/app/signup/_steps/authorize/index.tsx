@@ -3,7 +3,7 @@ import { Step } from '@/features/steps/StepContainer';
 import { useLeftTimeCaption } from '@/features/time/useLeftTimeCaption';
 import { useSendAuthCodeMutation } from '@/store/mutation/useSendAuthCodeMutation';
 import { useSignupMutation, WRONG_AUTH_CODE_MESSAGE } from '@/store/mutation/useSignupMutation';
-import { Button, TextField } from '@bottlesteam/ui';
+import { Button, Input } from '@bottlesteam/ui';
 import { useState } from 'react';
 import { SignupValues, useSignupValues } from '../../SignupProvider';
 import { containerStyle, fieldStyle } from './authorizeStyle.css';
@@ -45,7 +45,7 @@ export function Authorize() {
       <section className={containerStyle}>
         <div className={fieldStyle}>
           <Step.Subtitle>휴대폰 번호</Step.Subtitle>
-          <TextField
+          <Input
             value={phoneNumber}
             maxLength={8}
             onChange={e => {
@@ -62,7 +62,7 @@ export function Authorize() {
         </div>
         <div className={fieldStyle}>
           <Step.Subtitle>인증 번호</Step.Subtitle>
-          <TextField
+          <Input
             value={authCode}
             onChange={e => {
               setAuthCode(e.currentTarget.value);
@@ -71,9 +71,9 @@ export function Authorize() {
             placeholder="번호를 입력해 주세요"
             caption={
               isAuthCodeError ? (
-                <TextField.Caption>{WRONG_AUTH_CODE_MESSAGE}</TextField.Caption>
+                <Input.Caption>{WRONG_AUTH_CODE_MESSAGE}</Input.Caption>
               ) : (
-                isSMSSent && <TextField.Caption>{timeCaption}</TextField.Caption>
+                isSMSSent && <Input.Caption>{timeCaption}</Input.Caption>
               )
             }
           />

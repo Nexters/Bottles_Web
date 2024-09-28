@@ -14,7 +14,7 @@ export {
   BottomSheet,
   Chip,
   Card,
-  TextField,
+  Input,
   Agreement,
 } from './components';
 export type {
@@ -32,7 +32,7 @@ export type {
   BottomSheetProps,
   ChipProps,
   CardProps,
-  TextFieldProps,
+  InputProps,
   AgreementProps,
   AgreementItemProps,
 } from './components';

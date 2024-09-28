@@ -1,5 +1,5 @@
 import { Control } from '@/components/common/control';
-import { Asset, BottomSheet, BottomSheetProps, Button, Paragraph, TextField, spacings } from '@bottlesteam/ui';
+import { Asset, BottomSheet, BottomSheetProps, Button, Paragraph, Input, spacings } from '@bottlesteam/ui';
 import { useEffect, useState } from 'react';
 import { deleteButtonStyle, emoticonsContainer } from './bottomSheetStyle.css';
 
@@ -32,7 +32,7 @@ export function ExpressInterestBottomSheet({ onExpress, ...bottomSheetProps }: P
       size="sm"
       body={
         <>
-          <TextField
+          <Input
             placeholder="호감이 생긴 이유를 적어보세요"
             value={message}
             onChange={e => setMessage(e.currentTarget.value)}
@@ -50,7 +50,7 @@ export function ExpressInterestBottomSheet({ onExpress, ...bottomSheetProps }: P
               )
             }
           />
-          <TextField.Caption>{isError && ERROR_CAPTION}</TextField.Caption>
+          <Input.Caption>{isError && ERROR_CAPTION}</Input.Caption>
           <Paragraph typography="st2" color="neutral600" style={{ marginTop: spacings.xl }}>
             이모티콘으로 표현해보세요
           </Paragraph>

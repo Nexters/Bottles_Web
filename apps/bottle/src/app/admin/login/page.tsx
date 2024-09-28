@@ -3,7 +3,7 @@
 import { Header } from '@/components/common/header';
 import { POST } from '@/features/server';
 import { Step } from '@/features/steps/StepContainer';
-import { spacings, TextField } from '@bottlesteam/ui';
+import { spacings, Input } from '@bottlesteam/ui';
 import { setCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -57,7 +57,7 @@ export default function LoginPage() {
         <section className={containerStyle}>
           <div className={fieldStyle}>
             <Step.Subtitle>아이디</Step.Subtitle>
-            <TextField
+            <Input
               value={id}
               placeholder="아이디를 입력해 주세요"
               onChange={e => {
@@ -67,14 +67,14 @@ export default function LoginPage() {
           </div>
           <div className={fieldStyle}>
             <Step.Subtitle>비밀번호</Step.Subtitle>
-            <TextField
+            <Input
               value={password}
               onChange={e => {
                 setPassword(e.currentTarget.value);
               }}
               type="password"
               placeholder="비밀번호를 입력해 주세요"
-              caption={isError && <TextField.Caption>{ERROR_MESSAGE}</TextField.Caption>}
+              caption={isError && <Input.Caption>{ERROR_MESSAGE}</Input.Caption>}
             />
           </div>
         </section>
