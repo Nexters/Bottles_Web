@@ -16,6 +16,7 @@ export {
   Card,
   Input,
   Agreement,
+  Textarea,
 } from './components';
 export type {
   ButtonProps,
@@ -35,6 +36,7 @@ export type {
   InputProps,
   AgreementProps,
   AgreementItemProps,
+  TextareaProps,
 } from './components';
 
 export { colors, colorsMap, typography, spacings, radius, radiusMap } from './foundations';

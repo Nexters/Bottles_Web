@@ -24,3 +24,5 @@ export { Input } from './input';
 export type { InputProps } from './input';
 export { Agreement } from './agreement';
 export type { AgreementProps, AgreementItemProps } from './agreement';
+export { Textarea } from './textarea';
+export type { TextareaProps } from './textarea';
