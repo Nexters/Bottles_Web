@@ -1,8 +1,10 @@
 'use client';
 
+import { SelectedProfile } from '@/components/common/selected-profile';
 import { ProfileLayout } from '@/components/profile/layout';
 import { BaseProfileComponentProps } from '@/components/profile/types';
 import { CurrentUser } from '@/models/user';
+import { useCurrentUserProfileQuery } from '@/store/query/useCurrentUserProfileQuery';
 import { spacings, Textarea } from '@bottlesteam/ui';
 import { useState } from 'react';
 
@@ -10,8 +12,13 @@ const MINIMUM_TEXT_LENGTH = 50;
 const PLACEHOLDER =
   '호기심 많고 새로운 경험을 즐깁니다. 주말엔 책을 읽거나 맛집을 찾아다니며 여유를 즐기고, 친구들과 소소한 모임으로 에너지를 충전해요';
 
-export function Introduction({ ctaButtonText }: BaseProfileComponentProps<CurrentUser['introduction']>) {
+export function Introduction({
+  initialValue,
+  onNext,
+  ctaButtonText,
+}: BaseProfileComponentProps<CurrentUser['introduction']>) {
   const [value, setValue] = useState('');
+  const { data } = useCurrentUserProfileQuery();
 
   const isError = value.length < MINIMUM_TEXT_LENGTH && value.length > 0;
 
@@ -25,24 +32,30 @@ export function Introduction({ ctaButtonText }: BaseProfileComponentProps<Curren
           onChange={e => {
             setValue(e.currentTarget.value);
           }}
+          maxLength={300}
+          defaultValue={initialValue != null ? initialValue[0]?.answer : undefined}
           error={isError}
           caption={<Textarea.Caption>{isError && '최소 50글자 이상 작성해주세요'}</Textarea.Caption>}
         />
-        {/* <Card style={{ marginBottom: spacings.xl }}>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: spacings.xl,
-            }}
-          >
-            <SelectedProfileBlock type="기본 정보" values={basicInformation} />
-            <SelectedProfileBlock type="나의 성격은" values={personalities} />
-            <SelectedProfileBlock type="내가 푹 빠진 취미는" values={hobbies} />
-          </div>
-        </Card> */}
+
+        <SelectedProfile
+          profile={data.profileSelect}
+          items={({ personalities, hobbies, basicInformation }) => (
+            <>
+              <SelectedProfile.Item type="내 키워드를 참고해보세요" values={basicInformation} />
+              <SelectedProfile.Item type="나의 성격은" values={personalities} />
+              <SelectedProfile.Item type="내가 푹 빠진 취미는" values={hobbies} />
+            </>
+          )}
+        />
       </div>
-      <ProfileLayout.FixedButton onClick={() => {}}>{ctaButtonText}</ProfileLayout.FixedButton>
+      <ProfileLayout.FixedButton
+        onClick={() => {
+          onNext([{ question: '', answer: value }]);
+        }}
+      >
+        {ctaButtonText}
+      </ProfileLayout.FixedButton>
     </>
   );
 }

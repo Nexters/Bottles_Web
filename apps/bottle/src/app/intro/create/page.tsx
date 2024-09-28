@@ -7,12 +7,13 @@ import { Introduction } from '@/components/intro/introduction';
 import { ProfileLayout } from '@/components/profile/layout';
 import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 import { useFunnel } from '@/features/funnel';
+import { Introduction as IntroductionType } from '@/models/introduction';
 import { useRouter } from 'next/navigation';
 
 const MAX_STEPS = 2;
 
 type CreateIntroFunnelValues = {
-  introduction: [{ question: string; answer: string }];
+  introduction: IntroductionType;
   // FIXME: depends on server API
   imageUrl: string;
 };
@@ -33,8 +34,8 @@ export default function CreateIntroPage() {
       <Stepper current={1} max={MAX_STEPS} />
       <Introduction
         initialValue={getValue('introduction')}
-        onNext={() => {
-          onNextStep('introduction', [{ answer: '', question: '' }]);
+        onNext={introduction => {
+          onNextStep('introduction', introduction);
         }}
         ctaButtonText="다음"
       />
