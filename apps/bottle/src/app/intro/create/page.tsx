@@ -8,6 +8,7 @@ import { ProfileLayout } from '@/components/profile/layout';
 import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 import { useFunnel } from '@/features/funnel';
 import { Introduction as IntroductionType } from '@/models/introduction';
+import { useIntroductionMutation } from '@/store/mutation/useIntroductionMutation';
 import { useRouter } from 'next/navigation';
 
 const MAX_STEPS = 2;
@@ -20,6 +21,7 @@ type CreateIntroFunnelValues = {
 
 export default function CreateIntroPage() {
   const { send } = useAppBridge();
+  const { mutateAsync } = useIntroductionMutation({ type: 'create' });
   const router = useRouter();
 
   const { onNextStep, currentStep, getValue } = useFunnel<CreateIntroFunnelValues>('/intro/create');
@@ -34,8 +36,13 @@ export default function CreateIntroPage() {
       <Stepper current={1} max={MAX_STEPS} />
       <Introduction
         initialValue={getValue('introduction')}
-        onNext={introduction => {
-          onNextStep('introduction', introduction);
+        onNext={async introduction => {
+          try {
+            await mutateAsync(introduction);
+            onNextStep('introduction', introduction);
+          } catch (error) {
+            console.error(error);
+          }
         }}
         ctaButtonText="다음"
       />
