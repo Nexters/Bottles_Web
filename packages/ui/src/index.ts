@@ -14,8 +14,9 @@ export {
   BottomSheet,
   Chip,
   Card,
-  TextField,
+  Input,
   Agreement,
+  Textarea,
 } from './components';
 export type {
   ButtonProps,
@@ -32,9 +33,10 @@ export type {
   BottomSheetProps,
   ChipProps,
   CardProps,
-  TextFieldProps,
+  InputProps,
   AgreementProps,
   AgreementItemProps,
+  TextareaProps,
 } from './components';
 
 export { colors, colorsMap, typography, spacings, radius, radiusMap } from './foundations';

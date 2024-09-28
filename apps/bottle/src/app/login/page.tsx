@@ -7,7 +7,7 @@ import { useLeftTimeCaption } from '@/features/time/useLeftTimeCaption';
 import { useSendAuthCodeMutation } from '@/store/mutation/useSendAuthCodeMutation';
 import { useSignInUpMutation } from '@/store/mutation/useSignInUpMutation';
 import { WRONG_AUTH_CODE_MESSAGE } from '@/store/mutation/useSignupMutation';
-import { Asset, Button, spacings, TextField } from '@bottlesteam/ui';
+import { Asset, Button, spacings, Input } from '@bottlesteam/ui';
 import { useState } from 'react';
 import { containerStyle, fieldStyle } from './loginStyle.css';
 
@@ -50,7 +50,7 @@ export default function LoginPage() {
         <section className={containerStyle}>
           <div className={fieldStyle}>
             <Step.Subtitle>휴대폰 번호</Step.Subtitle>
-            <TextField
+            <Input
               value={phoneNumber}
               maxLength={8}
               onChange={e => {
@@ -67,7 +67,7 @@ export default function LoginPage() {
           </div>
           <div className={fieldStyle}>
             <Step.Subtitle>인증 번호</Step.Subtitle>
-            <TextField
+            <Input
               value={authCode}
               onChange={e => {
                 setAuthCode(e.currentTarget.value);
@@ -76,9 +76,9 @@ export default function LoginPage() {
               placeholder="번호를 입력해 주세요"
               caption={
                 isAuthCodeError ? (
-                  <TextField.Caption>{WRONG_AUTH_CODE_MESSAGE}</TextField.Caption>
+                  <Input.Caption>{WRONG_AUTH_CODE_MESSAGE}</Input.Caption>
                 ) : (
-                  isSMSSent && <TextField.Caption>{timeCaption}</TextField.Caption>
+                  isSMSSent && <Input.Caption>{timeCaption}</Input.Caption>
                 )
               }
             />

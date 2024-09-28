@@ -6,6 +6,7 @@ import IconClose from './icons/icon_close.svg';
 import DeleteIcon from './icons/icon_delete.svg';
 import DownIcon from './icons/icon_down.svg';
 import PencilIcon from './icons/icon_pencil.svg';
+import PlusIcon from './icons/icon_plus.svg';
 import RightIcon from './icons/icon_right.svg';
 import VerticalBarIcon from './icons/icon_vertical_bar.svg';
 import Vector from './icons/vector.svg';
@@ -20,7 +21,8 @@ type Type =
   | 'icon-check-colored'
   | 'icon-close'
   | 'icon-delete'
-  | 'icon-pencil';
+  | 'icon-pencil'
+  | 'icon-plus';
 
 export interface AssetProps extends ComponentProps<'svg'> {
   type: Type;
@@ -45,6 +47,8 @@ export function Asset({ type, ...rest }: AssetProps) {
     <DeleteIcon />
   ) : type === 'icon-pencil' ? (
     <PencilIcon />
+  ) : type === 'icon-plus' ? (
+    <PlusIcon />
   ) : (
     <VerticalBarIcon />
   );

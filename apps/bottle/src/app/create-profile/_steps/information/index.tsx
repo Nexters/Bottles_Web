@@ -2,7 +2,7 @@ import { Control } from '@/components/common/control';
 import { Step } from '@/features/steps/StepContainer';
 import { useStep } from '@/features/steps/StepProvider';
 import { useSignupProfileMutation } from '@/store/mutation/useSignupProfileMutation';
-import { Button, TextField } from '@bottlesteam/ui';
+import { Button, Input } from '@bottlesteam/ui';
 import { useState } from 'react';
 import { useSignupProfileValues, SignupProfileValues } from '../../SignupProvider';
 import { birthDateWrapper, buttonsWrapper, containerStyle, fieldStyle } from './informationStyle.css';
@@ -37,28 +37,28 @@ export function Information() {
           <Step.Subtitle asChild>
             <label>이름</label>
           </Step.Subtitle>
-          <TextField placeholder="홍길동" value={name} onChange={e => setName(e.currentTarget.value)} />
+          <Input placeholder="홍길동" value={name} onChange={e => setName(e.currentTarget.value)} />
         </div>
         <div className={fieldStyle}>
           <Step.Subtitle asChild>
             <label>생년월일</label>
           </Step.Subtitle>
           <div className={birthDateWrapper}>
-            <TextField
+            <Input
               placeholder="YYYY"
               type="number"
               maxLength={4}
               value={year}
               onChange={e => setYear(e.currentTarget.value)}
             />
-            <TextField
+            <Input
               placeholder="MM"
               type="number"
               value={month}
               maxLength={2}
               onChange={e => setMonth(e.currentTarget.value)}
             />
-            <TextField
+            <Input
               placeholder="DD"
               type="number"
               value={day}

@@ -1,4 +1,4 @@
-import { TextField, spacings } from '@bottlesteam/ui';
+import { Input, spacings } from '@bottlesteam/ui';
 import { useState } from 'react';
 import { ProfileLayout } from '../layout';
 import { BaseProfileComponentProps } from '../types';
@@ -17,13 +17,13 @@ export function KakaoId({ onNext, initialValue, ctaButtonText = '완료' }: Base
       <ProfileLayout.Description style={{ marginTop: spacings.sm }}>
         오타가 없는지 한 번 더 확인해 주세요
       </ProfileLayout.Description>
-      <TextField
+      <Input
         placeholder="영문, 숫자, 특수문자 포함 4-20자"
         value={kakaoId}
         onChange={e => setKakaoId(e.currentTarget.value)}
         style={{ marginTop: spacings.xxl }}
       />
-      <TextField.Caption>{isError && ERROR_CAPTION}</TextField.Caption>
+      <Input.Caption>{isError && ERROR_CAPTION}</Input.Caption>
       <ProfileLayout.FixedButton
         disabled={disabled}
         onClick={() => {

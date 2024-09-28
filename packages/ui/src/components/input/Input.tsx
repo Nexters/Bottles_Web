@@ -1,14 +1,14 @@
 import { ComponentPropsWithoutRef, ElementRef, ReactNode, forwardRef, useId, useState } from 'react';
 import { Caption } from './Caption';
-import { labelStyle, inputStyle, containerStyle } from './textFieldStyle.css';
+import { labelStyle, inputStyle, containerStyle } from './inputStyle.css';
 
-export interface TextFieldProps extends ComponentPropsWithoutRef<'input'> {
+export interface InputProps extends ComponentPropsWithoutRef<'input'> {
   rightButton?: ReactNode;
   caption?: ReactNode;
   error?: boolean;
 }
 
-const TextFieldImpl = forwardRef<ElementRef<'input'>, TextFieldProps>(
+const InputImpl = forwardRef<ElementRef<'input'>, InputProps>(
   ({ rightButton, caption, error = false, style, ...inputProps }, ref) => {
     const id = useId();
     const [focused, setFocused] = useState(false);
@@ -39,6 +39,6 @@ const TextFieldImpl = forwardRef<ElementRef<'input'>, TextFieldProps>(
   }
 );
 
-export const TextField = Object.assign(TextFieldImpl, {
+export const Input = Object.assign(InputImpl, {
   Caption,
 });

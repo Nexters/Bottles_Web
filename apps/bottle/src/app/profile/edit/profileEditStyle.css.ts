@@ -16,6 +16,13 @@ export const contentsContainerStyle = style({
   },
 });
 
+export const introductionTextBoxStyle = style({
+  width: '100%',
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+});
+
 export const introductionBoxStyle = style({
   width: '100%',
   height: 'auto',
@@ -34,6 +41,7 @@ export const profileItemStyle = style({
   alignItems: 'center',
   gap: spacings.xs,
 });
+
 export const profileItemLeftStyle = style({
   display: 'flex',
   flexDirection: 'column',
