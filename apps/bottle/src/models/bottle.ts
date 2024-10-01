@@ -19,7 +19,7 @@ export interface PreviewBottle
 }
 
 export interface BaseBottlePreview
-  extends Pick<OtherUser, 'age' | 'userImageUrl' | 'userName'>,
+  extends Pick<OtherUser, 'age' | 'userImageUrl' | 'userName' | 'introduction'>,
     Pick<OtherUser['profileSelect'], 'keyword' | 'mbti'> {
   userId: number;
   expiredAt: string; // Date
