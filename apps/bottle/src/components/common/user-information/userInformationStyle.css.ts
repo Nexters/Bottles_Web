@@ -24,8 +24,8 @@ export const layoutStyle = recipe({
   },
   variants: {
     hasCTAButton: {
-      true: { height: `calc(100vh - ${CONTAINER_OFFSET_HEIGHT - OVERLAP_HEIGHT}px) - env(safe-area-inset-top))` },
-      false: { height: '100vh - env(safe-area-inset-top))' },
+      true: { height: `calc(100vh - ${CONTAINER_OFFSET_HEIGHT - OVERLAP_HEIGHT}px)` },
+      false: { height: '100vh' },
     },
   },
 });
