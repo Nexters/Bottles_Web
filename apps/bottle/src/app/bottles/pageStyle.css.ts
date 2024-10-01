@@ -18,7 +18,7 @@ export const controlStyle = style({
 
 export const contentsContainer = style({
   width: '100%',
-  height: `calc(100vh - ${HEADER_HEIGHT}px)`,
+  height: `calc(100vh - ${HEADER_HEIGHT}px) - env(safe-area-inset-top))`,
   overflow: 'scroll',
   msOverflowStyle: 'none',
   scrollbarWidth: 'none',
