@@ -33,7 +33,7 @@ export function BottlesListItem({ bottle }: Props) {
             <span>{stringifyKeywords(bottle.keyword)}</span>
           </Paragraph>
         </div>
-        <Avatar src={bottle.userImageUrl} size="sm" blur />
+        <Avatar src={bottle.userImageUrl} size="sm" />
       </div>
     </li>
   );
