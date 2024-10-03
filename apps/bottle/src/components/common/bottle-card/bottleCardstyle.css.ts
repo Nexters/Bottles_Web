@@ -19,7 +19,7 @@ export const timeTagStyle = style({
 });
 
 export const introductionBoxStyle = style({
-  width: '100%',
+  width: '296px',
   height: '95px',
   backgroundColor: colors.neutral100,
   padding: spacings.md,

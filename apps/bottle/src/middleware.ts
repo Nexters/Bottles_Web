@@ -46,6 +46,7 @@ export async function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     '/bottles/:path*',
+    '/bottle/:path*',
     '/my',
     '/create-profile/:path*',
     '/profile/create/:path*',

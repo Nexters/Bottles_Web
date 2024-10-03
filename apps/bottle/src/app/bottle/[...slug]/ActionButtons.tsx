@@ -1,12 +1,12 @@
 'use client';
 
+import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 import { useAcceptBottleMutation } from '@/store/mutation/useAcceptBottleMutation';
 import { useRefuseBottleMutation } from '@/store/mutation/useRefuseBottleMutation';
 import { CTAButton, FixedBottomCTAButton } from '@bottlesteam/ui';
-import { useRouter } from 'next/navigation';
 import { overlay } from 'overlay-kit';
-import { BottleType } from '../Bottles';
 import { ExpressInterestBottomSheet } from './ExpressInterestBottomSheet';
+import { BottleType } from './page';
 
 interface Props {
   type: BottleType;
@@ -14,13 +14,13 @@ interface Props {
 }
 
 export function ActionButtons({ type, id }: Props) {
-  const router = useRouter();
+  const { send } = useAppBridge();
 
   const { mutateAsync: accept } = useAcceptBottleMutation(type, id);
   const { mutate: refuse } = useRefuseBottleMutation(id);
 
   const handleRightClick =
-    type === 'random'
+    type === 'recommendation'
       ? () => {
           overlay.open(({ isOpen, unmount }) => (
             <ExpressInterestBottomSheet
@@ -28,12 +28,15 @@ export function ActionButtons({ type, id }: Props) {
               onClose={unmount}
               onExpress={async likeMessage => {
                 await accept(likeMessage);
-                router.back();
+                send({ type: AppBridgeMessageType.WEB_VIEW_CLOSE });
               }}
             />
           ));
         }
-      : () => accept(null);
+      : async () => {
+          await accept(null);
+          send({ type: AppBridgeMessageType.WEB_VIEW_CLOSE });
+        };
 
   return (
     <FixedBottomCTAButton

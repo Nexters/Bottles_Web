@@ -34,7 +34,7 @@ export function Sents() {
                   send({
                     type: AppBridgeMessageType.OPEN_LINK,
                     payload: {
-                      url: buildWebViewUrl(`bottles/sent/${bottle.id}`),
+                      url: buildWebViewUrl(`bottle/sent/${bottle.id}`),
                     },
                   });
                 }}

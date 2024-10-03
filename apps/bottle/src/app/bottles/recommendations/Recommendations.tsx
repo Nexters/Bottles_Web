@@ -34,7 +34,7 @@ export function Recommendations() {
                   send({
                     type: AppBridgeMessageType.OPEN_LINK,
                     payload: {
-                      url: buildWebViewUrl(`bottles/recommendation/${bottle.id}`),
+                      url: buildWebViewUrl(`bottle/recommendation/${bottle.id}`),
                     },
                   });
                 }}
