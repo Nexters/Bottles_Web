@@ -5,6 +5,7 @@ import { recipe } from '@vanilla-extract/recipes';
 export const containerStyle = recipe({
   base: {
     borderRadius: '50%',
+    position: 'relative',
   },
   variants: {
     size: {
