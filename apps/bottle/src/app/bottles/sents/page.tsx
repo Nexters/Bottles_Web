@@ -1,10 +1,10 @@
+import { Header } from '@/components/common/header';
 import { ProfileLayout } from '@/components/profile/layout';
 import { getServerSideTokens } from '@/features/server/serverSideTokens';
 import { ServerFetchBoundary } from '@/store/query/ServerFetchBoundary';
 import { sentBottlesQueryOptions } from '@/store/query/useSentBottlesQuery';
 import { userInfoQueryOptions } from '@/store/query/useUserInfoQuery';
 import { Suspense } from 'react';
-import { HeaderArea } from './HeaderArea';
 import { Sents } from './Sents';
 
 export default function SentBottlesPage() {
@@ -13,7 +13,7 @@ export default function SentBottlesPage() {
 
   return (
     <ProfileLayout hasCTAButton={false}>
-      <HeaderArea />
+      <Header />
       <Suspense>
         <ServerFetchBoundary fetchOptions={serverFetchOptions}>
           <Sents />

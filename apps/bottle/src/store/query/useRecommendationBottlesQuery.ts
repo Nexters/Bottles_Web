@@ -13,6 +13,7 @@ export const recommendationBottlesQueryOptions = (tokens: Tokens): UseSuspenseQu
   queryKey: ['bottles', 'recommendation'],
   // NOTE: should ALWAYS be stale
   queryFn: () => GET<RandomBottlesQuery>(`/api/v2/bottles/random`, tokens, createInit(tokens.accessToken)),
+  staleTime: 0,
 });
 
 export function useRecommendationBottlesQuery() {

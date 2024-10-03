@@ -13,7 +13,6 @@ type Props =
   | Pick<SentBottlePreview, 'userName' | 'age' | 'mbti' | 'userImageUrl' | 'lastActivatedAt' | 'likeEmoji'>;
 
 export function UserInformationArea({ userName, userImageUrl, age, mbti, lastActivatedAt, ...rest }: Props) {
-  console.log('????', rest.likeEmoji, rest);
   return (
     <div className={userInformationAreaStyle}>
       <div className={userPreviewStyle}>
@@ -36,7 +35,7 @@ export function UserInformationArea({ userName, userImageUrl, age, mbti, lastAct
           <div style={{ display: 'flex', alignItems: 'center', gap: spacings.xxs }}>
             <Asset type="icon-clock" />
             <Paragraph typography="ca" color="neutral900">
-              {lastActivatedAt}
+              {lastActivatedAt} 접속
             </Paragraph>
           </div>
         </div>
@@ -46,7 +45,6 @@ export function UserInformationArea({ userName, userImageUrl, age, mbti, lastAct
         {Object.hasOwn(rest, 'likeEmoji') && (
           <Paragraph typography="t2" style={{ position: 'absolute', bottom: -2, left: -8 }}>
             {(rest as any).likeEmoji as string}
-            {/* {'😘'} */}
           </Paragraph>
         )}
       </div>
