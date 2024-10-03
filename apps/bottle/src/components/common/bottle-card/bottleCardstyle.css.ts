@@ -20,11 +20,10 @@ export const timeTagStyle = style({
 
 export const introductionBoxStyle = style({
   width: '100%',
-  height: 'auto',
+  height: '95px',
   backgroundColor: colors.neutral100,
   padding: spacings.md,
   borderRadius: radius.md,
-  maxLines: 3,
 });
 
 export const userInformationAreaStyle = style({

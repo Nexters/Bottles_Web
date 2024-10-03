@@ -9,10 +9,11 @@ import {
 } from './bottleCardstyle.css';
 
 type Props =
-  | Pick<RecommendationBottlePreview, 'userName' | 'age' | 'mbti' | 'userImageUrl' | 'likeEmoji' | 'lastActivatedAt'>
-  | Pick<SentBottlePreview, 'userName' | 'age' | 'mbti' | 'userImageUrl' | 'lastActivatedAt'>;
+  | Pick<RecommendationBottlePreview, 'userName' | 'age' | 'mbti' | 'userImageUrl' | 'lastActivatedAt'>
+  | Pick<SentBottlePreview, 'userName' | 'age' | 'mbti' | 'userImageUrl' | 'lastActivatedAt' | 'likeEmoji'>;
 
 export function UserInformationArea({ userName, userImageUrl, age, mbti, lastActivatedAt, ...rest }: Props) {
+  console.log('????', rest.likeEmoji, rest);
   return (
     <div className={userInformationAreaStyle}>
       <div className={userPreviewStyle}>
@@ -42,8 +43,11 @@ export function UserInformationArea({ userName, userImageUrl, age, mbti, lastAct
       </div>
       <div className={avatarAreaStyle}>
         <Avatar size="sm" src={userImageUrl} />
-        {'likeEmjoi' in rest && (
-          <Paragraph style={{ position: 'absolute', bottom: -2, left: -8 }}>{rest.likeEmjoi as string}</Paragraph>
+        {Object.hasOwn(rest, 'likeEmoji') && (
+          <Paragraph typography="t2" style={{ position: 'absolute', bottom: -2, left: -8 }}>
+            {(rest as any).likeEmoji as string}
+            {/* {'😘'} */}
+          </Paragraph>
         )}
       </div>
     </div>

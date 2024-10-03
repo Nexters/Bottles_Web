@@ -1,22 +1,22 @@
 import { ProfileLayout } from '@/components/profile/layout';
 import { getServerSideTokens } from '@/features/server/serverSideTokens';
 import { ServerFetchBoundary } from '@/store/query/ServerFetchBoundary';
-import { recommendationBottlesQueryOptions } from '@/store/query/useRecommendationBottlesQuery';
+import { sentBottlesQueryOptions } from '@/store/query/useSentBottlesQuery';
 import { userInfoQueryOptions } from '@/store/query/useUserInfoQuery';
 import { Suspense } from 'react';
 import { HeaderArea } from './HeaderArea';
-import { Recommendations } from './Recommendations';
+import { Sents } from './Sents';
 
-export default function RecommendationsPage() {
+export default function SentBottlesPage() {
   const tokens = getServerSideTokens();
-  const serverFetchOptions = [userInfoQueryOptions(tokens), recommendationBottlesQueryOptions(tokens)];
+  const serverFetchOptions = [userInfoQueryOptions(tokens), sentBottlesQueryOptions(tokens)];
 
   return (
     <ProfileLayout hasCTAButton={false}>
       <HeaderArea />
       <Suspense>
         <ServerFetchBoundary fetchOptions={serverFetchOptions}>
-          <Recommendations />
+          <Sents />
         </ServerFetchBoundary>
       </Suspense>
     </ProfileLayout>

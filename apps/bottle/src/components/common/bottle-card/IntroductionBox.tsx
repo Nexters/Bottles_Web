@@ -5,7 +5,16 @@ import { introductionBoxStyle } from './bottleCardstyle.css';
 export function IntroductionBox({ children }: { children: ReactNode }) {
   return (
     <div className={introductionBoxStyle}>
-      <Paragraph color="neutral900" typography="bo">
+      <Paragraph
+        color="neutral900"
+        typography="bo"
+        style={{
+          width: '264px',
+          overflow: 'hidden',
+          WebkitLineClamp: 3,
+          textOverflow: 'ellipsis',
+        }}
+      >
         {children}
       </Paragraph>
     </div>

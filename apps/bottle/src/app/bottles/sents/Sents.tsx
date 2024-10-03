@@ -2,28 +2,30 @@
 
 import { BottleCard } from '@/components/common/bottle-card';
 import { ProfileLayout } from '@/components/profile/layout';
-import { useRecommendationBottlesQuery } from '@/store/query/useRecommendationBottlesQuery';
+import { useSentBottlesQuery } from '@/store/query/useSentBottlesQuery';
 import { useUserInfoQuery } from '@/store/query/useUserInfoQuery';
 import { spacings } from '@bottlesteam/ui';
 import { pick } from 'es-toolkit';
 
-export function Recommendations() {
+export function Sents() {
   const { data: currentUser } = useUserInfoQuery();
-  const { data: recommendationBottles } = useRecommendationBottlesQuery();
+  const { data: sentBottlesData } = useSentBottlesQuery();
+
+  console.log('DATA', sentBottlesData.sentBottles);
 
   return (
     <>
-      <ProfileLayout.Title>{`${currentUser.name}님에게\n추천하는 분들이에요!`}</ProfileLayout.Title>
+      <ProfileLayout.Title>{`${currentUser.name}님을 마음에\n들어한 분들이에요`}</ProfileLayout.Title>
       <ProfileLayout.Subtitle style={{ marginTop: spacings.sm }}>
-        시간이 지나면 새로운 분들을 추천해 드려요
+        시간 내에 보틀을 열지 않으면 사라져요
       </ProfileLayout.Subtitle>
       <section style={{ marginTop: spacings.xxl, display: 'flex', flexDirection: 'column', gap: spacings.md }}>
-        {recommendationBottles.randomBottles.map(bottle => (
+        {sentBottlesData.sentBottles.map(bottle => (
           <BottleCard key={bottle.id}>
             <BottleCard.TimeTag>{bottle.expiredAt}</BottleCard.TimeTag>
             <BottleCard.Introduction>{bottle.introduction[0]?.answer}</BottleCard.Introduction>
             <BottleCard.UserInformation
-              {...pick(bottle, ['userName', 'age', 'mbti', 'userImageUrl', 'lastActivatedAt'])}
+              {...pick(bottle, ['userName', 'age', 'mbti', 'userImageUrl', 'likeEmoji', 'lastActivatedAt'])}
             />
           </BottleCard>
         ))}

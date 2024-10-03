@@ -27,8 +27,8 @@ export interface BaseBottlePreview
   lastActivatedAt: string;
 }
 
-export interface RecommendationBottlePreview extends BaseBottlePreview {
+export interface RecommendationBottlePreview extends BaseBottlePreview {}
+
+export interface SentBottlePreview extends BaseBottlePreview {
   likeEmoji: string;
 }
-
-export interface SentBottlePreview extends BaseBottlePreview {}

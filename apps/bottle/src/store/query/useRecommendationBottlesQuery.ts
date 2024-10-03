@@ -1,18 +1,8 @@
 import { createInit, GET } from '@/features/server';
 import { Tokens } from '@/features/server/auth';
 import { getClientSideTokens } from '@/features/server/clientSideTokens';
-import { OtherUser } from '@/models/user';
+import { RecommendationBottlePreview } from '@/models/bottle';
 import { useSuspenseQuery, UseSuspenseQueryOptions } from '@tanstack/react-query';
-
-export interface RecommendationBottlePreview
-  extends Pick<OtherUser, 'age' | 'userImageUrl' | 'userName'>,
-    Pick<OtherUser['profileSelect'], 'keyword' | 'mbti'> {
-  userId: number;
-  expiredAt: string; // Date
-  id: number;
-  lastActivatedAt: string;
-  likeEmoji: string;
-}
 
 interface RandomBottlesQuery {
   nextBottleLeftHours: number;
@@ -20,7 +10,8 @@ interface RandomBottlesQuery {
 }
 
 export const recommendationBottlesQueryOptions = (tokens: Tokens): UseSuspenseQueryOptions<RandomBottlesQuery> => ({
-  queryKey: ['bottles', 'random'],
+  queryKey: ['bottles', 'recommendation'],
+  // NOTE: should ALWAYS be stale
   queryFn: () => GET<RandomBottlesQuery>(`/api/v2/bottles/random`, tokens, createInit(tokens.accessToken)),
 });
 
