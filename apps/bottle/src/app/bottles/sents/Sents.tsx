@@ -4,13 +4,15 @@ import CoconutImage from '@/assets/images/coconut.webp';
 import { BottleCard } from '@/components/common/bottle-card';
 import { Fallback } from '@/components/common/fallback';
 import { ProfileLayout } from '@/components/profile/layout';
+import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
+import { buildWebViewUrl } from '@/features/app-bridge/utils';
 import { useSentBottlesQuery } from '@/store/query/useSentBottlesQuery';
 import { useUserInfoQuery } from '@/store/query/useUserInfoQuery';
 import { spacings } from '@bottlesteam/ui';
 import { pick } from 'es-toolkit';
-import Link from 'next/link';
 
 export function Sents() {
+  const { send } = useAppBridge();
   const { data: currentUser } = useUserInfoQuery();
   const {
     data: { sentBottles },
@@ -26,15 +28,23 @@ export function Sents() {
           </ProfileLayout.Subtitle>
           <section style={{ marginTop: spacings.xxl, display: 'flex', flexDirection: 'column', gap: spacings.md }}>
             {sentBottles.map(bottle => (
-              <Link href={`/bottles/sent/${bottle.id}`}>
-                <BottleCard key={bottle.id}>
-                  <BottleCard.TimeTag>{bottle.expiredAt}</BottleCard.TimeTag>
-                  <BottleCard.Introduction>{bottle.introduction[0]?.answer}</BottleCard.Introduction>
-                  <BottleCard.UserInformation
-                    {...pick(bottle, ['userName', 'age', 'mbti', 'userImageUrl', 'likeEmoji', 'lastActivatedAt'])}
-                  />
-                </BottleCard>
-              </Link>
+              <BottleCard
+                key={bottle.id}
+                onClick={() => {
+                  send({
+                    type: AppBridgeMessageType.OPEN_LINK,
+                    payload: {
+                      url: buildWebViewUrl(`bottles/sent/${bottle.id}`),
+                    },
+                  });
+                }}
+              >
+                <BottleCard.TimeTag>{bottle.expiredAt}</BottleCard.TimeTag>
+                <BottleCard.Introduction>{bottle.introduction[0]?.answer}</BottleCard.Introduction>
+                <BottleCard.UserInformation
+                  {...pick(bottle, ['userName', 'age', 'mbti', 'userImageUrl', 'likeEmoji', 'lastActivatedAt'])}
+                />
+              </BottleCard>
             ))}
           </section>
         </>

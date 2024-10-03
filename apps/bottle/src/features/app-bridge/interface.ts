@@ -47,7 +47,7 @@ export interface SignupMessage {
 export interface OpenLinkMessage {
   type: AppBridgeMessageType.OPEN_LINK;
   payload: {
-    href: string;
+    url: string;
   };
 }
 

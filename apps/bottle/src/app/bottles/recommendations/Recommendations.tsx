@@ -4,13 +4,15 @@ import TelescopeImage from '@/assets/images/telescope.webp';
 import { BottleCard } from '@/components/common/bottle-card';
 import { Fallback } from '@/components/common/fallback';
 import { ProfileLayout } from '@/components/profile/layout';
+import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
+import { buildWebViewUrl } from '@/features/app-bridge/utils';
 import { useRecommendationBottlesQuery } from '@/store/query/useRecommendationBottlesQuery';
 import { useUserInfoQuery } from '@/store/query/useUserInfoQuery';
 import { spacings } from '@bottlesteam/ui';
 import { pick } from 'es-toolkit';
-import Link from 'next/link';
 
 export function Recommendations() {
+  const { send } = useAppBridge();
   const { data: currentUser } = useUserInfoQuery();
   const {
     data: { randomBottles },
@@ -26,15 +28,23 @@ export function Recommendations() {
           </ProfileLayout.Subtitle>
           <section style={{ marginTop: spacings.xxl, display: 'flex', flexDirection: 'column', gap: spacings.md }}>
             {randomBottles.map(bottle => (
-              <Link href={`/bottles/recommendation/${bottle.id}`}>
-                <BottleCard key={bottle.id}>
-                  <BottleCard.TimeTag>{bottle.expiredAt}</BottleCard.TimeTag>
-                  <BottleCard.Introduction>{bottle.introduction[0]?.answer}</BottleCard.Introduction>
-                  <BottleCard.UserInformation
-                    {...pick(bottle, ['userName', 'age', 'mbti', 'userImageUrl', 'lastActivatedAt'])}
-                  />
-                </BottleCard>
-              </Link>
+              <BottleCard
+                key={bottle.id}
+                onClick={() => {
+                  send({
+                    type: AppBridgeMessageType.OPEN_LINK,
+                    payload: {
+                      url: buildWebViewUrl(`bottles/recommendation/${bottle.id}`),
+                    },
+                  });
+                }}
+              >
+                <BottleCard.TimeTag>{bottle.expiredAt}</BottleCard.TimeTag>
+                <BottleCard.Introduction>{bottle.introduction[0]?.answer}</BottleCard.Introduction>
+                <BottleCard.UserInformation
+                  {...pick(bottle, ['userName', 'age', 'mbti', 'userImageUrl', 'lastActivatedAt'])}
+                />
+              </BottleCard>
             ))}
           </section>
         </>
