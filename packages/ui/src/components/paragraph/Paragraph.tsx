@@ -1,5 +1,5 @@
 import { Slot } from '@radix-ui/react-slot';
-import { ComponentPropsWithoutRef, ReactNode } from 'react';
+import { ComponentPropsWithoutRef, ElementRef, forwardRef, ReactNode } from 'react';
 import { Color } from '../../foundations/colors';
 import { paragraphStyle } from './paragraph.css';
 
@@ -12,12 +12,14 @@ export interface ParagraphProps extends ComponentPropsWithoutRef<'p'> {
   asChild?: boolean;
 }
 
-export function Paragraph({ typography, color, children, className, asChild, ...rest }: ParagraphProps) {
-  const Component = asChild ? Slot : 'p';
+export const Paragraph = forwardRef<ElementRef<'p'>, ParagraphProps>(
+  ({ typography, color, children, className, asChild, ...rest }: ParagraphProps, ref) => {
+    const Component = asChild ? Slot : 'p';
 
-  return (
-    <Component className={`${paragraphStyle({ typography, color })} ${className}`} {...rest}>
-      {children}
-    </Component>
-  );
-}
+    return (
+      <Component ref={ref} className={`${paragraphStyle({ typography, color })} ${className}`} {...rest}>
+        {children}
+      </Component>
+    );
+  }
+);
