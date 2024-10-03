@@ -11,7 +11,8 @@ import { useState } from 'react';
 import { BottlesList } from './_components/BottlesList';
 import { contentsContainer, controlStyle } from './pageStyle.css';
 
-export type BottleType = 'random' | 'sent';
+// NOTE: 'random' and 'recommendation' are the same. 'random' will be deprecated soon.
+export type BottleType = 'random' | 'sent' | 'recommendation';
 
 export function Bottles() {
   const { send } = useAppBridge();

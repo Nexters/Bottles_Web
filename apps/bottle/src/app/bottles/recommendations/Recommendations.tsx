@@ -8,6 +8,7 @@ import { useRecommendationBottlesQuery } from '@/store/query/useRecommendationBo
 import { useUserInfoQuery } from '@/store/query/useUserInfoQuery';
 import { spacings } from '@bottlesteam/ui';
 import { pick } from 'es-toolkit';
+import Link from 'next/link';
 
 export function Recommendations() {
   const { data: currentUser } = useUserInfoQuery();
@@ -25,13 +26,15 @@ export function Recommendations() {
           </ProfileLayout.Subtitle>
           <section style={{ marginTop: spacings.xxl, display: 'flex', flexDirection: 'column', gap: spacings.md }}>
             {randomBottles.map(bottle => (
-              <BottleCard key={bottle.id}>
-                <BottleCard.TimeTag>{bottle.expiredAt}</BottleCard.TimeTag>
-                <BottleCard.Introduction>{bottle.introduction[0]?.answer}</BottleCard.Introduction>
-                <BottleCard.UserInformation
-                  {...pick(bottle, ['userName', 'age', 'mbti', 'userImageUrl', 'lastActivatedAt'])}
-                />
-              </BottleCard>
+              <Link href={`/bottles/recommendation/${bottle.id}`}>
+                <BottleCard key={bottle.id}>
+                  <BottleCard.TimeTag>{bottle.expiredAt}</BottleCard.TimeTag>
+                  <BottleCard.Introduction>{bottle.introduction[0]?.answer}</BottleCard.Introduction>
+                  <BottleCard.UserInformation
+                    {...pick(bottle, ['userName', 'age', 'mbti', 'userImageUrl', 'lastActivatedAt'])}
+                  />
+                </BottleCard>
+              </Link>
             ))}
           </section>
         </>

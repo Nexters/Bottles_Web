@@ -2,10 +2,12 @@ import { getServerSideTokens } from '@/features/server/serverSideTokens';
 import { Suspense } from 'react';
 import { ServerFetchBoundary } from '../../../store/query/ServerFetchBoundary';
 import { bottleDetailQueryOptions } from '../../../store/query/useBottleDetailQuery';
-import { BottleType } from '../Bottles';
 import { ActionButtons } from './ActionButtons';
 import { BottleDetail } from './BottleDetail';
 import { BottlePageHeader } from './BottlePageHeader';
+
+// NOTE: 'random' and 'recommendation' are the same. 'random' will be deprecated soon.
+export type BottleType = 'random' | 'sent' | 'recommendation';
 
 interface Props {
   params: { slug: [BottleType, number] };

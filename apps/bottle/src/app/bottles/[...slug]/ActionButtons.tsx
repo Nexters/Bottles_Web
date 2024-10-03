@@ -35,7 +35,7 @@ export function ActionButtons({ type, id }: Props) {
       left={<CTAButton.Left onClick={() => refuse()}>떠내려 보내기</CTAButton.Left>}
       right={
         <CTAButton.Right onClick={handleRightClick}>
-          {type === 'random' ? '호감 표현하기' : '문답 시작하기'}
+          {type !== 'sent' ? '호감 표현하기' : '문답 시작하기'}
         </CTAButton.Right>
       }
     />
