@@ -22,6 +22,7 @@ export function Avatar({ size: _size, blur, ...props }: AvatarProps) {
           alt="user profile image"
           width={size}
           height={size}
+          objectFit="cover"
           className={avatarStyle({ blur })}
         />
       ) : (
