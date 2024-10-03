@@ -1,4 +1,4 @@
-import { Paragraph, typography } from '@bottlesteam/ui';
+import { Paragraph } from '@bottlesteam/ui';
 import type { ReactNode } from 'react';
 import { introductionBoxStyle } from './bottleCardstyle.css';
 
