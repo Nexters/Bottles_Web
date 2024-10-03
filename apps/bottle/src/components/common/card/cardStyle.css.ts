@@ -9,5 +9,4 @@ export const cardStyle = style({
   width: '100%',
   display: 'flex',
   flexDirection: 'column',
-  gap: spacings.xl,
 });
