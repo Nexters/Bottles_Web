@@ -33,9 +33,8 @@ export function ActionButtons({ type, id }: Props) {
             />
           ));
         }
-      : async () => {
-          await accept(null);
-          send({ type: AppBridgeMessageType.WEB_VIEW_CLOSE });
+      : () => {
+          accept(null);
         };
 
   return (

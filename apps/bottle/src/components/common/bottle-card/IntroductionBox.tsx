@@ -1,24 +1,25 @@
-import { Paragraph } from '@bottlesteam/ui';
+import { Paragraph, typography } from '@bottlesteam/ui';
 import type { ReactNode } from 'react';
 import { introductionBoxStyle } from './bottleCardstyle.css';
 
 export function IntroductionBox({ children }: { children: ReactNode }) {
   return (
     <div className={introductionBoxStyle}>
-      <div
+      <Paragraph
+        typography="bo"
+        color="neutral900"
         style={{
-          display: 'inline-block',
-          width: '264px',
           height: '63px',
           overflow: 'hidden',
-          whiteSpace: 'nowrap',
+          wordBreak: 'break-all',
           textOverflow: 'ellipsis',
+          display: '-webkit-box',
+          WebkitBoxOrient: 'vertical',
+          WebkitLineClamp: 3,
         }}
       >
-        <Paragraph color="neutral900" typography="bo" style={{ display: 'inline-block' }}>
-          {children}
-        </Paragraph>
-      </div>
+        {children}
+      </Paragraph>
     </div>
   );
 }
