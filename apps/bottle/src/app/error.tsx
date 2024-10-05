@@ -1,6 +1,6 @@
 'use client';
 
-import BasketImage from '@/assets/basket.webp';
+import BasketImage from '@/assets/images/basket.webp';
 import { Header } from '@/components/common/header';
 import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 import { Asset, Button, Paragraph, spacings } from '@bottlesteam/ui';

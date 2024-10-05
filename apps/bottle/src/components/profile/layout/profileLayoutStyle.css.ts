@@ -1,5 +1,6 @@
 import { CTA_HEIGHT, spacings } from '@bottlesteam/ui';
 import { style } from '@vanilla-extract/css';
+import { recipe } from '@vanilla-extract/recipes';
 
 /**
  * NOTE: This is a trick to make sure that
@@ -20,13 +21,25 @@ export const buttonContainer = style({
   background: 'linear-gradient(180deg, rgba(251, 251, 251, 0) 0%, #FBFBFB 25%)',
 });
 
-export const containerStyle = style({
-  height: `calc(100vh - ${CONTAINER_OFFSET_HEIGHT - OVERLAP_HEIGHT}px - env(safe-area-inset-top))`,
-  overflow: 'scroll',
-  msOverflowStyle: 'none',
-  scrollbarWidth: 'none',
-  '::-webkit-scrollbar': {
-    display: 'none',
+export const containerStyle = recipe({
+  base: {
+    overflow: 'scroll',
+    msOverflowStyle: 'none',
+    scrollbarWidth: 'none',
+    '::-webkit-scrollbar': {
+      display: 'none',
+    },
+  },
+  variants: {
+    hasCTAButton: {
+      true: {
+        height: `calc(100vh - ${CONTAINER_OFFSET_HEIGHT - OVERLAP_HEIGHT}px - env(safe-area-inset-top))`,
+      },
+      false: {
+        height: `calc(100vh - env(safe-area-inset-top))`,
+        paddingBottom: spacings.xl,
+      },
+    },
   },
 });
 

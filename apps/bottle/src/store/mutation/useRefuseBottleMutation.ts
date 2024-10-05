@@ -4,13 +4,11 @@ import { getClientSideTokens } from '@/features/server/clientSideTokens';
 import { logAction } from '@/features/server/log';
 import { Bottle } from '@/models/bottle';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
 import { bottleDetailQueryOptions } from '../query/useBottleDetailQuery';
 import { bottlesQueryOptions } from '../query/useBottlesQuery';
 import { userInfoQueryOptions } from '../query/useUserInfoQuery';
 
 export function useRefuseBottleMutation(id: Bottle['id']) {
-  const router = useRouter();
   const { send } = useAppBridge();
   const queryClient = useQueryClient();
 
@@ -28,7 +26,6 @@ export function useRefuseBottleMutation(id: Bottle['id']) {
       queryClient.invalidateQueries({ queryKey: bottlesQueryOptions(tokens).queryKey });
       send({ type: AppBridgeMessageType.TOAST_OPEN, payload: { message: '보틀을 떠내려 보냈어요' } });
       await logRefuseBottleAction();
-      router.back();
     },
   });
 }

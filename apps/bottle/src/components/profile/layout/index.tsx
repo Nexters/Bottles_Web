@@ -4,10 +4,11 @@ import { containerStyle } from './profileLayoutStyle.css';
 
 interface Props {
   children: ReactNode;
+  hasCTAButton?: boolean;
 }
 
-function ProfileContainer({ children }: Props) {
-  return <div className={containerStyle}>{children}</div>;
+function ProfileContainer({ children, hasCTAButton = true }: Props) {
+  return <div className={containerStyle({ hasCTAButton })}>{children}</div>;
 }
 
 function Title({ children, ...rest }: Omit<ParagraphProps, 'typography' | 'color'>) {

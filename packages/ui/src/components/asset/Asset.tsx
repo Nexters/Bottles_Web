@@ -2,6 +2,7 @@ import { ComponentProps } from 'react';
 import LeftArrowIcon from './icons/icon_arrow_left.svg';
 import CheckIcon from './icons/icon_check.svg';
 import CheckIconColored from './icons/icon_check_colored.svg';
+import ClockIcon from './icons/icon_clock.svg';
 import IconClose from './icons/icon_close.svg';
 import DeleteIcon from './icons/icon_delete.svg';
 import DownIcon from './icons/icon_down.svg';
@@ -22,7 +23,8 @@ type Type =
   | 'icon-close'
   | 'icon-delete'
   | 'icon-pencil'
-  | 'icon-plus';
+  | 'icon-plus'
+  | 'icon-clock';
 
 export interface AssetProps extends ComponentProps<'svg'> {
   type: Type;
@@ -47,6 +49,8 @@ export function Asset({ type, ...rest }: AssetProps) {
     <DeleteIcon />
   ) : type === 'icon-pencil' ? (
     <PencilIcon />
+  ) : type === 'icon-clock' ? (
+    <ClockIcon />
   ) : type === 'icon-plus' ? (
     <PlusIcon />
   ) : (

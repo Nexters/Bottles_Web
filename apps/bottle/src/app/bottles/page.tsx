@@ -1,5 +1,4 @@
 import { getServerSideTokens } from '@/features/server/serverSideTokens';
-import { Suspense } from 'react';
 import { ServerFetchBoundary } from '../../store/query/ServerFetchBoundary';
 import { bottlesQueryOptions } from '../../store/query/useBottlesQuery';
 import { userInfoQueryOptions } from '../../store/query/useUserInfoQuery';
@@ -10,10 +9,8 @@ export default function BottlesPage() {
   const serverFetchOptions = [userInfoQueryOptions(tokens), bottlesQueryOptions(tokens)];
 
   return (
-    <Suspense>
-      <ServerFetchBoundary fetchOptions={serverFetchOptions}>
-        <Bottles />
-      </ServerFetchBoundary>
-    </Suspense>
+    <ServerFetchBoundary fetchOptions={serverFetchOptions}>
+      <Bottles />
+    </ServerFetchBoundary>
   );
 }

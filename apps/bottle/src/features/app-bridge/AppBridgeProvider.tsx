@@ -3,7 +3,7 @@
 import { createContext, ReactNode, useContext } from 'react';
 import { useUserAgent } from '../user-agent/UserAgentProvider';
 import { convertToAndroidAppBridge, convertToIOSAppBridge } from './convertToNativeMessage';
-import { AppBridgeMessage } from './interface';
+import { AppBridgeMessage, AppBridgeMessageType } from './interface';
 
 interface AppBridgeProviderProps {
   children: ReactNode;
@@ -25,6 +25,10 @@ export function AppBridgeProvider({ children }: AppBridgeProviderProps) {
       if (isIOS) return convertToIOSAppBridge(message);
       return convertToAndroidAppBridge(message);
     } catch (error) {
+      if (message.type === AppBridgeMessageType.OPEN_LINK) {
+        window.open(message.payload.url);
+        return;
+      }
       alert('App Bridge API called: ' + message.type);
     }
   };

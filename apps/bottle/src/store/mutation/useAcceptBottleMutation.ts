@@ -6,7 +6,6 @@ import { logAction } from '@/features/server/log';
 import { Bottle } from '@/models/bottle';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { getCookie } from 'cookies-next';
-import { useRouter } from 'next/navigation';
 import { bottleDetailQueryOptions } from '../query/useBottleDetailQuery';
 import { bottlesQueryOptions } from '../query/useBottlesQuery';
 import { userInfoQueryOptions } from '../query/useUserInfoQuery';
@@ -16,7 +15,6 @@ interface AcceptBottleBody<T extends BottleType> {
 }
 
 export function useAcceptBottleMutation<T extends BottleType>(type: T, id: Bottle['id']) {
-  const router = useRouter();
   const { send } = useAppBridge();
   const queryClient = useQueryClient();
   const tokens = getClientSideTokens();
@@ -36,12 +34,10 @@ export function useAcceptBottleMutation<T extends BottleType>(type: T, id: Bottl
       ),
     onSuccess: async () => {
       queryClient.invalidateQueries({ queryKey: bottlesQueryOptions(getClientSideTokens()).queryKey });
-      if (type === 'random') {
+      if (type === 'random' || type === 'recommendation') {
         send({ type: AppBridgeMessageType.TOAST_OPEN, payload: { message: '호감을 보냈어요' } });
-        router.back();
         return;
       }
-      send({ type: AppBridgeMessageType.BOTTLE_ACCEPT });
       await logAcceptBottleAction();
     },
   });

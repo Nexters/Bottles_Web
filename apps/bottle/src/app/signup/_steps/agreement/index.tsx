@@ -45,7 +45,7 @@ export function Agreement() {
                   send({
                     type: AppBridgeMessageType.OPEN_LINK,
                     payload: {
-                      href: 'https://spiral-ogre-a4d.notion.site/abb2fd284516408e8c2fc267d07c6421',
+                      url: 'https://spiral-ogre-a4d.notion.site/abb2fd284516408e8c2fc267d07c6421',
                     },
                   });
                 }}
@@ -67,7 +67,7 @@ export function Agreement() {
                   send({
                     type: AppBridgeMessageType.OPEN_LINK,
                     payload: {
-                      href: 'https://spiral-ogre-a4d.notion.site/240724-e3676639ea864147bb293cfcda40d99f',
+                      url: 'https://spiral-ogre-a4d.notion.site/240724-e3676639ea864147bb293cfcda40d99f',
                     },
                   });
                 }}

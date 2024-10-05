@@ -11,5 +11,8 @@ export function hasPayload(message: AppBridgeMessage) {
 
 export function buildWebViewUrl(endpoint: string) {
   const { accessToken, refreshToken } = getClientSideTokens();
-  return `https://bottle.bottles.asia/${endpoint}?accessToken=${accessToken}&refreshToken=${refreshToken}`;
+  const BASE_URL =
+    process.env.NEXT_PUBLIC_MODE === 'DEVELOPMENT' ? 'http://localhost:3000' : 'https://bottle.bottles.asia';
+
+  return `${BASE_URL}/${endpoint}?accessToken=${accessToken}&refreshToken=${refreshToken}`;
 }
