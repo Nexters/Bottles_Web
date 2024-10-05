@@ -38,7 +38,6 @@ export function useAcceptBottleMutation<T extends BottleType>(type: T, id: Bottl
         send({ type: AppBridgeMessageType.TOAST_OPEN, payload: { message: '호감을 보냈어요' } });
         return;
       }
-      send({ type: AppBridgeMessageType.BOTTLE_ACCEPT });
       await logAcceptBottleAction();
     },
   });

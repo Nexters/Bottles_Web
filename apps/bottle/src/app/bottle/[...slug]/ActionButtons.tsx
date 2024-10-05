@@ -17,7 +17,7 @@ export function ActionButtons({ type, id }: Props) {
   const { send } = useAppBridge();
 
   const { mutateAsync: accept } = useAcceptBottleMutation(type, id);
-  const { mutate: refuse } = useRefuseBottleMutation(id);
+  const { mutateAsync: refuse } = useRefuseBottleMutation(id);
 
   const handleRightClick =
     type === 'recommendation'
@@ -33,14 +33,24 @@ export function ActionButtons({ type, id }: Props) {
             />
           ));
         }
-      : () => {
-          accept(null);
+      : async () => {
+          await accept(null);
+          send({ type: AppBridgeMessageType.BOTTLE_ACCEPT });
         };
 
   return (
     <FixedBottomCTAButton
       variant="two"
-      left={<CTAButton.Left onClick={() => refuse()}>떠내려 보내기</CTAButton.Left>}
+      left={
+        <CTAButton.Left
+          onClick={async () => {
+            await refuse();
+            send({ type: AppBridgeMessageType.WEB_VIEW_CLOSE });
+          }}
+        >
+          떠내려 보내기
+        </CTAButton.Left>
+      }
       right={
         <CTAButton.Right onClick={handleRightClick}>
           {type !== 'sent' ? '호감 표현하기' : '문답 시작하기'}

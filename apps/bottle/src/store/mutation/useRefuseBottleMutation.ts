@@ -28,7 +28,6 @@ export function useRefuseBottleMutation(id: Bottle['id']) {
       queryClient.invalidateQueries({ queryKey: bottlesQueryOptions(tokens).queryKey });
       send({ type: AppBridgeMessageType.TOAST_OPEN, payload: { message: '보틀을 떠내려 보냈어요' } });
       await logRefuseBottleAction();
-      router.back();
     },
   });
 }
