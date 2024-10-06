@@ -5,7 +5,7 @@ import { useCurrentUserProfileQuery } from '@/store/query/useCurrentUserProfileQ
 import { Asset, Paragraph, spacings } from '@bottlesteam/ui';
 import Link from 'next/link';
 import { useMemo } from 'react';
-import { profileItemLeftStyle, profileItemStyle } from './profileEditStyle.css';
+import { profileItemLeftStyle, profileItemStyle, profileSelectListStyle } from './profileEditStyle.css';
 
 export function ProfileArea() {
   const {
@@ -84,7 +84,7 @@ export function ProfileArea() {
 
   return (
     <Card asChild style={{ marginTop: spacings.sm, marginBottom: spacings.xl }}>
-      <ul>
+      <ul className={profileSelectListStyle}>
         {editProfileItems.map(({ title, description, endpoint }) => (
           <Link href={endpoint} key={title}>
             <li key={title} className={profileItemStyle} onClick={() => {}}>
