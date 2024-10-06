@@ -31,6 +31,13 @@ export const introductionBoxStyle = style({
   color: colors.neutral900,
   backgroundColor: colors.purple100,
   ...typography.bo,
+  marginTop: spacings.xl,
+});
+
+export const profileSelectListStyle = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: spacings.xl,
 });
 
 export const profileItemStyle = style({
