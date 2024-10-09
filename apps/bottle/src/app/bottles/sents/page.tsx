@@ -1,4 +1,3 @@
-import { Header } from '@/components/common/header';
 import { ProfileLayout } from '@/components/profile/layout';
 import { getServerSideTokens } from '@/features/server/serverSideTokens';
 import { ServerFetchBoundary } from '@/store/query/ServerFetchBoundary';
@@ -13,7 +12,6 @@ export default function SentBottlesPage() {
 
   return (
     <ProfileLayout hasCTAButton={false}>
-      <Header />
       <Suspense>
         <ServerFetchBoundary fetchOptions={serverFetchOptions}>
           <Sents />
