@@ -4,6 +4,7 @@ import { Header } from '@/components/common/header';
 import { Stepper } from '@/components/common/stepper';
 import { Images } from '@/components/intro/images';
 import { Introduction } from '@/components/intro/introduction';
+import { Questions } from '@/components/intro/questions';
 import { ProfileLayout } from '@/components/profile/layout';
 import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 import { useFunnel } from '@/features/funnel';
@@ -11,9 +12,10 @@ import { Introduction as IntroductionType } from '@/models/introduction';
 import { useIntroductionMutation } from '@/store/mutation/useIntroductionMutation';
 import { useRouter } from 'next/navigation';
 
-const MAX_STEPS = 2;
+const MAX_STEPS = 3;
 
 type CreateIntroFunnelValues = {
+  answers: [string, string, string, string, string, string];
   introduction: IntroductionType;
   // FIXME: depends on server API
   imageUrl: string;
@@ -27,6 +29,27 @@ export default function CreateIntroPage() {
   const { onNextStep, currentStep, getValue } = useFunnel<CreateIntroFunnelValues>('/intro/create');
 
   const steps = [
+    <ProfileLayout key={0}>
+      <Header
+        onGoBack={() => {
+          send({ type: AppBridgeMessageType.WEB_VIEW_CLOSE });
+        }}
+      />
+      <Stepper current={1} max={MAX_STEPS} />
+      <Questions
+        initialValue={getValue('answers')}
+        onNext={async answers => {
+          try {
+            // await mutateAsync(introduction);
+            onNextStep('answers', answers);
+          } catch (error) {
+            console.error(error);
+          }
+        }}
+        ctaButtonText="다음"
+      />
+    </ProfileLayout>,
+
     <ProfileLayout key={1}>
       <Header
         onGoBack={() => {

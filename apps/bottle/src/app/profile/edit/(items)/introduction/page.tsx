@@ -5,6 +5,9 @@ import { useIntroductionMutation } from '@/store/mutation/useIntroductionMutatio
 import { useCurrentUserProfileQuery } from '@/store/query/useCurrentUserProfileQuery';
 import { useRouter } from 'next/navigation';
 
+/**
+ * @deprecated
+ */
 export default function IntroductionEditPage() {
   const {
     data: { introduction },
