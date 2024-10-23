@@ -1,5 +1,5 @@
 import { FixedBottomCTAButton, Paragraph, ParagraphProps, spacings, VariantOneProps } from '@bottlesteam/ui';
-import { ReactNode } from 'react';
+import { ComponentProps, ReactNode } from 'react';
 import { containerStyle } from './profileLayoutStyle.css';
 
 interface Props {
@@ -9,6 +9,14 @@ interface Props {
 
 function ProfileContainer({ children, hasCTAButton = true }: Props) {
   return <div className={containerStyle({ hasCTAButton })}>{children}</div>;
+}
+
+function Contents(props: ComponentProps<'div'>) {
+  return (
+    <div style={{ padding: '0 16px', ...props.style }} {...props}>
+      {props.children}
+    </div>
+  );
 }
 
 function Title({ children, ...rest }: Omit<ParagraphProps, 'typography' | 'color'>) {
@@ -39,6 +47,7 @@ function FixedButton(props: VariantOneProps) {
 }
 
 export const ProfileLayout = Object.assign(ProfileContainer, {
+  Contents,
   Title,
   Description,
   Subtitle,

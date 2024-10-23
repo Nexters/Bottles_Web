@@ -1,6 +1,7 @@
 'use client';
 
 import { Header } from '@/components/common/header';
+import { ProfileLayout } from '@/components/profile/layout';
 import { POST } from '@/features/server';
 import { getClientSideTokens } from '@/features/server/clientSideTokens';
 import { Step } from '@/features/steps/StepContainer';
@@ -9,7 +10,7 @@ import Link from 'next/link';
 
 export default function AdminPage() {
   return (
-    <>
+    <ProfileLayout.Contents>
       <Header />
       <Step>
         <Step.Title style={{ margin: `${spacings.xl} 0` }}>{'뭐할래?'}</Step.Title>
@@ -47,6 +48,6 @@ export default function AdminPage() {
           </Link>
         </div>
       </Step>
-    </>
+    </ProfileLayout.Contents>
   );
 }

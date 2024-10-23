@@ -7,6 +7,7 @@ import { HeaderArea } from './HeaderArea';
 import { IntroductionArea } from './IntroductionArea';
 import { ProfileArea } from './ProfileArea';
 import { contentsContainerStyle } from './profileEditStyle.css';
+import { ProfileLayout } from '@/components/profile/layout';
 
 export default function ProfileEditPage() {
   const prefetchOptions = currentUserProfileQueryOptions(getServerSideTokens());
@@ -14,15 +15,17 @@ export default function ProfileEditPage() {
   return (
     <>
       <HeaderArea />
-      <div className={contentsContainerStyle}>
-        <Suspense>
-          <ServerFetchBoundary fetchOptions={prefetchOptions}>
-            <BasicInformation />
-            <IntroductionArea />
-            <ProfileArea />
-          </ServerFetchBoundary>
-        </Suspense>
-      </div>
+      <ProfileLayout.Contents>
+        <div className={contentsContainerStyle}>
+          <Suspense>
+            <ServerFetchBoundary fetchOptions={prefetchOptions}>
+              <BasicInformation />
+              <IntroductionArea />
+              <ProfileArea />
+            </ServerFetchBoundary>
+          </Suspense>
+        </div>
+      </ProfileLayout.Contents>
     </>
   );
 }

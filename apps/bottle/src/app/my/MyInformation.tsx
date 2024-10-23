@@ -5,6 +5,10 @@ import { UserInformation } from '@/components/common/user-information';
 import { useCurrentUserProfileQuery } from '@/store/query/useCurrentUserProfileQuery';
 import { ActionButtons } from './_components/ActionButtons';
 
+/**
+ * @deprecated use 'profile/edit' instead
+ * support iOS v1.0.1, android X
+ */
 export function MyInformation() {
   const { data } = useCurrentUserProfileQuery();
 

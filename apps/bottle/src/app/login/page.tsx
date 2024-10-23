@@ -11,6 +11,10 @@ import { Asset, Button, spacings, Input } from '@bottlesteam/ui';
 import { useState } from 'react';
 import { containerStyle, fieldStyle } from './loginStyle.css';
 
+/**
+ * @deprecated
+ * support iOS v1.0.0, android X
+ */
 export default function LoginPage() {
   const { send } = useAppBridge();
   const { timeCaption, startTimer } = useLeftTimeCaption();

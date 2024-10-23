@@ -51,8 +51,11 @@ const steps = [
     <KaKaoId />
   </Step>,
 ] as const;
+
 /**
- * @deprecated
+ * @deprecated use 'profile/create' instead
+ * support iOS v1.0.8
+ * support android v1.0.1
  */
 export default function CreateProfilePage() {
   const router = useRouter();

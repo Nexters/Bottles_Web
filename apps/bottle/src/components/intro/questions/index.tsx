@@ -15,15 +15,20 @@ export function Questions({ initialValue, ctaButtonText }: Props) {
   const answersRef = useRef<QuestionCardAnswers>(initialValue ?? ['', '', '', '', '', '']);
   const answers = answersRef.current;
 
-  console.log('RERENDER');
-
   return (
     <>
       <ProfileLayout.Title>{'보틀에 담을\n소개를 작성해 볼까요?'}</ProfileLayout.Title>
       <ProfileLayout.Subtitle style={{ marginTop: spacings.sm }}>
         답변한 내용은 다음 단계에서 다듬을 수 있어요
       </ProfileLayout.Subtitle>
-      <div style={{ display: 'flex', flexDirection: 'column', margin: `${spacings.xxl} 0`, gap: spacings.xxl }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          margin: `${spacings.xxl} 0`,
+          gap: spacings.xxl,
+        }}
+      >
         <QuestionCard
           number={1}
           title={'인사하기'}

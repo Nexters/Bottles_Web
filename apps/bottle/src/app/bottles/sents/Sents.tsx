@@ -19,7 +19,7 @@ export function Sents() {
   } = useSentBottlesQuery();
 
   return (
-    <>
+    <ProfileLayout.Contents>
       {sentBottles.length > 0 ? (
         <>
           <ProfileLayout.Title>{`${currentUser.name}님을 마음에\n들어한 분들이에요`}</ProfileLayout.Title>
@@ -55,6 +55,6 @@ export function Sents() {
           <Fallback.Subtitle>나를 마음에 들어할 상대는 누굴까요 👀</Fallback.Subtitle>
         </Fallback>
       )}
-    </>
+    </ProfileLayout.Contents>
   );
 }

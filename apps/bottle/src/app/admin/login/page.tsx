@@ -1,6 +1,7 @@
 'use client';
 
 import { Header } from '@/components/common/header';
+import { ProfileLayout } from '@/components/profile/layout';
 import { POST } from '@/features/server';
 import { Step } from '@/features/steps/StepContainer';
 import { spacings, Input } from '@bottlesteam/ui';
@@ -50,7 +51,7 @@ export default function LoginPage() {
   };
 
   return (
-    <>
+    <ProfileLayout.Contents>
       <Header />
       <Step>
         <Step.Title style={{ marginTop: spacings.xl }}>{'인증을 진행할게요'}</Step.Title>
@@ -82,6 +83,6 @@ export default function LoginPage() {
           로그인
         </Step.FixedButton>
       </Step>
-    </>
+    </ProfileLayout.Contents>
   );
 }

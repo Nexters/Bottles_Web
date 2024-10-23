@@ -19,7 +19,7 @@ export function Recommendations() {
   } = useRecommendationBottlesQuery();
 
   return (
-    <>
+    <ProfileLayout.Contents>
       {randomBottles.length > 0 ? (
         <>
           <ProfileLayout.Title>{`${currentUser.name}님에게\n추천하는 분들이에요!`}</ProfileLayout.Title>
@@ -55,6 +55,6 @@ export function Recommendations() {
           <Fallback.Subtitle>{`보틀은 ${currentUser.name}님과 케미가 통하는\n상대를 엄선해 추천드리고 있어요`}</Fallback.Subtitle>
         </Fallback>
       )}
-    </>
+    </ProfileLayout.Contents>
   );
 }
