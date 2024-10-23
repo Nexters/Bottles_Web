@@ -1,3 +1,4 @@
+import { ProfileLayout } from '@/components/profile/layout';
 import { getServerSideTokens } from '@/features/server/serverSideTokens';
 import { ServerFetchBoundary } from '@/store/query/ServerFetchBoundary';
 import { currentUserProfileQueryOptions } from '@/store/query/useCurrentUserProfileQuery';
@@ -7,7 +8,6 @@ import { HeaderArea } from './HeaderArea';
 import { IntroductionArea } from './IntroductionArea';
 import { ProfileArea } from './ProfileArea';
 import { contentsContainerStyle } from './profileEditStyle.css';
-import { ProfileLayout } from '@/components/profile/layout';
 
 export default function ProfileEditPage() {
   const prefetchOptions = currentUserProfileQueryOptions(getServerSideTokens());

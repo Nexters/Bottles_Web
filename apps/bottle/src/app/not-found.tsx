@@ -2,11 +2,11 @@
 
 import BasketImage from '@/assets/images/basket.webp';
 import { Header } from '@/components/common/header';
+import { ProfileLayout } from '@/components/profile/layout';
 import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 import { Asset, Button, Paragraph, spacings } from '@bottlesteam/ui';
 import Image from 'next/image';
 import { errorImageContainer } from './layout.css';
-import { ProfileLayout } from '@/components/profile/layout';
 
 export default function DefaultErrorPage() {
   const { send } = useAppBridge();

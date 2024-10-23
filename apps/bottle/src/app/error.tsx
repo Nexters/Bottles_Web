@@ -2,12 +2,12 @@
 
 import BasketImage from '@/assets/images/basket.webp';
 import { Header } from '@/components/common/header';
+import { ProfileLayout } from '@/components/profile/layout';
 import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 import { Asset, Button, Paragraph, spacings } from '@bottlesteam/ui';
 import Image from 'next/image';
 import { useEffect } from 'react';
 import { errorImageContainer } from './layout.css';
-import { ProfileLayout } from '@/components/profile/layout';
 
 interface ErrorPageProps {
   error: Error & { digest?: string };
