@@ -30,6 +30,7 @@ export const containerStyle = recipe({
       display: 'none',
     },
     position: 'relative',
+    overflowX: 'hidden',
   },
   variants: {
     hasCTAButton: {

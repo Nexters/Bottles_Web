@@ -1,19 +1,41 @@
 import { ProfileLayout } from '@/components/profile/layout';
 import { Chip, colors, radius, spacings, typography } from '@bottlesteam/ui';
-import { useRef } from 'react';
-import { QuestionCard } from './QuestionCard';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { QuestionCard, QuestionCardRef } from './QuestionCard';
 
 type QuestionCardAnswers = [string, string, string, string, string, string];
 
 interface Props {
-  initialValue?: QuestionCardAnswers;
   onNext: (answers: QuestionCardAnswers) => void;
   ctaButtonText: string;
 }
 
-export function Questions({ initialValue, ctaButtonText }: Props) {
-  const answersRef = useRef<QuestionCardAnswers>(initialValue ?? ['', '', '', '', '', '']);
+export function Questions({ onNext, ctaButtonText }: Props) {
+  const questionCardRefs = useRef<
+    [QuestionCardRef, QuestionCardRef, QuestionCardRef, QuestionCardRef, QuestionCardRef, QuestionCardRef] | []
+  >([]);
+
+  const initialValue = useMemo(() => {
+    const storedRawAnswers = localStorage.getItem('intro-answers');
+    return storedRawAnswers ? JSON.parse(storedRawAnswers) : ['', '', '', '', '', ''];
+  }, []) as QuestionCardAnswers;
+
+  const answersRef = useRef<QuestionCardAnswers>(initialValue);
+
+  const questionCards = questionCardRefs.current;
   const answers = answersRef.current;
+
+  const [disabled, setDisabled] = useState(true);
+
+  useEffect(() => {
+    const isAllAnswered = initialValue?.every(answer => answer.length >= 5);
+    setDisabled(!isAllAnswered);
+  }, [initialValue]);
+
+  const handleAnswerChange = () => {
+    const isAllAnswered = answers.every(answer => answer.length >= 5);
+    setDisabled(!isAllAnswered);
+  };
 
   return (
     <>
@@ -30,16 +52,30 @@ export function Questions({ initialValue, ctaButtonText }: Props) {
         }}
       >
         <QuestionCard
+          ref={ref => {
+            questionCards[0] = ref!;
+          }}
+          onChange={(value: string) => {
+            answers[0] = value;
+            handleAnswerChange();
+          }}
+          initialValue={initialValue?.[0]}
           number={1}
           title={'인사하기'}
           placeholder="디자이너로 근무하고 있는 3년차 직장인"
-          onChange={value => {
-            answers[0] = value;
-          }}
+          blur={false}
           guideText={{ top: '안녕하세요!', bottom: '입니다.' }}
         />
         <QuestionCard
           number={2}
+          ref={ref => {
+            questionCards[1] = ref!;
+          }}
+          onChange={(value: string) => {
+            answers[1] = value;
+            handleAnswerChange();
+          }}
+          initialValue={initialValue?.[1]}
           title={'성격 소개하기'}
           placeholder="소확행을 추구하는 사람"
           guideText={{ top: '제 성격을 한 마디로 표현하자면', bottom: '(이)에요.' }}
@@ -68,24 +104,56 @@ export function Questions({ initialValue, ctaButtonText }: Props) {
         />
         <QuestionCard
           number={3}
+          initialValue={initialValue?.[2]}
+          onChange={(value: string) => {
+            answers[2] = value;
+            handleAnswerChange();
+          }}
+          ref={ref => {
+            questionCards[2] = ref!;
+          }}
           title={'다른 사람이 보는 나'}
           placeholder="섬세하고 어른스럽다는"
           guideText={{ top: '저는 제 주변인에게', bottom: '(은)는 말을 많이 들어요.' }}
         />
         <QuestionCard
           number={4}
+          ref={ref => {
+            questionCards[3] = ref!;
+          }}
+          onChange={(value: string) => {
+            answers[3] = value;
+            handleAnswerChange();
+          }}
+          initialValue={initialValue?.[3]}
           title={'외모 표현하기'}
           placeholder="강아지상이고 진한 눈썹이 포인트"
           guideText={{ top: '제 외모의 특징을 한가지 뽑아자면', bottom: '(이)에요.' }}
         />
         <QuestionCard
           number={5}
+          ref={ref => {
+            questionCards[4] = ref!;
+          }}
+          onChange={(value: string) => {
+            answers[4] = value;
+            handleAnswerChange();
+          }}
+          initialValue={initialValue?.[4]}
           title={'연애할 때의 모습 표현하기'}
           placeholder="잘 챙겨주고 연락을 잘 하는"
           guideText={{ top: '연애할 때는', bottom: '스타일이에요.' }}
         />
         <QuestionCard
           number={6}
+          ref={ref => {
+            questionCards[5] = ref!;
+          }}
+          onChange={(value: string) => {
+            answers[5] = value;
+            handleAnswerChange();
+          }}
+          initialValue={initialValue?.[5]}
           title={'이상형 작성하기'}
           placeholder="서로에게 좋은 친구가 될 수 있는 사람"
           guideText={{ top: '보틀에서는', bottom: '(을)를 만나고 싶어요.' }}
@@ -93,8 +161,9 @@ export function Questions({ initialValue, ctaButtonText }: Props) {
       </div>
       <ProfileLayout.FixedButton
         onClick={() => {
-          console.log(answers);
+          onNext(answers);
         }}
+        disabled={disabled}
       >
         {ctaButtonText}
       </ProfileLayout.FixedButton>
