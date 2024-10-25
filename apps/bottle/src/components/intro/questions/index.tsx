@@ -1,6 +1,8 @@
 import { ProfileLayout } from '@/components/profile/layout';
+import { keyMap } from '@/features/bottle-storage/bottleStorage';
+import { useGetBottleStorage } from '@/features/bottle-storage/useGetBottleStorage';
 import { Chip, colors, radius, spacings, typography } from '@bottlesteam/ui';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { QuestionCard, QuestionCardRef } from './QuestionCard';
 
 type QuestionCardAnswers = [string, string, string, string, string, string];
@@ -14,20 +16,17 @@ export function Questions({ onNext, ctaButtonText }: Props) {
   const questionCardRefs = useRef<
     [QuestionCardRef, QuestionCardRef, QuestionCardRef, QuestionCardRef, QuestionCardRef, QuestionCardRef] | []
   >([]);
-
-  const initialValue = useMemo(() => {
-    const storedRawAnswers = localStorage.getItem('intro-answers');
-    return storedRawAnswers ? JSON.parse(storedRawAnswers) : ['', '', '', '', '', ''];
-  }, []) as QuestionCardAnswers;
-
-  const answersRef = useRef<QuestionCardAnswers>(initialValue);
-
   const questionCards = questionCardRefs.current;
+
+  const initialValue = useGetBottleStorage<QuestionCardAnswers>(keyMap.introAnswers);
+
+  const answersRef = useRef<QuestionCardAnswers>(['', '', '', '', '', '']);
   const answers = answersRef.current;
 
   const [disabled, setDisabled] = useState(true);
 
   useEffect(() => {
+    answersRef.current = initialValue ?? ['', '', '', '', '', ''];
     const isAllAnswered = initialValue?.every(answer => answer.length >= 5);
     setDisabled(!isAllAnswered);
   }, [initialValue]);
@@ -128,7 +127,7 @@ export function Questions({ onNext, ctaButtonText }: Props) {
           initialValue={initialValue?.[3]}
           title={'외모 표현하기'}
           placeholder="강아지상이고 진한 눈썹이 포인트"
-          guideText={{ top: '제 외모의 특징을 한가지 뽑아자면', bottom: '(이)에요.' }}
+          guideText={{ top: '제 외모의 특징을 한가지 뽑자면', bottom: '(이)에요.' }}
         />
         <QuestionCard
           number={5}
@@ -161,7 +160,7 @@ export function Questions({ onNext, ctaButtonText }: Props) {
       </div>
       <ProfileLayout.FixedButton
         onClick={() => {
-          onNext(answers);
+          onNext(answersRef.current.map(answer => answer.trim()) as QuestionCardAnswers);
         }}
         disabled={disabled}
       >

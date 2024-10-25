@@ -7,10 +7,11 @@ import { IntroductionV2 } from '@/components/intro/introductionV2';
 import { Questions } from '@/components/intro/questions';
 import { ProfileLayout } from '@/components/profile/layout';
 import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
+import { useAutoCreatedIntro } from '@/features/auto-create-intro/useAutoCreateIntro';
+import { bottleStorage, keyMap } from '@/features/bottle-storage/bottleStorage';
 import { useFunnel } from '@/features/funnel';
 import { Introduction as IntroductionType } from '@/models/introduction';
 import { useIntroductionMutation } from '@/store/mutation/useIntroductionMutation';
-import { useCurrentUserProfileQuery } from '@/store/query/useCurrentUserProfileQuery';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import Gradient from './gradient.png';
@@ -26,10 +27,8 @@ type CreateIntroFunnelValues = {
 export default function CreateIntroPage() {
   const { send } = useAppBridge();
   const { mutateAsync } = useIntroductionMutation({ type: 'create' });
-  const {
-    data: { introduction },
-  } = useCurrentUserProfileQuery();
   const router = useRouter();
+  const autoCreatedIntro = useAutoCreatedIntro();
 
   const { onNextStep, currentStep, getValue } = useFunnel<CreateIntroFunnelValues>('/intro/create');
 
@@ -56,7 +55,8 @@ export default function CreateIntroPage() {
         <Stepper current={1} max={MAX_STEPS} />
         <Questions
           onNext={answers => {
-            localStorage.setItem('intro-answers', JSON.stringify(answers));
+            console.log('ANSWERS', answers);
+            bottleStorage.setItem(keyMap.introAnswers, JSON.stringify(answers.map(answer => answer.trim())));
             onNextStep();
           }}
           ctaButtonText="다음"
@@ -73,10 +73,10 @@ export default function CreateIntroPage() {
       <ProfileLayout.Contents>
         <Stepper current={2} max={MAX_STEPS} />
         <IntroductionV2
-          initialValue={introduction}
+          initialValue={autoCreatedIntro}
           onNext={async introduction => {
             try {
-              await mutateAsync(introduction);
+              await mutateAsync([{ question: '', answer: introduction }]);
               onNextStep();
             } catch (error) {
               console.error(error);

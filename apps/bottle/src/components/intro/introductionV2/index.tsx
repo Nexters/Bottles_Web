@@ -14,8 +14,8 @@ export function IntroductionV2({
   initialValue,
   onNext,
   ctaButtonText,
-}: BaseProfileComponentProps<CurrentUser['introduction']>) {
-  const [value, setValue] = useState(initialValue != null ? (initialValue[0]?.answer ?? '') : '');
+}: BaseProfileComponentProps<CurrentUser['introduction'][0]['answer']>) {
+  const [value, setValue] = useState(initialValue ?? '');
 
   const isError = value.length < MINIMUM_TEXT_LENGTH && value.length > 0;
 
@@ -30,7 +30,7 @@ export function IntroductionV2({
             setValue(e.currentTarget.value);
           }}
           maxLength={300}
-          defaultValue={initialValue != null ? initialValue[0]?.answer : undefined}
+          defaultValue={initialValue}
           error={isError}
           caption={<Textarea.Caption>{isError && '최소 50글자 이상 작성해주세요'}</Textarea.Caption>}
         />
@@ -38,7 +38,7 @@ export function IntroductionV2({
       <ProfileLayout.FixedButton
         disabled={isError || value.length === 0}
         onClick={() => {
-          onNext([{ question: '', answer: value }]);
+          onNext(value);
         }}
       >
         {ctaButtonText}
