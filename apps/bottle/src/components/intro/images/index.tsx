@@ -5,7 +5,7 @@ import { CurrentUser } from '@/models/user';
 export function Images({ ctaButtonText }: BaseProfileComponentProps<CurrentUser['imageUrl']>) {
   return (
     <>
-      <ProfileLayout.Title>{'보틀에 담을 나의\n사진을 골라주세요'}</ProfileLayout.Title>
+      <ProfileLayout.Title>{'거의 다 왔어요!\n보틀에 담을 사진을 골라주세요'}</ProfileLayout.Title>
       <ProfileLayout.FixedButton onClick={() => {}}>{ctaButtonText}</ProfileLayout.FixedButton>
     </>
   );

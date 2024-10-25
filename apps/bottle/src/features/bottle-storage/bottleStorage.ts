@@ -12,8 +12,8 @@ export const bottleStorage = {
     const value = rawValue == null ? undefined : JSON.parse(rawValue);
     return value as T | undefined;
   },
-  setItem: (key: Key, value: string) => {
-    localStorage.setItem(key, value);
+  setItem: (key: Key, value: unknown) => {
+    localStorage.setItem(key, JSON.stringify(value));
     window.dispatchEvent(new Event('storage'));
   },
   removeItem: (key: Key) => {

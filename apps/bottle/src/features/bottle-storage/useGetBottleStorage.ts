@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { bottleStorage, Key } from './bottleStorage';
 
 export function useGetBottleStorage<T>(key: Key): T | undefined;
 export function useGetBottleStorage<T>(key: Key, placeholder: T): T;
+
 export function useGetBottleStorage<T>(key: Key, placeholder?: T) {
   const [value, setValue] = useState(placeholder);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     /**
      * get item from bottleStorage in useEffect to prevent RSC, SSR error
      */

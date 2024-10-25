@@ -1,4 +1,4 @@
-import { colors, spacings, typography } from '@bottlesteam/ui';
+import { colors, radius, spacings, typography } from '@bottlesteam/ui';
 import { style } from '@vanilla-extract/css';
 
 export const topAreaContainer = style({
@@ -31,4 +31,14 @@ export const middleAreaContainer = style({
 export const bottomAreaContainer = style({
   marginTop: spacings.lg,
   width: '100%',
+});
+
+export const keywordsContainer = style({
+  width: '100%',
+  backgroundColor: colors.neutral100,
+  padding: `${spacings.lg} ${spacings.md}`,
+  display: 'flex',
+  flexDirection: 'column',
+  borderRadius: radius.md,
+  gap: spacings.sm,
 });

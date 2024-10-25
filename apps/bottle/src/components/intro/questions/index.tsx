@@ -1,9 +1,11 @@
 import { ProfileLayout } from '@/components/profile/layout';
 import { keyMap } from '@/features/bottle-storage/bottleStorage';
 import { useGetBottleStorage } from '@/features/bottle-storage/useGetBottleStorage';
-import { Chip, colors, radius, spacings, typography } from '@bottlesteam/ui';
-import { useEffect, useRef, useState } from 'react';
-import { QuestionCard, QuestionCardRef } from './QuestionCard';
+import { useCurrentUserProfileQuery } from '@/store/query/useCurrentUserProfileQuery';
+import { Chip, colors, spacings, typography } from '@bottlesteam/ui';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { QuestionCard } from './QuestionCard';
+import { keywordsContainer } from './questionCardStyle.css';
 
 type QuestionCardAnswers = [string, string, string, string, string, string];
 
@@ -13,28 +15,29 @@ interface Props {
 }
 
 export function Questions({ onNext, ctaButtonText }: Props) {
-  const questionCardRefs = useRef<
-    [QuestionCardRef, QuestionCardRef, QuestionCardRef, QuestionCardRef, QuestionCardRef, QuestionCardRef] | []
-  >([]);
-  const questionCards = questionCardRefs.current;
-
   const initialValue = useGetBottleStorage<QuestionCardAnswers>(keyMap.introAnswers);
+  const {
+    data: {
+      profileSelect: { keyword: keywords },
+    },
+  } = useCurrentUserProfileQuery();
 
-  const answersRef = useRef<QuestionCardAnswers>(['', '', '', '', '', '']);
+  const answersRef = useRef<QuestionCardAnswers>(initialValue ?? ['', '', '', '', '', '']);
   const answers = answersRef.current;
 
   const [disabled, setDisabled] = useState(true);
 
-  useEffect(() => {
-    answersRef.current = initialValue ?? ['', '', '', '', '', ''];
-    const isAllAnswered = initialValue?.every(answer => answer.length >= 5);
+  const handleAnswerChange = useCallback(() => {
+    const isAllAnswered = answersRef.current.every(answer => answer.length >= 5);
     setDisabled(!isAllAnswered);
-  }, [initialValue]);
+  }, []);
 
-  const handleAnswerChange = () => {
-    const isAllAnswered = answers.every(answer => answer.length >= 5);
-    setDisabled(!isAllAnswered);
-  };
+  useEffect(() => {
+    if (initialValue != null) {
+      answersRef.current = initialValue;
+      handleAnswerChange();
+    }
+  }, [initialValue, handleAnswerChange]);
 
   return (
     <>
@@ -51,9 +54,6 @@ export function Questions({ onNext, ctaButtonText }: Props) {
         }}
       >
         <QuestionCard
-          ref={ref => {
-            questionCards[0] = ref!;
-          }}
           onChange={(value: string) => {
             answers[0] = value;
             handleAnswerChange();
@@ -67,9 +67,6 @@ export function Questions({ onNext, ctaButtonText }: Props) {
         />
         <QuestionCard
           number={2}
-          ref={ref => {
-            questionCards[1] = ref!;
-          }}
           onChange={(value: string) => {
             answers[1] = value;
             handleAnswerChange();
@@ -79,24 +76,12 @@ export function Questions({ onNext, ctaButtonText }: Props) {
           placeholder="소확행을 추구하는 사람"
           guideText={{ top: '제 성격을 한 마디로 표현하자면', bottom: '(이)에요.' }}
           bottom={
-            <div
-              style={{
-                width: '100%',
-                backgroundColor: colors.neutral100,
-                padding: `${spacings.lg} ${spacings.md}`,
-                display: 'flex',
-                flexDirection: 'column',
-                borderRadius: radius.md,
-                gap: spacings.sm,
-              }}
-            >
+            <div className={keywordsContainer}>
               <p style={{ color: colors.neutral600, ...typography.bo }}>나의 성격 키워드를 참고해보세요</p>
               <div style={{ display: 'flex', rowGap: spacings.sm, columnGap: spacings.xs, flexWrap: 'wrap' }}>
-                <Chip>적극적인</Chip>
-                <Chip>열정적인</Chip>
-                <Chip>예의바른</Chip>
-                <Chip>자유로운</Chip>
-                <Chip>쿨한</Chip>
+                {keywords.map(keyword => (
+                  <Chip key={keyword}>{keyword}</Chip>
+                ))}
               </div>
             </div>
           }
@@ -108,18 +93,12 @@ export function Questions({ onNext, ctaButtonText }: Props) {
             answers[2] = value;
             handleAnswerChange();
           }}
-          ref={ref => {
-            questionCards[2] = ref!;
-          }}
           title={'다른 사람이 보는 나'}
           placeholder="섬세하고 어른스럽다는"
           guideText={{ top: '저는 제 주변인에게', bottom: '(은)는 말을 많이 들어요.' }}
         />
         <QuestionCard
           number={4}
-          ref={ref => {
-            questionCards[3] = ref!;
-          }}
           onChange={(value: string) => {
             answers[3] = value;
             handleAnswerChange();
@@ -131,9 +110,6 @@ export function Questions({ onNext, ctaButtonText }: Props) {
         />
         <QuestionCard
           number={5}
-          ref={ref => {
-            questionCards[4] = ref!;
-          }}
           onChange={(value: string) => {
             answers[4] = value;
             handleAnswerChange();
@@ -145,9 +121,6 @@ export function Questions({ onNext, ctaButtonText }: Props) {
         />
         <QuestionCard
           number={6}
-          ref={ref => {
-            questionCards[5] = ref!;
-          }}
           onChange={(value: string) => {
             answers[5] = value;
             handleAnswerChange();
