@@ -26,3 +26,5 @@ export { Agreement } from './agreement';
 export type { AgreementProps, AgreementItemProps } from './agreement';
 export { Textarea } from './textarea';
 export type { TextareaProps } from './textarea';
+export type { ImageInputsProps } from './image-inputs';
+export { ImageInputs } from './image-inputs';
