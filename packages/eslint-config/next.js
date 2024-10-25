@@ -49,5 +49,7 @@ module.exports = {
         alphabetize: { order: 'asc' },
       },
     ],
+    // This will be checked by TypeScript. Disable it to support TypeScript overloads.
+    'no-redeclare': 'off',
   },
 };
