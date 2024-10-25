@@ -21,14 +21,13 @@ export interface TextareaProps extends ComponentPropsWithoutRef<'textarea'> {
 const TextareaImpl = forwardRef<ElementRef<'textarea'>, TextareaProps>(
   ({ caption, error = false, style, value, maxLength, ...textareaProps }, ref) => {
     const id = useId();
-
     const counterTextColor = value != null && String(value).length > 0 ? 'neutral600' : 'neutral400';
 
     return (
       <div className={containerStyle} style={style}>
         <label htmlFor={id} className={labelStyle({ error })}>
           <div className={textAreaWrapperStyle}>
-            <textarea ref={ref} id={id} className={textareaStyle} {...textareaProps} />
+            <textarea ref={ref} id={id} className={textareaStyle} value={value} {...textareaProps} />
             {maxLength != null && (
               <div className={counterTextWrapperStyle}>
                 <Paragraph
