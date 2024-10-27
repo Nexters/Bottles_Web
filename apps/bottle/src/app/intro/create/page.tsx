@@ -31,6 +31,7 @@ export default function CreateIntroPage() {
   const { mutateAsync } = useIntroductionMutation({ type: 'create' });
   const router = useRouter();
   const autoCreatedIntro = useAutoCreatedIntro();
+  const initialImages = ['https://avatars.githubusercontent.com/u/107744534?s=96&v=4'];
 
   const { onNextStep, currentStep, getValue } = useFunnel<CreateIntroFunnelValues>('/intro/create');
 
@@ -93,11 +94,11 @@ export default function CreateIntroPage() {
         <Header />
         <ProfileLayout.Contents>
           <Stepper current={3} max={MAX_STEPS} />
-          <Images initialValue={getValue('imageUrl')} onNext={() => {}} ctaButtonText="완료" />
+          <Images initialValue={initialImages} onNext={() => {}} ctaButtonText="완료" />
         </ProfileLayout.Contents>
       </ProfileLayout>,
     ],
-    [autoCreatedIntro, mutateAsync, onNextStep, router, send, getValue]
+    [autoCreatedIntro, mutateAsync, onNextStep, router, send, getValue, initialImages]
   );
 
   // return <ClientGate>{steps[currentStep - 1]}</ClientGate>;

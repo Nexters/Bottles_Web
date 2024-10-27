@@ -1,22 +1,21 @@
-import { useState } from 'react';
+import { ComponentProps } from 'react';
 import { Asset } from '../asset';
 import { Paragraph } from '../paragraph';
 import { placeholder, imagesContainer, imageFrame, deleteButton, imageFrameBlock } from './imageInputsStyle.css';
 
-export interface ImageInputsProps {
-  onChange?: (files: string[]) => void;
+export interface ImageInputsProps extends Omit<ComponentProps<'div'>, 'onChange' | 'className'> {
+  onChange: (files: string[]) => void;
   maxImages: number;
-  initialImages?: string[];
   labels?: string[];
+  images: string[];
 }
 
-export function ImageInputs({ onChange, maxImages, initialImages, labels }: ImageInputsProps) {
-  const [files, setFiles] = useState<string[]>(initialImages ?? []);
-
+export function ImageInputs({ onChange, images, maxImages, labels, ...containerProps }: ImageInputsProps) {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newFiles = e.currentTarget.files;
-    const availableLength = maxImages - files.length;
+    const availableLength = maxImages - images.length;
     if (newFiles == null) {
+      console.log('WTF');
       return;
     }
     if (newFiles.length > availableLength) {
@@ -26,31 +25,35 @@ export function ImageInputs({ onChange, maxImages, initialImages, labels }: Imag
     const deleteCount = newFiles.length - availableLength;
     newFilesArray.splice(-deleteCount, deleteCount);
 
-    const previews: string[] = [...files];
-    newFilesArray.forEach(file => {
+    const previews: string[] = [...images];
+    newFilesArray.forEach((file, index) => {
       if (file && file.type.startsWith('image/')) {
         const reader = new FileReader();
         reader.onloadend = () => {
           previews.push(reader.result as string);
-          if (previews.length === newFilesArray.length) {
-            setFiles(previews);
+          if (index === newFilesArray.length - 1) {
+            onChange(previews);
           }
         };
         reader.readAsDataURL(file);
       }
     });
-    onChange?.(previews);
+  };
+
+  const handleDelete = (index: number) => {
+    const filtered = images.filter((_, i) => i !== index);
+    onChange(filtered);
   };
 
   return (
-    <div className={imagesContainer}>
+    <div className={imagesContainer} {...containerProps}>
       {new Array(maxImages).fill(null).map((_, index) => (
         <div className={imageFrameBlock} key={index}>
-          {files != null && files.length > index ? (
+          {images.length > index ? (
             <>
               <div className={imageFrame}>
-                <img src={files[index]} style={{ width: '104px', height: '104px', objectFit: 'cover' }} />
-                <button className={deleteButton} onClick={() => setFiles(files.filter((_, i) => i !== index))}>
+                <img src={images[index]} style={{ width: '104px', height: '104px', objectFit: 'cover' }} />
+                <button className={deleteButton} onClick={() => handleDelete(index)}>
                   <Asset type="icon-close" />
                 </button>
               </div>
