@@ -34,7 +34,10 @@ export function Images({
           })
         }
         images={images}
-        maxImages={3}
+        maxImages={
+          // TODO: Change this to 3 when the feature is ready on native app
+          1
+        }
         labels={['프로필 사진']}
         onChange={files => {
           setImages(files);
