@@ -22,7 +22,9 @@ export function Sents() {
     <ProfileLayout.Contents>
       {sentBottles.length > 0 ? (
         <>
-          <ProfileLayout.Title>{`${currentUser.name}님을 마음에\n들어한 분들이에요`}</ProfileLayout.Title>
+          <ProfileLayout.Title
+            style={{ marginTop: 72 }}
+          >{`${currentUser.name}님을 마음에\n들어한 분들이에요`}</ProfileLayout.Title>
           <ProfileLayout.Subtitle style={{ marginTop: spacings.sm }}>
             시간 내에 보틀을 열지 않으면 사라져요
           </ProfileLayout.Subtitle>
@@ -49,7 +51,7 @@ export function Sents() {
           </section>
         </>
       ) : (
-        <Fallback marginTop={94}>
+        <Fallback marginTop={142}>
           <Fallback.Image src={CoconutImage} alt="fallback image" />
           <Fallback.Title>조금만 기다려 볼까요?</Fallback.Title>
           <Fallback.Subtitle>나를 마음에 들어할 상대는 누굴까요 👀</Fallback.Subtitle>
