@@ -18,6 +18,7 @@ export const layoutStyle = recipe({
     overflow: 'scroll',
     msOverflowStyle: 'none',
     scrollbarWidth: 'none',
+    padding: '0 16px',
     '::-webkit-scrollbar': {
       display: 'none',
     },

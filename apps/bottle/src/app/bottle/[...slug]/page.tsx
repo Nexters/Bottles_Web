@@ -12,6 +12,9 @@ interface Props {
   params: { slug: [BottleType, number] };
 }
 
+/**
+ * @deprecated use '/bottles/[type]/[id]' instead
+ */
 export default function BottleItemPage({
   params: {
     slug: [type, id],

@@ -16,7 +16,7 @@ export function Avatar({ size: _size, blur, ...props }: AvatarProps) {
   return (
     <div className={containerStyle({ size: _size })}>
       {props.src != null ? (
-        <Image priority {...props} alt="user profile image" fill objectFit="cover" className={avatarStyle({ blur })} />
+        <Image priority {...props} alt="user profile image" fill className={avatarStyle({ blur })} />
       ) : (
         <Placeholder size={size} />
       )}

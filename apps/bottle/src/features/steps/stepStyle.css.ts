@@ -31,6 +31,7 @@ export const containerStyle = style({
   '::-webkit-scrollbar': {
     display: 'none',
   },
+  padding: '0 16px',
 });
 
 export const buttonStyle = style({

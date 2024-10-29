@@ -29,6 +29,8 @@ export const containerStyle = recipe({
     '::-webkit-scrollbar': {
       display: 'none',
     },
+    position: 'relative',
+    overflowX: 'hidden',
   },
   variants: {
     hasCTAButton: {

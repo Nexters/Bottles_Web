@@ -22,3 +22,7 @@ export type User = CurrentUser | OtherUser;
 export function isCurrentUser(userInformation: User): userInformation is CurrentUser {
   return 'imageUrl' in userInformation;
 }
+
+export interface UserImages {
+  userImages: string[];
+}

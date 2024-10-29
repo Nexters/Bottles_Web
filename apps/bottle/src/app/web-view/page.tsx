@@ -50,7 +50,7 @@ export default function WebViewPage() {
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', padding: '0 16px' }}>
       <Paragraph typography="t1" style={{ marginTop: spacings.xxl, marginBottom: spacings.xxl }}>
         WebView 테스트용 페이지
       </Paragraph>

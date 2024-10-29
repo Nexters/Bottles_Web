@@ -11,7 +11,7 @@ export const wrapperStyle = style({
   left: 0,
   display: 'flex',
   justifyContent: 'center',
-  zIndex: 100,
+  zIndex: 1000,
   '::-webkit-scrollbar': {
     display: 'none',
   },
@@ -79,6 +79,7 @@ export const overlayStyle = style({
   position: 'fixed',
   top: 0,
   left: 0,
+  zIndex: 999,
 });
 
 export const buttonContainer = style({

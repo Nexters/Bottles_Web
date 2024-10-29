@@ -12,6 +12,11 @@ const MINIMUM_TEXT_LENGTH = 50;
 const PLACEHOLDER =
   '호기심 많고 새로운 경험을 즐깁니다. 주말엔 책을 읽거나 맛집을 찾아다니며 여유를 즐기고, 친구들과 소소한 모임으로 에너지를 충전해요';
 
+/**
+ * @deprecated use IntroductionV2 instead
+ * suppport iOS v1.0.10, android v1.0.3
+ */
+
 export function Introduction({
   initialValue,
   onNext,

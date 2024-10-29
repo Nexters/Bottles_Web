@@ -16,7 +16,7 @@
     "@bottlesteam/typescript-config": "workspace:*",
     "@bottlesteam/bottle": "workspace:*",
     "start-server-and-test": "^2.0.5",
-    "@playwright/test": "^1.48.0",
+    "@playwright/test": "^1.48.1",
     "dotenv": "^16.4.5",
     "eslint": "^8"
   }

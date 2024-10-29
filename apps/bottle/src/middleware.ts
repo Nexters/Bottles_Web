@@ -48,6 +48,7 @@ export const config = {
     '/bottles/:path*',
     '/bottle/:path*',
     '/my',
+    '/intro/:path*',
     '/create-profile/:path*',
     '/profile/create/:path*',
     '/profile/edit/:path*',

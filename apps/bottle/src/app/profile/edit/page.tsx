@@ -1,3 +1,4 @@
+import { ProfileLayout } from '@/components/profile/layout';
 import { getServerSideTokens } from '@/features/server/serverSideTokens';
 import { ServerFetchBoundary } from '@/store/query/ServerFetchBoundary';
 import { currentUserProfileQueryOptions } from '@/store/query/useCurrentUserProfileQuery';
@@ -14,15 +15,17 @@ export default function ProfileEditPage() {
   return (
     <>
       <HeaderArea />
-      <div className={contentsContainerStyle}>
-        <Suspense>
-          <ServerFetchBoundary fetchOptions={prefetchOptions}>
-            <BasicInformation />
-            <IntroductionArea />
-            <ProfileArea />
-          </ServerFetchBoundary>
-        </Suspense>
-      </div>
+      <ProfileLayout.Contents>
+        <div className={contentsContainerStyle}>
+          <Suspense>
+            <ServerFetchBoundary fetchOptions={prefetchOptions}>
+              <BasicInformation />
+              <IntroductionArea />
+              <ProfileArea />
+            </ServerFetchBoundary>
+          </Suspense>
+        </div>
+      </ProfileLayout.Contents>
     </>
   );
 }

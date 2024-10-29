@@ -1,5 +1,5 @@
-export interface BaseProfileComponentProps<T> {
+export interface BaseProfileComponentProps<T, V extends T = T> {
   initialValue?: T;
   ctaButtonText?: string;
-  onNext: (value: T) => void | Promise<void>;
+  onNext: (value: V) => void | Promise<void>;
 }

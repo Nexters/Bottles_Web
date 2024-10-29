@@ -11,6 +11,10 @@ import { Information } from './_steps/information';
 
 const steps = [<Agreement key={1} />, <Information key={2} />, <Authorize key={3} />] as const;
 
+/**
+ * @deprecated
+ * support iOS X, android X
+ */
 export default function SignupPage() {
   const { send } = useAppBridge();
   const router = useRouter();

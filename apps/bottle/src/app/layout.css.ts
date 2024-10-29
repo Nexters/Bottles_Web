@@ -6,7 +6,7 @@ export const layoutStyle = recipe({
   base: {
     width: '100%',
     minWidth: '360px',
-    padding: '0 16px',
+    // padding: '0 16px',
     '@media': {
       'screen and (min-width: 500px)': {
         width: '360px',
