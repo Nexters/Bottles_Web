@@ -55,7 +55,7 @@ export function Questions({ onNext, ctaButtonText }: Props) {
       >
         <QuestionCard
           onChange={(value: string) => {
-            answers[0] = value;
+            answers[0] = value.trim();
             handleAnswerChange();
           }}
           initialValue={initialValue?.[0]}
@@ -68,7 +68,7 @@ export function Questions({ onNext, ctaButtonText }: Props) {
         <QuestionCard
           number={2}
           onChange={(value: string) => {
-            answers[1] = value;
+            answers[1] = value.trim();
             handleAnswerChange();
           }}
           initialValue={initialValue?.[1]}
@@ -90,7 +90,7 @@ export function Questions({ onNext, ctaButtonText }: Props) {
           number={3}
           initialValue={initialValue?.[2]}
           onChange={(value: string) => {
-            answers[2] = value;
+            answers[2] = value.trim();
             handleAnswerChange();
           }}
           title={'다른 사람이 보는 나'}
@@ -100,7 +100,7 @@ export function Questions({ onNext, ctaButtonText }: Props) {
         <QuestionCard
           number={4}
           onChange={(value: string) => {
-            answers[3] = value;
+            answers[3] = value.trim();
             handleAnswerChange();
           }}
           initialValue={initialValue?.[3]}
@@ -111,7 +111,7 @@ export function Questions({ onNext, ctaButtonText }: Props) {
         <QuestionCard
           number={5}
           onChange={(value: string) => {
-            answers[4] = value;
+            answers[4] = value.trim();
             handleAnswerChange();
           }}
           initialValue={initialValue?.[4]}
@@ -122,7 +122,7 @@ export function Questions({ onNext, ctaButtonText }: Props) {
         <QuestionCard
           number={6}
           onChange={(value: string) => {
-            answers[5] = value;
+            answers[5] = value.trim();
             handleAnswerChange();
           }}
           initialValue={initialValue?.[5]}

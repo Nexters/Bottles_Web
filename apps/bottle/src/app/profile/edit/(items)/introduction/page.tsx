@@ -1,6 +1,6 @@
 'use client';
 
-import { Introduction } from '@/components/intro/introduction';
+import { IntroductionV2 } from '@/components/intro/introductionV2';
 import { ProfileLayout } from '@/components/profile/layout';
 import { useIntroductionMutation } from '@/store/mutation/useIntroductionMutation';
 import { useCurrentUserProfileQuery } from '@/store/query/useCurrentUserProfileQuery';
@@ -21,14 +21,15 @@ export default function IntroductionEditPage() {
 
   return (
     <ProfileLayout.Contents>
-      <Introduction
-        initialValue={introduction}
+      <ProfileLayout.Title>{'보틀에 담을\n소개를 작성해 주세요'}</ProfileLayout.Title>
+      <IntroductionV2
+        initialValue={initialAnswer}
         onNext={introduction => {
-          if (introduction[0]?.answer === initialAnswer) {
+          if (introduction === initialAnswer) {
             router.back();
             return;
           }
-          mutate(introduction);
+          mutate([{ question: '', answer: introduction }]);
         }}
         ctaButtonText="완료"
       />

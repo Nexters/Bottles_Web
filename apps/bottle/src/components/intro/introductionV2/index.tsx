@@ -18,17 +18,15 @@ export function IntroductionV2({
 }: BaseProfileComponentProps<CurrentUser['introduction'][0]['answer']>) {
   const [value, setValue] = useState('');
 
-  const isError = value != null && value.length < MINIMUM_TEXT_LENGTH && value.length > 0;
+  const isError =
+    value != null && value.length > 0 && (value.length < MINIMUM_TEXT_LENGTH || value.length > MAX_TEXT_LENGTH);
 
   useEffect(() => {
     if (initialValue != null) setValue(initialValue);
   }, [initialValue]);
 
-  console.log('value', value, initialValue);
-
   return (
     <>
-      <ProfileLayout.Title>{'고생 많으셨어요!\n작성한 소개를 다듬어 보세요'}</ProfileLayout.Title>
       <div style={{ display: 'flex', flexDirection: 'column', marginTop: spacings.xxl, gap: spacings.sm }}>
         {initialValue != null && (
           <Textarea
@@ -36,7 +34,6 @@ export function IntroductionV2({
             onChange={e => {
               setValue(e.target.value);
             }}
-            // defaultValue={initialValue}
             maxLength={MAX_TEXT_LENGTH}
             error={isError}
             caption={<Textarea.Caption>{isError && '최소 50글자 이상 작성해주세요'}</Textarea.Caption>}

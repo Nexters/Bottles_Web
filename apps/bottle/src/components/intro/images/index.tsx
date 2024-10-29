@@ -1,14 +1,16 @@
 import { ProfileLayout } from '@/components/profile/layout';
 import { BaseProfileComponentProps } from '@/components/profile/types';
-import { createInit, GET } from '@/features/server';
-import { getClientSideTokens } from '@/features/server/clientSideTokens';
+import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
+import { uploadImages } from '@/features/image-upload';
+import { useProfileImageMutation } from '@/store/mutation/useProfileImageMutation';
 import { ImageInputs, spacings } from '@bottlesteam/ui';
-import { getCookie } from 'cookies-next';
 import { useCallback, useMemo, useState } from 'react';
 import { ExampleCarousel } from './ExampleCarousel';
 
-export function Images({ ctaButtonText, initialValue }: BaseProfileComponentProps<string[]>) {
-  const [images, setImages] = useState<string[]>(initialValue ?? []);
+export function Images({ ctaButtonText, initialValue }: BaseProfileComponentProps<(string | File)[], string[]>) {
+  const { send } = useAppBridge();
+  const { mutate } = useProfileImageMutation();
+  const [images, setImages] = useState<(File | string)[]>(initialValue ?? []);
 
   const initialImagesSet = useMemo(() => new Set(initialValue), [initialValue]);
 
@@ -17,18 +19,15 @@ export function Images({ ctaButtonText, initialValue }: BaseProfileComponentProp
     [initialImagesSet, images]
   );
 
-  const getPresignedUrls = useCallback(async (newImages: string[]) => {
-    return GET(
-      '/api/v2/profile/images/presigned-url',
-      getClientSideTokens(),
-      createInit(getCookie('accessToken') ?? '', { fileNames: newImages })
-    );
-  }, []);
-
   return (
     <>
-      <ProfileLayout.Title>{'거의 다 왔어요!\n보틀에 담을 사진을 골라주세요'}</ProfileLayout.Title>
       <ImageInputs
+        onMaxExceeded={() =>
+          send({
+            type: AppBridgeMessageType.TOAST_OPEN,
+            payload: { message: '사진은 최대 3개까지만 업로드 가능합니다.' },
+          })
+        }
         images={images}
         maxImages={3}
         labels={['프로필 사진']}
@@ -39,18 +38,13 @@ export function Images({ ctaButtonText, initialValue }: BaseProfileComponentProp
       />
       <ExampleCarousel />
       <ProfileLayout.FixedButton
-        onClick={() => {
-          /**
-           * 이미지 파일들에서, 기존에 없던 이미지는 presigned url을 발급받아서 업로드하고,
-           * 업로드 url로 교체하여 저장한다.
-           */
+        onClick={async () => {
           const newImages = getNewImages();
-          if (newImages.length > 0) {
-            getPresignedUrls(newImages).then(urls => {
-              // urls를 이용해서 이미지 업로드
-              console.log('URLS', urls);
-            });
-          }
+          const urls = await uploadImages(newImages);
+          mutate(urls);
+          urls.forEach(url => {
+            console.log('URL: ', url);
+          });
         }}
       >
         {ctaButtonText}
