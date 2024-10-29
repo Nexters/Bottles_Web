@@ -25,7 +25,7 @@ export default function ProfileImagesEditPage() {
   const router = useRouter();
 
   return (
-    <ProfileLayout.Contents>
+    <>
       <ProfileLayout.Title>{'보틀에 담을 나의\n사진을 골라주세요'}</ProfileLayout.Title>
       <Images
         initialValue={initialImages}
@@ -39,6 +39,6 @@ export default function ProfileImagesEditPage() {
         }}
         ctaButtonText="완료"
       />
-    </ProfileLayout.Contents>
+    </>
   );
 }

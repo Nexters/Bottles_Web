@@ -16,7 +16,9 @@ export default function ItemEditLayout({ children }: Props) {
     <ProfileLayout>
       <HeaderArea />
       <Suspense>
-        <ServerFetchBoundary fetchOptions={prefetchOptions}>{children}</ServerFetchBoundary>
+        <ServerFetchBoundary fetchOptions={prefetchOptions}>
+          <ProfileLayout.Contents>{children}</ProfileLayout.Contents>
+        </ServerFetchBoundary>
       </Suspense>
     </ProfileLayout>
   );
