@@ -44,7 +44,7 @@ export function Item3() {
           </div>
         </div>
         <div style={{ position: 'relative', width: 48, height: 48, borderRadius: '50%', overflow: 'hidden' }}>
-          <Image src={ProfileEx} alt="profile-example" style={{ objectFit: 'cover' }} fill />
+          <Image src={ProfileEx} alt="profile-example" fill />
         </div>
       </div>
       <Paragraph typography="ca" style={{ textAlign: 'center', marginTop: spacings.sm }}>

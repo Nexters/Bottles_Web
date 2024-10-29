@@ -1,16 +1,21 @@
+'use client';
+
 import { ProfileLayout } from '@/components/profile/layout';
 import { BaseProfileComponentProps } from '@/components/profile/types';
 import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
 import { uploadImages } from '@/features/image-upload';
-import { useProfileImageMutation } from '@/store/mutation/useProfileImageMutation';
 import { ImageInputs, spacings } from '@bottlesteam/ui';
 import { useCallback, useMemo, useState } from 'react';
 import { ExampleCarousel } from './ExampleCarousel';
 
-export function Images({ ctaButtonText, initialValue }: BaseProfileComponentProps<(string | File)[], string[]>) {
+export function Images({
+  ctaButtonText,
+  initialValue,
+  onNext,
+}: BaseProfileComponentProps<(string | File)[], string[]>) {
   const { send } = useAppBridge();
-  const { mutate } = useProfileImageMutation();
   const [images, setImages] = useState<(File | string)[]>(initialValue ?? []);
+  const [isLoading, setIsLoading] = useState(false);
 
   const initialImagesSet = useMemo(() => new Set(initialValue), [initialValue]);
 
@@ -38,11 +43,14 @@ export function Images({ ctaButtonText, initialValue }: BaseProfileComponentProp
       />
       <ExampleCarousel />
       <ProfileLayout.FixedButton
+        disabled={isLoading || images.length === 0}
         onClick={async () => {
+          setIsLoading(true);
           const newImages = getNewImages();
-          const urls = await uploadImages(newImages);
-          mutate(urls);
-          urls.forEach(url => {
+          const newUrls = await uploadImages(newImages);
+          await onNext([...images.filter(image => typeof image === 'string'), ...newUrls]);
+          setIsLoading(false);
+          newUrls.forEach(url => {
             console.log('URL: ', url);
           });
         }}

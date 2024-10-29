@@ -3,15 +3,10 @@ import Gradient from './gradient.png';
 
 export function GradientBackground() {
   return (
-    <Image
-      src={Gradient}
-      alt="gradient"
-      objectFit="cover"
-      priority
-      aria-hidden
-      width={776}
-      height={613}
+    <div
       style={{
+        width: 776,
+        height: 613,
         userSelect: 'none',
         position: 'absolute',
         top: 48,
@@ -19,6 +14,8 @@ export function GradientBackground() {
         left: '50%',
         transform: 'translateX(-50%)',
       }}
-    />
+    >
+      <Image src={Gradient} alt="gradient" priority fill aria-hidden />
+    </div>
   );
 }

@@ -11,7 +11,7 @@ import { useAutoCreatedIntro } from '@/features/auto-create-intro/useAutoCreateI
 import { bottleStorage, keyMap } from '@/features/bottle-storage/bottleStorage';
 import { useFunnel } from '@/features/funnel';
 import { useIntroductionMutation } from '@/store/mutation/useIntroductionMutation';
-import { useProfileImageMutation } from '@/store/mutation/useProfileImageMutation';
+import { useProfileImagesMutation } from '@/store/mutation/useProfileImagesMutation';
 import { useRouter } from 'next/navigation';
 import { useMemo } from 'react';
 import { GradientBackground } from './GradientBackground';
@@ -21,7 +21,7 @@ const MAX_STEPS = 3;
 export default function CreateIntroPage() {
   const { send } = useAppBridge();
   const { mutateAsync: introMutation } = useIntroductionMutation({ type: 'create' });
-  const { mutateAsync: profileImageMuatation } = useProfileImageMutation();
+  const { mutateAsync: profileImageMuatation } = useProfileImagesMutation({ type: 'create' });
   const router = useRouter();
   const autoCreatedIntro = useAutoCreatedIntro();
 
@@ -70,6 +70,7 @@ export default function CreateIntroPage() {
           <Images
             onNext={async (newImages: string[]) => {
               await profileImageMuatation(newImages);
+              // TODO: handle native behavior after success
             }}
             ctaButtonText="완료"
           />
