@@ -27,7 +27,14 @@ const TextareaImpl = forwardRef<ElementRef<'textarea'>, TextareaProps>(
       <div className={containerStyle} style={style}>
         <label htmlFor={id} className={labelStyle({ error })}>
           <div className={textAreaWrapperStyle}>
-            <textarea ref={ref} id={id} className={textareaStyle} value={value} {...textareaProps} />
+            <textarea
+              ref={ref}
+              id={id}
+              className={textareaStyle}
+              value={value}
+              maxLength={maxLength}
+              {...textareaProps}
+            />
             {maxLength != null && (
               <div className={counterTextWrapperStyle}>
                 <Paragraph
