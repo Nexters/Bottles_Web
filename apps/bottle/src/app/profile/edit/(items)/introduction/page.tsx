@@ -20,7 +20,7 @@ export default function IntroductionEditPage() {
   const initialAnswer = introduction[0]?.answer ?? '';
 
   return (
-    <ProfileLayout.Contents>
+    <>
       <ProfileLayout.Title>{'보틀에 담을\n소개를 작성해 주세요'}</ProfileLayout.Title>
       <IntroductionV2
         initialValue={initialAnswer}
@@ -33,6 +33,6 @@ export default function IntroductionEditPage() {
         }}
         ctaButtonText="완료"
       />
-    </ProfileLayout.Contents>
+    </>
   );
 }
