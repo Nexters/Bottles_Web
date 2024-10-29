@@ -4,40 +4,36 @@ import { Paragraph } from '../paragraph';
 import { placeholder, imagesContainer, imageFrame, deleteButton, imageFrameBlock } from './imageInputsStyle.css';
 
 export interface ImageInputsProps extends Omit<ComponentProps<'div'>, 'onChange' | 'className'> {
-  onChange: (files: string[]) => void;
+  onChange: (files: (File | string)[]) => void;
   maxImages: number;
   labels?: string[];
-  images: string[];
+  // images: string[];
+  images: (File | string)[];
+  onMaxExceeded?: () => void;
 }
 
-export function ImageInputs({ onChange, images, maxImages, labels, ...containerProps }: ImageInputsProps) {
+export function ImageInputs({
+  onChange,
+  images,
+  maxImages,
+  labels,
+  onMaxExceeded,
+  ...containerProps
+}: ImageInputsProps) {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newFiles = e.currentTarget.files;
     const availableLength = maxImages - images.length;
     if (newFiles == null) {
-      console.log('WTF');
       return;
     }
     if (newFiles.length > availableLength) {
-      alert(`최대 ${maxImages}개의 사진만 업로드할 수 있습니다.`);
+      onMaxExceeded?.();
     }
     const newFilesArray = Array.from(newFiles);
     const deleteCount = newFiles.length - availableLength;
     newFilesArray.splice(-deleteCount, deleteCount);
 
-    const previews: string[] = [...images];
-    newFilesArray.forEach((file, index) => {
-      if (file && file.type.startsWith('image/')) {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          previews.push(reader.result as string);
-          if (index === newFilesArray.length - 1) {
-            onChange(previews);
-          }
-        };
-        reader.readAsDataURL(file);
-      }
-    });
+    onChange([...images, ...newFilesArray]);
   };
 
   const handleDelete = (index: number) => {
@@ -52,7 +48,10 @@ export function ImageInputs({ onChange, images, maxImages, labels, ...containerP
           {images.length > index ? (
             <>
               <div className={imageFrame}>
-                <img src={images[index]} style={{ width: '104px', height: '104px', objectFit: 'cover' }} />
+                <img
+                  src={typeof images[index] === 'string' ? images[index] : URL.createObjectURL(images[index]!)}
+                  style={{ width: '104px', height: '104px', objectFit: 'cover' }}
+                />
                 <button className={deleteButton} onClick={() => handleDelete(index)}>
                   <Asset type="icon-close" />
                 </button>
