@@ -1,5 +1,6 @@
 import { LoginResponse } from '@/store/mutation/useLoginMutation';
 import { Tokens } from '../server/auth';
+import App from 'next/app';
 
 export enum AppBridgeMessageType {
   TOAST_OPEN = 'onToastOpen',
@@ -13,6 +14,7 @@ export enum AppBridgeMessageType {
   OPEN_LINK = 'openLink',
   OPEN_WEB_VIEW = 'openWebView',
   INTRODUCTION_COMPLETE = 'onIntroductionComplete',
+  PROFILE_IMAGE_EDIT_COMPLETE = 'onProfileImageEditComplete',
 }
 export type AppBridgeMessage =
   | ToastMessage
@@ -27,7 +29,8 @@ export type AppBridgeMessage =
         | AppBridgeMessageType.DELETE_USER
         | AppBridgeMessageType.BOTTLE_ACCEPT
         | AppBridgeMessageType.LOGOUT
-        | AppBridgeMessageType.INTRODUCTION_COMPLETE;
+        | AppBridgeMessageType.INTRODUCTION_COMPLETE
+        | AppBridgeMessageType.PROFILE_IMAGE_EDIT_COMPLETE;
     };
 
 export interface ToastMessage {
