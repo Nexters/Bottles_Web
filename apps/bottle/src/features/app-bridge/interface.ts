@@ -1,6 +1,5 @@
 import { LoginResponse } from '@/store/mutation/useLoginMutation';
 import { Tokens } from '../server/auth';
-import App from 'next/app';
 
 export enum AppBridgeMessageType {
   TOAST_OPEN = 'onToastOpen',
