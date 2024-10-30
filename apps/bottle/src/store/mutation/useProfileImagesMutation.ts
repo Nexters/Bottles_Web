@@ -32,7 +32,6 @@ export function useProfileImagesMutation({ type }: { type: MutateProfileImagesTy
       switch (type) {
         case 'create':
           send({ type: AppBridgeMessageType.TOAST_OPEN, payload: { message: messageMap.create.success } });
-          send({ type: AppBridgeMessageType.CREATE_PROFILE_COMPLETE });
           break;
         case 'edit':
           send({ type: AppBridgeMessageType.TOAST_OPEN, payload: { message: messageMap.edit.success } });
