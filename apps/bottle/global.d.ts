@@ -9,6 +9,8 @@ declare const Native: {
   onSignup: (json: string) => void;
   openLink: (json: string) => void;
   openWebView: (json: string) => void;
+  onIntroductionComplete: () => void;
+  onProfileImageEditComplete: () => void;
 };
 
 interface WebviewCloseMessage {

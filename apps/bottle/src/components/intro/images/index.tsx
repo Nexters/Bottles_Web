@@ -30,7 +30,8 @@ export function Images({
         onMaxExceeded={() =>
           send({
             type: AppBridgeMessageType.TOAST_OPEN,
-            payload: { message: '사진은 최대 3개까지만 업로드 가능합니다.' },
+            // TODO: Change this to 3 when the feature is ready on native app
+            payload: { message: '사진은 최대 1개까지만 업로드 가능합니다.' },
           })
         }
         images={images}

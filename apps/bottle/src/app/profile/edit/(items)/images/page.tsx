@@ -2,6 +2,8 @@
 
 import { Images } from '@/components/intro/images';
 import { ProfileLayout } from '@/components/profile/layout';
+import { AppBridgeMessageType, useAppBridge } from '@/features/app-bridge';
+import { useUserAgent } from '@/features/user-agent/UserAgentProvider';
 import { useProfileImagesMutation } from '@/store/mutation/useProfileImagesMutation';
 import { useProfileImagesQuery } from '@/store/query/useProfileImagesQuery';
 import { useRouter } from 'next/navigation';
@@ -18,6 +20,8 @@ const isSameArray = (array1: string[], array2: string[]) => {
 };
 
 export default function ProfileImagesEditPage() {
+  const { isIOS, isMobile } = useUserAgent();
+  const { send } = useAppBridge();
   const {
     data: { userImages: initialImages },
   } = useProfileImagesQuery();
@@ -35,6 +39,9 @@ export default function ProfileImagesEditPage() {
             return;
           }
           await mutateAsync(images);
+          if (isIOS && isMobile) {
+            send({ type: AppBridgeMessageType.PROFILE_IMAGE_EDIT_COMPLETE });
+          }
           router.back();
         }}
         ctaButtonText="완료"

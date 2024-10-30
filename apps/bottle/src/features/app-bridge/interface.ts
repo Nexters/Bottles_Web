@@ -12,6 +12,8 @@ export enum AppBridgeMessageType {
   BOTTLE_ACCEPT = 'onBottleAccept',
   OPEN_LINK = 'openLink',
   OPEN_WEB_VIEW = 'openWebView',
+  INTRODUCTION_COMPLETE = 'onIntroductionComplete',
+  PROFILE_IMAGE_EDIT_COMPLETE = 'onProfileImageEditComplete',
 }
 export type AppBridgeMessage =
   | ToastMessage
@@ -25,7 +27,9 @@ export type AppBridgeMessage =
         | AppBridgeMessageType.CREATE_PROFILE_COMPLETE
         | AppBridgeMessageType.DELETE_USER
         | AppBridgeMessageType.BOTTLE_ACCEPT
-        | AppBridgeMessageType.LOGOUT;
+        | AppBridgeMessageType.LOGOUT
+        | AppBridgeMessageType.INTRODUCTION_COMPLETE
+        | AppBridgeMessageType.PROFILE_IMAGE_EDIT_COMPLETE;
     };
 
 export interface ToastMessage {

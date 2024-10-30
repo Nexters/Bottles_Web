@@ -70,7 +70,7 @@ export default function CreateIntroPage() {
           <Images
             onNext={async (newImages: string[]) => {
               await profileImageMuatation(newImages);
-              // TODO: handle native behavior after success
+              send({ type: AppBridgeMessageType.INTRODUCTION_COMPLETE });
             }}
             ctaButtonText="완료"
           />
