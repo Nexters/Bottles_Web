@@ -6,6 +6,8 @@ export const containerStyle = recipe({
   base: {
     borderRadius: '50%',
     position: 'relative',
+    userSelect: 'none',
+    WebkitUserSelect: 'none',
   },
   variants: {
     size: {

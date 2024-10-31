@@ -13,8 +13,10 @@ export const embla = style({
 
 export const emblaContainer = style({
   display: 'flex',
+  flexDirection: 'column',
   height: '100%',
   width: '100%',
+  alignItems: 'center',
 });
 
 export const emblaSlide = style({
@@ -26,4 +28,16 @@ export const emblaSlide = style({
   flexDirection: 'column',
   justifyContent: 'flex-start',
   alignItems: 'center',
+});
+
+export const newEmbla = style({
+  overflow: 'hidden',
+  width: '100%',
+  height: 'auto',
+});
+
+export const newEmblaContainer = style({
+  display: 'flex',
+  height: '100%',
+  width: '100%',
 });
