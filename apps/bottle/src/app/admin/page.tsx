@@ -41,9 +41,14 @@ export default function AdminPage() {
               프로필 수정 이동{' >'}
             </Button>
           </Link>
-          <Link href={'/bottles'}>
+          <Link href={'/bottles/sents'}>
             <Button size="md" variant="outlined">
               도착한 보틀 이동{' >'}
+            </Button>
+          </Link>
+          <Link href={'/intro/create'}>
+            <Button size="md" variant="outlined">
+              자기소개&프로필 사진 등록{' >'}
             </Button>
           </Link>
         </div>
