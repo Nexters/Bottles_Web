@@ -9,7 +9,7 @@ export const buttonContainer = style({
   width: '100%',
   height: `${CTA_HEIGHT}px`,
   paddingTop: spacings.xl,
-  marginBottom: 'env(safe-area-inset-bottom)',
+  marginBottom: spacings.sm,
   display: 'flex',
   justifyContent: 'center',
   background: 'linear-gradient(180deg, rgba(251, 251, 251, 0) 0%, #FBFBFB 25%)',
