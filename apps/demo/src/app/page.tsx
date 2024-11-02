@@ -1,95 +1,42 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
+
+import LoginBackground from '@/assets/images/login-background.webp';
+import { KakaoButton } from '@/components/kakao-button';
+import { Asset, Paragraph, spacings } from '@bottlesteam/ui';
+import Image from 'next/image';
+
+const CLIENT_ID = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID;
+const REDIRECT_URI = `${process.env.NEXT_PUBLIC_MODE === 'DEVELOPMENT' ? 'http://localhost:3000' : 'https://demo.bottles.asia'}/kakao`;
+const kakaoLoginUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+    <div style={{ position: 'relative', width: '100%', height: '100%', padding: `0 ${spacings.md}` }}>
+      <Image src={LoginBackground} alt="login background" fill style={{ objectFit: 'cover' }} />
+      <div
+        style={{
+          zIndex: 2,
+          position: 'absolute',
+          left: 0,
+          top: 96,
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          textAlign: 'center',
+          gap: spacings.xl,
+        }}
+      >
+        <Asset type="bottle-logo" />
+        <Paragraph color="white100" typography="t2">
+          {'진심을 담은 보틀로\n서로를 밀도있게 알아가요'}
+        </Paragraph>
+      </div>
+      <KakaoButton
+        onClick={() => {
+          window.location.href = kakaoLoginUrl;
+        }}
+      />
     </div>
   );
 }

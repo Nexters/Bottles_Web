@@ -1,4 +1,5 @@
 import { ComponentProps } from 'react';
+import BottleLogo from './icons/bottle-logo.svg';
 import LeftArrowIcon from './icons/icon_arrow_left.svg';
 import CheckIcon from './icons/icon_check.svg';
 import CheckIconColored from './icons/icon_check_colored.svg';
@@ -12,6 +13,7 @@ import PencilIcon from './icons/icon_pencil.svg';
 import PlusIcon from './icons/icon_plus.svg';
 import RightIcon from './icons/icon_right.svg';
 import VerticalBarIcon from './icons/icon_vertical_bar.svg';
+import KakaoLogo from './icons/kakao-logo.svg';
 import Vector from './icons/vector.svg';
 
 type Type =
@@ -28,7 +30,9 @@ type Type =
   | 'icon-delete'
   | 'icon-pencil'
   | 'icon-plus'
-  | 'icon-clock';
+  | 'icon-clock'
+  | 'kakao-logo'
+  | 'bottle-logo';
 
 export interface AssetProps extends ComponentProps<'svg'> {
   type: Type;
@@ -61,6 +65,10 @@ export function Asset({ type, ...rest }: AssetProps) {
     <ClockIcon />
   ) : type === 'icon-plus' ? (
     <PlusIcon />
+  ) : type === 'kakao-logo' ? (
+    <KakaoLogo />
+  ) : type === 'bottle-logo' ? (
+    <BottleLogo />
   ) : (
     <VerticalBarIcon />
   );
