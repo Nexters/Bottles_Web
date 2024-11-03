@@ -29,7 +29,7 @@ export default function Home() {
       >
         <Asset type="bottle-logo" />
         <Paragraph color="white100" typography="t2">
-          {'진심을 담은 보틀로\n서로를 밀도있게 알아가요'}
+          {'진심을 담은 보틀로\n서로를 밀도있게 알아가요 '}
         </Paragraph>
       </div>
       <KakaoButton
