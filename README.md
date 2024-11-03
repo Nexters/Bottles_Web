@@ -18,9 +18,11 @@ This Turborepo includes the following packages/apps:
 ### Apps and Packages
 
 - `bottle`: a Next.js project for web view inside the [Bottle](https://url.kr/cps1z2) native app
+- `demo`: a Next.js project for [demo usage on the browser](https://demo.bottles.asia) 
 - `web`: a Next.js project for a [promotional website](https://bottles.asia)
 - `admin`: a React project for the admin panel managing the Bottle app 
 - `@bottlesteam/ui`: a stub React component library shared by services located in `apps/**`
+- `@bottlesteam/utils`: a React, Next.js util library shared by services located in `apps/**`
 - `@bottlesteam/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
 - `@bottlesteam/typescript-config`: `tsconfig.json`s used throughout the monorepo
 - `@bottlesteam/vitest-config`: `vitest.config`s used throughout the monorepo
