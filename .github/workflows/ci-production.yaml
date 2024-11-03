@@ -112,6 +112,49 @@ jobs:
           -d "$DATA" \
           ${{ secrets.SLACK_WEBHOOK_URL }}
 
+  Deploy_Demo_to_Vercel:
+    # deploy Demo to vercel
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_DEMO }}
+    needs: Setup
+    steps:
+      # checkout and install pnpm
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 8
+          run_install: false
+      # setup node
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Deploy to Vercel if needed
+        run: |
+          npm install --global vercel@latest
+          vercel pull --yes --environment=production --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+          vercel build --prod --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+          vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+
+      - name: Send Slack Notification
+        env:
+          DATA: |
+            {
+              "channel": "C07N47FH04Q", 
+              "text": "<@U07L87GGHJS>
+              🎉 데모 배포 완료! 🎉
+              👉 https://demo.bottles.asia",
+            }
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d "$DATA" \
+          ${{ secrets.SLACK_WEBHOOK_URL }}
+
   Deploy_Web_to_Vercel:
     # deploy Web to vercel
     runs-on: ubuntu-latest
