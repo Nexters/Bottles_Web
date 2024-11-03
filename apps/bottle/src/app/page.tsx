@@ -1,3 +1,5 @@
+'use client';
+
 import { Step } from '@/features/steps/StepContainer';
 import { Asset } from '@bottlesteam/ui';
 
@@ -14,7 +16,7 @@ export default function Home() {
         }}
         style={{ marginBottom: '20px' }}
       >
-        테스트
+        테스트2
       </Step.FixedButton>
     </div>
   );
