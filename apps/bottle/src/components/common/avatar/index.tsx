@@ -16,7 +16,20 @@ export function Avatar({ size: _size, blur, ...props }: AvatarProps) {
   return (
     <div className={containerStyle({ size: _size })}>
       {props.src != null ? (
-        <Image priority {...props} alt="user profile image" fill objectFit="cover" className={avatarStyle({ blur })} />
+        <>
+          <Image
+            priority
+            {...props}
+            alt="user profile image"
+            fill
+            objectFit="cover"
+            className={avatarStyle({ blur })}
+          />
+          <div
+            aria-hidden
+            style={{ width: '100%', height: '100%', position: 'absolute', top: 0, left: 0, zIndex: 2 }}
+          />
+        </>
       ) : (
         <Placeholder size={size} />
       )}
