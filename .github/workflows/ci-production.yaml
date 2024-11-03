@@ -33,7 +33,7 @@ jobs:
       # install dependencies
       - run: npx pnpm i -r
 
-      # set .env.local
+      # set .env.local for e2e
       - name: create dotenv
         run: |
           touch apps/bottle/.env.local
@@ -43,22 +43,25 @@ jobs:
         env:
           NEXT_PUBLIC_SERVER_BASE_URL: ${{ secrets.NEXT_PUBLIC_SERVER_BASE_URL }}
 
-      # determine whether @bottlesteam/bottle, @bottlesteam/web is cached on remote
+      # determine whether @bottlesteam/bottle, @bottlesteam/demo, @bottlesteam/web is cached on remote
       - name: Determine cache status for each services
         id: determine-status
         run: |
           pnpx turbo run build --dry-run=json > result.json
           cache_status_bottle=$(jq -r '.tasks[] | select(.taskId == "@bottlesteam/bottle#build") | .cache.status' result.json)
+          cache_status_demo=$(jq -r '.tasks[] | select(.taskId == "@bottlesteam/demo#build") | .cache.status' result.json)
           cache_status_web=$(jq -r '.tasks[] | select(.taskId == "@bottlesteam/web#build") | .cache.status' result.json)
           pnpx turbo run test:e2e --dry-run=json > result2.json
           cache_status_e2e=$(jq -r '.tasks[] | select(.taskId == "@bottlesteam/e2e#test:e2e") | .cache.status' result2.json)
           echo "cache_status_bottle=$cache_status_bottle" >> $GITHUB_OUTPUT
+          echo "cache_status_demo=$cache_status_demo" >> $GITHUB_OUTPUT
           echo "cache_status_web=$cache_status_web" >> $GITHUB_OUTPUT
           echo "cache_status_e2e=$cache_status_e2e" >> $GITHUB_OUTPUT
 
       - name: Cache Status Print
         run: |
           echo "cache_status_bottle: ${{ steps.determine-status.outputs.cache_status_bottle }}"
+          echo "cache_status_demo: ${{ steps.determine-status.outputs.cache_status_demo }}"
           echo "cache_status_web: ${{ steps.determine-status.outputs.cache_status_web }}"
           echo "cache_status_e2e: ${{ steps.determine-status.outputs.cache_status_e2e }}"
 
@@ -106,6 +109,49 @@ jobs:
               "text": "<@U07L87GGHJS>
               🎉 보틀 배포 완료! 🎉
               👉 https://bottle.bottles.asia",
+            }
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d "$DATA" \
+          ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  Deploy_Demo_to_Vercel:
+    # deploy Demo to vercel
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_DEMO }}
+    needs: Setup
+    steps:
+      # checkout and install pnpm
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 8
+          run_install: false
+      # setup node
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Deploy to Vercel if needed
+        run: |
+          npm install --global vercel@latest
+          vercel pull --yes --environment=production --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+          vercel build --prod --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+          vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+
+      - name: Send Slack Notification
+        env:
+          DATA: |
+            {
+              "channel": "C07N47FH04Q", 
+              "text": "<@U07L87GGHJS>
+              🎉 데모 배포 완료! 🎉
+              👉 https://demo.bottles.asia",
             }
         run: |
           curl -X POST -H "Content-Type: application/json" \
