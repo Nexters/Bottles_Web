@@ -1,0 +1,26 @@
+{
+  "name": "@bottlesteam/server-utils",
+  "version": "0.0.0",
+  "private": true,
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {},
+  "dependencies": {
+    "@bottlesteam/bottle": "workspace:*",
+    "@bottlesteam/eslint-config": "workspace:*",
+    "@bottlesteam/typescript-config": "workspace:*",
+    "cookies-next": "^4.2.1",
+    "dotenv": "^16.4.5",
+    "eslint": "^8",
+    "next": "14.2.4",
+    "react": "^18.3.1",
+    "react-dom": "^18"
+  },
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "require": "./src/index.ts"
+    }
+  }
+}

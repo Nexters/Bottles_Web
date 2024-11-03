@@ -206,6 +206,9 @@ importers:
 
   apps/demo:
     dependencies:
+      '@bottlesteam/server-utils':
+        specifier: workspace:*
+        version: link:../../packages/server-utils
       '@bottlesteam/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -412,6 +415,36 @@ importers:
       typescript:
         specifier: ^5.5.2
         version: 5.5.4
+
+  packages/server-utils:
+    dependencies:
+      '@bottlesteam/bottle':
+        specifier: workspace:*
+        version: link:../../apps/bottle
+      '@bottlesteam/eslint-config':
+        specifier: workspace:*
+        version: link:../eslint-config
+      '@bottlesteam/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      cookies-next:
+        specifier: ^4.2.1
+        version: 4.2.1
+      dotenv:
+        specifier: ^16.4.5
+        version: 16.4.5
+      eslint:
+        specifier: ^8
+        version: 8.57.0
+      next:
+        specifier: 14.2.4
+        version: 14.2.4(@babel/core@7.25.2)(react-dom@18.3.1)(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: ^18
+        version: 18.3.1(react@18.3.1)
 
   packages/typescript-config: {}
 
@@ -5443,6 +5476,7 @@ packages:
   /eslint@8.57.0:
     resolution: {integrity: sha512-dZ6+mexnaTIbSBZWgou51U6OmzIhYM2VcNdtiTtI7qPNZm35Akpr0f6vtw3w1Kmn5PYo+tZVfh13WrhpS6oLqQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
     dependencies:
       '@eslint-community/eslint-utils': 4.4.0(eslint@8.57.0)

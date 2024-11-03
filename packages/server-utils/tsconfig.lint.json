@@ -1,0 +1,6 @@
+{
+  "extends": "@bottlesteam/typescript-config/react-library.json",
+  "compilerOptions": {},
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}

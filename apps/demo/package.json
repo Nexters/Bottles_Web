@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@bottlesteam/ui": "workspace:*",
+    "@bottlesteam/server-utils": "workspace:*",
     "@tanstack/react-query": "^5.51.21",
     "cookies-next": "^4.2.1",
     "es-toolkit": "^1.26.1",
