@@ -1,3 +1,5 @@
+'use client';
+
 import { Step } from '@/features/steps/StepContainer';
 import { Asset } from '@bottlesteam/ui';
 
@@ -8,7 +10,14 @@ export default function Home() {
         <Asset type="icon-down" />
         <Asset type="icon-arrow-left" />
       </div>
-      <Step.FixedButton style={{ marginBottom: '20px' }}>테스트</Step.FixedButton>
+      <Step.FixedButton
+        onClick={() => {
+          window.location.href = 'intent://main#Intent;scheme=bottle;package=com.team.bottles;end';
+        }}
+        style={{ marginBottom: '20px' }}
+      >
+        테스트2
+      </Step.FixedButton>
     </div>
   );
 }
