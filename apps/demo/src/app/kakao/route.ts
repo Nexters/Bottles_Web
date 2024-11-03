@@ -10,6 +10,8 @@ export async function GET(request: Request) {
 
   const loginData = await login(accessToken);
 
+  console.log('loginData', accessToken, loginData);
+
   const headers = new Headers();
   headers.append('Set-Cookie', `accessToken=${loginData.accessToken}`);
   headers.append('Set-Cookie', `refreshToken=${loginData.refreshToken}`);
