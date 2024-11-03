@@ -6,7 +6,7 @@ export const getTokenFromKakako = async (code: string) => {
   const details: Record<Detail, string> = {
     grant_type: 'authorization_code',
     client_id: `${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}`,
-    redirect_uri: `${isDev ? 'http://localhost:3000/kakao' : 'https://demo.bottles.asia/'}`,
+    redirect_uri: `${isDev ? 'http://localhost:3000/kakao' : 'https://demo.bottles.asia/kakao'}`,
     code,
   };
   const body = (Object.keys(details) as Detail[])
