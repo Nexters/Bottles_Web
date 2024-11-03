@@ -9,6 +9,7 @@ import IconClose from './icons/icon_close.svg';
 import IconCloseWhite from './icons/icon_close_white.svg';
 import DeleteIcon from './icons/icon_delete.svg';
 import DownIcon from './icons/icon_down.svg';
+import LetterIcon from './icons/icon_letter.svg';
 import PencilIcon from './icons/icon_pencil.svg';
 import PlusIcon from './icons/icon_plus.svg';
 import RightIcon from './icons/icon_right.svg';
@@ -32,7 +33,8 @@ type Type =
   | 'icon-plus'
   | 'icon-clock'
   | 'kakao-logo'
-  | 'bottle-logo';
+  | 'bottle-logo'
+  | 'icon-letter';
 
 export interface AssetProps extends ComponentProps<'svg'> {
   type: Type;
@@ -46,29 +48,31 @@ export function Asset({ type, ...rest }: AssetProps) {
   ) : type === 'icon-right' ? (
     <RightIcon {...rest} />
   ) : type === 'vector' ? (
-    <Vector />
+    <Vector {...rest} />
   ) : type === 'icon-check' ? (
-    <CheckIcon />
+    <CheckIcon {...rest} />
   ) : type === 'icon-check-colored' ? (
-    <CheckIconColored />
+    <CheckIconColored {...rest} />
   ) : type === 'icon-check-white' ? (
-    <CheckIconWhite />
+    <CheckIconWhite {...rest} />
   ) : type === 'icon-close' ? (
-    <IconClose />
+    <IconClose {...rest} />
   ) : type === 'icon-close-white' ? (
-    <IconCloseWhite />
+    <IconCloseWhite {...rest} />
   ) : type === 'icon-delete' ? (
-    <DeleteIcon />
+    <DeleteIcon {...rest} />
   ) : type === 'icon-pencil' ? (
-    <PencilIcon />
+    <PencilIcon {...rest} />
   ) : type === 'icon-clock' ? (
-    <ClockIcon />
+    <ClockIcon {...rest} />
   ) : type === 'icon-plus' ? (
-    <PlusIcon />
+    <PlusIcon {...rest} />
   ) : type === 'kakao-logo' ? (
-    <KakaoLogo />
+    <KakaoLogo {...rest} />
   ) : type === 'bottle-logo' ? (
-    <BottleLogo />
+    <BottleLogo {...rest} />
+  ) : type === 'icon-letter' ? (
+    <LetterIcon {...rest} />
   ) : (
     <VerticalBarIcon />
   );

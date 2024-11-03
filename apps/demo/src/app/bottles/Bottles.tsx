@@ -5,6 +5,7 @@ import { BottleCard } from '@/components/common/bottle-card';
 import { Fallback } from '@/components/common/fallback';
 import { Layout, spacings } from '@bottlesteam/ui';
 import { pick } from 'es-toolkit';
+import { useRouter } from 'next/navigation';
 import { RandomBottlesQuery, UserInfo } from './page';
 
 interface Props {
@@ -13,6 +14,8 @@ interface Props {
 }
 
 export function Bottles({ bottles: { randomBottles }, userInfo }: Props) {
+  const router = useRouter();
+
   return (
     <Layout.Contents>
       {randomBottles.length > 0 ? (
@@ -20,7 +23,12 @@ export function Bottles({ bottles: { randomBottles }, userInfo }: Props) {
           <Layout.Title>{`${userInfo.name}님에게\n추천하는 분들이에요!`}</Layout.Title>
           <section style={{ marginTop: spacings.xxl, display: 'flex', flexDirection: 'column', gap: spacings.md }}>
             {randomBottles.map(bottle => (
-              <BottleCard key={bottle.id} onClick={() => {}}>
+              <BottleCard
+                key={bottle.id}
+                onClick={() => {
+                  router.push(`/bottle/${bottle.id}`);
+                }}
+              >
                 <BottleCard.TimeTag>{bottle.expiredAt}</BottleCard.TimeTag>
                 <BottleCard.Introduction>{bottle.introduction[0]?.answer}</BottleCard.Introduction>
                 <BottleCard.UserInformation

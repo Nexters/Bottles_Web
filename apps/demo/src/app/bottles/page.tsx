@@ -1,5 +1,5 @@
 import { RecommendationBottlePreview } from '@/models/bottle';
-import { getServerSideTokens, GET, createInit } from '@bottlesteam/server-utils';
+import { GET, getServerSideTokens, createInit } from '@/server';
 import { Bottles } from './Bottles';
 
 export interface RandomBottlesQuery {

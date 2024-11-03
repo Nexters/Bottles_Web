@@ -206,12 +206,12 @@ importers:
 
   apps/demo:
     dependencies:
-      '@bottlesteam/server-utils':
-        specifier: workspace:*
-        version: link:../../packages/server-utils
       '@bottlesteam/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      '@bottlesteam/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
       '@tanstack/react-query':
         specifier: ^5.51.21
         version: 5.51.21(react@18.3.1)
@@ -416,36 +416,6 @@ importers:
         specifier: ^5.5.2
         version: 5.5.4
 
-  packages/server-utils:
-    dependencies:
-      '@bottlesteam/bottle':
-        specifier: workspace:*
-        version: link:../../apps/bottle
-      '@bottlesteam/eslint-config':
-        specifier: workspace:*
-        version: link:../eslint-config
-      '@bottlesteam/typescript-config':
-        specifier: workspace:*
-        version: link:../typescript-config
-      cookies-next:
-        specifier: ^4.2.1
-        version: 4.2.1
-      dotenv:
-        specifier: ^16.4.5
-        version: 16.4.5
-      eslint:
-        specifier: ^8
-        version: 8.57.0
-      next:
-        specifier: 14.2.4
-        version: 14.2.4(@babel/core@7.25.2)(react-dom@18.3.1)(react@18.3.1)
-      react:
-        specifier: ^18.3.1
-        version: 18.3.1
-      react-dom:
-        specifier: ^18
-        version: 18.3.1(react@18.3.1)
-
   packages/typescript-config: {}
 
   packages/ui:
@@ -499,6 +469,52 @@ importers:
       eslint:
         specifier: ^8.57.0
         version: 8.57.0
+      typescript:
+        specifier: ^5.3.3
+        version: 5.5.4
+
+  packages/utils:
+    dependencies:
+      '@bottlesteam/bottle':
+        specifier: workspace:*
+        version: link:../../apps/bottle
+      '@bottlesteam/eslint-config':
+        specifier: workspace:*
+        version: link:../eslint-config
+      '@bottlesteam/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      cookies-next:
+        specifier: ^4.2.1
+        version: 4.2.1
+      dotenv:
+        specifier: ^16.4.5
+        version: 16.4.5
+      eslint:
+        specifier: ^8
+        version: 8.57.0
+      next:
+        specifier: 14.2.4
+        version: 14.2.4(@babel/core@7.25.2)(react-dom@18.3.1)(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: ^18
+        version: 18.3.1(react@18.3.1)
+    devDependencies:
+      '@types/eslint':
+        specifier: ^8.56.5
+        version: 8.56.11
+      '@types/node':
+        specifier: ^20.11.24
+        version: 20.14.14
+      '@types/react':
+        specifier: ^18.2.61
+        version: 18.3.3
+      '@types/react-dom':
+        specifier: ^18.2.19
+        version: 18.3.0
       typescript:
         specifier: ^5.3.3
         version: 5.5.4
