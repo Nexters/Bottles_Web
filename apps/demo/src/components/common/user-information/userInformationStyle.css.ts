@@ -54,7 +54,6 @@ export const introductionStyle = style({
   padding: spacings.md,
   display: 'flex',
   flexDirection: 'column',
-  marginTop: spacings.xl,
   gap: spacings.xxl,
 });
 

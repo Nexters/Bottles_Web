@@ -5,6 +5,8 @@ import { Bottle } from '@/models/bottle';
 import { Asset, FixedBottomCTAButton, spacings } from '@bottlesteam/ui';
 import { useUserAgent } from '@bottlesteam/utils';
 
+const ANDROID_INTENT_SCHEME = 'intent://main#Intent;scheme=bottle;package=com.team.bottles;end';
+
 export function BottleDetail({ bottleDetail: user }: { bottleDetail: Bottle }) {
   const userAgent = useUserAgent();
 
@@ -14,7 +16,7 @@ export function BottleDetail({ bottleDetail: user }: { bottleDetail: Bottle }) {
       return;
     }
     if (userAgent.isAndroid) {
-      window.location.href = 'intent://main#Intent;scheme=bottle;package=com.team.bottles;end';
+      window.location.href = ANDROID_INTENT_SCHEME;
     }
     if (userAgent.isIOS) {
       // TODO: add iOS scheme
