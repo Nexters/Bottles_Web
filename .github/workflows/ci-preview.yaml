@@ -129,112 +129,112 @@ jobs:
           -d "$DATA" \
           ${{ secrets.SLACK_WEBHOOK_URL }}
 
-Deploy_Demo_to_Vercel:
-  # deploy Demo to vercel
-  runs-on: ubuntu-latest
-  env:
-    VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_Demo }}
-  needs: Setup
-  if: needs.Setup.outputs.cache_status_demo == 'MISS'
-  steps:
-    # checkout and install pnpm
-    - uses: actions/checkout@v4
-    - uses: pnpm/action-setup@v3
-      name: Install pnpm
-      id: pnpm-install
-      with:
-        version: 8
-        run_install: false
-    # setup node
-    - name: Setup Node.js environment
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20
-        cache: 'pnpm'
+  Deploy_Demo_to_Vercel:
+    # deploy Demo to vercel
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_Demo }}
+    needs: Setup
+    if: needs.Setup.outputs.cache_status_demo == 'MISS'
+    steps:
+      # checkout and install pnpm
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 8
+          run_install: false
+      # setup node
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
 
-    - name: Deploy to Vercel if needed
-      run: |
-        npm install --global vercel@latest
-        vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
-        vercel build --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
-        vercel deploy --prebuilt --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
-    - name: Get Vercel Preview
-      uses: zentered/vercel-preview-url@v1.1.9
-      id: vercel_preview_url
-      env:
-        VERCEL_TOKEN: ${{ secrets.VERCEL_ACCESS_TOKEN }}
-      with:
-        vercel_project_id: ${{ secrets.VERCEL_PROJECT_ID_BOTTLE }}
-    - name: Get URL
-      run: echo "https://${{ steps.vercel_preview_url.outputs.preview_url }}"
+      - name: Deploy to Vercel if needed
+        run: |
+          npm install --global vercel@latest
+          vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+          vercel build --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+          vercel deploy --prebuilt --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+      - name: Get Vercel Preview
+        uses: zentered/vercel-preview-url@v1.1.9
+        id: vercel_preview_url
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_ACCESS_TOKEN }}
+        with:
+          vercel_project_id: ${{ secrets.VERCEL_PROJECT_ID_BOTTLE }}
+      - name: Get URL
+        run: echo "https://${{ steps.vercel_preview_url.outputs.preview_url }}"
 
-    - name: Send Slack Notification
-      env:
-        DATA: |
-          {
-            "channel": "C07N47FH04Q", 
-            "text": "<@U07L87GGHJS>
-            🍾 데모 미리보기 배포 완료! 
-            👉 https://${{ steps.vercel_preview_url.outputs.preview_url }}",
-          }
-      run: |
-        curl -X POST -H "Content-Type: application/json" \
-        -d "$DATA" \
-        ${{ secrets.SLACK_WEBHOOK_URL }}
+      - name: Send Slack Notification
+        env:
+          DATA: |
+            {
+              "channel": "C07N47FH04Q", 
+              "text": "<@U07L87GGHJS>
+              🍾 데모 미리보기 배포 완료! 
+              👉 https://${{ steps.vercel_preview_url.outputs.preview_url }}",
+            }
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d "$DATA" \
+          ${{ secrets.SLACK_WEBHOOK_URL }}
 
-Deploy_Web_to_Vercel:
-  # deploy Web to vercel
-  runs-on: ubuntu-latest
-  env:
-    VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_WEB }}
-  needs: Setup
-  if: needs.Setup.outputs.cache_status_web == 'MISS'
-  steps:
-    # checkout and install pnpm
-    - uses: actions/checkout@v4
-    - uses: pnpm/action-setup@v3
-      name: Install pnpm
-      id: pnpm-install
-      with:
-        version: 8
-        run_install: false
-    # setup node
-    - name: Setup Node.js environment
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20
-        cache: 'pnpm'
+  Deploy_Web_to_Vercel:
+    # deploy Web to vercel
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_WEB }}
+    needs: Setup
+    if: needs.Setup.outputs.cache_status_web == 'MISS'
+    steps:
+      # checkout and install pnpm
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 8
+          run_install: false
+      # setup node
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
 
-    - run: cd apps/web
+      - run: cd apps/web
 
-    - name: Deploy to Vercel if needed
-      run: |
-        npm install --global vercel@latest
-        vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
-        vercel build --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
-        vercel deploy --prebuilt --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
-      env:
-        VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-    - name: Get Vercel Preview
-      uses: zentered/vercel-preview-url@v1.1.9
-      id: vercel_preview_url_web
-      env:
-        VERCEL_TOKEN: ${{ secrets.VERCEL_ACCESS_TOKEN }}
-      with:
-        vercel_project_id: ${{ secrets.VERCEL_PROJECT_ID_WEB }}
-    - name: Get URL
-      run: echo "https://${{ steps.vercel_preview_url_web.outputs.preview_url }}"
+      - name: Deploy to Vercel if needed
+        run: |
+          npm install --global vercel@latest
+          vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+          vercel build --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+          vercel deploy --prebuilt --token=${{ secrets.VERCEL_ACCESS_TOKEN }}
+        env:
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      - name: Get Vercel Preview
+        uses: zentered/vercel-preview-url@v1.1.9
+        id: vercel_preview_url_web
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_ACCESS_TOKEN }}
+        with:
+          vercel_project_id: ${{ secrets.VERCEL_PROJECT_ID_WEB }}
+      - name: Get URL
+        run: echo "https://${{ steps.vercel_preview_url_web.outputs.preview_url }}"
 
-    - name: Send Slack Notification
-      env:
-        DATA: |
-          {
-            "channel": "C07N47FH04Q", 
-            "text": "<@U07L87GGHJS>
-            랜딩 페이지 미리보기 배포 완료! 
-            👉 https://${{ steps.vercel_preview_url_web.outputs.preview_url }}",
-          }
-      run: |
-        curl -X POST -H "Content-Type: application/json" \
-        -d "$DATA" \
-        ${{ secrets.SLACK_WEBHOOK_URL }}
+      - name: Send Slack Notification
+        env:
+          DATA: |
+            {
+              "channel": "C07N47FH04Q", 
+              "text": "<@U07L87GGHJS>
+              랜딩 페이지 미리보기 배포 완료! 
+              👉 https://${{ steps.vercel_preview_url_web.outputs.preview_url }}",
+            }
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d "$DATA" \
+          ${{ secrets.SLACK_WEBHOOK_URL }}
