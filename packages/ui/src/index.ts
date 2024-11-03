@@ -18,6 +18,8 @@ export {
   Agreement,
   Textarea,
   ImageInputs,
+  Header,
+  Layout,
 } from './components';
 export type {
   ButtonProps,
@@ -39,6 +41,8 @@ export type {
   AgreementItemProps,
   TextareaProps,
   ImageInputsProps,
+  HeaderProps,
+  LayoutProps,
 } from './components';
 
 export { colors, colorsMap, typography, spacings, radius, radiusMap } from './foundations';

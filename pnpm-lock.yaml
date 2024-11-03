@@ -204,6 +204,109 @@ importers:
         specifier: ^0.3.3
         version: 0.3.3(vitest@2.0.5)
 
+  apps/demo:
+    dependencies:
+      '@bottlesteam/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+      '@bottlesteam/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
+      '@tanstack/react-query':
+        specifier: ^5.51.21
+        version: 5.51.21(react@18.3.1)
+      cookies-next:
+        specifier: ^4.2.1
+        version: 4.2.1
+      es-toolkit:
+        specifier: ^1.26.1
+        version: 1.26.1
+      next:
+        specifier: 14.2.4
+        version: 14.2.4(@babel/core@7.25.2)(react-dom@18.3.1)(react@18.3.1)
+      overlay-kit:
+        specifier: ^1.3.0
+        version: 1.4.1(react-dom@18.3.1)(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: ^18
+        version: 18.3.1(react@18.3.1)
+    devDependencies:
+      '@bottlesteam/eslint-config':
+        specifier: workspace:*
+        version: link:../../packages/eslint-config
+      '@bottlesteam/typescript-config':
+        specifier: workspace:*
+        version: link:../../packages/typescript-config
+      '@bottlesteam/vitest-config':
+        specifier: workspace:*
+        version: link:../../packages/vitest-config
+      '@svgr/webpack':
+        specifier: ^8.1.0
+        version: 8.1.0(typescript@5.5.4)
+      '@testing-library/jest-dom':
+        specifier: ^6.4.8
+        version: 6.4.8
+      '@testing-library/react':
+        specifier: ^16.0.0
+        version: 16.0.0(@testing-library/dom@10.4.0)(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@testing-library/user-event':
+        specifier: ^14.5.2
+        version: 14.5.2(@testing-library/dom@10.4.0)
+      '@types/node':
+        specifier: ^20
+        version: 20.14.14
+      '@types/react':
+        specifier: ^18
+        version: 18.3.3
+      '@types/react-dom':
+        specifier: ^18
+        version: 18.3.0
+      '@vanilla-extract/css':
+        specifier: ^1.15.3
+        version: 1.15.3
+      '@vanilla-extract/next-plugin':
+        specifier: ^2.4.3
+        version: 2.4.3(@types/node@20.14.14)(next@14.2.4)(webpack@5.93.0)
+      '@vanilla-extract/recipes':
+        specifier: ^0.5.3
+        version: 0.5.3(@vanilla-extract/css@1.15.3)
+      '@vanilla-extract/vite-plugin':
+        specifier: ^4.0.13
+        version: 4.0.13(@types/node@20.14.14)(vite@5.4.2)
+      '@vitejs/plugin-react':
+        specifier: ^4.3.1
+        version: 4.3.1(vite@5.4.2)
+      eslint:
+        specifier: ^8
+        version: 8.57.0
+      eslint-config-next:
+        specifier: 15.0.0-rc.0
+        version: 15.0.0-rc.0(eslint@8.57.0)(typescript@5.5.4)
+      eslint-config-vitest-globals:
+        specifier: ^1.0.0
+        version: 1.0.0
+      jsdom:
+        specifier: ^24.1.1
+        version: 24.1.1
+      typescript:
+        specifier: ^5
+        version: 5.5.4
+      vite-plugin-magical-svg:
+        specifier: ^1.2.1
+        version: 1.3.0(vite@5.4.2)
+      vite-tsconfig-paths:
+        specifier: ^4.3.1
+        version: 4.3.2(typescript@5.5.4)(vite@5.4.2)
+      vitest:
+        specifier: ^2.0.4
+        version: 2.0.5(@types/node@20.14.14)(jsdom@24.1.1)
+      vitest-canvas-mock:
+        specifier: ^0.3.3
+        version: 0.3.3(vitest@2.0.5)
+
   apps/web:
     dependencies:
       '@bottlesteam/ui':
@@ -366,6 +469,52 @@ importers:
       eslint:
         specifier: ^8.57.0
         version: 8.57.0
+      typescript:
+        specifier: ^5.3.3
+        version: 5.5.4
+
+  packages/utils:
+    dependencies:
+      '@bottlesteam/bottle':
+        specifier: workspace:*
+        version: link:../../apps/bottle
+      '@bottlesteam/eslint-config':
+        specifier: workspace:*
+        version: link:../eslint-config
+      '@bottlesteam/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      cookies-next:
+        specifier: ^4.2.1
+        version: 4.2.1
+      dotenv:
+        specifier: ^16.4.5
+        version: 16.4.5
+      eslint:
+        specifier: ^8
+        version: 8.57.0
+      next:
+        specifier: 14.2.4
+        version: 14.2.4(@babel/core@7.25.2)(react-dom@18.3.1)(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: ^18
+        version: 18.3.1(react@18.3.1)
+    devDependencies:
+      '@types/eslint':
+        specifier: ^8.56.5
+        version: 8.56.11
+      '@types/node':
+        specifier: ^20.11.24
+        version: 20.14.14
+      '@types/react':
+        specifier: ^18.2.61
+        version: 18.3.3
+      '@types/react-dom':
+        specifier: ^18.2.19
+        version: 18.3.0
       typescript:
         specifier: ^5.3.3
         version: 5.5.4
@@ -2360,7 +2509,6 @@ packages:
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
-    libc: [glibc]
     requiresBuild: true
     optional: true
 
@@ -2369,7 +2517,6 @@ packages:
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
-    libc: [musl]
     requiresBuild: true
     optional: true
 
@@ -2378,7 +2525,6 @@ packages:
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
-    libc: [glibc]
     requiresBuild: true
     optional: true
 
@@ -2387,7 +2533,6 @@ packages:
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
-    libc: [musl]
     requiresBuild: true
     optional: true
 
@@ -5347,6 +5492,7 @@ packages:
   /eslint@8.57.0:
     resolution: {integrity: sha512-dZ6+mexnaTIbSBZWgou51U6OmzIhYM2VcNdtiTtI7qPNZm35Akpr0f6vtw3w1Kmn5PYo+tZVfh13WrhpS6oLqQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
     dependencies:
       '@eslint-community/eslint-utils': 4.4.0(eslint@8.57.0)

@@ -1,0 +1,30 @@
+{
+  "extends": "@bottlesteam/typescript-config/nextjs.json",
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "types": ["vitest/globals"]
+  },
+  "ts-node": {
+    "esm": true
+  },
+  "include": [
+    "next-env.d.ts",
+    "global.d.ts",
+    "next.config.mjs",
+    "**/*.ts",
+    "**/css.ts",
+    "**/css.js",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "vitest.config.mjs",
+    ".eslintrc.cjs"
+  ],
+  "exclude": ["node_modules"]
+}
