@@ -43,6 +43,9 @@ export function Questions({ onNext, ctaButtonText }: Props) {
     <>
       <ProfileLayout.Title>{'보틀에 담을\n소개를 작성해 볼까요?'}</ProfileLayout.Title>
       <ProfileLayout.Subtitle style={{ marginTop: spacings.sm }}>
+        {'타인에게 불쾌감을 줄 경우 제재를 받을 수 있어요'}
+      </ProfileLayout.Subtitle>
+      <ProfileLayout.Subtitle style={{ marginTop: spacings.sm }}>
         답변한 내용은 다음 단계에서 다듬을 수 있어요
       </ProfileLayout.Subtitle>
       <div

@@ -4,6 +4,7 @@ import { IntroductionV2 } from '@/components/intro/introductionV2';
 import { ProfileLayout } from '@/components/profile/layout';
 import { useIntroductionMutation } from '@/store/mutation/useIntroductionMutation';
 import { useCurrentUserProfileQuery } from '@/store/query/useCurrentUserProfileQuery';
+import { spacings } from '@bottlesteam/ui';
 import { useRouter } from 'next/navigation';
 
 /**
@@ -22,6 +23,9 @@ export default function IntroductionEditPage() {
   return (
     <>
       <ProfileLayout.Title>{'보틀에 담을\n소개를 작성해 주세요'}</ProfileLayout.Title>
+      <ProfileLayout.Subtitle style={{ marginTop: spacings.sm }}>
+        {'타인에게 불쾌감을 줄 경우 제재를 받을 수 있어요'}
+      </ProfileLayout.Subtitle>
       <IntroductionV2
         initialValue={initialAnswer}
         onNext={introduction => {
