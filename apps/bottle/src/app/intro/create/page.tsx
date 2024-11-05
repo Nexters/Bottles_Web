@@ -12,6 +12,7 @@ import { bottleStorage, keyMap } from '@/features/bottle-storage/bottleStorage';
 import { useFunnel } from '@/features/funnel';
 import { useIntroductionMutation } from '@/store/mutation/useIntroductionMutation';
 import { useProfileImagesMutation } from '@/store/mutation/useProfileImagesMutation';
+import { spacings } from '@bottlesteam/ui';
 import { useRouter } from 'next/navigation';
 import { useMemo } from 'react';
 import { GradientBackground } from './GradientBackground';
@@ -52,6 +53,9 @@ export default function CreateIntroPage() {
         <ProfileLayout.Contents>
           <Stepper current={2} max={MAX_STEPS} />
           <ProfileLayout.Title>{'고생 많으셨어요!\n작성한 소개를 다듬어 보세요'}</ProfileLayout.Title>
+          <ProfileLayout.Subtitle style={{ marginTop: spacings.sm }}>
+            {'타인에게 불쾌감을 줄 경우 제재를 받을 수 있어요'}
+          </ProfileLayout.Subtitle>
           <IntroductionV2
             initialValue={autoCreatedIntro}
             onNext={async introduction => {

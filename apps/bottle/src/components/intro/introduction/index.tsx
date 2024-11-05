@@ -30,6 +30,9 @@ export function Introduction({
   return (
     <>
       <ProfileLayout.Title>{'보틀에 담을\n소개를 작성해 주세요'}</ProfileLayout.Title>
+      <ProfileLayout.Subtitle style={{ marginTop: spacings.sm }}>
+        {'타인에게 불쾌감을 줄 경우 제재를 받을 수 있어요'}
+      </ProfileLayout.Subtitle>
       <div style={{ display: 'flex', flexDirection: 'column', marginTop: spacings.xxl, gap: spacings.sm }}>
         <Textarea
           placeholder={PLACEHOLDER}
