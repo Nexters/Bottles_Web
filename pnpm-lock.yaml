@@ -97,6 +97,9 @@ importers:
       '@bottlesteam/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      '@next/third-parties':
+        specifier: ^15.0.3
+        version: 15.0.3(next@14.2.4)(react@18.3.1)
       '@radix-ui/react-slot':
         specifier: ^1.1.0
         version: 1.1.0(@types/react@18.3.3)(react@18.3.1)

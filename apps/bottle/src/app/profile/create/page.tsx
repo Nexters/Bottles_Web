@@ -10,19 +10,28 @@ import { KakaoId } from '@/components/profile/kakao-id';
 import { Keywords } from '@/components/profile/keywords';
 import { ProfileLayout } from '@/components/profile/layout';
 import { Region } from '@/components/profile/region';
+import { useDurationTime } from '@/features/analystics/useDurationTime';
 import { useFunnel } from '@/features/funnel';
 import { Profile } from '@/models/profile';
 import { User } from '@/models/user';
 import { useProfileMutation } from '@/store/mutation/useProfileMuatation';
-import { useRouter } from 'next/navigation';
+import { sendGTMEvent } from '@next/third-parties/google';
+import { useRouter, usePathname } from 'next/navigation';
 import { useMemo } from 'react';
 
 const MAX_STEPS = 7;
 
 type CreateProfileFunnelValues = Profile & Pick<User, 'kakaoId'>;
 
+const EVENT_NAME = 'create_profile';
+
 export default function CreateProfilePage() {
   const router = useRouter();
+  const pathname = usePathname();
+  useDurationTime(duration => {
+    console.log('duration', duration);
+    sendGTMEvent({ duration, path: pathname }, EVENT_NAME);
+  });
 
   const { onNextStep, currentStep, getValue, getValues } = useFunnel<CreateProfileFunnelValues>('/profile/create');
   const { mutate } = useProfileMutation({ type: 'create' });
@@ -36,6 +45,7 @@ export default function CreateProfilePage() {
           <Job
             initialValue={getValue('job')}
             onNext={job => {
+              sendGTMEvent('1->2', EVENT_NAME);
               onNextStep('job', job);
             }}
             ctaButtonText="다음"
@@ -49,6 +59,7 @@ export default function CreateProfilePage() {
           <Height
             initialValue={getValue('height')}
             onNext={height => {
+              sendGTMEvent('2->3', EVENT_NAME);
               onNextStep('height', height);
             }}
             ctaButtonText="다음"
@@ -62,6 +73,7 @@ export default function CreateProfilePage() {
           <Region
             initialValue={getValue('region')}
             onNext={region => {
+              sendGTMEvent('3->4', EVENT_NAME);
               onNextStep('region', region);
             }}
             ctaButtonText="다음"
@@ -75,6 +87,7 @@ export default function CreateProfilePage() {
           <MBTI
             initialValue={getValue('mbti')}
             onNext={mbti => {
+              sendGTMEvent('4->5', EVENT_NAME);
               onNextStep('mbti', mbti);
             }}
             ctaButtonText="다음"
@@ -88,6 +101,7 @@ export default function CreateProfilePage() {
           <Keywords
             initialValue={getValue('keyword')}
             onNext={keyword => {
+              sendGTMEvent('5->6', EVENT_NAME);
               onNextStep('keyword', keyword);
             }}
             ctaButtonText="다음"
@@ -101,6 +115,7 @@ export default function CreateProfilePage() {
           <Interests
             initialValue={getValue('interest')}
             onNext={interest => {
+              sendGTMEvent('6->7', EVENT_NAME);
               onNextStep('interest', interest);
             }}
             ctaButtonText="다음"
@@ -114,6 +129,7 @@ export default function CreateProfilePage() {
           <KakaoId
             initialValue={getValue('kakaoId')}
             onNext={kakaoId => {
+              sendGTMEvent('7->complete', EVENT_NAME);
               mutate({ ...(getValues() as Profile), kakaoId });
             }}
           />

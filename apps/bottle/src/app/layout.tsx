@@ -1,6 +1,7 @@
 import { AppBridgeProvider } from '@/features/app-bridge/AppBridgeProvider';
 import { UserAgentProvider } from '@/features/user-agent/UserAgentProvider';
 import { QueryClientProvider } from '@/store/query/QueryClientProvider';
+import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import { getCookie } from 'cookies-next';
 import type { Metadata } from 'next';
 import './globals.css';
@@ -36,6 +37,8 @@ export default function RootLayout({
             </UserAgentProvider>
           </QueryClientProvider>
         </main>
+        <GoogleAnalytics gaId={`${process.env.NEXT_PUBLIC_BOTTLE_GOOGLE_ANALYSTICS_ID}`} />
+        <GoogleTagManager gtmId={`${process.env.NEXT_PUBLIC_BOTTLE_GOOGLE_TAG_MANAGER_ID}`} />
       </body>
     </html>
   );
