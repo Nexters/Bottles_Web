@@ -11,6 +11,7 @@
   "dependencies": {
     "@bottlesteam/ui": "workspace:*",
     "@bottlesteam/utils": "workspace:*",
+    "@next/third-parties": "^15.0.3",
     "@tanstack/react-query": "^5.51.21",
     "cookies-next": "^4.2.1",
     "es-toolkit": "^1.26.1",

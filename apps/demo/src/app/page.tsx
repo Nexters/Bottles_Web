@@ -3,6 +3,7 @@
 import LoginBackground from '@/assets/images/login-background.webp';
 import { KakaoButton } from '@/components/kakao-button';
 import { Asset, Paragraph, spacings } from '@bottlesteam/ui';
+import { sendGAEvent } from '@next/third-parties/google';
 import Image from 'next/image';
 import { useEffect } from 'react';
 
@@ -45,6 +46,7 @@ export default function Home() {
       </div>
       <KakaoButton
         onClick={() => {
+          sendGAEvent('kakao login', '카카오 로그인 버튼 클릭');
           Kakao.Auth.authorize({
             redirectUri: REDIRECT_URI,
           });
