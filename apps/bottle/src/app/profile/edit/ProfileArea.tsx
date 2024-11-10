@@ -7,6 +7,8 @@ import Link from 'next/link';
 import { useMemo } from 'react';
 import { profileItemLeftStyle, profileItemStyle, profileSelectListStyle } from './profileEditStyle.css';
 
+const NOT_SELECTED_DESCRIPTION = '아직 작성하지 않았어요';
+
 export function ProfileArea() {
   const {
     data: {
@@ -29,6 +31,21 @@ export function ProfileArea() {
     () => [
       { title: '카카오톡 아이디', description: kakaoId, endpoint: '/profile/edit/kakao-id' },
       {
+        title: '직업 · 직무',
+        description: job,
+        endpoint: '/profile/edit/job',
+      },
+      {
+        title: '키',
+        description: `${height}cm`,
+        endpoint: '/profile/edit/height',
+      },
+      {
+        title: '지역',
+        description: `${city} ${state}`,
+        endpoint: '/profile/edit/region',
+      },
+      {
         title: '나의 성격',
         description: mbti,
         endpoint: '/profile/edit/mbti',
@@ -49,34 +66,19 @@ export function ProfileArea() {
         endpoint: '/profile/edit/interests',
       },
       {
-        title: '직업 · 직무',
-        description: job,
-        endpoint: '/profile/edit/job',
-      },
-      {
-        title: '키',
-        description: `${height}cm`,
-        endpoint: '/profile/edit/height',
-      },
-      {
         title: '흡연 스타일',
-        description: smoking,
+        description: smoking ?? NOT_SELECTED_DESCRIPTION,
         endpoint: '/profile/edit/smoking',
       },
       {
         title: '음주 스타일',
-        description: alcohol,
+        description: alcohol ?? NOT_SELECTED_DESCRIPTION,
         endpoint: '/profile/edit/alcohol',
       },
       {
         title: '종교',
-        description: religion,
+        description: religion ?? NOT_SELECTED_DESCRIPTION,
         endpoint: '/profile/edit/religion',
-      },
-      {
-        title: '지역',
-        description: `${city} ${state}`,
-        endpoint: '/profile/edit/region',
       },
     ],
     [mbti, keyword, kakaoId, culture, sports, entertainment, job, height, smoking, alcohol, religion, city, state, etc]

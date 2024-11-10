@@ -54,6 +54,7 @@ export function Questions({ onNext, ctaButtonText }: Props) {
           flexDirection: 'column',
           margin: `${spacings.xxl} 0`,
           gap: spacings.xxl,
+          width: '100%',
         }}
       >
         <QuestionCard

@@ -14,6 +14,7 @@ import PencilIcon from './icons/icon_pencil.svg';
 import PlusIcon from './icons/icon_plus.svg';
 import RightIcon from './icons/icon_right.svg';
 import VerticalBarIcon from './icons/icon_vertical_bar.svg';
+import WarningIcon from './icons/icon_warning.svg';
 import KakaoLogo from './icons/kakao-logo.svg';
 import Vector from './icons/vector.svg';
 
@@ -34,7 +35,8 @@ type Type =
   | 'icon-clock'
   | 'kakao-logo'
   | 'bottle-logo'
-  | 'icon-letter';
+  | 'icon-letter'
+  | 'icon-warning';
 
 export interface AssetProps extends ComponentProps<'svg'> {
   type: Type;
@@ -73,6 +75,8 @@ export function Asset({ type, ...rest }: AssetProps) {
     <BottleLogo {...rest} />
   ) : type === 'icon-letter' ? (
     <LetterIcon {...rest} />
+  ) : type === 'icon-warning' ? (
+    <WarningIcon {...rest} />
   ) : (
     <VerticalBarIcon />
   );

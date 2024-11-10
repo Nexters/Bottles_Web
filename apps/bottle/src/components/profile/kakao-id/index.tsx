@@ -2,6 +2,7 @@ import { Input, spacings } from '@bottlesteam/ui';
 import { useState } from 'react';
 import { ProfileLayout } from '../layout';
 import { BaseProfileComponentProps } from '../types';
+import { GuideCarousel } from './GuideCarousel';
 
 const KAKAO_ID_REGEX = /^[A-Za-z\d._-]{4,20}$/;
 const ERROR_CAPTION = '카카오톡 아이디를 확인해주세요';
@@ -27,11 +28,12 @@ export function KakaoId({ onNext, initialValue, ctaButtonText = '완료' }: Base
       <ProfileLayout.FixedButton
         disabled={disabled}
         onClick={() => {
-          onNext(kakaoId);
+          onNext(kakaoId.trim());
         }}
       >
         {ctaButtonText}
       </ProfileLayout.FixedButton>
+      <GuideCarousel />
     </>
   );
 }

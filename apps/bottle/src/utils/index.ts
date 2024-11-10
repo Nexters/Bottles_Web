@@ -18,5 +18,9 @@ export function isSameArray(array1: string[], array2: string[]) {
  * @returns Profile
  */
 export function convertProfileSelectToProfile(profile: ProfileSelect): Profile {
-  return { ...profile, smoking: smokingTextMap[profile.smoking], alcohol: alcoholTextMap[profile.alcohol] };
+  return {
+    ...profile,
+    smoking: profile.smoking != null ? smokingTextMap[profile.smoking] : undefined,
+    alcohol: profile.alcohol != null ? alcoholTextMap[profile.alcohol] : undefined,
+  };
 }
