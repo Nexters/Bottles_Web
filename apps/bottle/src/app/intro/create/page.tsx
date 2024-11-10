@@ -32,7 +32,7 @@ export default function CreateIntroPage() {
     () => [
       <ProfileLayout key={0}>
         <GradientBackground />
-        <ProfileLayout.Contents style={{ padding: '0 16px', position: 'absolute', top: 48, left: 0 }}>
+        <ProfileLayout.Contents style={{ padding: '0 16px', position: 'absolute', top: 48, left: 0, width: '100%' }}>
           <Stepper current={1} max={MAX_STEPS} />
           <Questions
             onNext={answers => {
