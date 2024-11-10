@@ -4,14 +4,25 @@ import LoginBackground from '@/assets/images/login-background.webp';
 import { KakaoButton } from '@/components/kakao-button';
 import { Asset, Paragraph, spacings } from '@bottlesteam/ui';
 import Image from 'next/image';
+import { useEffect } from 'react';
 
-const CLIENT_ID = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID;
+const JAVASCRIPT_KEY = `${process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY}`;
 const REDIRECT_URI = `${process.env.NEXT_PUBLIC_MODE === 'DEVELOPMENT' ? 'http://localhost:3000' : 'https://demo.bottles.asia'}/kakao`;
-const kakaoLoginUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
 export default function Home() {
+  useEffect(() => {
+    if (!Kakao?.isInitialized()) {
+      Kakao.init(JAVASCRIPT_KEY); //SDK 초기화 함수
+    }
+  }, []);
+
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%', padding: `0 ${spacings.md}` }}>
+      <script
+        src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.3/kakao.min.js"
+        integrity="sha384-kLbo2SvoNtOFiniJ1EQ9o2iDA8i3xp+O6Cns+L5cd4RsOJfl+43z5pvieT2ayq3C"
+        crossOrigin="anonymous"
+      />
       <Image src={LoginBackground} alt="login background" fill style={{ objectFit: 'cover' }} />
       <div
         style={{
@@ -34,7 +45,9 @@ export default function Home() {
       </div>
       <KakaoButton
         onClick={() => {
-          window.location.href = kakaoLoginUrl;
+          Kakao.Auth.authorize({
+            redirectUri: REDIRECT_URI,
+          });
         }}
       />
     </div>
