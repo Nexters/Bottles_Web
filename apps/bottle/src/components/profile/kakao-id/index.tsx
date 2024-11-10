@@ -27,7 +27,7 @@ export function KakaoId({ onNext, initialValue, ctaButtonText = '완료' }: Base
       <ProfileLayout.FixedButton
         disabled={disabled}
         onClick={() => {
-          onNext(kakaoId);
+          onNext(kakaoId.trim());
         }}
       >
         {ctaButtonText}
