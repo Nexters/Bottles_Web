@@ -5,6 +5,10 @@ import { Bottle } from '@/models/bottle';
 import { Asset, FixedBottomCTAButton, spacings } from '@bottlesteam/ui';
 import { useUserAgent } from '@bottlesteam/utils';
 
+const ANDROID_INDENT_SCHEME = 'intent://main#Intent;scheme=bottle;package=com.team.bottles;end';
+const IOS_STORE_SCHEME =
+  'https://apps.apple.com/kr/app/%EB%B3%B4%ED%8B%80-%EB%84%88%EC%97%90%EA%B2%8C-%EB%B3%B4%EB%82%B4%EB%8A%94-%ED%8E%B8%EC%A7%80/id6602889623';
+
 export function BottleDetail({ bottleDetail: user }: { bottleDetail: Bottle }) {
   const userAgent = useUserAgent();
 
@@ -14,11 +18,10 @@ export function BottleDetail({ bottleDetail: user }: { bottleDetail: Bottle }) {
       return;
     }
     if (userAgent.isAndroid) {
-      window.location.href = 'intent://main#Intent;scheme=bottle;package=com.team.bottles;end';
+      window.location.href = ANDROID_INDENT_SCHEME;
     }
     if (userAgent.isIOS) {
-      // TODO: add iOS scheme
-      alert('iOS 대응 예정...ㅠ');
+      window.location.href = IOS_STORE_SCHEME;
     }
   };
 
