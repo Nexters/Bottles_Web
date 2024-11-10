@@ -21,15 +21,16 @@ interface BaseProfile {
     city: string;
     state: string;
   };
-  religion: Religion;
+  religion?: Religion;
 }
 
 export interface Profile extends BaseProfile {
-  alcohol: Alcohol;
-  smoking: Smoking;
+  alcohol?: Alcohol;
+  smoking?: Smoking;
 }
 
 export interface ProfileSelect extends BaseProfile {
-  alcohol: AlcoholChipText;
-  smoking: SmokingChipText;
+  // NOTE: religion, smoking, alcohol are optional selections
+  alcohol?: AlcoholChipText;
+  smoking?: SmokingChipText;
 }

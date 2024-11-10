@@ -30,7 +30,12 @@ export function SelectedProfileImpl({
   },
   items,
 }: Props) {
-  const basicInformation = [job, mbti, city, `${height}cm`, smoking, alcohol];
+  const basicInformation =
+    smoking != null && alcohol != null
+      ? [job, mbti, city, `${height}cm`, smoking, alcohol]
+      : smoking != null
+        ? [job, mbti, city, `${height}cm`, smoking]
+        : [job, mbti, city, `${height}cm`];
   const personalities = keyword;
   const hobbies = [
     ...Object.values(culture),
