@@ -4,7 +4,7 @@ import TelescopeImage from '@/assets/images/telescope.webp';
 import { BottleCard } from '@/components/common/bottle-card';
 import { Fallback } from '@/components/common/fallback';
 import { Layout, spacings } from '@bottlesteam/ui';
-import { sendGTMEvent } from '@next/third-parties/google';
+import { sendGAEvent } from '@next/third-parties/google';
 import { pick } from 'es-toolkit';
 import { useRouter } from 'next/navigation';
 import { RandomBottlesQuery, UserInfo } from './page';
@@ -27,7 +27,7 @@ export function Bottles({ bottles: { randomBottles }, userInfo }: Props) {
               <BottleCard
                 key={bottle.id}
                 onClick={() => {
-                  sendGTMEvent('bottle', '보틀 클릭');
+                  sendGAEvent('event', 'random_bottle_click', { value: '받은 보틀 클릭' });
                   router.push(`/bottle/${bottle.id}`);
                 }}
               >
