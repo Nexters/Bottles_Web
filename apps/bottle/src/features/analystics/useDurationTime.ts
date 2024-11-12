@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 
 const MILLISECONDS_PER_SECOND = 1000;
 
-export function useDurationTime(onEnd: (duration: number) => void) {
+export function useDurationTime() {
   const timeRef = useRef<number>(0);
 
   useEffect(() => {
@@ -12,9 +12,8 @@ export function useDurationTime(onEnd: (duration: number) => void) {
 
     return () => {
       clearInterval(timer);
-      onEnd(timeRef.current);
     };
-  }, [onEnd]);
+  }, []);
 
-  return {};
+  return { getTime: () => timeRef.current };
 }

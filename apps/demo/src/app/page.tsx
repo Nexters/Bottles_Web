@@ -46,7 +46,7 @@ export default function Home() {
       </div>
       <KakaoButton
         onClick={() => {
-          sendGAEvent('kakao login', '카카오 로그인 버튼 클릭');
+          sendGAEvent('event', 'kakao_login', { value: '카카오 로그인 버튼 클릭' });
           Kakao.Auth.authorize({
             redirectUri: REDIRECT_URI,
           });
