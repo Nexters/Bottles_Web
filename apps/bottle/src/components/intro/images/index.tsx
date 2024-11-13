@@ -35,10 +35,7 @@ export function Images({
           })
         }
         images={images}
-        maxImages={
-          // TODO: Change this to 3 when the feature is ready on native app
-          1
-        }
+        maxImages={3}
         labels={['프로필 사진']}
         onChange={files => {
           setImages(files);
@@ -54,9 +51,6 @@ export function Images({
           const newUrls = await uploadImages(newImages);
           await onNext([...images.filter(image => typeof image === 'string'), ...newUrls]);
           setIsLoading(false);
-          newUrls.forEach(url => {
-            console.log('URL: ', url);
-          });
         }}
       >
         {ctaButtonText}
