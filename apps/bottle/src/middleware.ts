@@ -1,5 +1,8 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { AB_TEST_SEARCH_KEY } from './app/bottles/sents/Sents';
+import { GET, createInit } from './features/server';
+import { CurrentUser } from './models/user';
 
 export async function middleware(request: NextRequest) {
   const url = new URL(request.url);
@@ -22,6 +25,23 @@ export async function middleware(request: NextRequest) {
     version = url.searchParams.get('version')!;
     cleanUrl.searchParams.delete('device');
     cleanUrl.searchParams.delete('version');
+  }
+
+  if (url.pathname.includes('/bottles/sents') && url.searchParams.get(AB_TEST_SEARCH_KEY) == null) {
+    try {
+      const userInfo = await GET<CurrentUser>(
+        `/api/v1/profile`,
+        { accessToken: accessToken ?? '', refreshToken: refreshToken ?? '' },
+        createInit(accessToken)
+      );
+      if (userInfo.introduction[0]?.answer.length ?? 2 % 2 === 0) {
+        cleanUrl.searchParams.set(AB_TEST_SEARCH_KEY, 'B');
+      } else {
+        cleanUrl.searchParams.set(AB_TEST_SEARCH_KEY, 'A');
+      }
+    } catch (error) {
+      console.log('NO TOKENS', error);
+    }
   }
 
   if (url.toString() !== cleanUrl.toString()) {
